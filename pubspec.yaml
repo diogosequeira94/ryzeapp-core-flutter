@@ -35,6 +35,7 @@ dependencies:
   equatable: ^1.2.5
   dartz: ^0.9.1
   freezed_annotation: ^0.7.1
+  bloc: ^6.1.0
 
 dev_dependencies:
   flutter_test:
