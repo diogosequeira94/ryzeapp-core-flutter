@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebaseblocryze/features/login_feature/domain/core/failures.dart';
-import 'package:firebaseblocryze/features/login_feature/domain/core/value_objects.dart';
+import 'package:firebaseblocryze/features/login_feature/domain/core/value_object.dart';
 import 'package:firebaseblocryze/features/login_feature/domain/core/value_validators.dart';
 
 
@@ -18,18 +18,18 @@ class EmailAddress extends ValueObject<String> {
   const EmailAddress._(this.emailValue);
 }
 
-class PasswordAddress extends ValueObject<String> {
+class Password extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> emailValue;
 
-  factory PasswordAddress(String input){
+  factory Password(String input){
     assert(input != null);
-    return PasswordAddress._(
+    return Password._(
       validatePassword(input),
     );
   }
 
-  const PasswordAddress._(this.emailValue);
+  const Password._(this.emailValue);
 }
 
 //// Just an example on how can we get the failure or the actual content
