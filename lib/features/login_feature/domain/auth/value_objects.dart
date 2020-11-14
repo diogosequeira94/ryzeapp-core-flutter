@@ -6,7 +6,7 @@ import 'package:firebaseblocryze/features/login_feature/domain/core/value_valida
 
 class EmailAddress extends ValueObject<String> {
   @override
-  final Either<ValueFailure<String>, String> emailValue;
+  final Either<ValueFailure<String>, String> value;
 
   factory EmailAddress(String input){
     assert(input != null);
@@ -15,12 +15,12 @@ class EmailAddress extends ValueObject<String> {
     );
   }
 
-  const EmailAddress._(this.emailValue);
+  const EmailAddress._(this.value);
 }
 
 class Password extends ValueObject<String> {
   @override
-  final Either<ValueFailure<String>, String> emailValue;
+  final Either<ValueFailure<String>, String> value;
 
   factory Password(String input){
     assert(input != null);
@@ -29,7 +29,7 @@ class Password extends ValueObject<String> {
     );
   }
 
-  const Password._(this.emailValue);
+  const Password._(this.value);
 }
 
 //// Just an example on how can we get the failure or the actual content
