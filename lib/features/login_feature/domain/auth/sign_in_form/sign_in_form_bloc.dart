@@ -79,6 +79,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     if (isEmailValid && isPasswordValid) {
       yield state.copyWith(
         isSubmitting: true,
+        showErrorMessages: false,
         authFailureOrSuccessOption: none(),
       );
 

@@ -1,13 +1,19 @@
+import 'package:firebaseblocryze/features/login_feature/domain/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:firebaseblocryze/features/login_feature/presentation/widgets/sign_in_form.dart';
+import 'package:firebaseblocryze/injection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignIn extends StatelessWidget {
+class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text('Login'),
-        ),
+      appBar: AppBar(
+        title: Text('Sign In'),
+      ),
+      body: BlocProvider(
+        create: (context) => getIt<SignInFormBloc>(),
+          child: SignInForm()
       ),
     );
   }
