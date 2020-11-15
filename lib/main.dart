@@ -1,7 +1,12 @@
+import 'package:firebaseblocryze/injection.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'features/login_feature/presentation/pages/sign_in_screen.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  configureInjection(Environment.prod);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
