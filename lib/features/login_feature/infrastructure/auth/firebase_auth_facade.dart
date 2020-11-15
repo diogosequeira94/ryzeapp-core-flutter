@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaseblocryze/features/login_feature/domain/auth/auth_failure.dart';
+import 'package:firebaseblocryze/features/login_feature/domain/auth/entity/user.dart';
 import 'package:firebaseblocryze/features/login_feature/domain/auth/interface_auth_facade.dart';
 import 'package:firebaseblocryze/features/login_feature/domain/auth/value_objects.dart';
 import 'package:flutter/foundation.dart';
@@ -8,8 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: IAuthFacade)
+import 'firebase_user_mapper.dart';
 
+@LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
@@ -18,6 +20,10 @@ class FirebaseAuthFacade implements IAuthFacade {
     this._firebaseAuth,
     this._googleSignIn,
   );
+
+  @override
+  Future<Option<User>> getSignedInUser() => _firebaseAuth.currentUser()
+      .then((firebaseUser) => optionOf(firebaseUser?.toDomain()));
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
@@ -81,4 +87,11 @@ class FirebaseAuthFacade implements IAuthFacade {
       return left(const AuthFailure.serverError());
     }
   }
+
+  /// Future.wait its used when you want to await multiple functions
+  @override
+  Future<void> signOut() => Future.wait([
+    _googleSignIn.signOut(),
+    _firebaseAuth.signOut(),
+    ]);
 }
