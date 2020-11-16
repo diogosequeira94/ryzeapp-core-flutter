@@ -1,4 +1,4 @@
-import 'package:firebaseblocryze/features/login_feature/domain/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:firebaseblocryze/features/login_feature/blocs/sign_in_form/sign_in_form_bloc.dart';
 import 'package:firebaseblocryze/features/login_feature/utils/login_strings.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
