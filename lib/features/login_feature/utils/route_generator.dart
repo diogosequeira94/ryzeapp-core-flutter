@@ -1,17 +1,25 @@
+import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
+import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/sign_in_screen.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class HomePageArguments {
+  final AuthBloc authBloc;
+
+  const HomePageArguments(this.authBloc);
+}
+
 class RouteGenerator {
-  static Route<dynamic> generateRoute(RouteSettings settings){
+  static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
-    switch(settings.name) {
+    switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case '/home':
-        return MaterialPageRoute(builder: (_) => SignInPage());
+        return MaterialPageRoute(builder: (_) => HomePage());
       case '/login':
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/register':
@@ -22,7 +30,7 @@ class RouteGenerator {
   }
 
   static Route<dynamic> _errorRoute() {
-    return MaterialPageRoute(builder: (_){
+    return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
           title: Text('Error'),

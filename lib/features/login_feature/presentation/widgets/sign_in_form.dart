@@ -24,7 +24,7 @@ class SignInForm extends StatelessWidget {
               ).show(context);
             },
             (_) {
-              // TODO: Navigate
+              Navigator.of(context).pushNamed('/home');
             },
           ),
         );
@@ -136,7 +136,11 @@ class SignInForm extends StatelessWidget {
                     LoginStrings.signInGoogleButton,
                     style: TextStyle(color: Colors.white),
                   ),
-                )
+                ),
+                if (state.isSubmitting)...[
+                 const SizedBox(height: 8.0),
+                 const LinearProgressIndicator(value: null),
+                ],
               ],
             ),
           ),

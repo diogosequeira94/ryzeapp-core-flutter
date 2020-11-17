@@ -8,14 +8,13 @@ class SplashScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.map(
-            initial: (_) {},
-            authenticated: (_) {
-//              Navigator.of(context).pushNamed('/home');
-            print('I am authenticated');
-            },
-            unauthenticated: (_) {
-              Navigator.of(context).pushNamed('/login');
-            },
+          initial: (_) {},
+          authenticated: (_) {
+            Navigator.of(context).pushNamed('/home');
+          },
+          unauthenticated: (_) {
+            Navigator.of(context).pushNamed('/login');
+          },
         );
       },
       child: const Scaffold(
