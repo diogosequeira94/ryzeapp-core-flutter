@@ -28,8 +28,9 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
               items: imageSliders(),
               options: CarouselOptions(
                   autoPlay: true,
-                  enlargeCenterPage: true,
-                  aspectRatio: 2.0,
+                  viewportFraction: 1.0,
+                  enlargeCenterPage: false,
+                  aspectRatio: 2.3,
                   onPageChanged: (index, reason) {
                     setState(() {
                       _current = index;
