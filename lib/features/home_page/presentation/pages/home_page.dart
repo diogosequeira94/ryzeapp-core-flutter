@@ -9,12 +9,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Home'),
+        title: Text('RyzeApp Home'),
         actions: [
-          IconButton(icon: Icon(Icons.notifications), onPressed: (){}),
+          IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xfff8f8f8),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Find out whats new',
+                'Trending',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontSize: 20.0,
@@ -32,6 +32,17 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 8.0),
             NewsCarouselSliderWidget(),
             const SizedBox(height: 8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Your Job Posts',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+            _myJobPosts(context),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -48,16 +59,18 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Your Job Posts',
+                'All Jobs',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
               ),
             ),
+            _allJobPosts(context),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
+                height: 50,
                 width: double.infinity,
                 child: RaisedButton(
                   onPressed: () {},
@@ -75,6 +88,45 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  Widget _myJobPosts(BuildContext context) {
+
+    // backing data
+    final europeanCountries = ['Bartender', 'Android Developer'];
+
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: europeanCountries.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(europeanCountries[index]),
+          subtitle: Text('Lisbon Area'),
+          trailing: Text('10€ / hr'),
+          onTap: (){},
+        );
+      },
+    );
+  }
+
+  Widget _allJobPosts(BuildContext context) {
+
+    // backing data
+    final europeanCountries = ['Bartender', 'Android Developer', 'Hotel Cleaner', 'Delivery Driver', 'Gardner', 'Library Helper', 'Officer', 'Tax Consultant', 'Lawyer'];
+
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: europeanCountries.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(europeanCountries[index]),
+          subtitle: Text('Lisbon Area'),
+          trailing: Text('10€ / hr'),
+          onTap: (){},
+        );
+      },
     );
   }
 }

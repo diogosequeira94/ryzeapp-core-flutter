@@ -24,7 +24,7 @@ class CategoryItem extends StatelessWidget {
             Text(category.title),
             SizedBox(height: 10.0),
             Image.network(category.imageUrl,
-                height: 50,
+                height: 40,
                 width: double.infinity,
                 fit: BoxFit.contain)
           ],
