@@ -1,8 +1,9 @@
-import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
-import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
+import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:firebaseblocryze/features/bottom_navigation_bar/bottom_nav_bar_widget.dart';
+import 'package:firebaseblocryze/features/bottom_navigation_bar/repositories/home_page_repository.dart';
+import 'package:firebaseblocryze/features/bottom_navigation_bar/repositories/profile_page_repository.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/sign_in_screen.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/splash_screen.dart';
-import 'package:firebaseblocryze/injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +15,14 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => SplashScreen());
-      case '/home':
-        return MaterialPageRoute(builder: (_) => BlocProvider(
-            create: (_) => getIt<AuthBloc>(),
-            child: HomePage()));
+      case '/bottom-nav':
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (_) => BottomNavigationBarBloc(
+                      homePageRepository: HomePageRepository(),
+                      profilePageRepository: ProfilePageRepository(),
+                    )..add(BottomNavigationHomePagePressed()),
+                child: BottomNavBarWidget()));
       case '/login':
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/register':

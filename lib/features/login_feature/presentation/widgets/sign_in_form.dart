@@ -24,7 +24,7 @@ class SignInForm extends StatelessWidget {
               ).show(context);
             },
             (_) {
-              Navigator.of(context).pushReplacementNamed('/home');
+              Navigator.of(context).pushReplacementNamed('/bottom-nav');
             },
           ),
         );

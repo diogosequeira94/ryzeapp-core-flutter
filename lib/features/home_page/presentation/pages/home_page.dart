@@ -8,16 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('RyzeApp Home'),
-        actions: [
-          IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
-        ],
-      ),
-      backgroundColor: Color(0xfff8f8f8),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,36 +60,8 @@ class HomePage extends StatelessWidget {
               ),
             ),
             _allJobPosts(context),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                child: BlocBuilder<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    return RaisedButton(
-                      onPressed: () {
-                        context.read<AuthBloc>().add(
-                              AuthEvent.signedOutPressed(),
-                            );
-                        Navigator.of(context).pushReplacementNamed('/login');
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.black38)),
-                      color: Colors.deepPurpleAccent,
-                      child: const Text(
-                        HomePageStrings.signOutButton,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
           ],
         ),
-      ),
     );
   }
 

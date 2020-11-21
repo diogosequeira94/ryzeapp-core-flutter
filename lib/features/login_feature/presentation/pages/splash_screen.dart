@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
         state.map(
           initial: (_) {},
           authenticated: (_) {
-            Navigator.of(context).pushNamed('/home');
+            Navigator.of(context).pushNamed('/bottom-nav');
           },
           unauthenticated: (_) {
             Navigator.of(context).pushNamed('/login');
