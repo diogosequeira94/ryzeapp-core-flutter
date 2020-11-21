@@ -1,7 +1,9 @@
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
 import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
+import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -72,16 +74,25 @@ class HomePage extends StatelessWidget {
               child: Container(
                 height: 50,
                 width: double.infinity,
-                child: RaisedButton(
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.black38)),
-                  color: Colors.deepPurpleAccent,
-                  child: const Text(
-                    HomePageStrings.signOutButton,
-                    style: TextStyle(color: Colors.white),
-                  ),
+                child: BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    return RaisedButton(
+                      onPressed: () {
+                        context.read<AuthBloc>().add(
+                              AuthEvent.signedOutPressed(),
+                            );
+                        Navigator.of(context).pushReplacementNamed('/login');
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.black38)),
+                      color: Colors.deepPurpleAccent,
+                      child: const Text(
+                        HomePageStrings.signOutButton,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -90,41 +101,47 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
   Widget _myJobPosts(BuildContext context) {
-
-    // backing data
-    final europeanCountries = ['Bartender', 'Android Developer'];
-
+    final myJobsMock = ['Bartender', 'Android Developer'];
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: europeanCountries.length,
+      itemCount: myJobsMock.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text(europeanCountries[index]),
+          title: Text(myJobsMock[index]),
           subtitle: Text('Lisbon Area'),
           trailing: Text('10€ / hr'),
-          onTap: (){},
+          onTap: () {},
         );
       },
     );
   }
 
   Widget _allJobPosts(BuildContext context) {
-
-    // backing data
-    final europeanCountries = ['Bartender', 'Android Developer', 'Hotel Cleaner', 'Delivery Driver', 'Gardner', 'Library Helper', 'Officer', 'Tax Consultant', 'Lawyer'];
+    final allJobsMock = [
+      'Bartender',
+      'Android Developer',
+      'Hotel Cleaner',
+      'Delivery Driver',
+      'Gardner',
+      'Library Helper',
+      'Officer',
+      'Tax Consultant',
+      'Lawyer'
+    ];
 
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: europeanCountries.length,
+      itemCount: allJobsMock.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text(europeanCountries[index]),
+          title: Text(allJobsMock[index]),
           subtitle: Text('Lisbon Area'),
           trailing: Text('10€ / hr'),
-          onTap: (){},
+          onTap: () {},
         );
       },
     );

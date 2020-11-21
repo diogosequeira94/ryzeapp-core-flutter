@@ -12,17 +12,17 @@ T _$identity<T>(T value) => value;
 class _$JobPostFailureTearOff {
   const _$JobPostFailureTearOff();
 
-  EmptyJobTitle<T> emptyJobTitle<T>({@required String failedValue}) {
-    return EmptyJobTitle<T>(
+  Empty<T> empty<T>({@required String failedValue}) {
+    return Empty<T>(
       failedValue: failedValue,
     );
   }
 
   InvalidLength<T> invalidLength<T>(
-      {@required String failedValue, @required int min}) {
+      {@required String failedValue, @required int max}) {
     return InvalidLength<T>(
       failedValue: failedValue,
-      min: min,
+      max: max,
     );
   }
 
@@ -32,8 +32,16 @@ class _$JobPostFailureTearOff {
     );
   }
 
-  ListTooLong<T> listTooLong<T>({@required String failedValue}) {
+  ListTooLong<T> listTooLong<T>(
+      {@required List<dynamic> failedValue, @required int max}) {
     return ListTooLong<T>(
+      failedValue: failedValue,
+      max: max,
+    );
+  }
+
+  Multiline<T> multiline<T>({@required String failedValue}) {
+    return Multiline<T>(
       failedValue: failedValue,
     );
   }
@@ -43,47 +51,46 @@ class _$JobPostFailureTearOff {
 const $JobPostFailure = _$JobPostFailureTearOff();
 
 mixin _$JobPostFailure<T> {
-  String get failedValue;
-
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result emptyJobTitle(String failedValue),
-    @required Result invalidLength(String failedValue, int min),
+    @required Result empty(String failedValue),
+    @required Result invalidLength(String failedValue, int max),
     @required Result invalidPay(String failedValue),
-    @required Result listTooLong(String failedValue),
+    @required Result listTooLong(List<dynamic> failedValue, int max),
+    @required Result multiline(String failedValue),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result emptyJobTitle(String failedValue),
-    Result invalidLength(String failedValue, int min),
+    Result empty(String failedValue),
+    Result invalidLength(String failedValue, int max),
     Result invalidPay(String failedValue),
-    Result listTooLong(String failedValue),
+    Result listTooLong(List<dynamic> failedValue, int max),
+    Result multiline(String failedValue),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result emptyJobTitle(EmptyJobTitle<T> value),
+    @required Result empty(Empty<T> value),
     @required Result invalidLength(InvalidLength<T> value),
     @required Result invalidPay(InvalidPay<T> value),
     @required Result listTooLong(ListTooLong<T> value),
+    @required Result multiline(Multiline<T> value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result emptyJobTitle(EmptyJobTitle<T> value),
+    Result empty(Empty<T> value),
     Result invalidLength(InvalidLength<T> value),
     Result invalidPay(InvalidPay<T> value),
     Result listTooLong(ListTooLong<T> value),
+    Result multiline(Multiline<T> value),
     @required Result orElse(),
   });
-
-  $JobPostFailureCopyWith<T, JobPostFailure<T>> get copyWith;
 }
 
 abstract class $JobPostFailureCopyWith<T, $Res> {
   factory $JobPostFailureCopyWith(
           JobPostFailure<T> value, $Res Function(JobPostFailure<T>) then) =
       _$JobPostFailureCopyWithImpl<T, $Res>;
-  $Res call({String failedValue});
 }
 
 class _$JobPostFailureCopyWithImpl<T, $Res>
@@ -93,64 +100,48 @@ class _$JobPostFailureCopyWithImpl<T, $Res>
   final JobPostFailure<T> _value;
   // ignore: unused_field
   final $Res Function(JobPostFailure<T>) _then;
-
-  @override
-  $Res call({
-    Object failedValue = freezed,
-  }) {
-    return _then(_value.copyWith(
-      failedValue:
-          failedValue == freezed ? _value.failedValue : failedValue as String,
-    ));
-  }
 }
 
-abstract class $EmptyJobTitleCopyWith<T, $Res>
-    implements $JobPostFailureCopyWith<T, $Res> {
-  factory $EmptyJobTitleCopyWith(
-          EmptyJobTitle<T> value, $Res Function(EmptyJobTitle<T>) then) =
-      _$EmptyJobTitleCopyWithImpl<T, $Res>;
-  @override
+abstract class $EmptyCopyWith<T, $Res> {
+  factory $EmptyCopyWith(Empty<T> value, $Res Function(Empty<T>) then) =
+      _$EmptyCopyWithImpl<T, $Res>;
   $Res call({String failedValue});
 }
 
-class _$EmptyJobTitleCopyWithImpl<T, $Res>
-    extends _$JobPostFailureCopyWithImpl<T, $Res>
-    implements $EmptyJobTitleCopyWith<T, $Res> {
-  _$EmptyJobTitleCopyWithImpl(
-      EmptyJobTitle<T> _value, $Res Function(EmptyJobTitle<T>) _then)
-      : super(_value, (v) => _then(v as EmptyJobTitle<T>));
+class _$EmptyCopyWithImpl<T, $Res> extends _$JobPostFailureCopyWithImpl<T, $Res>
+    implements $EmptyCopyWith<T, $Res> {
+  _$EmptyCopyWithImpl(Empty<T> _value, $Res Function(Empty<T>) _then)
+      : super(_value, (v) => _then(v as Empty<T>));
 
   @override
-  EmptyJobTitle<T> get _value => super._value as EmptyJobTitle<T>;
+  Empty<T> get _value => super._value as Empty<T>;
 
   @override
   $Res call({
     Object failedValue = freezed,
   }) {
-    return _then(EmptyJobTitle<T>(
+    return _then(Empty<T>(
       failedValue:
           failedValue == freezed ? _value.failedValue : failedValue as String,
     ));
   }
 }
 
-class _$EmptyJobTitle<T> implements EmptyJobTitle<T> {
-  const _$EmptyJobTitle({@required this.failedValue})
-      : assert(failedValue != null);
+class _$Empty<T> implements Empty<T> {
+  const _$Empty({@required this.failedValue}) : assert(failedValue != null);
 
   @override
   final String failedValue;
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.emptyJobTitle(failedValue: $failedValue)';
+    return 'JobPostFailure<$T>.empty(failedValue: $failedValue)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is EmptyJobTitle<T> &&
+        (other is Empty<T> &&
             (identical(other.failedValue, failedValue) ||
                 const DeepCollectionEquality()
                     .equals(other.failedValue, failedValue)));
@@ -161,36 +152,39 @@ class _$EmptyJobTitle<T> implements EmptyJobTitle<T> {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
 
   @override
-  $EmptyJobTitleCopyWith<T, EmptyJobTitle<T>> get copyWith =>
-      _$EmptyJobTitleCopyWithImpl<T, EmptyJobTitle<T>>(this, _$identity);
+  $EmptyCopyWith<T, Empty<T>> get copyWith =>
+      _$EmptyCopyWithImpl<T, Empty<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result emptyJobTitle(String failedValue),
-    @required Result invalidLength(String failedValue, int min),
+    @required Result empty(String failedValue),
+    @required Result invalidLength(String failedValue, int max),
     @required Result invalidPay(String failedValue),
-    @required Result listTooLong(String failedValue),
+    @required Result listTooLong(List<dynamic> failedValue, int max),
+    @required Result multiline(String failedValue),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
-    return emptyJobTitle(failedValue);
+    assert(multiline != null);
+    return empty(failedValue);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result emptyJobTitle(String failedValue),
-    Result invalidLength(String failedValue, int min),
+    Result empty(String failedValue),
+    Result invalidLength(String failedValue, int max),
     Result invalidPay(String failedValue),
-    Result listTooLong(String failedValue),
+    Result listTooLong(List<dynamic> failedValue, int max),
+    Result multiline(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (emptyJobTitle != null) {
-      return emptyJobTitle(failedValue);
+    if (empty != null) {
+      return empty(failedValue);
     }
     return orElse();
   }
@@ -198,52 +192,50 @@ class _$EmptyJobTitle<T> implements EmptyJobTitle<T> {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result emptyJobTitle(EmptyJobTitle<T> value),
+    @required Result empty(Empty<T> value),
     @required Result invalidLength(InvalidLength<T> value),
     @required Result invalidPay(InvalidPay<T> value),
     @required Result listTooLong(ListTooLong<T> value),
+    @required Result multiline(Multiline<T> value),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
-    return emptyJobTitle(this);
+    assert(multiline != null);
+    return empty(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result emptyJobTitle(EmptyJobTitle<T> value),
+    Result empty(Empty<T> value),
     Result invalidLength(InvalidLength<T> value),
     Result invalidPay(InvalidPay<T> value),
     Result listTooLong(ListTooLong<T> value),
+    Result multiline(Multiline<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (emptyJobTitle != null) {
-      return emptyJobTitle(this);
+    if (empty != null) {
+      return empty(this);
     }
     return orElse();
   }
 }
 
-abstract class EmptyJobTitle<T> implements JobPostFailure<T> {
-  const factory EmptyJobTitle({@required String failedValue}) =
-      _$EmptyJobTitle<T>;
+abstract class Empty<T> implements JobPostFailure<T> {
+  const factory Empty({@required String failedValue}) = _$Empty<T>;
 
-  @override
   String get failedValue;
-  @override
-  $EmptyJobTitleCopyWith<T, EmptyJobTitle<T>> get copyWith;
+  $EmptyCopyWith<T, Empty<T>> get copyWith;
 }
 
-abstract class $InvalidLengthCopyWith<T, $Res>
-    implements $JobPostFailureCopyWith<T, $Res> {
+abstract class $InvalidLengthCopyWith<T, $Res> {
   factory $InvalidLengthCopyWith(
           InvalidLength<T> value, $Res Function(InvalidLength<T>) then) =
       _$InvalidLengthCopyWithImpl<T, $Res>;
-  @override
-  $Res call({String failedValue, int min});
+  $Res call({String failedValue, int max});
 }
 
 class _$InvalidLengthCopyWithImpl<T, $Res>
@@ -259,29 +251,29 @@ class _$InvalidLengthCopyWithImpl<T, $Res>
   @override
   $Res call({
     Object failedValue = freezed,
-    Object min = freezed,
+    Object max = freezed,
   }) {
     return _then(InvalidLength<T>(
       failedValue:
           failedValue == freezed ? _value.failedValue : failedValue as String,
-      min: min == freezed ? _value.min : min as int,
+      max: max == freezed ? _value.max : max as int,
     ));
   }
 }
 
 class _$InvalidLength<T> implements InvalidLength<T> {
-  const _$InvalidLength({@required this.failedValue, @required this.min})
+  const _$InvalidLength({@required this.failedValue, @required this.max})
       : assert(failedValue != null),
-        assert(min != null);
+        assert(max != null);
 
   @override
   final String failedValue;
   @override
-  final int min;
+  final int max;
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.invalidLength(failedValue: $failedValue, min: $min)';
+    return 'JobPostFailure<$T>.invalidLength(failedValue: $failedValue, max: $max)';
   }
 
   @override
@@ -291,15 +283,15 @@ class _$InvalidLength<T> implements InvalidLength<T> {
             (identical(other.failedValue, failedValue) ||
                 const DeepCollectionEquality()
                     .equals(other.failedValue, failedValue)) &&
-            (identical(other.min, min) ||
-                const DeepCollectionEquality().equals(other.min, min)));
+            (identical(other.max, max) ||
+                const DeepCollectionEquality().equals(other.max, max)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(failedValue) ^
-      const DeepCollectionEquality().hash(min);
+      const DeepCollectionEquality().hash(max);
 
   @override
   $InvalidLengthCopyWith<T, InvalidLength<T>> get copyWith =>
@@ -308,30 +300,33 @@ class _$InvalidLength<T> implements InvalidLength<T> {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result emptyJobTitle(String failedValue),
-    @required Result invalidLength(String failedValue, int min),
+    @required Result empty(String failedValue),
+    @required Result invalidLength(String failedValue, int max),
     @required Result invalidPay(String failedValue),
-    @required Result listTooLong(String failedValue),
+    @required Result listTooLong(List<dynamic> failedValue, int max),
+    @required Result multiline(String failedValue),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
-    return invalidLength(failedValue, min);
+    assert(multiline != null);
+    return invalidLength(failedValue, max);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result emptyJobTitle(String failedValue),
-    Result invalidLength(String failedValue, int min),
+    Result empty(String failedValue),
+    Result invalidLength(String failedValue, int max),
     Result invalidPay(String failedValue),
-    Result listTooLong(String failedValue),
+    Result listTooLong(List<dynamic> failedValue, int max),
+    Result multiline(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (invalidLength != null) {
-      return invalidLength(failedValue, min);
+      return invalidLength(failedValue, max);
     }
     return orElse();
   }
@@ -339,25 +334,28 @@ class _$InvalidLength<T> implements InvalidLength<T> {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result emptyJobTitle(EmptyJobTitle<T> value),
+    @required Result empty(Empty<T> value),
     @required Result invalidLength(InvalidLength<T> value),
     @required Result invalidPay(InvalidPay<T> value),
     @required Result listTooLong(ListTooLong<T> value),
+    @required Result multiline(Multiline<T> value),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
+    assert(multiline != null);
     return invalidLength(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result emptyJobTitle(EmptyJobTitle<T> value),
+    Result empty(Empty<T> value),
     Result invalidLength(InvalidLength<T> value),
     Result invalidPay(InvalidPay<T> value),
     Result listTooLong(ListTooLong<T> value),
+    Result multiline(Multiline<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -370,21 +368,17 @@ class _$InvalidLength<T> implements InvalidLength<T> {
 
 abstract class InvalidLength<T> implements JobPostFailure<T> {
   const factory InvalidLength(
-      {@required String failedValue, @required int min}) = _$InvalidLength<T>;
+      {@required String failedValue, @required int max}) = _$InvalidLength<T>;
 
-  @override
   String get failedValue;
-  int get min;
-  @override
+  int get max;
   $InvalidLengthCopyWith<T, InvalidLength<T>> get copyWith;
 }
 
-abstract class $InvalidPayCopyWith<T, $Res>
-    implements $JobPostFailureCopyWith<T, $Res> {
+abstract class $InvalidPayCopyWith<T, $Res> {
   factory $InvalidPayCopyWith(
           InvalidPay<T> value, $Res Function(InvalidPay<T>) then) =
       _$InvalidPayCopyWithImpl<T, $Res>;
-  @override
   $Res call({String failedValue});
 }
 
@@ -441,25 +435,28 @@ class _$InvalidPay<T> implements InvalidPay<T> {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result emptyJobTitle(String failedValue),
-    @required Result invalidLength(String failedValue, int min),
+    @required Result empty(String failedValue),
+    @required Result invalidLength(String failedValue, int max),
     @required Result invalidPay(String failedValue),
-    @required Result listTooLong(String failedValue),
+    @required Result listTooLong(List<dynamic> failedValue, int max),
+    @required Result multiline(String failedValue),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
+    assert(multiline != null);
     return invalidPay(failedValue);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result emptyJobTitle(String failedValue),
-    Result invalidLength(String failedValue, int min),
+    Result empty(String failedValue),
+    Result invalidLength(String failedValue, int max),
     Result invalidPay(String failedValue),
-    Result listTooLong(String failedValue),
+    Result listTooLong(List<dynamic> failedValue, int max),
+    Result multiline(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -472,25 +469,28 @@ class _$InvalidPay<T> implements InvalidPay<T> {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result emptyJobTitle(EmptyJobTitle<T> value),
+    @required Result empty(Empty<T> value),
     @required Result invalidLength(InvalidLength<T> value),
     @required Result invalidPay(InvalidPay<T> value),
     @required Result listTooLong(ListTooLong<T> value),
+    @required Result multiline(Multiline<T> value),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
+    assert(multiline != null);
     return invalidPay(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result emptyJobTitle(EmptyJobTitle<T> value),
+    Result empty(Empty<T> value),
     Result invalidLength(InvalidLength<T> value),
     Result invalidPay(InvalidPay<T> value),
     Result listTooLong(ListTooLong<T> value),
+    Result multiline(Multiline<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -504,19 +504,15 @@ class _$InvalidPay<T> implements InvalidPay<T> {
 abstract class InvalidPay<T> implements JobPostFailure<T> {
   const factory InvalidPay({@required String failedValue}) = _$InvalidPay<T>;
 
-  @override
   String get failedValue;
-  @override
   $InvalidPayCopyWith<T, InvalidPay<T>> get copyWith;
 }
 
-abstract class $ListTooLongCopyWith<T, $Res>
-    implements $JobPostFailureCopyWith<T, $Res> {
+abstract class $ListTooLongCopyWith<T, $Res> {
   factory $ListTooLongCopyWith(
           ListTooLong<T> value, $Res Function(ListTooLong<T>) then) =
       _$ListTooLongCopyWithImpl<T, $Res>;
-  @override
-  $Res call({String failedValue});
+  $Res call({List<dynamic> failedValue, int max});
 }
 
 class _$ListTooLongCopyWithImpl<T, $Res>
@@ -532,24 +528,30 @@ class _$ListTooLongCopyWithImpl<T, $Res>
   @override
   $Res call({
     Object failedValue = freezed,
+    Object max = freezed,
   }) {
     return _then(ListTooLong<T>(
-      failedValue:
-          failedValue == freezed ? _value.failedValue : failedValue as String,
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue as List<dynamic>,
+      max: max == freezed ? _value.max : max as int,
     ));
   }
 }
 
 class _$ListTooLong<T> implements ListTooLong<T> {
-  const _$ListTooLong({@required this.failedValue})
-      : assert(failedValue != null);
+  const _$ListTooLong({@required this.failedValue, @required this.max})
+      : assert(failedValue != null),
+        assert(max != null);
 
   @override
-  final String failedValue;
+  final List<dynamic> failedValue;
+  @override
+  final int max;
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.listTooLong(failedValue: $failedValue)';
+    return 'JobPostFailure<$T>.listTooLong(failedValue: $failedValue, max: $max)';
   }
 
   @override
@@ -558,12 +560,16 @@ class _$ListTooLong<T> implements ListTooLong<T> {
         (other is ListTooLong<T> &&
             (identical(other.failedValue, failedValue) ||
                 const DeepCollectionEquality()
-                    .equals(other.failedValue, failedValue)));
+                    .equals(other.failedValue, failedValue)) &&
+            (identical(other.max, max) ||
+                const DeepCollectionEquality().equals(other.max, max)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(failedValue) ^
+      const DeepCollectionEquality().hash(max);
 
   @override
   $ListTooLongCopyWith<T, ListTooLong<T>> get copyWith =>
@@ -572,30 +578,33 @@ class _$ListTooLong<T> implements ListTooLong<T> {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result emptyJobTitle(String failedValue),
-    @required Result invalidLength(String failedValue, int min),
+    @required Result empty(String failedValue),
+    @required Result invalidLength(String failedValue, int max),
     @required Result invalidPay(String failedValue),
-    @required Result listTooLong(String failedValue),
+    @required Result listTooLong(List<dynamic> failedValue, int max),
+    @required Result multiline(String failedValue),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
-    return listTooLong(failedValue);
+    assert(multiline != null);
+    return listTooLong(failedValue, max);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result emptyJobTitle(String failedValue),
-    Result invalidLength(String failedValue, int min),
+    Result empty(String failedValue),
+    Result invalidLength(String failedValue, int max),
     Result invalidPay(String failedValue),
-    Result listTooLong(String failedValue),
+    Result listTooLong(List<dynamic> failedValue, int max),
+    Result multiline(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (listTooLong != null) {
-      return listTooLong(failedValue);
+      return listTooLong(failedValue, max);
     }
     return orElse();
   }
@@ -603,25 +612,28 @@ class _$ListTooLong<T> implements ListTooLong<T> {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result emptyJobTitle(EmptyJobTitle<T> value),
+    @required Result empty(Empty<T> value),
     @required Result invalidLength(InvalidLength<T> value),
     @required Result invalidPay(InvalidPay<T> value),
     @required Result listTooLong(ListTooLong<T> value),
+    @required Result multiline(Multiline<T> value),
   }) {
-    assert(emptyJobTitle != null);
+    assert(empty != null);
     assert(invalidLength != null);
     assert(invalidPay != null);
     assert(listTooLong != null);
+    assert(multiline != null);
     return listTooLong(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result emptyJobTitle(EmptyJobTitle<T> value),
+    Result empty(Empty<T> value),
     Result invalidLength(InvalidLength<T> value),
     Result invalidPay(InvalidPay<T> value),
     Result listTooLong(ListTooLong<T> value),
+    Result multiline(Multiline<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -633,10 +645,143 @@ class _$ListTooLong<T> implements ListTooLong<T> {
 }
 
 abstract class ListTooLong<T> implements JobPostFailure<T> {
-  const factory ListTooLong({@required String failedValue}) = _$ListTooLong<T>;
+  const factory ListTooLong(
+      {@required List<dynamic> failedValue,
+      @required int max}) = _$ListTooLong<T>;
+
+  List<dynamic> get failedValue;
+  int get max;
+  $ListTooLongCopyWith<T, ListTooLong<T>> get copyWith;
+}
+
+abstract class $MultilineCopyWith<T, $Res> {
+  factory $MultilineCopyWith(
+          Multiline<T> value, $Res Function(Multiline<T>) then) =
+      _$MultilineCopyWithImpl<T, $Res>;
+  $Res call({String failedValue});
+}
+
+class _$MultilineCopyWithImpl<T, $Res>
+    extends _$JobPostFailureCopyWithImpl<T, $Res>
+    implements $MultilineCopyWith<T, $Res> {
+  _$MultilineCopyWithImpl(
+      Multiline<T> _value, $Res Function(Multiline<T>) _then)
+      : super(_value, (v) => _then(v as Multiline<T>));
 
   @override
-  String get failedValue;
+  Multiline<T> get _value => super._value as Multiline<T>;
+
   @override
-  $ListTooLongCopyWith<T, ListTooLong<T>> get copyWith;
+  $Res call({
+    Object failedValue = freezed,
+  }) {
+    return _then(Multiline<T>(
+      failedValue:
+          failedValue == freezed ? _value.failedValue : failedValue as String,
+    ));
+  }
+}
+
+class _$Multiline<T> implements Multiline<T> {
+  const _$Multiline({@required this.failedValue}) : assert(failedValue != null);
+
+  @override
+  final String failedValue;
+
+  @override
+  String toString() {
+    return 'JobPostFailure<$T>.multiline(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Multiline<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+
+  @override
+  $MultilineCopyWith<T, Multiline<T>> get copyWith =>
+      _$MultilineCopyWithImpl<T, Multiline<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result empty(String failedValue),
+    @required Result invalidLength(String failedValue, int max),
+    @required Result invalidPay(String failedValue),
+    @required Result listTooLong(List<dynamic> failedValue, int max),
+    @required Result multiline(String failedValue),
+  }) {
+    assert(empty != null);
+    assert(invalidLength != null);
+    assert(invalidPay != null);
+    assert(listTooLong != null);
+    assert(multiline != null);
+    return multiline(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result empty(String failedValue),
+    Result invalidLength(String failedValue, int max),
+    Result invalidPay(String failedValue),
+    Result listTooLong(List<dynamic> failedValue, int max),
+    Result multiline(String failedValue),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (multiline != null) {
+      return multiline(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result empty(Empty<T> value),
+    @required Result invalidLength(InvalidLength<T> value),
+    @required Result invalidPay(InvalidPay<T> value),
+    @required Result listTooLong(ListTooLong<T> value),
+    @required Result multiline(Multiline<T> value),
+  }) {
+    assert(empty != null);
+    assert(invalidLength != null);
+    assert(invalidPay != null);
+    assert(listTooLong != null);
+    assert(multiline != null);
+    return multiline(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result empty(Empty<T> value),
+    Result invalidLength(InvalidLength<T> value),
+    Result invalidPay(InvalidPay<T> value),
+    Result listTooLong(ListTooLong<T> value),
+    Result multiline(Multiline<T> value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (multiline != null) {
+      return multiline(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Multiline<T> implements JobPostFailure<T> {
+  const factory Multiline({@required String failedValue}) = _$Multiline<T>;
+
+  String get failedValue;
+  $MultilineCopyWith<T, Multiline<T>> get copyWith;
 }
