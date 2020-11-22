@@ -2,7 +2,8 @@ import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navi
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bottom_nav_bar_widget.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/repositories/home_page_repository.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/repositories/profile_page_repository.dart';
-import 'package:firebaseblocryze/features/login_feature/presentation/pages/sign_in_screen.dart';
+import 'package:firebaseblocryze/features/login_feature/presentation/pages/register_page.dart';
+import 'package:firebaseblocryze/features/login_feature/presentation/pages/sign_in_page.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/register':
-        return MaterialPageRoute(builder: (_) => SignInPage());
+        return MaterialPageRoute(builder: (_) => RegisterPage());
       default:
         return _errorRoute();
     }

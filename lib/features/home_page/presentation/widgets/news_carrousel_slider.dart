@@ -14,8 +14,8 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
   final List<String> imgList = [
     'https://www.raconteur.net/wp-content/uploads/2016/09/Hospitality-industry-is-set-to-thrive.jpg',
     'https://chilledmagazine.com/wp-content/uploads/2020/03/Aid-For-Bartenders-During-Bar-Closures-feat.jpg',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+    'https://tr2.cbsistatic.com/hub/i/r/2019/08/06/53468105-5f4b-45dc-b51d-9c901a348849/resize/1200x/11c5f180724798e54b70230c844a129a/istock-1036557452.jpg',
+    'https://jornaleconomico.sapo.pt/wp-content/uploads/2018/01/encomenda_correio.jpg',
     'https://thepienews.com/wp-content/uploads/2016/12/Kendall-College-School-of-Hospitality-Management-2-860x375.png'
   ];
 

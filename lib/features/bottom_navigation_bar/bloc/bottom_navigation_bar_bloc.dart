@@ -25,13 +25,13 @@ class BottomNavigationBarBloc extends Bloc<BottomNavigationBarEvent, BottomNavig
   ) async* {
     if (event is BottomNavigationHomePagePressed) {
       yield BottomNavigationHomePageLoading();
-      homePageRepository.fetchData();
+      await homePageRepository.fetchData();
       yield BottomNavigationHomePageLoaded();
     }
 
     if (event is BottomNavigationProfilePagePressed) {
       yield BottomNavigationProfilePageLoading();
-      profilePageRepository.fetchData();
+      //await profilePageRepository.fetchData();
       yield BottomNavigationProfilePageLoaded();
     }
   }

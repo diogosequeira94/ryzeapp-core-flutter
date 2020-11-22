@@ -111,10 +111,7 @@ class SignInForm extends StatelessWidget {
                     Expanded(
                       child: FlatButton(
                         onPressed: () {
-                          context.read<SignInFormBloc>().add(
-                                const SignInFormEvent
-                                    .registerWithEmailAndPasswordPressed(),
-                              );
+                          Navigator.of(context).pushReplacementNamed('/register');
                         },
                         child: const Text(LoginStrings.registerButton),
                       ),
