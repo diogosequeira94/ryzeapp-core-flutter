@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:firebaseblocryze/features/home_page/core/job_post_failures.dart';
 import 'package:firebaseblocryze/features/home_page/core/job_post_transformer.dart';
 import 'package:firebaseblocryze/features/home_page/core/job_post_validators.dart';
-import 'package:firebaseblocryze/features/home_page/core/job_post_value_object.dart';
+import 'package:firebaseblocryze/features/home_page/core/job_post_evaluator_object.dart';
 
 // Objects that we want to validate
-class NoteBody extends JobPostValueObject<String> {
+class NoteBody extends JobPostEvaluatorObject<String> {
   @override
   final Either<JobPostFailure<String>, String> value;
 
@@ -24,7 +24,7 @@ class NoteBody extends JobPostValueObject<String> {
   const NoteBody._(this.value);
 }
 
-class TodoName extends JobPostValueObject<String> {
+class TodoName extends JobPostEvaluatorObject<String> {
   @override
   final Either<JobPostFailure<String>, String> value;
 
@@ -45,7 +45,7 @@ class TodoName extends JobPostValueObject<String> {
 
 //Note Colors can't have transparency
 
-class NoteColor extends JobPostValueObject<Color> {
+class NoteColor extends JobPostEvaluatorObject<Color> {
   static const List<Color> predefinedColors = [
     Color(0xfffafafa),
     Color(0xfffa8072),
@@ -71,7 +71,7 @@ class NoteColor extends JobPostValueObject<Color> {
 }
 
 //This validator validates if the list max 3 items
-class List3<T> extends JobPostValueObject<List<T>> {
+class List3<T> extends JobPostEvaluatorObject<List<T>> {
   @override
   final Either<JobPostFailure<List<T>>, List<T>> value;
 

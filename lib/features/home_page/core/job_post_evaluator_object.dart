@@ -3,8 +3,8 @@ import 'package:firebaseblocryze/features/home_page/core/job_post_failures.dart'
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 @immutable
-abstract class JobPostValueObject<T> {
-  const JobPostValueObject();
+abstract class JobPostEvaluatorObject<T> {
+  const JobPostEvaluatorObject();
 
   Either<JobPostFailure<T>, T> get value;
 
@@ -19,7 +19,7 @@ abstract class JobPostValueObject<T> {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-    return o is JobPostValueObject<T> && o.value == value;
+    return o is JobPostEvaluatorObject<T> && o.value == value;
   }
 
   @override
