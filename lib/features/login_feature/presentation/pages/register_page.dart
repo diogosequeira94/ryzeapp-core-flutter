@@ -1,6 +1,7 @@
 import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login_feature/blocs/sign_in_form/sign_in_form_bloc.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/widgets/register_form.dart';
+import 'package:firebaseblocryze/features/login_feature/presentation/widgets/sign_in_form.dart';
 import 'package:firebaseblocryze/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,7 @@ class RegisterPage extends StatelessWidget {
               create: (context) => getIt<SignInFormBloc>(),
             ),
           ],
-          child: RegisterForm()
+          child: SignInForm()
       ),
     );
   }
