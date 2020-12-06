@@ -1,4 +1,4 @@
-import 'package:firebaseblocryze/features/home_page/data/model/category.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/category.dart';
 import 'package:flutter/material.dart';
 
 const DUMMY_CATEGORIES = const [

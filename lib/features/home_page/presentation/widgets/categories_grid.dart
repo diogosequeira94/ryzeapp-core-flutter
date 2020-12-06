@@ -1,5 +1,5 @@
-import 'package:firebaseblocryze/features/home_page/data/dummy_data.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/category_item.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/dummy_data.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesGridWidget extends StatelessWidget {

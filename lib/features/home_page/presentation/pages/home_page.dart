@@ -1,9 +1,6 @@
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
-import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
-import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   @override

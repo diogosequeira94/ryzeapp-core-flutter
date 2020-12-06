@@ -1,10 +1,12 @@
 import 'dart:ui';
 import 'package:dartz/dartz.dart';
-import 'package:firebaseblocryze/features/home_page/core/job_post_failures.dart';
-import 'package:firebaseblocryze/features/home_page/core/job_post_transformer.dart';
-import 'package:firebaseblocryze/features/home_page/core/job_post_validators.dart';
-import 'package:firebaseblocryze/features/home_page/core/job_post_evaluator_object.dart';
+import 'package:firebaseblocryze/features/home_page/utils/job_post_transformer.dart';
+import 'package:firebaseblocryze/repository/job_posts/error/job_post_failures.dart';
+import 'package:firebaseblocryze/repository/job_posts/value_objects/job_post_evaluator_object.dart';
+import 'package:firebaseblocryze/repository/job_posts/value_objects/job_post_validators.dart';
 
+
+// Objects that we want to validate
 // Objects that we want to validate
 class NoteBody extends JobPostEvaluatorObject<String> {
   @override
@@ -16,8 +18,8 @@ class NoteBody extends JobPostEvaluatorObject<String> {
   factory NoteBody(String input) {
     assert(input != null);
     return NoteBody._(
-      validateInvalidLength(input, maxLength)
-          .flatMap((value) => validateStringNotEmpty(value))
+        validateInvalidLength(input, maxLength)
+            .flatMap((value) => validateStringNotEmpty(value))
     );
   }
 
@@ -34,9 +36,9 @@ class TodoName extends JobPostEvaluatorObject<String> {
   factory TodoName(String input) {
     assert(input != null);
     return TodoName._(
-        validateInvalidLength(input, maxLength)
-            .flatMap(validateStringNotEmpty)
-            .flatMap(validateSingleLine),
+      validateInvalidLength(input, maxLength)
+          .flatMap(validateStringNotEmpty)
+          .flatMap(validateSingleLine),
     );
   }
 
@@ -63,7 +65,7 @@ class NoteColor extends JobPostEvaluatorObject<Color> {
   factory NoteColor(Color input) {
     assert(input != null);
     return NoteColor._(
-        right(makeColorOpaque(input)),
+      right(makeColorOpaque(input)),
     );
   }
 
@@ -81,7 +83,7 @@ class List3<T> extends JobPostEvaluatorObject<List<T>> {
   factory List3(List<T> listInput) {
     assert(listInput != null);
     return List3._(
-      validateMaxListLength(listInput, maxLength)
+        validateMaxListLength(listInput, maxLength)
     );
   }
 

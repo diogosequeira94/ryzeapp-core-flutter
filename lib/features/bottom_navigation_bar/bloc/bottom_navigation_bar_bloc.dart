@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebaseblocryze/features/bottom_navigation_bar/repositories/home_page_repository.dart';
-import 'package:firebaseblocryze/features/bottom_navigation_bar/repositories/profile_page_repository.dart';
+import 'package:firebaseblocryze/repository/bottom_navigation_bar/home_page_repository.dart';
+import 'package:firebaseblocryze/repository/bottom_navigation_bar/profile_page_repository.dart';
 import 'package:flutter/foundation.dart';
 
 part 'bottom_navigation_bar_event.dart';

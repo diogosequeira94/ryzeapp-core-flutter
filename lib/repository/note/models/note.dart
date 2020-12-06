@@ -1,6 +1,6 @@
-import 'package:firebaseblocryze/features/home_page/domain/notes/notes_value_objects.dart';
-import 'package:firebaseblocryze/features/home_page/domain/notes/todo_item.dart';
 import 'package:firebaseblocryze/features/login_feature/domain/core/value_object.dart';
+import 'package:firebaseblocryze/repository/note/models/todo_item.dart';
+import 'package:firebaseblocryze/repository/note/value_objects/notes_value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'note.freezed.dart';
@@ -25,4 +25,9 @@ abstract class Note with _$Note {
     color: NoteColor(NoteColor.predefinedColors[0]),
     toDos: List3([]),
   );
+
+//  //Report possible Failures
+//  Option<JobPostFailure<dynamic>> get failureOption {
+//    return name.value.fold((failure) => some(failure), (_) => none());
+//  }
 }

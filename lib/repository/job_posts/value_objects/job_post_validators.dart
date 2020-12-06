@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebaseblocryze/features/home_page/core/job_post_failures.dart';
+import 'package:firebaseblocryze/repository/job_posts/error/job_post_failures.dart';
 
 Either<JobPostFailure<String>, String> validateInvalidLength(
     String input, int maxLength) {
