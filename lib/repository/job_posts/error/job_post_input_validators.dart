@@ -1,23 +1,23 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'job_post_failures.freezed.dart';
+part 'job_post_input_validators.freezed.dart';
 @freezed
-abstract class JobPostFailure<T> with _$JobPostFailure<T> {
-  const factory JobPostFailure.empty({
+abstract class JobPostInputValidator<T> with _$JobPostInputValidator<T> {
+  const factory JobPostInputValidator.empty({
     @required String failedValue,
   }) = Empty<T>;
-  const factory JobPostFailure.invalidLength({
+  const factory JobPostInputValidator.invalidLength({
     @required String failedValue,
     @required int max,
   }) = InvalidLength<T>;
-  const factory JobPostFailure.invalidPay({
+  const factory JobPostInputValidator.invalidPay({
     @required String failedValue,
   }) = InvalidPay<T>;
-  const factory JobPostFailure.listTooLong({
+  const factory JobPostInputValidator.listTooLong({
     @required List failedValue,
     @required int max,
   }) = ListTooLong<T>;
-  const factory JobPostFailure.multiline({
+  const factory JobPostInputValidator.multiline({
     @required String failedValue,
   }) = Multiline<T>;
 }

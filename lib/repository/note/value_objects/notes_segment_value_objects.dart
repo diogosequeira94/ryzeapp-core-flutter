@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:dartz/dartz.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_transformer.dart';
-import 'package:firebaseblocryze/repository/job_posts/error/job_post_failures.dart';
+import 'package:firebaseblocryze/repository/job_posts/error/job_post_input_validators.dart';
 import 'package:firebaseblocryze/repository/job_posts/value_objects/job_post_evaluator_object.dart';
 import 'package:firebaseblocryze/repository/job_posts/value_objects/job_post_validators.dart';
 
@@ -10,7 +10,7 @@ import 'package:firebaseblocryze/repository/job_posts/value_objects/job_post_val
 // Objects that we want to validate
 class NoteBody extends JobPostEvaluatorObject<String> {
   @override
-  final Either<JobPostFailure<String>, String> value;
+  final Either<JobPostInputValidator<String>, String> value;
 
   static const maxLength = 1000;
 
@@ -28,7 +28,7 @@ class NoteBody extends JobPostEvaluatorObject<String> {
 
 class TodoName extends JobPostEvaluatorObject<String> {
   @override
-  final Either<JobPostFailure<String>, String> value;
+  final Either<JobPostInputValidator<String>, String> value;
 
   static const maxLength = 30;
 
@@ -59,7 +59,7 @@ class NoteColor extends JobPostEvaluatorObject<Color> {
   ];
 
   @override
-  final Either<JobPostFailure<Color>, Color> value;
+  final Either<JobPostInputValidator<Color>, Color> value;
 
   // Inside this constructor, we want to validate the max length of the string && single Line && not empty.
   factory NoteColor(Color input) {
@@ -75,7 +75,7 @@ class NoteColor extends JobPostEvaluatorObject<Color> {
 //This validator validates if the list max 3 items
 class List3<T> extends JobPostEvaluatorObject<List<T>> {
   @override
-  final Either<JobPostFailure<List<T>>, List<T>> value;
+  final Either<JobPostInputValidator<List<T>>, List<T>> value;
 
   static const maxLength = 3;
 

@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
 
-part of 'job_post_failures.dart';
+part of 'job_post_input_validators.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -9,8 +9,8 @@ part of 'job_post_failures.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$JobPostFailureTearOff {
-  const _$JobPostFailureTearOff();
+class _$JobPostInputValidatorTearOff {
+  const _$JobPostInputValidatorTearOff();
 
   Empty<T> empty<T>({@required String failedValue}) {
     return Empty<T>(
@@ -48,9 +48,9 @@ class _$JobPostFailureTearOff {
 }
 
 // ignore: unused_element
-const $JobPostFailure = _$JobPostFailureTearOff();
+const $JobPostInputValidator = _$JobPostInputValidatorTearOff();
 
-mixin _$JobPostFailure<T> {
+mixin _$JobPostInputValidator<T> {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result empty(String failedValue),
@@ -87,19 +87,19 @@ mixin _$JobPostFailure<T> {
   });
 }
 
-abstract class $JobPostFailureCopyWith<T, $Res> {
-  factory $JobPostFailureCopyWith(
-          JobPostFailure<T> value, $Res Function(JobPostFailure<T>) then) =
-      _$JobPostFailureCopyWithImpl<T, $Res>;
+abstract class $JobPostInputValidatorCopyWith<T, $Res> {
+  factory $JobPostInputValidatorCopyWith(JobPostInputValidator<T> value,
+          $Res Function(JobPostInputValidator<T>) then) =
+      _$JobPostInputValidatorCopyWithImpl<T, $Res>;
 }
 
-class _$JobPostFailureCopyWithImpl<T, $Res>
-    implements $JobPostFailureCopyWith<T, $Res> {
-  _$JobPostFailureCopyWithImpl(this._value, this._then);
+class _$JobPostInputValidatorCopyWithImpl<T, $Res>
+    implements $JobPostInputValidatorCopyWith<T, $Res> {
+  _$JobPostInputValidatorCopyWithImpl(this._value, this._then);
 
-  final JobPostFailure<T> _value;
+  final JobPostInputValidator<T> _value;
   // ignore: unused_field
-  final $Res Function(JobPostFailure<T>) _then;
+  final $Res Function(JobPostInputValidator<T>) _then;
 }
 
 abstract class $EmptyCopyWith<T, $Res> {
@@ -108,7 +108,8 @@ abstract class $EmptyCopyWith<T, $Res> {
   $Res call({String failedValue});
 }
 
-class _$EmptyCopyWithImpl<T, $Res> extends _$JobPostFailureCopyWithImpl<T, $Res>
+class _$EmptyCopyWithImpl<T, $Res>
+    extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $EmptyCopyWith<T, $Res> {
   _$EmptyCopyWithImpl(Empty<T> _value, $Res Function(Empty<T>) _then)
       : super(_value, (v) => _then(v as Empty<T>));
@@ -135,7 +136,7 @@ class _$Empty<T> implements Empty<T> {
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.empty(failedValue: $failedValue)';
+    return 'JobPostInputValidator<$T>.empty(failedValue: $failedValue)';
   }
 
   @override
@@ -224,7 +225,7 @@ class _$Empty<T> implements Empty<T> {
   }
 }
 
-abstract class Empty<T> implements JobPostFailure<T> {
+abstract class Empty<T> implements JobPostInputValidator<T> {
   const factory Empty({@required String failedValue}) = _$Empty<T>;
 
   String get failedValue;
@@ -239,7 +240,7 @@ abstract class $InvalidLengthCopyWith<T, $Res> {
 }
 
 class _$InvalidLengthCopyWithImpl<T, $Res>
-    extends _$JobPostFailureCopyWithImpl<T, $Res>
+    extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $InvalidLengthCopyWith<T, $Res> {
   _$InvalidLengthCopyWithImpl(
       InvalidLength<T> _value, $Res Function(InvalidLength<T>) _then)
@@ -273,7 +274,7 @@ class _$InvalidLength<T> implements InvalidLength<T> {
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.invalidLength(failedValue: $failedValue, max: $max)';
+    return 'JobPostInputValidator<$T>.invalidLength(failedValue: $failedValue, max: $max)';
   }
 
   @override
@@ -366,7 +367,7 @@ class _$InvalidLength<T> implements InvalidLength<T> {
   }
 }
 
-abstract class InvalidLength<T> implements JobPostFailure<T> {
+abstract class InvalidLength<T> implements JobPostInputValidator<T> {
   const factory InvalidLength(
       {@required String failedValue, @required int max}) = _$InvalidLength<T>;
 
@@ -383,7 +384,7 @@ abstract class $InvalidPayCopyWith<T, $Res> {
 }
 
 class _$InvalidPayCopyWithImpl<T, $Res>
-    extends _$JobPostFailureCopyWithImpl<T, $Res>
+    extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $InvalidPayCopyWith<T, $Res> {
   _$InvalidPayCopyWithImpl(
       InvalidPay<T> _value, $Res Function(InvalidPay<T>) _then)
@@ -412,7 +413,7 @@ class _$InvalidPay<T> implements InvalidPay<T> {
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.invalidPay(failedValue: $failedValue)';
+    return 'JobPostInputValidator<$T>.invalidPay(failedValue: $failedValue)';
   }
 
   @override
@@ -501,7 +502,7 @@ class _$InvalidPay<T> implements InvalidPay<T> {
   }
 }
 
-abstract class InvalidPay<T> implements JobPostFailure<T> {
+abstract class InvalidPay<T> implements JobPostInputValidator<T> {
   const factory InvalidPay({@required String failedValue}) = _$InvalidPay<T>;
 
   String get failedValue;
@@ -516,7 +517,7 @@ abstract class $ListTooLongCopyWith<T, $Res> {
 }
 
 class _$ListTooLongCopyWithImpl<T, $Res>
-    extends _$JobPostFailureCopyWithImpl<T, $Res>
+    extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $ListTooLongCopyWith<T, $Res> {
   _$ListTooLongCopyWithImpl(
       ListTooLong<T> _value, $Res Function(ListTooLong<T>) _then)
@@ -551,7 +552,7 @@ class _$ListTooLong<T> implements ListTooLong<T> {
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.listTooLong(failedValue: $failedValue, max: $max)';
+    return 'JobPostInputValidator<$T>.listTooLong(failedValue: $failedValue, max: $max)';
   }
 
   @override
@@ -644,7 +645,7 @@ class _$ListTooLong<T> implements ListTooLong<T> {
   }
 }
 
-abstract class ListTooLong<T> implements JobPostFailure<T> {
+abstract class ListTooLong<T> implements JobPostInputValidator<T> {
   const factory ListTooLong(
       {@required List<dynamic> failedValue,
       @required int max}) = _$ListTooLong<T>;
@@ -662,7 +663,7 @@ abstract class $MultilineCopyWith<T, $Res> {
 }
 
 class _$MultilineCopyWithImpl<T, $Res>
-    extends _$JobPostFailureCopyWithImpl<T, $Res>
+    extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $MultilineCopyWith<T, $Res> {
   _$MultilineCopyWithImpl(
       Multiline<T> _value, $Res Function(Multiline<T>) _then)
@@ -690,7 +691,7 @@ class _$Multiline<T> implements Multiline<T> {
 
   @override
   String toString() {
-    return 'JobPostFailure<$T>.multiline(failedValue: $failedValue)';
+    return 'JobPostInputValidator<$T>.multiline(failedValue: $failedValue)';
   }
 
   @override
@@ -779,7 +780,7 @@ class _$Multiline<T> implements Multiline<T> {
   }
 }
 
-abstract class Multiline<T> implements JobPostFailure<T> {
+abstract class Multiline<T> implements JobPostInputValidator<T> {
   const factory Multiline({@required String failedValue}) = _$Multiline<T>;
 
   String get failedValue;

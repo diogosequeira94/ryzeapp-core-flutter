@@ -1,6 +1,6 @@
 import 'package:firebaseblocryze/features/login_feature/domain/core/value_object.dart';
 import 'package:firebaseblocryze/repository/note/models/todo_item.dart';
-import 'package:firebaseblocryze/repository/note/value_objects/notes_value_objects.dart';
+import 'package:firebaseblocryze/repository/note/value_objects/notes_segment_value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'note.freezed.dart';

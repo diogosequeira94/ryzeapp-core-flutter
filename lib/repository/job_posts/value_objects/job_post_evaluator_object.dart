@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebaseblocryze/repository/job_posts/error/job_post_failures.dart';
+import 'package:firebaseblocryze/repository/job_posts/error/job_post_input_validators.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 @immutable
 abstract class JobPostEvaluatorObject<T> {
   const JobPostEvaluatorObject();
 
-  Either<JobPostFailure<T>, T> get value;
+  Either<JobPostInputValidator<T>, T> get value;
 
   /// Throws [UnexpectedValueError] containing the [JobPostFalures]
   T getOrCrash() {
@@ -31,7 +31,7 @@ abstract class JobPostEvaluatorObject<T> {
 
 //This class us a copy of the one inside Core
 class UnexpectedValueError extends Error {
-  final JobPostFailure jobPostFailure;
+  final JobPostInputValidator jobPostFailure;
 
   UnexpectedValueError(this.jobPostFailure);
 
