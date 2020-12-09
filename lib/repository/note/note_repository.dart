@@ -73,7 +73,9 @@ class NoteRepository implements INoteRepository {
       // We need to convert the Dart Object to a normal model to send it to FireStore
       final noteDto = NoteDto.fromDomain(note);
       // When set data is call over a non-existing document, it will be created, if it exists, it will be override.
-      await userDoc.noteCollection.document(noteDto.id).setData(noteDto.toJson());
+      await userDoc.noteCollection
+          .document(noteDto.id)
+          .setData(noteDto.toJson());
       return right(unit);
     } on PlatformException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
@@ -86,13 +88,43 @@ class NoteRepository implements INoteRepository {
 
   @override
   Future<Either<NoteFailure, Unit>> update(Note note) async {
-    // TODO: implement update
-    throw UnimplementedError();
+    try {
+      final userDoc = await _fireStore.userDocument();
+      // We need to convert the Dart Object to a normal model to send it to FireStore
+      final noteDto = NoteDto.fromDomain(note);
+      // When set data is call over a non-existing document, it will be created, if it exists, it will be override.
+      await userDoc.noteCollection
+          .document(noteDto.id)
+          .updateData(noteDto.toJson());
+      return right(unit);
+    } on PlatformException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(const NoteFailure.insufficientPermission());
+      } else if (e.message.contains('NOT_FOUND')) {
+        return left(const NoteFailure.unableToUpdate());
+      } else {
+        return left(const NoteFailure.unexpected());
+      }
+    }
   }
 
   @override
   Future<Either<NoteFailure, Unit>> delete(Note note) async {
-    // TODO: implement delete
-    throw UnimplementedError();
+    try {
+      final userDoc = await _fireStore.userDocument();
+      // We need to convert the Dart Object to a normal model to send it to FireStore
+      final noteId = note.id.getOrCrash();
+      // When set data is call over a non-existing document, it will be created, if it exists, it will be override.
+      await userDoc.noteCollection.document(noteId).delete();
+      return right(unit);
+    } on PlatformException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(NoteFailure.insufficientPermission());
+      } else if (e.message.contains('NOT_FOUND')) {
+        return left(const NoteFailure.unableToDelete());
+      } else {
+        return left(NoteFailure.unexpected());
+      }
+    }
   }
 }
