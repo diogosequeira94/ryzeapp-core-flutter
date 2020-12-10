@@ -37,7 +37,7 @@ abstract class NoteDto implements _$NoteDto {
 
   Note toDomain() {
     return Note(
-      id: UniqueId.fromUniqueString(this.id),
+      id: UniqueId.fromUniqueString(id),
       body: NoteBody(body),
       color: NoteColor(Color(color)),
       toDos: List3(todos.map((dto) => dto.toDomain()).toList())
