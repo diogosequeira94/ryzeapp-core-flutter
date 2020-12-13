@@ -1,3 +1,4 @@
+import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login_feature/blocs/sign_in_form/sign_in_form_bloc.dart';
 import 'package:firebaseblocryze/features/login_feature/utils/login_strings.dart';
 import 'package:flushbar/flushbar_helper.dart';
@@ -25,6 +26,8 @@ class SignInForm extends StatelessWidget {
             },
             (_) {
               Navigator.of(context).pushReplacementNamed('/bottom-nav');
+              context.bloc<AuthBloc>()
+              .add(const AuthEvent.authCheckRequested());
             },
           ),
         );
