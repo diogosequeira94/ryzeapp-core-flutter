@@ -22,7 +22,7 @@ const DUMMY_CATEGORIES = const [
   ),
   Category(
     id: 'c4',
-    title: 'Multilingual',
+    title: 'Multi',
     color: Colors.deepPurpleAccent,
     imageUrl: 'https://images.vexels.com/media/users/3/157970/isolated/preview/c156b4270aea292b9b335dd463ea17eb-earth-planet-icon-earth-icon-by-vexels.png',
   ),

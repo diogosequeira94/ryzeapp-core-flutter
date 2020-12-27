@@ -1,5 +1,5 @@
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
-import 'package:firebaseblocryze/features/bottom_navigation_bar/bottom_nav_bar_widget.dart';
+import 'file:///C:/Users/diogo/OneDrive/Bureau/Flutter%20Projects/firebaseblocryze/lib/features/bottom_navigation_bar/presentation/bottom_nav_bar_widget.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/register_page.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/sign_in_page.dart';
 import 'package:firebaseblocryze/features/login_feature/presentation/pages/splash_screen.dart';

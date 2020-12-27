@@ -5,14 +5,13 @@ import 'package:firebaseblocryze/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// f45d27
+// f5851f
+
 class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('Sign In'),
-      ),
       body: MultiBlocProvider(
         providers: [
           BlocProvider(

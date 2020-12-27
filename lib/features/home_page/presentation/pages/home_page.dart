@@ -9,16 +9,6 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Trending',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
             const SizedBox(height: 8.0),
             NewsCarouselSliderWidget(),
             const SizedBox(height: 8.0),
@@ -49,7 +39,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'All Jobs',
+                'Trending',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontSize: 20.0,
@@ -64,18 +54,23 @@ class HomePage extends StatelessWidget {
 
   Widget _myJobPosts(BuildContext context) {
     final myJobsMock = ['Bartender', 'Android Developer'];
-    return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: myJobsMock.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(myJobsMock[index]),
-          subtitle: Text('Lisbon Area'),
-          trailing: Text('10€ / hr'),
-          onTap: () {},
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: myJobsMock.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              title: Text(myJobsMock[index]),
+              subtitle: Text('Lisbon Area'),
+              trailing: Text('10€ / hr'),
+              onTap: () {},
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -92,18 +87,23 @@ class HomePage extends StatelessWidget {
       'Lawyer'
     ];
 
-    return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: allJobsMock.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(allJobsMock[index]),
-          subtitle: Text('Lisbon Area'),
-          trailing: Text('10€ / hr'),
-          onTap: () {},
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: allJobsMock.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              title: Text(allJobsMock[index]),
+              subtitle: Text('Lisbon Area'),
+              trailing: Text('10€ / hr'),
+              onTap: () {},
+            ),
+          );
+        },
+      ),
     );
   }
 }

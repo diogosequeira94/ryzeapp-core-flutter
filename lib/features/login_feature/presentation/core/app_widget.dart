@@ -17,8 +17,8 @@ class AppWidget extends StatelessWidget {
         title: 'RyzeApp',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
-          primaryColor: Colors.deepPurpleAccent,
-          accentColor: Colors.deepPurple,
+          primaryColor: Color(0xFF4568ff),
+          accentColor: Color(0xFF3229bf),
           inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0),
             ),
