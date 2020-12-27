@@ -42,3 +42,21 @@ class BottomNavigationProfilePageLoaded extends BottomNavigationBarState {
   @override
   List<Object> get props => [];
 }
+
+class BottomNavigationSettingsPageLoading extends BottomNavigationBarState {
+  @override
+  List<Object> get props => [];
+}
+
+class BottomNavigationSettingsPageLoadingFailure extends BottomNavigationBarState {
+  final String error;
+  const BottomNavigationSettingsPageLoadingFailure(this.error);
+  @override
+  List<Object> get props => [error];
+}
+
+class BottomNavigationSettingsPageLoaded extends BottomNavigationBarState {
+  @override
+  List<Object> get props => [];
+}
+

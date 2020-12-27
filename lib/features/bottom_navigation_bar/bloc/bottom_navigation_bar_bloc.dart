@@ -34,5 +34,10 @@ class BottomNavigationBarBloc extends Bloc<BottomNavigationBarEvent, BottomNavig
       //await profilePageRepository.fetchData();
       yield BottomNavigationProfilePageLoaded();
     }
+
+    if(event is BottomNavigationSettingsPagePressed){
+      yield BottomNavigationSettingsPageLoading();
+      yield BottomNavigationSettingsPageLoaded();
+    }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile.dart';
+import 'package:firebaseblocryze/features/settings/presentation/pages/settings_overview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +18,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        brightness: Brightness.light,
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
         title: Text('RyzeApp'),
         actions: [
           IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
@@ -35,7 +38,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             return Center(child: CircularProgressIndicator());
           }
           if (state is BottomNavigationProfilePageLoaded) {
-            return UserProfilePage();
+            return SettingsOverviewPage();
           }
           return Container();
         },
@@ -51,8 +54,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile'),
+              icon: Icon(Icons.settings),
+              title: Text('Settings'),
             ),
           ],
           onTap: (index) {
@@ -64,7 +67,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             if (index == 1) {
               context
                   .read<BottomNavigationBarBloc>()
-                  .add(BottomNavigationProfilePagePressed());
+                  .add(BottomNavigationSettingsPagePressed());
             }
             setState(() {
               _currentIndex = index;

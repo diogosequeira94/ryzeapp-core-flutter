@@ -13,3 +13,9 @@ class BottomNavigationProfilePagePressed extends BottomNavigationBarEvent {
   @override
   List<Object> get props => [];
 }
+
+class BottomNavigationSettingsPagePressed extends BottomNavigationBarEvent {
+  @override
+  List<Object> get props => [];
+}
+
