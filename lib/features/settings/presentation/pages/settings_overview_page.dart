@@ -79,6 +79,7 @@ class SettingsOverviewPage extends StatelessWidget {
             title: Text('Receive Responses Notification'),
             onChanged: (isChecked) {},
           ),
+          SizedBox(height: 24.0),
           BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
             return InkWell(
               child: Container(
