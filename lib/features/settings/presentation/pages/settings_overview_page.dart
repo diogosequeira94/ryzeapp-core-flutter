@@ -1,5 +1,6 @@
 import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login_feature/utils/login_strings.dart';
+import 'package:firebaseblocryze/features/settings/presentation/pages/wallet_page.dart';
 import 'package:firebaseblocryze/features/settings/presentation/widgets/horizontal_divider_widget.dart';
 import 'package:firebaseblocryze/features/settings/presentation/widgets/section_header_widget.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,16 @@ class SettingsOverviewPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0)),
             child: Column(
               children: [
+                ListTile(
+                  leading: Icon(Icons.monetization_on),
+                  title: Text('My Wallet'),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => WalletPage()),
+                  ),
+                ),
+                HorizontalDivider(),
                 ListTile(
                   leading: Icon(Icons.lock_outline),
                   title: Text('Change Password'),
