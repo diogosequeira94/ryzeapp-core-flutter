@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
             child: ListTile(
               title: Text(myJobsMock[index]),
               subtitle: Text('Lisbon Area'),
-              trailing: Text('10€ / hr'),
+              trailing: Text('15€ / h'),
               onTap: () {},
             ),
           );
@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
             child: ListTile(
               title: Text(allJobsMock[index]),
               subtitle: Text('Lisbon Area'),
-              trailing: Text('10€ / hr'),
+              trailing: Text('10€ / h'),
               onTap: () {},
             ),
           );

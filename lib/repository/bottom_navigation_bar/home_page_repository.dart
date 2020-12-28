@@ -2,7 +2,7 @@ class HomePageRepository {
   String _data;
 
   Future<void> fetchData() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 250));
     _data = 'Home Page';
   }
 

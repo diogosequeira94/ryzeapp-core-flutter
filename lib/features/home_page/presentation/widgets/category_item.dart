@@ -14,7 +14,7 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: BorderRadius.circular(12.0),
       onTap: () => _selectCategory(context),
       child: Card(
         child: Container(
@@ -31,7 +31,7 @@ class CategoryItem extends StatelessWidget {
             ],
           ),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(16.0),
             gradient: LinearGradient(
                 colors:[
                   category?.color?.withOpacity(0.5),
