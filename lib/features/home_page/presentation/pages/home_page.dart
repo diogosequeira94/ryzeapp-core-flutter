@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
             NewsCarouselSliderWidget(),
             const SizedBox(height: 8.0),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 8.0),
               child: Text(
                 'Your Job Posts',
                 textAlign: TextAlign.left,
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
             ),
             _myJobPosts(context),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 8.0),
               child: Text(
                 'Job Categories',
                 textAlign: TextAlign.left,
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
             CategoriesGridWidget(),
             const SizedBox(height: 8.0),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 8.0),
               child: Text(
                 'Trending',
                 textAlign: TextAlign.left,

@@ -19,7 +19,7 @@ class SettingsOverviewPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0)),
             child: ListTile(
               onTap: () => print('Open profile pressed'),
-              title: Text('John Doe'),
+              title: Text('Diogo Sequeira'),
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(
                     'https://cdn.psychologytoday.com/sites/default/files/styles/image-article_inline_full/public/field_blog_entry_images/2018-09/shutterstock_648907024.jpg?itok=ji6Xj8tv'),
@@ -28,8 +28,8 @@ class SettingsOverviewPage extends StatelessWidget {
             ),
           ),
           Card(
+            margin: const EdgeInsets.symmetric(vertical: 16.0),
             elevation: 4.0,
-            margin: const EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 16.0),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
             child: Column(
@@ -95,7 +95,7 @@ class SettingsOverviewPage extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(50.0))),
                 child: Center(
                   child: const Text(
-                    LoginStrings.signInGoogleButton,
+                    LoginStrings.signOutButton,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

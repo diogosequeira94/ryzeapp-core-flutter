@@ -15,4 +15,5 @@ class LoginStrings {
   static const String signInButton = "Sign In";
   static const String registerButton = "Register";
   static const String signInGoogleButton = "Sign In With Google";
+  static const String signOutButton = "Sign Out";
 }

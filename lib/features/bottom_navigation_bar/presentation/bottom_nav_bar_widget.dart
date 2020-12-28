@@ -10,7 +10,6 @@ class BottomNavBarWidget extends StatefulWidget {
 }
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
-
   int _currentIndex = 0;
 
   @override
@@ -18,12 +17,14 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        brightness: Brightness.light,
+        backgroundColor: Colors.white ,
         iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
-        title: Text('RyzeApp'),
+        title: Text(
+          'RyzeApp',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
-          IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
+          IconButton(icon: Icon(Icons.notifications_none), onPressed: () {}),
         ],
       ),
       body: BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
@@ -34,10 +35,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           if (state is BottomNavigationHomePageLoaded) {
             return HomePage();
           }
-          if (state is BottomNavigationProfilePageLoading) {
+          if (state is BottomNavigationSettingsPageLoading) {
             return Center(child: CircularProgressIndicator());
           }
-          if (state is BottomNavigationProfilePageLoaded) {
+          if (state is BottomNavigationSettingsPageLoaded) {
             return SettingsOverviewPage();
           }
           return Container();
@@ -68,6 +69,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               context
                   .read<BottomNavigationBarBloc>()
                   .add(BottomNavigationSettingsPagePressed());
+              print('Settings Page Pressed');
             }
             setState(() {
               _currentIndex = index;
