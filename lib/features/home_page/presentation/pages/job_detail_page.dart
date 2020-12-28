@@ -132,7 +132,9 @@ class JobDetailPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                     ),
                   ],
                 ),
