@@ -1,3 +1,6 @@
+import 'package:firebaseblocryze/features/home_page/presentation/model/job_model.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +56,19 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _myJobPosts(BuildContext context) {
-    final myJobsMock = ['Bartender', 'Android Developer'];
+    final myJobsMock = DUMMY_MY_JOBS.map((job){
+      return JobPostModel(
+          title: job.title,
+          description: job.description,
+          hourRate: job.hourRate,
+          imageUrl: job.imageUrl,
+          city: job.city,
+          isRemote: job.isRemote,
+          slotsAvailable: job.slotsAvailable,
+          languages: job.languages
+      );
+    }).toList();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ListView.builder(
@@ -63,10 +78,14 @@ class HomePage extends StatelessWidget {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: Text(myJobsMock[index]),
-              subtitle: Text('Lisbon Area'),
-              trailing: Text('15€ / h'),
-              onTap: () {},
+              title: Text(myJobsMock[index].title),
+              subtitle: Text(myJobsMock[index].city),
+              trailing: Text(myJobsMock[index].hourRate),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => JobDetailPage(jobPostModel: myJobsMock[index],)));
+              },
             ),
           );
         },
@@ -75,17 +94,18 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _allJobPosts(BuildContext context) {
-    final allJobsMock = [
-      'Bartender',
-      'Android Developer',
-      'Hotel Cleaner',
-      'Delivery Driver',
-      'Gardner',
-      'Library Helper',
-      'Officer',
-      'Tax Consultant',
-      'Lawyer'
-    ];
+   final allJobsMock = DUMMY_ALL_JOBS.map((job){
+      return JobPostModel(
+        title: job.title,
+        description: job.description,
+        hourRate: job.hourRate,
+        imageUrl: job.imageUrl,
+        city: job.city,
+        isRemote: job.isRemote,
+        slotsAvailable: job.slotsAvailable,
+        languages: job.languages
+      );
+    }).toList();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -96,10 +116,14 @@ class HomePage extends StatelessWidget {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: Text(allJobsMock[index]),
-              subtitle: Text('Lisbon Area'),
-              trailing: Text('10€ / h'),
-              onTap: () {},
+              title: Text(allJobsMock[index].title),
+              subtitle: Text(allJobsMock[index].city),
+              trailing: Text(allJobsMock[index].hourRate),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => JobDetailPage(jobPostModel: allJobsMock[index],)));
+              },
             ),
           );
         },
