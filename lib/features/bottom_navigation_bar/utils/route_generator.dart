@@ -1,7 +1,7 @@
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
 import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/settings/presentation/pages/settings_overview_page.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
 import 'package:firebaseblocryze/injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

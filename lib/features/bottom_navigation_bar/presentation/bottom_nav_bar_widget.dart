@@ -1,6 +1,7 @@
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
 import 'package:firebaseblocryze/features/settings/presentation/pages/settings_overview_page.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white ,
+        backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           'RyzeApp',
@@ -58,6 +59,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               icon: Icon(Icons.settings),
               title: Text('Settings'),
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text('Profile'),
+            ),
           ],
           onTap: (index) {
             if (index == 0) {
@@ -70,6 +75,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   .read<BottomNavigationBarBloc>()
                   .add(BottomNavigationSettingsPagePressed());
               print('Settings Page Pressed');
+            }
+            if (index == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserProfilePage()),
+              );
             }
             setState(() {
               _currentIndex = index;
