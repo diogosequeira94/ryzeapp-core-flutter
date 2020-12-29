@@ -20,7 +20,7 @@ class JobDetailPage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.add), onPressed: () {}),
+          IconButton(icon: Icon(Icons.star_border), onPressed: () {}),
         ],
       ),
       body: SingleChildScrollView(
@@ -53,17 +53,17 @@ class JobDetailPage extends StatelessWidget {
                     Text(
                       jobPostModel.title,
                       style: TextStyle(
-                          fontSize: 24.0,
+                          fontSize: 26.0,
                           fontWeight: FontWeight.w800,
                           color: Colors.black),
                     ),
-                    const SizedBox(height: 8.0),
+                    const SizedBox(height: 20.0),
                     Text(
                       'Description',
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 18.0,
                         color: Colors.black,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 6.0),
@@ -75,13 +75,13 @@ class JobDetailPage extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    const SizedBox(height: 8.0),
+                    const SizedBox(height: 16.0),
                     Text(
                       'Location',
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 18.0,
                         color: Colors.black,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 6.0),
@@ -93,13 +93,13 @@ class JobDetailPage extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    const SizedBox(height: 12.0),
+                    const SizedBox(height: 16.0),
                     Text(
                       'Pay Rate',
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 18.0,
                         color: Colors.black,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 6.0),
@@ -111,7 +111,25 @@ class JobDetailPage extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      'Positions Available',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 6.0),
+                    Text(
+                      jobPostModel.slotsAvailable.toString(),
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 26.0),
                     InkWell(
                       child: Container(
                         height: 50,
