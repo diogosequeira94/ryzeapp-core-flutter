@@ -11,17 +11,24 @@ class ProfilePageHeaderWidget extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 0),
+      padding: const EdgeInsets.only(top: 24.0),
       child: Container(
         width: width,
         height: height / 4.5,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16.0),
-              child: Image.network(user.profilePic,
-                  fit: BoxFit.fill, height: 150, width: 150),
+            Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 1.2),
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                child: Image.network(user.profilePic, fit: BoxFit.cover),
+              ),
             ),
             SizedBox(width: 16),
             Column(
@@ -32,12 +39,12 @@ class ProfilePageHeaderWidget extends StatelessWidget {
                   child: Text(
                     user.name,
                     style:
-                        TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Text(
                   user.jobTitle,
-                  style: TextStyle(fontSize: 13.0, color: Colors.black54),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black54),
                 ),
                 SizedBox(height: 16),
                 Row(

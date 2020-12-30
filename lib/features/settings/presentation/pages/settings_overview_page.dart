@@ -96,6 +96,13 @@ class SettingsOverviewPage extends StatelessWidget {
             title: Text('Receive Responses Notification'),
             onChanged: (isChecked) {},
           ),
+          SectionHeader(title: 'Premium'),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text('Currently you have no active plans.', style: TextStyle(
+              fontSize: 16.0
+            ),),
+          ),
           SizedBox(height: 24.0),
           BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
             return InkWell(

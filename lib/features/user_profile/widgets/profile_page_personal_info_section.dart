@@ -14,14 +14,14 @@ class ProfilePagePersonalInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.only(top: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Personal',
             style:
-            TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+            TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
           SizedBox(height: 6),
           Text(

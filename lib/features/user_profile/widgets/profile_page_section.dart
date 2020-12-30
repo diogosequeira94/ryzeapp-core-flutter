@@ -12,20 +12,19 @@ class ProfilePageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.only(top: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             body,
             style: TextStyle(fontSize: 14.0, color: Colors.black54),
           ),
-          SizedBox(height: 16.0),
         ],
       ),
     );

@@ -2,35 +2,35 @@ import 'package:firebaseblocryze/features/home_page/presentation/model/job_model
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/categories_grid.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
-import 'package:firebaseblocryze/features/settings/presentation/widgets/section_header_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8.0),
-            NewsCarouselSliderWidget(),
-            const SizedBox(height: 8.0),
-            SectionHeader(title: 'Your Job Posts'),
-            _myJobPosts(context),
-            SectionHeader(title: 'Job Categories'),
-            const SizedBox(height: 8.0),
-            CategoriesGridWidget(),
-            const SizedBox(height: 8.0),
-            SectionHeader(title: 'Trending'),
-            _allJobPosts(context),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8.0),
+          NewsCarouselSliderWidget(),
+          const SizedBox(height: 8.0),
+          HomePageSectionHeader(title: 'Your Job Posts'),
+          _myJobPosts(context),
+          HomePageSectionHeader(title: 'Job Categories'),
+          const SizedBox(height: 8.0),
+          CategoriesGridWidget(),
+          const SizedBox(height: 8.0),
+          HomePageSectionHeader(title: 'Trending'),
+          _allJobPosts(context),
+        ],
+      ),
     );
   }
 
   Widget _myJobPosts(BuildContext context) {
-    final myJobsMock = DUMMY_MY_JOBS.map((job){
+    final myJobsMock = DUMMY_MY_JOBS.map((job) {
       return JobPostModel(
           title: job.title,
           description: job.description,
@@ -39,8 +39,7 @@ class HomePage extends StatelessWidget {
           city: job.city,
           isRemote: job.isRemote,
           slotsAvailable: job.slotsAvailable,
-          languages: job.languages
-      );
+          languages: job.languages);
     }).toList();
 
     return Padding(
@@ -58,7 +57,10 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => JobDetailPage(jobPostModel: myJobsMock[index],)));
+                    MaterialPageRoute(
+                        builder: (context) => JobDetailPage(
+                              jobPostModel: myJobsMock[index],
+                            )));
               },
             ),
           );
@@ -68,17 +70,16 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _allJobPosts(BuildContext context) {
-   final allJobsMock = DUMMY_ALL_JOBS.map((job){
+    final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPostModel(
-        title: job.title,
-        description: job.description,
-        hourRate: job.hourRate,
-        imageUrl: job.imageUrl,
-        city: job.city,
-        isRemote: job.isRemote,
-        slotsAvailable: job.slotsAvailable,
-        languages: job.languages
-      );
+          title: job.title,
+          description: job.description,
+          hourRate: job.hourRate,
+          imageUrl: job.imageUrl,
+          city: job.city,
+          isRemote: job.isRemote,
+          slotsAvailable: job.slotsAvailable,
+          languages: job.languages);
     }).toList();
 
     return Padding(
@@ -96,7 +97,10 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => JobDetailPage(jobPostModel: allJobsMock[index],)));
+                    MaterialPageRoute(
+                        builder: (context) => JobDetailPage(
+                              jobPostModel: allJobsMock[index],
+                            )));
               },
             ),
           );
