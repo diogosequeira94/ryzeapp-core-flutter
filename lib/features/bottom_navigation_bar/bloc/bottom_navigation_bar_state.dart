@@ -59,4 +59,3 @@ class BottomNavigationSettingsPageLoaded extends BottomNavigationBarState {
   @override
   List<Object> get props => [];
 }
-

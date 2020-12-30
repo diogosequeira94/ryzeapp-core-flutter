@@ -32,17 +32,17 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         builder: (context, state) {
           if (state is BottomNavigationHomePageLoading) {
             return Center(child: CircularProgressIndicator());
-          }
-          if (state is BottomNavigationHomePageLoaded) {
+          } else if (state is BottomNavigationHomePageLoaded) {
             return HomePage();
-          }
-          if (state is BottomNavigationSettingsPageLoading) {
+          } else if (state is BottomNavigationSettingsPageLoading) {
             return Center(child: CircularProgressIndicator());
-          }
-          if (state is BottomNavigationSettingsPageLoaded) {
+          } else if (state is BottomNavigationSettingsPageLoaded) {
             return SettingsOverviewPage();
+          } else if (state is BottomNavigationProfilePageLoaded) {
+            return UserProfilePage();
+          } else {
+            return Container();
           }
-          return Container();
         },
       ),
       bottomNavigationBar:
@@ -56,12 +56,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.person),
               title: Text('Profile'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Settings'),
             ),
           ],
           onTap: (index) {
@@ -73,14 +73,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             if (index == 1) {
               context
                   .read<BottomNavigationBarBloc>()
-                  .add(BottomNavigationSettingsPagePressed());
-              print('Settings Page Pressed');
+                  .add(BottomNavigationProfilePagePressed());
             }
             if (index == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserProfilePage()),
-              );
+              context
+                  .read<BottomNavigationBarBloc>()
+                  .add(BottomNavigationSettingsPagePressed());
             }
             setState(() {
               _currentIndex = index;

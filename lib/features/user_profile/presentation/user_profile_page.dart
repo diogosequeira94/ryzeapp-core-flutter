@@ -6,14 +6,6 @@ class UserProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          'Profile',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +24,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    HomePageStrings.dummyJobDescription,
+                    HomePageStrings.dummyProfileSection + HomePageStrings.dummyProfileSection,
                     style: TextStyle(fontSize: 14.0, color: Colors.black54),
                   ),
                 ],
@@ -124,7 +116,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    HomePageStrings.dummyJobDescription,
+                    HomePageStrings.dummyProfileSection,
                     style: TextStyle(fontSize: 14.0, color: Colors.black54),
                   ),
                 ],
@@ -143,7 +135,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    HomePageStrings.dummyJobDescription,
+                    HomePageStrings.dummyProfileSection,
                     style: TextStyle(fontSize: 14.0, color: Colors.black54),
                   ),
                 ],
@@ -162,7 +154,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    HomePageStrings.dummyJobDescription,
+                    HomePageStrings.dummyProfileSection,
                     style: TextStyle(fontSize: 14.0, color: Colors.black54),
                   ),
                   SizedBox(height: 16.0),
