@@ -3,6 +3,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
+import 'package:firebaseblocryze/features/settings/presentation/widgets/section_header_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,40 +16,13 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 8.0),
             NewsCarouselSliderWidget(),
             const SizedBox(height: 8.0),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 8.0),
-              child: Text(
-                'Your Job Posts',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
+            SectionHeader(title: 'Your Job Posts'),
             _myJobPosts(context),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 8.0),
-              child: Text(
-                'Job Categories',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
+            SectionHeader(title: 'Job Categories'),
             const SizedBox(height: 8.0),
             CategoriesGridWidget(),
             const SizedBox(height: 8.0),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 8.0),
-              child: Text(
-                'Trending',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
+            SectionHeader(title: 'Trending'),
             _allJobPosts(context),
           ],
         ),

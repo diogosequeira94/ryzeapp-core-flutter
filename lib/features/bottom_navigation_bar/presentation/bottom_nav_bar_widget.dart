@@ -56,10 +56,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile'),
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               title: Text('Settings'),
             ),
@@ -71,11 +67,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   .add(BottomNavigationHomePagePressed());
             }
             if (index == 1) {
-              context
-                  .read<BottomNavigationBarBloc>()
-                  .add(BottomNavigationProfilePagePressed());
-            }
-            if (index == 2) {
               context
                   .read<BottomNavigationBarBloc>()
                   .add(BottomNavigationSettingsPagePressed());

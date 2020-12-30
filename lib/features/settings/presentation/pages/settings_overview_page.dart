@@ -3,6 +3,7 @@ import 'package:firebaseblocryze/features/login_feature/utils/login_strings.dart
 import 'package:firebaseblocryze/features/settings/presentation/pages/wallet_page.dart';
 import 'package:firebaseblocryze/features/settings/presentation/widgets/horizontal_divider_widget.dart';
 import 'package:firebaseblocryze/features/settings/presentation/widgets/section_header_widget.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +20,12 @@ class SettingsOverviewPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
             child: ListTile(
-              onTap: () => print('Open profile pressed'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UserProfilePage()),
+                );
+              },
               title: Text('Diogo Sequeira'),
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(

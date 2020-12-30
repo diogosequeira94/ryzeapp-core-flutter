@@ -1,35 +1,34 @@
 import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
+import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
+import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_personal_info_section.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_section.dart';
 import 'package:flutter/material.dart';
 
 class UserProfilePage extends StatelessWidget {
+  final user = UserMocks.getMockUser();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Text(
+          UserProfileString.profileTitle,
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          IconButton(icon: Icon(Icons.edit), onPressed: () {}),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfilePageHeaderWidget(),
+            ProfilePageHeaderWidget(user: user),
             SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'About',
-                    style:
-                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    HomePageStrings.dummyProfileSection + HomePageStrings.dummyProfileSection,
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ),
+            ProfilePageSection(title: UserProfileString.aboutSection, body: user.about),
             SizedBox(height: 16.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -37,9 +36,9 @@ class UserProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Job Statistics',
+                    UserProfileString.statisticsSection,
                     style:
-                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 4),
                   Text(
@@ -70,97 +69,14 @@ class UserProfilePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Personal',
-                    style:
-                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Email: diogocnsequeira@gmail.com',
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Date of Birth: 6/5/1994',
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Location: Lisbon Area',
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Drivers Licence: Yes',
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ),
+            ProfilePagePersonalInfo(email: user.email, dateOfBirth: user.dateOfBirth, city: user.currentCity),
             SizedBox(height: 16.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Education',
-                    style:
-                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    HomePageStrings.dummyProfileSection,
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ),
+            ProfilePageSection(title: UserProfileString.educationSection, body: HomePageStrings.dummyProfileSection),
             SizedBox(height: 16.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Skills',
-                    style:
-                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    HomePageStrings.dummyProfileSection,
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ),
+            ProfilePageSection(title: UserProfileString.skillsSection, body: HomePageStrings.dummyProfileSection),
             SizedBox(height: 16.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Attachments',
-                    style:
-                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    HomePageStrings.dummyProfileSection,
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                  ),
-                  SizedBox(height: 16.0),
-                ],
-              ),
-            ),
+            ProfilePageSection(title: UserProfileString.attachmentsSection, body: HomePageStrings.dummyProfileSection),
+            SizedBox(height: 16.0),
           ],
         ),
       ),
