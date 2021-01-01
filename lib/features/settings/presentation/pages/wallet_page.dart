@@ -41,7 +41,7 @@ class WalletPage extends StatelessWidget {
                       color: Colors.black,
                     )),
               ),
-              Text('Sara Vieira',
+              Text('Walter White',
                   style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.w700,

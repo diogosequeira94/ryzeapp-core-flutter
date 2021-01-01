@@ -24,7 +24,7 @@ dependencies:
   uuid: ^2.0.4
   carousel_slider: ^2.3.1
   json_annotation: ^3.0.1
-  websafe_svg: ^1.1.4
+  awesome_dialog: ^1.2.0
 
 dev_dependencies:
   flutter_test:

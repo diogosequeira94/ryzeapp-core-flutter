@@ -25,7 +25,7 @@ List<CardModel> cards = cardData.map(
 
 var cardData = [
   {
-    "user": "Sara Vieira",
+    "user": "Walter White",
     "cardNumber": "**** **** **** 1425",
     "cardExpired": "03-01-2023",
     "cardType": "assets/mastercard_logo.png",
@@ -34,7 +34,7 @@ var cardData = [
     "cardElementBottom": "assets/svg/ellipse_bottom_pink.svg"
   },
   {
-    "user": "Sara Vieira",
+    "user": "Uncle Hank",
     "cardNumber": "**** **** **** 8287",
     "cardExpired": "04-06-2025",
     "cardType": "assets/mastercard_logo.png",

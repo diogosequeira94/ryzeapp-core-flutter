@@ -26,10 +26,10 @@ class SettingsOverviewPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => UserProfilePage()),
                 );
               },
-              title: Text('Diogo Sequeira'),
+              title: Text('Walter White'),
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(
-                    'https://cdn.psychologytoday.com/sites/default/files/styles/image-article_inline_full/public/field_blog_entry_images/2018-09/shutterstock_648907024.jpg?itok=ji6Xj8tv'),
+                    'https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg'),
               ),
               trailing: Icon(Icons.edit),
             ),
