@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/pages/job_creation_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
@@ -12,16 +13,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<JobsBloc, JobsState>(
-      listener: (context, state){
-        if (state is JobsFetchFailure) {
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Error retrieving data. Please try again"),
-            duration: const Duration(seconds: 2),
-          ));
-        }
-      },
-        builder: (context, state) {
+    return BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
+      if (state is JobsFetchFailure) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Error retrieving data. Please try again"),
+          duration: const Duration(seconds: 2),
+        ));
+      }
+    }, builder: (context, state) {
       if (state is JobsFetchInProgress) {
         return Center(child: CircularProgressIndicator());
       } else if (state is JobsFetchSuccess) {
@@ -32,13 +31,38 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 8.0),
               NewsCarouselSliderWidget(),
               const SizedBox(height: 8.0),
-              HomePageSectionHeader(title: 'Your Job Posts', hasAction: true),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 14.0, right: 14.0, top: 14.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Your Job Posts',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.w500),
+                    ),
+                    InkWell(
+                        child: Icon(Icons.add),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BlocProvider.value(
+                                    value: BlocProvider.of<JobsBloc>(context) ,
+                                      child: JobCreation())));
+                        }),
+                  ],
+                ),
+              ),
               _myJobPosts(state.list, context),
-              HomePageSectionHeader(title: 'Job Categories', hasAction: false),
+              HomePageSectionHeader(
+                title: 'Job Categories',
+              ),
               const SizedBox(height: 8.0),
               CategoriesGridWidget(),
               const SizedBox(height: 8.0),
-              HomePageSectionHeader(title: 'Trending', hasAction: false),
+              HomePageSectionHeader(title: 'Trending'),
               _allJobPosts(context),
             ],
           ),
