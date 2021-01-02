@@ -13,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: close_sinks
+    final _jobsBloc = BlocProvider.of<JobsBloc>(context);
     return BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
       if (state is JobsFetchFailure) {
         Scaffold.of(context).showSnackBar(SnackBar(
@@ -24,11 +26,14 @@ class HomePage extends StatelessWidget {
           content: Text(state.message),
           duration: const Duration(seconds: 2),
         ));
-      } else if (state is DeleteJobFailure) {
+      } else if (state is DeleteJobSuccess) {
         Scaffold.of(context).showSnackBar(SnackBar(
           content: Text('Job deleted with success'),
           duration: const Duration(milliseconds: 1500),
         ));
+        Future.delayed(const Duration(milliseconds: 1500), (){
+          _jobsBloc.add(FetchJobsPosts());
+        });
       }
     }, builder: (context, state) {
       if (state is JobsFetchInProgress) {

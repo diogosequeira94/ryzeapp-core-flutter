@@ -39,10 +39,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       final result = await _jobRepository.delete(event.jobPost);
       yield result.fold(
         (failure) => DeleteJobFailure('Failed deleting job.'),
-        (success) {
-          add(FetchJobsPosts());
-          return DeleteJobSuccess();
-        },
+        (success) => DeleteJobSuccess(),
       );
     }
   }
