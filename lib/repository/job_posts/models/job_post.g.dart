@@ -8,24 +8,24 @@ part of 'job_post.dart';
 
 JobPost _$JobPostFromJson(Map<String, dynamic> json) {
   return JobPost(
-    id: json['id'] as String,
+    title: json['title'] as String,
     description: json['description'] as String,
-    hourPay: (json['hourPay'] as num).toDouble(),
-    availableSlots: json['availableSlots'] as int,
-    location: json['location'] as String,
-    available: json['available'] as bool,
-    creationDate: DateTime.parse(json['creationDate'] as String),
-    expireDate: DateTime.parse(json['expireDate'] as String),
+    imageUrl: json['imageUrl'] as String,
+    city: json['city'] as String,
+    hourRate: json['hourRate'] as String,
+    isRemote: json['isRemote'] as bool,
+    slotsAvailable: json['slotsAvailable'] as int,
+    languages: (json['languages'] as List).map((e) => e as String).toList(),
   );
 }
 
 Map<String, dynamic> _$JobPostToJson(JobPost instance) => <String, dynamic>{
-      'id': instance.id,
+      'title': instance.title,
       'description': instance.description,
-      'hourPay': instance.hourPay,
-      'availableSlots': instance.availableSlots,
-      'location': instance.location,
-      'available': instance.available,
-      'creationDate': instance.creationDate.toIso8601String(),
-      'expireDate': instance.expireDate.toIso8601String(),
+      'imageUrl': instance.imageUrl,
+      'city': instance.city,
+      'hourRate': instance.hourRate,
+      'isRemote': instance.isRemote,
+      'slotsAvailable': instance.slotsAvailable,
+      'languages': instance.languages,
     };

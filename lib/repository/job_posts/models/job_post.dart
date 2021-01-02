@@ -4,38 +4,38 @@ import 'package:meta/meta.dart';
 
 part 'job_post.g.dart';
 
-@JsonSerializable(nullable: false)
-class JobPost extends Equatable{
-  final String id;
+@JsonSerializable(explicitToJson: true)
+class JobPost extends Equatable {
+  final String title;
   final String description;
-  final double hourPay;
-  final int availableSlots;
-  final String location;
-  final bool available;
-  final DateTime creationDate;
-  final DateTime expireDate;
+  final String imageUrl;
+  final String city;
+  final String hourRate;
+  final bool isRemote;
+  final int slotsAvailable;
+  final List<String> languages;
 
   const JobPost({
-    @required this.id,
+    @required this.title,
     @required this.description,
-    @required this.hourPay,
-    @required this.availableSlots,
-    @required this.location,
-    @required this.available,
-    @required this.creationDate,
-    @required this.expireDate
+    @required this.imageUrl,
+    @required this.city,
+    @required this.hourRate,
+    @required this.isRemote,
+    @required this.slotsAvailable,
+    @required this.languages
   });
 
   @override
   List<Object> get props => [
-    id,
+    title,
     description,
-    hourPay,
-    availableSlots,
-    location,
-    available,
-    creationDate,
-    expireDate,
+    imageUrl,
+    city,
+    hourRate,
+    isRemote,
+    slotsAvailable,
+    languages,
   ];
 
   factory JobPost.fromJson(Map<String, dynamic> json) => _$JobPostFromJson(json);

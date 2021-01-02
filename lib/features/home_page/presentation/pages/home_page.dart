@@ -1,66 +1,75 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/model/job_model.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 8.0),
-          NewsCarouselSliderWidget(),
-          const SizedBox(height: 8.0),
-          HomePageSectionHeader(title: 'Your Job Posts'),
-          _myJobPosts(context),
-          HomePageSectionHeader(title: 'Job Categories'),
-          const SizedBox(height: 8.0),
-          CategoriesGridWidget(),
-          const SizedBox(height: 8.0),
-          HomePageSectionHeader(title: 'Trending'),
-          _allJobPosts(context),
-        ],
-      ),
-    );
+    return BlocConsumer<JobsBloc, JobsState>(
+      listener: (context, state){
+        if (state is JobsFetchFailure) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Error retrieving data. Please try again"),
+            duration: const Duration(seconds: 2),
+          ));
+        }
+      },
+        builder: (context, state) {
+      if (state is JobsFetchInProgress) {
+        return Center(child: CircularProgressIndicator());
+      } else if (state is JobsFetchSuccess) {
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 8.0),
+              NewsCarouselSliderWidget(),
+              const SizedBox(height: 8.0),
+              HomePageSectionHeader(title: 'Your Job Posts', hasAction: true),
+              _myJobPosts(state.list, context),
+              HomePageSectionHeader(title: 'Job Categories', hasAction: false),
+              const SizedBox(height: 8.0),
+              CategoriesGridWidget(),
+              const SizedBox(height: 8.0),
+              HomePageSectionHeader(title: 'Trending', hasAction: false),
+              _allJobPosts(context),
+            ],
+          ),
+        );
+      } else {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+    });
   }
 
-  Widget _myJobPosts(BuildContext context) {
-    final myJobsMock = DUMMY_MY_JOBS.map((job) {
-      return JobPostModel(
-          title: job.title,
-          description: job.description,
-          hourRate: job.hourRate,
-          imageUrl: job.imageUrl,
-          city: job.city,
-          isRemote: job.isRemote,
-          slotsAvailable: job.slotsAvailable,
-          languages: job.languages);
-    }).toList();
-
+  Widget _myJobPosts(List jobsList, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: myJobsMock.length,
+        itemCount: jobsList.length,
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: Text(myJobsMock[index].title),
-              subtitle: Text(myJobsMock[index].city),
-              trailing: Text(myJobsMock[index].hourRate),
+              title: Text(jobsList[index].title),
+              subtitle: Text(jobsList[index].city),
+              trailing: Text(jobsList[index].hourRate),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => JobDetailPage(
-                              jobPostModel: myJobsMock[index],
+                              jobPost: jobsList[index],
                             )));
               },
               onLongPress: () {
@@ -80,7 +89,8 @@ class HomePage extends StatelessWidget {
                   btnCancelOnPress: () {},
                   btnOkOnPress: () {
                     Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Job deleted with success."), duration: const Duration(seconds: 1),
+                      content: Text("Job deleted with success."),
+                      duration: const Duration(seconds: 1),
                     ));
                   },
                 )..show();
@@ -94,7 +104,7 @@ class HomePage extends StatelessWidget {
 
   Widget _allJobPosts(BuildContext context) {
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
-      return JobPostModel(
+      return JobPost(
           title: job.title,
           description: job.description,
           hourRate: job.hourRate,
@@ -122,7 +132,7 @@ class HomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => JobDetailPage(
-                              jobPostModel: allJobsMock[index],
+                              jobPost: allJobsMock[index],
                             )));
               },
             ),

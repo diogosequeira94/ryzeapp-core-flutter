@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
 import 'package:firebaseblocryze/features/settings/presentation/pages/settings_overview_page.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
+import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +36,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           if (state is BottomNavigationHomePageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationHomePageLoaded) {
-            return HomePage();
+            return BlocProvider(
+                create: (_) => JobsBloc(JobRepository(Firestore.instance))..add(FetchJobsPosts()),
+                child: HomePage());
           } else if (state is BottomNavigationSettingsPageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationSettingsPageLoaded) {

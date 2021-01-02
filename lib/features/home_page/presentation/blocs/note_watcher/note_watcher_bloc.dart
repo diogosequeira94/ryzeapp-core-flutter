@@ -15,8 +15,8 @@ part 'note_watcher_bloc.freezed.dart';
 
 @injectable
 class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
-
   final INoteRepository _noteRepository;
+
   NoteWatcherBloc(this._noteRepository)
       : super(const NoteWatcherState.initial());
 

@@ -1,9 +1,9 @@
-import 'package:firebaseblocryze/features/home_page/presentation/model/job_model.dart';
 import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 
 
 const DUMMY_ALL_JOBS = const [
-  JobPostModel(
+  JobPost(
     title: 'Cocktail Bartender',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -13,7 +13,7 @@ const DUMMY_ALL_JOBS = const [
     slotsAvailable: 2,
     languages: ['Portuguese, English'],
   ),
-  JobPostModel(
+  JobPost(
     title: 'NightClub Security',
     description: HomePageStrings.dummyJobDescription,
     city: 'Porto',
@@ -23,7 +23,7 @@ const DUMMY_ALL_JOBS = const [
     slotsAvailable: 1,
     languages: ['Portuguese'],
   ),
-  JobPostModel(
+  JobPost(
     title: 'House Cleaner',
     description: HomePageStrings.dummyJobDescription,
     city: 'Chaves',
@@ -33,7 +33,7 @@ const DUMMY_ALL_JOBS = const [
     slotsAvailable: 1,
     languages: ['Portuguese'],
   ),
-  JobPostModel(
+  JobPost(
     title: 'Receptionist',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon, Alameda',
@@ -43,7 +43,7 @@ const DUMMY_ALL_JOBS = const [
     slotsAvailable: 1,
     languages: ['Portuguese'],
   ),
-  JobPostModel(
+  JobPost(
     title: 'Sous Chef',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -53,7 +53,7 @@ const DUMMY_ALL_JOBS = const [
     slotsAvailable: 1,
     languages: ['Portuguese, English'],
   ),
-  JobPostModel(
+  JobPost(
     title: 'Assistant Kitchen Porter',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -63,7 +63,7 @@ const DUMMY_ALL_JOBS = const [
     slotsAvailable: 2,
     languages: ['Portuguese'],
   ),
-  JobPostModel(
+  JobPost(
     title: 'Electro House DJ',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -76,7 +76,7 @@ const DUMMY_ALL_JOBS = const [
 ];
 
 const DUMMY_MY_JOBS = const [
-  JobPostModel(
+  JobPost(
     title: 'Gardner',
     description: HomePageStrings.dummyJobDescription,
     city: 'Oeiras',
@@ -86,7 +86,7 @@ const DUMMY_MY_JOBS = const [
     slotsAvailable: 1,
     languages: ['Any'],
   ),
-  JobPostModel(
+  JobPost(
     title: 'Guitar Player for Wedding',
     description: HomePageStrings.dummyJobDescription,
     city: 'Porto',

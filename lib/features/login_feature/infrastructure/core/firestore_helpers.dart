@@ -14,5 +14,6 @@ extension FirestoreX on Firestore {
 }
 
 extension DocumentReferenceX on DocumentReference {
+  CollectionReference get jobsCollection => collection('jobs');
   CollectionReference get noteCollection => collection('notes');
 }

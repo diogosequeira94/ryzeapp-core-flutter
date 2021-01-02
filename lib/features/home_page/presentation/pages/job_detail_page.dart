@@ -1,10 +1,10 @@
-import 'package:firebaseblocryze/features/home_page/presentation/model/job_model.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class JobDetailPage extends StatelessWidget {
-  final JobPostModel jobPostModel;
-  JobDetailPage({@required this.jobPostModel});
+  final JobPost jobPost;
+  JobDetailPage({@required this.jobPost});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class JobDetailPage extends StatelessWidget {
                 height: height * 0.55,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(jobPostModel.imageUrl),
+                    image: NetworkImage(jobPost.imageUrl ?? 'https://static.wikia.nocookie.net/hitorijme-my-hero/images/c/c6/Image-placeholder.jpg/revision/latest?cb=20200207162338'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -51,7 +51,7 @@ class JobDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      jobPostModel.title,
+                      jobPost.title,
                       style: TextStyle(
                           fontSize: 26.0,
                           fontWeight: FontWeight.w800,
@@ -68,7 +68,7 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      jobPostModel.description,
+                      jobPost.description,
                       style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,
@@ -86,7 +86,7 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      jobPostModel.city,
+                      jobPost.city,
                       style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,
@@ -104,7 +104,7 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      jobPostModel.hourRate,
+                      jobPost.hourRate,
                       style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,
@@ -122,7 +122,7 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      jobPostModel.slotsAvailable.toString(),
+                      jobPost.slotsAvailable.toString(),
                       style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,

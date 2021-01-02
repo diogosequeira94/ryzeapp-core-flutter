@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebaseblocryze/repository/note/error/note_failure.dart';
-
 import 'models/note.dart';
 
 
