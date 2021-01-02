@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 
 const DUMMY_ALL_JOBS = const [
   JobPost(
+    jobID: '1',
     title: 'Cocktail Bartender',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -14,6 +15,7 @@ const DUMMY_ALL_JOBS = const [
     languages: ['Portuguese, English'],
   ),
   JobPost(
+    jobID: '2',
     title: 'NightClub Security',
     description: HomePageStrings.dummyJobDescription,
     city: 'Porto',
@@ -24,6 +26,7 @@ const DUMMY_ALL_JOBS = const [
     languages: ['Portuguese'],
   ),
   JobPost(
+    jobID: '3',
     title: 'House Cleaner',
     description: HomePageStrings.dummyJobDescription,
     city: 'Chaves',
@@ -34,6 +37,7 @@ const DUMMY_ALL_JOBS = const [
     languages: ['Portuguese'],
   ),
   JobPost(
+    jobID: '4',
     title: 'Receptionist',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon, Alameda',
@@ -44,6 +48,7 @@ const DUMMY_ALL_JOBS = const [
     languages: ['Portuguese'],
   ),
   JobPost(
+    jobID: '5',
     title: 'Sous Chef',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -54,6 +59,7 @@ const DUMMY_ALL_JOBS = const [
     languages: ['Portuguese, English'],
   ),
   JobPost(
+    jobID: '6',
     title: 'Assistant Kitchen Porter',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -64,6 +70,7 @@ const DUMMY_ALL_JOBS = const [
     languages: ['Portuguese'],
   ),
   JobPost(
+    jobID: '7',
     title: 'Electro House DJ',
     description: HomePageStrings.dummyJobDescription,
     city: 'Lisbon',
@@ -77,6 +84,7 @@ const DUMMY_ALL_JOBS = const [
 
 const DUMMY_MY_JOBS = const [
   JobPost(
+    jobID: '8',
     title: 'Gardner',
     description: HomePageStrings.dummyJobDescription,
     city: 'Oeiras',
@@ -87,6 +95,7 @@ const DUMMY_MY_JOBS = const [
     languages: ['Any'],
   ),
   JobPost(
+    jobID: '9',
     title: 'Guitar Player for Wedding',
     description: HomePageStrings.dummyJobDescription,
     city: 'Porto',

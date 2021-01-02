@@ -2,6 +2,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class JobCreation extends StatefulWidget {
   @override
@@ -86,37 +87,33 @@ class _JobCreationState extends State<JobCreation> {
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(16.0),
-                      child: Image.asset('assets/ryze-app-logo.jpg',
-                          width: 200, height: 200)),
+                      child: Image.asset('assets/no-image-placeholder.jpg',
+                          width: 250, height: 250)),
                 ),
-                _buildInputSection(titleNode, true, 'Title', 'Enter title', 50,
+                _buildInputSection(titleNode, false, 'Title', 'Enter title', 50,
                     titleController, descriptionNode),
-                _buildInputSection(
-                    descriptionNode,
-                    false,
-                    'Description',
-                    'Enter description',
-                    50,
-                    descriptionController,
-                    cityNode),
-                _buildInputSection(cityNode, false, 'City',
-                    'Enter city', 20, cityController, hourRateNode),
+                _buildInputSection(descriptionNode, false, 'Description',
+                    'Enter description', 50, descriptionController, cityNode),
+                _buildInputSection(cityNode, false, 'City', 'Enter city', 20,
+                    cityController, hourRateNode),
                 _buildInputSection(hourRateNode, false, 'Hour Rate',
-                    'Enter hour rate', 3, hourRateController, submitNode, true),
+                    'Enter hour rate', 6, hourRateController, submitNode, true),
                 SizedBox(height: 8.0),
                 CheckboxListTile(
                   title: Padding(
                     padding: const EdgeInsets.only(bottom: 14.0),
-                    child: Text('Terms of Consent', style: TextStyle(
-                      fontWeight: FontWeight.w600
-                    ),),
+                    child: Text(
+                      'Terms of Consent',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
-                  subtitle: Text('By submitting this job, you agree to share all the information with RyzeApp and its users.'),
+                  subtitle: Text(
+                      'By submitting this job, you agree to share all the information with RyzeApp and its users.'),
                   controlAffinity: ListTileControlAffinity.platform,
                   contentPadding: EdgeInsets.all(0.0),
                   value: _isChecked,
                   activeColor: Color(0xFF3229bf),
-                  onChanged: (bool value){
+                  onChanged: (bool value) {
                     setState(() {
                       _isChecked = value;
                     });
@@ -143,14 +140,22 @@ class _JobCreationState extends State<JobCreation> {
                     ),
                   ),
                   onTap: () {
-                    _jobsBloc.add(
-                        AddJobPost(
-                            JobPost(
-                      title: titleController.text == '' ? 'No title job' : titleController.text,
-                      description: descriptionController.text == '' ? 'No description' : descriptionController.text,
-                      city: cityController.text == '' ? 'Unknown location' : cityController.text,
+                    var uuid = Uuid();
+                    _jobsBloc.add(AddJobPost(JobPost(
+                      jobID: uuid.v4(),
+                      title: titleController.text == ''
+                          ? 'No title job'
+                          : titleController.text,
+                      description: descriptionController.text == ''
+                          ? 'No description'
+                          : descriptionController.text,
+                      city: cityController.text == ''
+                          ? 'Unknown location'
+                          : cityController.text,
                       imageUrl: null,
-                      hourRate: hourRateController.text == '' ? 'Volunteer job' : '${hourRateController.text} / h',
+                      hourRate: hourRateController.text == ''
+                          ? 'Volunteer job'
+                          : '${hourRateController.text.toString()} / h',
                       isRemote: false,
                       slotsAvailable: 1,
                       languages: ['Portuguese'],
@@ -191,7 +196,7 @@ class _JobCreationState extends State<JobCreation> {
 
   Widget _buildInputSection(FocusNode focusNode, bool autoFocus, String label,
       String hint, int length, TextEditingController controller,
-      [FocusNode nextFocus, bool numeric]) {
+      [FocusNode nextFocus, bool numeric = false]) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: TextFormField(

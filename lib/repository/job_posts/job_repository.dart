@@ -23,9 +23,16 @@ class JobRepository implements IJobPostRepository {
   }
 
   @override
-  Future<Either<JobPostFailure, void>> delete(JobPost jobPost) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<JobPostFailure, void>> delete(JobPost jobPost) async {
+    try {
+      return Right(_fireStore.collection('jobs').where('jobID', isEqualTo: jobPost.jobID).getDocuments().then((value) {
+        value.documents.forEach((element) {
+          _fireStore.collection('jobs').document(element.documentID).delete();
+        });
+      }));
+    } on Exception {
+      return Left(JobPostFailure.unexpected());
+    }
   }
 
   @override

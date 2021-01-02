@@ -47,3 +47,22 @@ class AddJobFailure extends JobsState {
   @override
   List<Object> get props => [message];
 }
+
+class DeleteJobInProgress extends JobsState {
+  DeleteJobInProgress();
+  @override
+  List<Object> get props => [];
+}
+
+class DeleteJobSuccess extends JobsState {
+  DeleteJobSuccess();
+  @override
+  List<Object> get props => [];
+}
+
+class DeleteJobFailure extends JobsState {
+  final String message;
+  DeleteJobFailure(this.message);
+  @override
+  List<Object> get props => [message];
+}

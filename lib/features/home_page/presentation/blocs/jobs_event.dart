@@ -15,3 +15,10 @@ class AddJobPost extends JobsEvent {
   @override
   List<Object> get props => [jobPost];
 }
+
+class DeleteJobPost extends JobsEvent {
+  final JobPost jobPost;
+  DeleteJobPost(this.jobPost);
+  @override
+  List<Object> get props => [jobPost];
+}

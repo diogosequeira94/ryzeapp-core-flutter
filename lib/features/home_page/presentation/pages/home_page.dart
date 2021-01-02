@@ -19,6 +19,16 @@ class HomePage extends StatelessWidget {
           content: Text("Error retrieving data. Please try again"),
           duration: const Duration(seconds: 2),
         ));
+      } else if (state is DeleteJobFailure) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(state.message),
+          duration: const Duration(seconds: 2),
+        ));
+      } else if (state is DeleteJobFailure) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('Job deleted with success'),
+          duration: const Duration(milliseconds: 1500),
+        ));
       }
     }, builder: (context, state) {
       if (state is JobsFetchInProgress) {
@@ -76,7 +86,10 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _myJobPosts(List jobsList, BuildContext context) {
-    return Padding(
+    return jobsList.isEmpty ? Padding(
+      padding: const EdgeInsets.only(left: 14.0, top: 8.0),
+      child: Text('You have No Jobs yet.'),
+    ) : Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
@@ -112,10 +125,7 @@ class HomePage extends StatelessWidget {
                   btnOkColor: Colors.black,
                   btnCancelOnPress: () {},
                   btnOkOnPress: () {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Job deleted with success."),
-                      duration: const Duration(seconds: 1),
-                    ));
+                    BlocProvider.of<JobsBloc>(context).add(DeleteJobPost(jobsList[index]));
                   },
                 )..show();
               },
@@ -129,6 +139,7 @@ class HomePage extends StatelessWidget {
   Widget _allJobPosts(BuildContext context) {
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPost(
+          jobID: job.jobID,
           title: job.title,
           description: job.description,
           hourRate: job.hourRate,
