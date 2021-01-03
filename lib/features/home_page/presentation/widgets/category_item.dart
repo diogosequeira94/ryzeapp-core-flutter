@@ -7,15 +7,11 @@ class CategoryItem extends StatelessWidget {
 
   const CategoryItem(this.category);
 
-  void _selectCategory(BuildContext context){
-    print('Category tapped');
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(12.0),
-      onTap: () => _selectCategory(context),
+      onTap: (){},
       child: Card(
         child: Container(
           padding: EdgeInsets.all(15.0),

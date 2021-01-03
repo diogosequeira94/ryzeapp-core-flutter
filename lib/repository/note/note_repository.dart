@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'i_note_repository.dart';
-import 'package:firebaseblocryze/features/login_feature/infrastructure/core/firestore_helpers.dart';
+import 'package:firebaseblocryze/repository/login/infrastructure/core/firestore_helpers.dart';
 
 @LazySingleton(as: INoteRepository)
 class NoteRepository implements INoteRepository {

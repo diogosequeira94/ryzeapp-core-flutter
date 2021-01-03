@@ -1,7 +1,7 @@
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/note_actor/note_actor_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/note_watcher/note_watcher_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/notes_overview_body.dart';
-import 'package:firebaseblocryze/features/login_feature/blocs/auth/auth_bloc.dart';
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/injection.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';

@@ -10,10 +10,10 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'features/login_feature/blocs/auth/auth_bloc.dart';
-import 'features/login_feature/infrastructure/auth/firebase_auth_facade.dart';
-import 'features/login_feature/infrastructure/core/firebase_injectable_module.dart';
-import 'features/login_feature/domain/auth/interface_auth_facade.dart';
+import 'features/login/blocs/auth/auth_bloc.dart';
+import 'repository/login/infrastructure/auth/firebase_auth_facade.dart';
+import 'repository/login/infrastructure/core/firebase_injectable_module.dart';
+import 'repository/login/auth/interface_auth_facade.dart';
 import 'repository/job_posts/i_job_post_repository.dart';
 import 'repository/note/i_note_repository.dart';
 import 'repository/job_posts/job_repository.dart';
@@ -21,7 +21,7 @@ import 'features/home_page/presentation/blocs/note_actor/note_actor_bloc.dart';
 import 'features/home_page/presentation/blocs/note_form/note_form_bloc.dart';
 import 'repository/note/note_repository.dart';
 import 'features/home_page/presentation/blocs/note_watcher/note_watcher_bloc.dart';
-import 'features/login_feature/blocs/sign_in_form/sign_in_form_bloc.dart';
+import 'features/login/blocs/sign_in_form/sign_in_form_bloc.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance

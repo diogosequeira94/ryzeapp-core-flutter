@@ -1,6 +1,6 @@
 // changing freezed anotation from with to implements because we want some custom methods
 // We are only doing this because we have evaluator objects, discarding them and making the validations in the UI will delete all this boilerplate.
-import 'package:firebaseblocryze/features/login_feature/domain/core/value_object.dart';
+import 'package:firebaseblocryze/repository/login/core/value_object.dart';
 import 'package:firebaseblocryze/repository/note/models/todo_item.dart';
 import 'package:firebaseblocryze/repository/note/value_objects/notes_segment_value_objects.dart';
 import 'package:flutter/foundation.dart';

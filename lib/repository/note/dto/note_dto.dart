@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebaseblocryze/features/login_feature/domain/core/value_object.dart';
+import 'package:firebaseblocryze/repository/login/core/value_object.dart';
 import 'package:firebaseblocryze/repository/note/models/note.dart';
 import 'package:firebaseblocryze/repository/note/models/todo_item.dart';
 import 'package:firebaseblocryze/repository/note/value_objects/notes_segment_value_objects.dart';

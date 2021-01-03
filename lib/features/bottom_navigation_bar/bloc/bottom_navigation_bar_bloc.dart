@@ -2,18 +2,16 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebaseblocryze/repository/bottom_navigation_bar/profile_page_repository.dart';
-import 'package:flutter/foundation.dart';
+
 
 part 'bottom_navigation_bar_event.dart';
 part 'bottom_navigation_bar_state.dart';
 
 class BottomNavigationBarBloc
     extends Bloc<BottomNavigationBarEvent, BottomNavigationBarState> {
-  final ProfilePageRepository profilePageRepository;
   int currentIndex = 0;
 
-  BottomNavigationBarBloc({@required this.profilePageRepository})
+  BottomNavigationBarBloc()
       : super(BottomNavigationBarInitial());
 
   @override

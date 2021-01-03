@@ -1,4 +1,4 @@
-import 'package:firebaseblocryze/features/login_feature/domain/core/value_object.dart';
+import 'package:firebaseblocryze/repository/login/core/value_object.dart';
 import 'package:firebaseblocryze/repository/note/value_objects/notes_segment_value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
