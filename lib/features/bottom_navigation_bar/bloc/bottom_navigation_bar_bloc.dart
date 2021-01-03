@@ -23,15 +23,13 @@ class BottomNavigationBarBloc
       yield BottomNavigationHomePageLoaded();
     }
 
-    if (event is BottomNavigationProfilePagePressed) {
-      yield BottomNavigationProfilePageLoading();
-      //await profilePageRepository.fetchData();
-      yield BottomNavigationProfilePageLoaded();
+    if (event is BottomNavigationExplorePagePressed) {
+      yield BottomNavigationExplorePageLoading();
+      yield BottomNavigationExplorePageLoaded();
     }
 
     if (event is BottomNavigationAccountPagePressed) {
       yield BottomNavigationAccountPageLoading();
-      //await profilePageRepository.fetchData();
       yield BottomNavigationAccountPageLoaded();
     }
   }

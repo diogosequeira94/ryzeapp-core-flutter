@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:firebaseblocryze/features/explore/presentation/explore_landing_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
@@ -43,8 +44,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationAccountPageLoaded) {
             return AccountOverviewPage();
-          } else if (state is BottomNavigationProfilePageLoaded) {
-            return UserProfilePage();
+          } else if (state is BottomNavigationExplorePageLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is BottomNavigationExplorePageLoaded) {
+            return ExploreLandingPage();
           } else {
             return Container();
           }
@@ -58,11 +61,15 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              title: Text('Home'),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.explore),
+              label: 'Explore',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              title: Text('Account'),
+              label: 'Account',
             ),
           ],
           onTap: (index) {
@@ -72,6 +79,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   .add(BottomNavigationHomePagePressed());
             }
             if (index == 1) {
+              context
+                  .read<BottomNavigationBarBloc>()
+                  .add(BottomNavigationExplorePagePressed());
+            }
+            if (index == 2) {
               context
                   .read<BottomNavigationBarBloc>()
                   .add(BottomNavigationAccountPagePressed());
