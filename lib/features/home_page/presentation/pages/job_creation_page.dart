@@ -49,7 +49,6 @@ class _JobCreationState extends State<JobCreation> {
     descriptionController.dispose();
     cityController.dispose();
     hourRateController.dispose();
-    _jobsBloc.close();
   }
 
   @override

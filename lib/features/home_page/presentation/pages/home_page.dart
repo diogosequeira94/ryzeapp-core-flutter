@@ -13,8 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // ignore: close_sinks
-    final _jobsBloc = BlocProvider.of<JobsBloc>(context);
+    final _jobsBloc = context.watch<JobsBloc>();
     return BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
       if (state is JobsFetchFailure) {
         Scaffold.of(context).showSnackBar(SnackBar(
@@ -27,12 +26,12 @@ class HomePage extends StatelessWidget {
           duration: const Duration(seconds: 2),
         ));
       } else if (state is DeleteJobSuccess) {
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('Job deleted with success'),
-          duration: const Duration(milliseconds: 1500),
-        ));
         Future.delayed(const Duration(milliseconds: 1500), (){
           _jobsBloc.add(FetchJobsPosts());
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text('Job deleted with success'),
+            duration: const Duration(milliseconds: 1500),
+          ));
         });
       }
     }, builder: (context, state) {
@@ -60,11 +59,10 @@ class HomePage extends StatelessWidget {
                     InkWell(
                         child: Icon(Icons.add),
                         onTap: () {
-                          Navigator.push(
-                              context,
+                          Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (_) => BlocProvider.value(
-                                    value: BlocProvider.of<JobsBloc>(context) ,
+                                    value: BlocProvider.of<JobsBloc>(context),
                                       child: JobCreation())));
                         }),
                   ],
@@ -130,7 +128,8 @@ class HomePage extends StatelessWidget {
                   btnOkColor: Colors.black,
                   btnCancelOnPress: () {},
                   btnOkOnPress: () {
-                    BlocProvider.of<JobsBloc>(context).add(DeleteJobPost(jobsList[index]));
+                    final _jobsBloc = context.read<JobsBloc>();
+                    _jobsBloc.add(DeleteJobPost(jobsList[index]));
                   },
                 )..show();
               },
