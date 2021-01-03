@@ -38,46 +38,48 @@ class HomePage extends StatelessWidget {
       if (state is JobsFetchInProgress) {
         return Center(child: CircularProgressIndicator());
       } else if (state is JobsFetchSuccess) {
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8.0),
-              NewsCarouselSliderWidget(),
-              const SizedBox(height: 8.0),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 14.0, right: 14.0, top: 14.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Your Job Posts',
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.w500),
-                    ),
-                    InkWell(
-                        child: Icon(Icons.add),
-                        onTap: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) => BlocProvider.value(
-                                    value: BlocProvider.of<JobsBloc>(context),
-                                      child: JobCreation())));
-                        }),
-                  ],
+        return RefreshIndicator(
+          onRefresh: (){
+            _jobsBloc.add(FetchJobsPosts());
+            return _jobsBloc.firstWhere((e) => e is !FetchJobsPosts);
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NewsCarouselSliderWidget(),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Your Job Posts',
+                        style: TextStyle(
+                            fontSize: 18.0, fontWeight: FontWeight.w500),
+                      ),
+                      InkWell(
+                          child: Icon(Icons.add),
+                          onTap: () {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (_) => BlocProvider.value(
+                                      value: BlocProvider.of<JobsBloc>(context),
+                                        child: JobCreation())));
+                          }),
+                    ],
+                  ),
                 ),
-              ),
-              _myJobPosts(state.list, context),
-              HomePageSectionHeader(
-                title: 'Job Categories',
-              ),
-              const SizedBox(height: 8.0),
-              CategoriesGridWidget(),
-              const SizedBox(height: 8.0),
-              HomePageSectionHeader(title: 'Trending'),
-              _allJobPosts(context),
-            ],
+                _myJobPosts(state.list, context),
+                HomePageSectionHeader(
+                  title: 'Job Categories',
+                ),
+                CategoriesGridWidget(),
+                HomePageSectionHeader(title: 'Trending'),
+                _allJobPosts(context),
+              ],
+            ),
           ),
         );
       } else {

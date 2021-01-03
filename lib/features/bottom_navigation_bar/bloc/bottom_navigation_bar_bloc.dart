@@ -31,10 +31,10 @@ class BottomNavigationBarBloc
       yield BottomNavigationProfilePageLoaded();
     }
 
-    if (event is BottomNavigationSettingsPagePressed) {
-      yield BottomNavigationSettingsPageLoading();
+    if (event is BottomNavigationAccountPagePressed) {
+      yield BottomNavigationAccountPageLoading();
       //await profilePageRepository.fetchData();
-      yield BottomNavigationSettingsPageLoaded();
+      yield BottomNavigationAccountPageLoaded();
     }
   }
 }

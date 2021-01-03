@@ -43,19 +43,19 @@ class BottomNavigationProfilePageLoaded extends BottomNavigationBarState {
   List<Object> get props => [];
 }
 
-class BottomNavigationSettingsPageLoading extends BottomNavigationBarState {
+class BottomNavigationAccountPageLoading extends BottomNavigationBarState {
   @override
   List<Object> get props => [];
 }
 
-class BottomNavigationSettingsPageLoadingFailure extends BottomNavigationBarState {
+class BottomNavigationAccountPageLoadingFailure extends BottomNavigationBarState {
   final String error;
-  const BottomNavigationSettingsPageLoadingFailure(this.error);
+  const BottomNavigationAccountPageLoadingFailure(this.error);
   @override
   List<Object> get props => [error];
 }
 
-class BottomNavigationSettingsPageLoaded extends BottomNavigationBarState {
+class BottomNavigationAccountPageLoaded extends BottomNavigationBarState {
   @override
   List<Object> get props => [];
 }

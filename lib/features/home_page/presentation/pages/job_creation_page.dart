@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
+import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
+import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class JobCreation extends StatefulWidget {
@@ -21,6 +26,7 @@ class _JobCreationState extends State<JobCreation> {
   TextEditingController hourRateController;
   JobsBloc _jobsBloc;
   bool _isChecked = false;
+  File _image;
 
   @override
   void initState() {
@@ -58,7 +64,7 @@ class _JobCreationState extends State<JobCreation> {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          'Add Job',
+          JobPostStrings.jobCreationPageTitle,
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -84,10 +90,15 @@ class _JobCreationState extends State<JobCreation> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 24.0),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16.0),
-                      child: Image.asset('assets/no-image-placeholder.jpg',
-                          width: 250, height: 250)),
+                  child: InkWell(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: _image != null
+                            ? Image.file(_image, width: 250, height: 250)
+                            : Image.asset(JobPostStrings.imagePlaceholder,
+                                width: 250, height: 250)),
+                    onTap: () async => await getImage(true),
+                  ),
                 ),
                 _buildInputSection(titleNode, false, 'Title', 'Enter title', 50,
                     titleController, descriptionNode),
@@ -102,12 +113,12 @@ class _JobCreationState extends State<JobCreation> {
                   title: Padding(
                     padding: const EdgeInsets.only(bottom: 14.0),
                     child: Text(
-                      'Terms of Consent',
+                      JobPostStrings.termsOfConsent,
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                   subtitle: Text(
-                      'By submitting this job, you agree to share all the information with RyzeApp and its users.'),
+                      JobPostStrings.jobDisclaimer),
                   controlAffinity: ListTileControlAffinity.platform,
                   contentPadding: EdgeInsets.all(0.0),
                   value: _isChecked,
@@ -133,7 +144,7 @@ class _JobCreationState extends State<JobCreation> {
                         borderRadius: BorderRadius.all(Radius.circular(50.0))),
                     child: Center(
                       child: const Text(
-                        'Create Job',
+                        JobPostStrings.createJobBtn,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -146,7 +157,7 @@ class _JobCreationState extends State<JobCreation> {
                           ? 'No title job'
                           : titleController.text,
                       description: descriptionController.text == ''
-                          ? 'No description'
+                          ? HomePageStrings.dummyJobDescription
                           : descriptionController.text,
                       city: cityController.text == ''
                           ? 'Unknown location'
@@ -154,7 +165,7 @@ class _JobCreationState extends State<JobCreation> {
                       imageUrl: null,
                       hourRate: hourRateController.text == ''
                           ? 'Volunteer job'
-                          : '${hourRateController.text.toString()} / h',
+                          : '${hourRateController.text.toString()}€ / h',
                       isRemote: false,
                       slotsAvailable: 1,
                       languages: ['Portuguese'],
@@ -176,7 +187,7 @@ class _JobCreationState extends State<JobCreation> {
                         borderRadius: BorderRadius.all(Radius.circular(50.0))),
                     child: Center(
                       child: const Text(
-                        'Preview Post',
+                        JobPostStrings.previewJobBtn,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -219,5 +230,21 @@ class _JobCreationState extends State<JobCreation> {
         },
       ),
     );
+  }
+
+  Future getImage(bool gallery) async {
+    ImagePicker picker = ImagePicker();
+    PickedFile pickedFile;
+    if (gallery) {
+      pickedFile = await picker.getImage(source: ImageSource.gallery);
+    } else {
+      pickedFile = await picker.getImage(source: ImageSource.camera);
+    }
+
+    setState(() {
+      if(pickedFile != null){
+        _image = File(pickedFile.path);
+      }
+    });
   }
 }

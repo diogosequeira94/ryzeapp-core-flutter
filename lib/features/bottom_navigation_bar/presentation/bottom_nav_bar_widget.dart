@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
-import 'package:firebaseblocryze/features/settings/presentation/pages/settings_overview_page.dart';
+import 'package:firebaseblocryze/features/settings/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +39,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             return BlocProvider(
                 create: (_) => JobsBloc(JobRepository(Firestore.instance))..add(FetchJobsPosts()),
                 child: HomePage());
-          } else if (state is BottomNavigationSettingsPageLoading) {
+          } else if (state is BottomNavigationAccountPageLoading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is BottomNavigationSettingsPageLoaded) {
-            return SettingsOverviewPage();
+          } else if (state is BottomNavigationAccountPageLoaded) {
+            return AccountOverviewPage();
           } else if (state is BottomNavigationProfilePageLoaded) {
             return UserProfilePage();
           } else {
@@ -61,8 +61,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              title: Text('Settings'),
+              icon: Icon(Icons.person),
+              title: Text('Account'),
             ),
           ],
           onTap: (index) {
@@ -74,7 +74,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             if (index == 1) {
               context
                   .read<BottomNavigationBarBloc>()
-                  .add(BottomNavigationSettingsPagePressed());
+                  .add(BottomNavigationAccountPagePressed());
             }
             setState(() {
               _currentIndex = index;
