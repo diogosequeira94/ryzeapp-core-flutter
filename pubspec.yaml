@@ -46,6 +46,8 @@ flutter:
   assets:
      - assets/ryze-app-logo.jpg
      - assets/no-image-placeholder.jpg
+     - assets/onboarding-01.jpg
+     - assets/onboarding-02.jpg
   # example:
   # fonts:
   #   - family: Schyler

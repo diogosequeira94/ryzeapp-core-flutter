@@ -20,6 +20,9 @@ class JobDetailPage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
+          IconButton(icon: Icon(Icons.share), onPressed: () {
+            Navigator.of(context).pushNamed('/onboarding');
+          }),
           IconButton(icon: Icon(Icons.star_border), onPressed: () {}),
         ],
       ),

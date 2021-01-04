@@ -34,7 +34,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       signedOutPressed: (e) async* {
         await _authFacade.signOut();
         yield const AuthState.unauthenticated();
-        print('This was called');
       },
     );
   }

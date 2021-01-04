@@ -1,4 +1,12 @@
 class LoginStrings {
+  //OnBoarding
+  static const String getStarted = "Get started";
+  static const String nextBtn = "Next";
+  static const String skipBtn = "Skip";
+  static const String appLogoPath = "assets/ryze-app-logo.jpg";
+  static const String firstOnBoardPath = "assets/onboarding-01.jpg";
+  static const String secondOnBoardPath = "assets/onboarding-02.jpg";
+
   //Failures
   static const String cancelledByUser = "Cancelled";
   static const String serverError = "Server error";
