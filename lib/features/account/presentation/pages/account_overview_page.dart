@@ -63,6 +63,7 @@ class AccountOverviewPage extends StatelessWidget {
                   title: Text('Change Language'),
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () => print('Language change pressed'),
+                  onLongPress: () => Navigator.of(context).pushNamed('/onboarding'),
                 ),
               ],
             ),
