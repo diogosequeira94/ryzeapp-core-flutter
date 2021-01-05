@@ -70,7 +70,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 const SizedBox(height: 18.0),
                 Container(
-                  height: screenHeight * 0.75,
+                  height: screenHeight / 1.5,
                   child: PageView(
                     physics: ClampingScrollPhysics(),
                     controller: _pageController,
@@ -80,18 +80,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       });
                     },
                     children: [
-                      _buildOnBoardingPage(
-                          'Grow your network daily, while learning new skills',
-                          'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment',
-                          LoginStrings.firstOnBoardPath),
-                      _buildOnBoardingPage(
-                          'Connect with people and build a report',
-                          'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment',
-                          LoginStrings.secondOnBoardPath),
-                      _buildOnBoardingPage(
-                          'All set! Lets start making money together!',
-                          'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment'),
+                      OnBoardingBodySection(title: 'Grow your network daily, while learning new skills', body: 'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment', imagePath: LoginStrings.firstOnBoardPath),
+                      OnBoardingBodySection(title: 'Connect with people and build a report', body: 'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment', imagePath: LoginStrings.secondOnBoardPath),
+                      OnBoardingBodySection(title: 'All set! Lets start making money together!', body: 'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment'),
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 40.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _buildPageIndicator(),
                   ),
                 ),
                 _currentPage != _numPages - 1
@@ -157,19 +156,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildOnBoardingPage(String title, String body, [String imagePath]) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        OnBoardingBodySection(title: title, body: body, imagePath: imagePath),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _buildPageIndicator(),
-        ),
-      ],
     );
   }
 

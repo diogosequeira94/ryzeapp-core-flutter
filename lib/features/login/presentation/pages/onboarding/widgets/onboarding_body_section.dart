@@ -16,6 +16,7 @@ class OnBoardingBodySection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
@@ -33,12 +34,9 @@ class OnBoardingBodySection extends StatelessWidget {
               style: TextStyle(color: Colors.black, fontSize: 26.0),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 48.0),
-            child: Text(
-              body,
-              style: TextStyle(color: Colors.black, fontSize: 16.0),
-            ),
+          Text(
+            body,
+            style: TextStyle(color: Colors.black, fontSize: 16.0),
           ),
         ],
       ),
