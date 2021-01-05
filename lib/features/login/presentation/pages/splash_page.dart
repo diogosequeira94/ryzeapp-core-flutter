@@ -11,6 +11,9 @@ class SplashScreen extends StatelessWidget {
       listener: (context, state) {
         state.map(
           initial: (_) {},
+          firstTimeUser: (_) {
+            Navigator.of(context).pushNamed('/onboarding');
+          },
           authenticated: (_) {
             Navigator.of(context).pushNamed('/bottom-nav');
           },

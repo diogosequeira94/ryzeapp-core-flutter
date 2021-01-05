@@ -1,5 +1,6 @@
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/widgets/onboarding_body_section.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
+import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -58,8 +59,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             curve: Curves.ease);
                       });
                     },
-                    child: Text( _currentPage != _numPages - 1 ?
-                      LoginStrings.skipBtn : '',
+                    child: Text(
+                      _currentPage != _numPages - 1 ? LoginStrings.skipBtn : '',
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 20.0,
@@ -146,7 +147,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                           onTap: () {
-                            Navigator.pop(context);
+                            sharedPrefs.isFirstTimeInApp = false;
+                            Navigator.of(context).pushNamed('/login');
                           },
                         ),
                       ),
@@ -172,8 +174,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildGradientBackground() {
-    child:
-    Container(
+    return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,

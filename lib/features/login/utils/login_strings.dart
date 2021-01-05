@@ -24,4 +24,7 @@ class LoginStrings {
   static const String registerButton = "Register";
   static const String signInGoogleButton = "Sign In With Google";
   static const String signOutButton = "Sign Out";
+
+  //Shared prefs
+  static const String keyIsFirstTimeInApp = "key_firstTime";
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
 import 'package:firebaseblocryze/repository/login/auth/interface_auth_facade.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -24,6 +25,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async* {
     // yield each because we want to map the incoming events (a freezed union)
     yield* event.map(
+      authCheckFirstTimeUser: (e) async* {
+        final isFirstTimeUser = sharedPrefs.isFirstTimeInApp;
+        if (isFirstTimeUser) {
+          yield const AuthState.firstTimeUser();
+        } else {
+          add(const AuthEvent.authCheckRequested());
+        }
+      },
       authCheckRequested: (e) async* {
         final userOption = await _authFacade.getSignedInUser();
         yield userOption.fold(

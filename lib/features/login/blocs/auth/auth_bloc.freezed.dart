@@ -16,6 +16,10 @@ class _$AuthEventTearOff {
     return const AuthCheckRequested();
   }
 
+  AuthCheckFirstTimeUser authCheckFirstTimeUser() {
+    return const AuthCheckFirstTimeUser();
+  }
+
   SignedOutPressed signedOutPressed() {
     return const SignedOutPressed();
   }
@@ -28,22 +32,26 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result authCheckRequested(),
+    @required Result authCheckFirstTimeUser(),
     @required Result signedOutPressed(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result authCheckRequested(),
+    Result authCheckFirstTimeUser(),
     Result signedOutPressed(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result authCheckRequested(AuthCheckRequested value),
+    @required Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
     @required Result signedOutPressed(SignedOutPressed value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result authCheckRequested(AuthCheckRequested value),
+    Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
     Result signedOutPressed(SignedOutPressed value),
     @required Result orElse(),
   });
@@ -99,9 +107,11 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result authCheckRequested(),
+    @required Result authCheckFirstTimeUser(),
     @required Result signedOutPressed(),
   }) {
     assert(authCheckRequested != null);
+    assert(authCheckFirstTimeUser != null);
     assert(signedOutPressed != null);
     return authCheckRequested();
   }
@@ -110,6 +120,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result authCheckRequested(),
+    Result authCheckFirstTimeUser(),
     Result signedOutPressed(),
     @required Result orElse(),
   }) {
@@ -124,9 +135,11 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result authCheckRequested(AuthCheckRequested value),
+    @required Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
     @required Result signedOutPressed(SignedOutPressed value),
   }) {
     assert(authCheckRequested != null);
+    assert(authCheckFirstTimeUser != null);
     assert(signedOutPressed != null);
     return authCheckRequested(this);
   }
@@ -135,6 +148,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result authCheckRequested(AuthCheckRequested value),
+    Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
     Result signedOutPressed(SignedOutPressed value),
     @required Result orElse(),
   }) {
@@ -148,6 +162,100 @@ class _$AuthCheckRequested implements AuthCheckRequested {
 
 abstract class AuthCheckRequested implements AuthEvent {
   const factory AuthCheckRequested() = _$AuthCheckRequested;
+}
+
+abstract class $AuthCheckFirstTimeUserCopyWith<$Res> {
+  factory $AuthCheckFirstTimeUserCopyWith(AuthCheckFirstTimeUser value,
+          $Res Function(AuthCheckFirstTimeUser) then) =
+      _$AuthCheckFirstTimeUserCopyWithImpl<$Res>;
+}
+
+class _$AuthCheckFirstTimeUserCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res>
+    implements $AuthCheckFirstTimeUserCopyWith<$Res> {
+  _$AuthCheckFirstTimeUserCopyWithImpl(AuthCheckFirstTimeUser _value,
+      $Res Function(AuthCheckFirstTimeUser) _then)
+      : super(_value, (v) => _then(v as AuthCheckFirstTimeUser));
+
+  @override
+  AuthCheckFirstTimeUser get _value => super._value as AuthCheckFirstTimeUser;
+}
+
+class _$AuthCheckFirstTimeUser implements AuthCheckFirstTimeUser {
+  const _$AuthCheckFirstTimeUser();
+
+  @override
+  String toString() {
+    return 'AuthEvent.authCheckFirstTimeUser()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is AuthCheckFirstTimeUser);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result authCheckRequested(),
+    @required Result authCheckFirstTimeUser(),
+    @required Result signedOutPressed(),
+  }) {
+    assert(authCheckRequested != null);
+    assert(authCheckFirstTimeUser != null);
+    assert(signedOutPressed != null);
+    return authCheckFirstTimeUser();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result authCheckRequested(),
+    Result authCheckFirstTimeUser(),
+    Result signedOutPressed(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (authCheckFirstTimeUser != null) {
+      return authCheckFirstTimeUser();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result authCheckRequested(AuthCheckRequested value),
+    @required Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
+    @required Result signedOutPressed(SignedOutPressed value),
+  }) {
+    assert(authCheckRequested != null);
+    assert(authCheckFirstTimeUser != null);
+    assert(signedOutPressed != null);
+    return authCheckFirstTimeUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result authCheckRequested(AuthCheckRequested value),
+    Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
+    Result signedOutPressed(SignedOutPressed value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (authCheckFirstTimeUser != null) {
+      return authCheckFirstTimeUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthCheckFirstTimeUser implements AuthEvent {
+  const factory AuthCheckFirstTimeUser() = _$AuthCheckFirstTimeUser;
 }
 
 abstract class $SignedOutPressedCopyWith<$Res> {
@@ -186,9 +294,11 @@ class _$SignedOutPressed implements SignedOutPressed {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result authCheckRequested(),
+    @required Result authCheckFirstTimeUser(),
     @required Result signedOutPressed(),
   }) {
     assert(authCheckRequested != null);
+    assert(authCheckFirstTimeUser != null);
     assert(signedOutPressed != null);
     return signedOutPressed();
   }
@@ -197,6 +307,7 @@ class _$SignedOutPressed implements SignedOutPressed {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result authCheckRequested(),
+    Result authCheckFirstTimeUser(),
     Result signedOutPressed(),
     @required Result orElse(),
   }) {
@@ -211,9 +322,11 @@ class _$SignedOutPressed implements SignedOutPressed {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result authCheckRequested(AuthCheckRequested value),
+    @required Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
     @required Result signedOutPressed(SignedOutPressed value),
   }) {
     assert(authCheckRequested != null);
+    assert(authCheckFirstTimeUser != null);
     assert(signedOutPressed != null);
     return signedOutPressed(this);
   }
@@ -222,6 +335,7 @@ class _$SignedOutPressed implements SignedOutPressed {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result authCheckRequested(AuthCheckRequested value),
+    Result authCheckFirstTimeUser(AuthCheckFirstTimeUser value),
     Result signedOutPressed(SignedOutPressed value),
     @required Result orElse(),
   }) {
@@ -244,6 +358,10 @@ class _$AuthStateTearOff {
     return const Initial();
   }
 
+  FirstTimeUser firstTimeUser() {
+    return const FirstTimeUser();
+  }
+
   Authenticated authenticated() {
     return const Authenticated();
   }
@@ -260,12 +378,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result firstTimeUser(),
     @required Result authenticated(),
     @required Result unauthenticated(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result firstTimeUser(),
     Result authenticated(),
     Result unauthenticated(),
     @required Result orElse(),
@@ -273,12 +393,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
+    @required Result firstTimeUser(FirstTimeUser value),
     @required Result authenticated(Authenticated value),
     @required Result unauthenticated(Unauthenticated value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
+    Result firstTimeUser(FirstTimeUser value),
     Result authenticated(Authenticated value),
     Result unauthenticated(Unauthenticated value),
     @required Result orElse(),
@@ -332,10 +454,12 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result firstTimeUser(),
     @required Result authenticated(),
     @required Result unauthenticated(),
   }) {
     assert(initial != null);
+    assert(firstTimeUser != null);
     assert(authenticated != null);
     assert(unauthenticated != null);
     return initial();
@@ -345,6 +469,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result firstTimeUser(),
     Result authenticated(),
     Result unauthenticated(),
     @required Result orElse(),
@@ -360,10 +485,12 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
+    @required Result firstTimeUser(FirstTimeUser value),
     @required Result authenticated(Authenticated value),
     @required Result unauthenticated(Unauthenticated value),
   }) {
     assert(initial != null);
+    assert(firstTimeUser != null);
     assert(authenticated != null);
     assert(unauthenticated != null);
     return initial(this);
@@ -373,6 +500,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
+    Result firstTimeUser(FirstTimeUser value),
     Result authenticated(Authenticated value),
     Result unauthenticated(Unauthenticated value),
     @required Result orElse(),
@@ -387,6 +515,105 @@ class _$Initial implements Initial {
 
 abstract class Initial implements AuthState {
   const factory Initial() = _$Initial;
+}
+
+abstract class $FirstTimeUserCopyWith<$Res> {
+  factory $FirstTimeUserCopyWith(
+          FirstTimeUser value, $Res Function(FirstTimeUser) then) =
+      _$FirstTimeUserCopyWithImpl<$Res>;
+}
+
+class _$FirstTimeUserCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+    implements $FirstTimeUserCopyWith<$Res> {
+  _$FirstTimeUserCopyWithImpl(
+      FirstTimeUser _value, $Res Function(FirstTimeUser) _then)
+      : super(_value, (v) => _then(v as FirstTimeUser));
+
+  @override
+  FirstTimeUser get _value => super._value as FirstTimeUser;
+}
+
+class _$FirstTimeUser implements FirstTimeUser {
+  const _$FirstTimeUser();
+
+  @override
+  String toString() {
+    return 'AuthState.firstTimeUser()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is FirstTimeUser);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result firstTimeUser(),
+    @required Result authenticated(),
+    @required Result unauthenticated(),
+  }) {
+    assert(initial != null);
+    assert(firstTimeUser != null);
+    assert(authenticated != null);
+    assert(unauthenticated != null);
+    return firstTimeUser();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result firstTimeUser(),
+    Result authenticated(),
+    Result unauthenticated(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (firstTimeUser != null) {
+      return firstTimeUser();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(Initial value),
+    @required Result firstTimeUser(FirstTimeUser value),
+    @required Result authenticated(Authenticated value),
+    @required Result unauthenticated(Unauthenticated value),
+  }) {
+    assert(initial != null);
+    assert(firstTimeUser != null);
+    assert(authenticated != null);
+    assert(unauthenticated != null);
+    return firstTimeUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(Initial value),
+    Result firstTimeUser(FirstTimeUser value),
+    Result authenticated(Authenticated value),
+    Result unauthenticated(Unauthenticated value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (firstTimeUser != null) {
+      return firstTimeUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FirstTimeUser implements AuthState {
+  const factory FirstTimeUser() = _$FirstTimeUser;
 }
 
 abstract class $AuthenticatedCopyWith<$Res> {
@@ -425,10 +652,12 @@ class _$Authenticated implements Authenticated {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result firstTimeUser(),
     @required Result authenticated(),
     @required Result unauthenticated(),
   }) {
     assert(initial != null);
+    assert(firstTimeUser != null);
     assert(authenticated != null);
     assert(unauthenticated != null);
     return authenticated();
@@ -438,6 +667,7 @@ class _$Authenticated implements Authenticated {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result firstTimeUser(),
     Result authenticated(),
     Result unauthenticated(),
     @required Result orElse(),
@@ -453,10 +683,12 @@ class _$Authenticated implements Authenticated {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
+    @required Result firstTimeUser(FirstTimeUser value),
     @required Result authenticated(Authenticated value),
     @required Result unauthenticated(Unauthenticated value),
   }) {
     assert(initial != null);
+    assert(firstTimeUser != null);
     assert(authenticated != null);
     assert(unauthenticated != null);
     return authenticated(this);
@@ -466,6 +698,7 @@ class _$Authenticated implements Authenticated {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
+    Result firstTimeUser(FirstTimeUser value),
     Result authenticated(Authenticated value),
     Result unauthenticated(Unauthenticated value),
     @required Result orElse(),
@@ -518,10 +751,12 @@ class _$Unauthenticated implements Unauthenticated {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
+    @required Result firstTimeUser(),
     @required Result authenticated(),
     @required Result unauthenticated(),
   }) {
     assert(initial != null);
+    assert(firstTimeUser != null);
     assert(authenticated != null);
     assert(unauthenticated != null);
     return unauthenticated();
@@ -531,6 +766,7 @@ class _$Unauthenticated implements Unauthenticated {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
+    Result firstTimeUser(),
     Result authenticated(),
     Result unauthenticated(),
     @required Result orElse(),
@@ -546,10 +782,12 @@ class _$Unauthenticated implements Unauthenticated {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result initial(Initial value),
+    @required Result firstTimeUser(FirstTimeUser value),
     @required Result authenticated(Authenticated value),
     @required Result unauthenticated(Unauthenticated value),
   }) {
     assert(initial != null);
+    assert(firstTimeUser != null);
     assert(authenticated != null);
     assert(unauthenticated != null);
     return unauthenticated(this);
@@ -559,6 +797,7 @@ class _$Unauthenticated implements Unauthenticated {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
+    Result firstTimeUser(FirstTimeUser value),
     Result authenticated(Authenticated value),
     Result unauthenticated(Unauthenticated value),
     @required Result orElse(),

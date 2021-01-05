@@ -10,7 +10,7 @@ class AppWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
+          create: (context) => getIt<AuthBloc>()..add(const AuthEvent.authCheckFirstTimeUser()),
         )
       ],
       child: MaterialApp(
