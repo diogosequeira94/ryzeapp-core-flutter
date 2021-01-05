@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
             Navigator.of(context).pushNamed('/onboarding');
           },
           authenticated: (_) {
-            Navigator.of(context).pushNamed('/bottom-nav');
+            Navigator.of(context).pushNamedAndRemoveUntil('/bottom-nav', (Route<dynamic> route) => false);
           },
           unauthenticated: (_) {
             Navigator.of(context).pushNamed('/login');

@@ -1,5 +1,7 @@
+import 'package:firebaseblocryze/features/account/presentation/pages/error/payment_failed_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/bottom_nav_bar_widget.dart';
+import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/register_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
@@ -27,6 +29,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/register':
         return MaterialPageRoute(builder: (_) => RegisterPage());
+      case '/payment-error':
+        return MaterialPageRoute(builder: (_) => PaymentFailedPage());
+      case '/notifications':
+        return MaterialPageRoute(builder: (_) => NotificationsPage());
       default:
         return _errorRoute();
     }

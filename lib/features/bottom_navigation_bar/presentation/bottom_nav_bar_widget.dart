@@ -29,7 +29,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.notifications_none), onPressed: () {}),
+          IconButton(icon: Icon(Icons.notifications_none), onPressed: () {
+            Navigator.of(context).pushNamed('/notifications');
+          }),
         ],
       ),
       body: BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(

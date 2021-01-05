@@ -138,31 +138,34 @@ class WalletPage extends StatelessWidget {
                     itemCount: 3,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Card(
-                        child: Container(
-                          width: 120.0,
-                          height: 80.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                            color: Colors.white70,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.attach_money),
-                              const SizedBox(height: 8.0),
-                              Text(
-                                'Withdraw',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              )
-                            ],
+                      return GestureDetector(
+                        child: Card(
+                          child: Container(
+                            width: 120.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              color: Colors.white70,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.attach_money),
+                                const SizedBox(height: 8.0),
+                                Text(
+                                  'Withdraw',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
+                        onTap: () => Navigator.of(context).pushNamed('/payment-error'),
                       );
                     }),
               ),
