@@ -1,21 +1,19 @@
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:firebaseblocryze/features/explore/presentation/widgets/no_results_found_widget.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
-import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExploreOverviewPage extends StatefulWidget {
   ExploreOverviewPage({Key key}) : super(key: key);
-  final List<String> list = List.generate(10, (index) => "Text $index");
 
   @override
   _ExploreOverviewPageState createState() => _ExploreOverviewPageState();
 }
 
 class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
-  bool checkedValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           actions: [
             IconButton(
               onPressed: () {
-                showSearch(context: context, delegate: Search(allJobsMock));
+                showSearch(context: context, delegate: ExploreModuleSearch(allJobsMock));
               },
               icon: Icon(Icons.search),
             ),
@@ -93,19 +91,20 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
   }
 }
 
-class Search extends SearchDelegate {
-  String selectedResult;
+class ExploreModuleSearch extends SearchDelegate {
+  JobPost selectedJob;
   final List<JobPost> jobsList;
-  Search(this.jobsList);
+  ExploreModuleSearch(this.jobsList);
 
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () {
-            query = '';
-          })
+        icon: Icon(Icons.close),
+        onPressed: () {
+          query = '';
+        },
+      ),
     ];
   }
 
@@ -122,42 +121,50 @@ class Search extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<JobPost> resultsList = [];
     query.isEmpty
-        ? resultsList = []
+        ? resultsList.clear()
         : resultsList.addAll(jobsList.where(
-            (element) => element.title.contains(query),
+            (element) =>
+                element.title.toUpperCase().contains(query) ||
+                element.title.toLowerCase().contains(query),
           ));
 
-    return ListView.builder(
-      itemCount: resultsList.length,
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            leading: Image.asset(LoginStrings.appLogoPath),
-            title: Text(jobsList[index].title),
-            subtitle: Text(jobsList[index].city),
-            trailing: Text(jobsList[index].hourRate),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => JobDetailPage(
-                            jobPost: jobsList[index],
-                          )));
+    return resultsList.length == 0
+        ? NoResultsFound()
+        : ListView.builder(
+            itemCount: resultsList.length,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(resultsList[index].imageUrl,
+                          width: 50, height: 50, fit: BoxFit.cover)),
+                  title: Text(resultsList[index].title),
+                  subtitle: Text(resultsList[index].city),
+                  trailing: Text(resultsList[index].hourRate),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => JobDetailPage(
+                                  jobPost: resultsList[index],
+                                )));
+                  },
+                ),
+              );
             },
-          ),
-        );
-      },
-    );
+          );
   }
 
-  List<JobPost> recentList = [];
   @override
   Widget buildSuggestions(BuildContext context) {
     List<JobPost> suggestionList = [];
     query.isEmpty
-        ? suggestionList = recentList
+        ? suggestionList.clear()
         : suggestionList.addAll(jobsList.where(
-            (element) => element.title.contains(query),
+            (element) =>
+                element.title.toUpperCase().contains(query) ||
+                element.title.toLowerCase().contains(query),
           ));
 
     return ListView.builder(
@@ -165,16 +172,20 @@ class Search extends SearchDelegate {
       itemBuilder: (context, index) {
         return Card(
           child: ListTile(
-            leading: Image.asset(LoginStrings.appLogoPath),
-            title: Text(jobsList[index].title),
-            subtitle: Text(jobsList[index].city),
-            trailing: Text(jobsList[index].hourRate),
+            leading: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(suggestionList[index].imageUrl,
+                    width: 50, height: 50, fit: BoxFit.cover)),
+            title: Text(suggestionList[index].title),
+            subtitle: Text(suggestionList[index].city),
+            trailing: Text(suggestionList[index].hourRate),
             onTap: () {
+              selectedJob = suggestionList[index];
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => JobDetailPage(
-                            jobPost: jobsList[index],
+                            jobPost: suggestionList[index],
                           )));
             },
           ),

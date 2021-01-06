@@ -29,7 +29,7 @@ class _ExploreMapPageState extends State<ExploreMapPage> {
     final _bottomNavBloc = context.watch<BottomNavigationBarBloc>();
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         title: Text('Map', style: TextStyle(color: Colors.black)),

@@ -45,9 +45,17 @@ class NotificationsPage extends StatelessWidget {
           const SizedBox(height: 24.0),
           Text(
               'You have no notifications right now.',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w600
+              ),
               textAlign: TextAlign.center),
           const SizedBox(height: 8.0),
-          Text('When you have job updates, messages or news, it will be showed here.', textAlign: TextAlign.center),
+          Text('When you have job updates, messages or news, it will be showed here.',
+              style: TextStyle(
+                fontSize: 16.0,
+              ),
+              textAlign: TextAlign.center),
         ],
       ),
     );
