@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
-import 'package:firebaseblocryze/features/explore/presentation/explore_landing_page.dart';
+import 'package:firebaseblocryze/features/explore/presentation/explore_overview_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,20 +19,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          'RyzeApp',
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: [
-          IconButton(icon: Icon(Icons.notifications_none), onPressed: () {
-            Navigator.of(context).pushNamed('/notifications');
-          }),
-        ],
-      ),
       body: BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
         builder: (context, state) {
           if (state is BottomNavigationHomePageLoading) {
@@ -49,7 +34,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           } else if (state is BottomNavigationExplorePageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationExplorePageLoaded) {
-            return ExploreLandingPage();
+            return ExploreOverviewPage();
           } else {
             return Container();
           }

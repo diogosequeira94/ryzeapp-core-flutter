@@ -2,6 +2,7 @@ import 'package:firebaseblocryze/features/account/presentation/pages/error/payme
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/bottom_nav_bar_widget.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
+import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/register_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
@@ -9,6 +10,8 @@ import 'package:firebaseblocryze/features/login/presentation/pages/splash_page.d
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'features/explore/presentation/explore_overview_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -29,6 +32,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/register':
         return MaterialPageRoute(builder: (_) => RegisterPage());
+      case '/explore-map':
+        return MaterialPageRoute(builder: (_) => ExploreMapPage());
+      case '/explore-overview':
+        return MaterialPageRoute(builder: (_) => ExploreOverviewPage());
       case '/payment-error':
         return MaterialPageRoute(builder: (_) => PaymentFailedPage());
       case '/notifications':

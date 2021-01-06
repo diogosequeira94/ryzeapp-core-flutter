@@ -38,47 +38,63 @@ class HomePage extends StatelessWidget {
       if (state is JobsFetchInProgress) {
         return Center(child: CircularProgressIndicator());
       } else if (state is JobsFetchSuccess) {
-        return RefreshIndicator(
-          onRefresh: (){
-            _jobsBloc.add(FetchJobsPosts());
-            return _jobsBloc.firstWhere((e) => e is !FetchJobsPosts);
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                NewsCarouselSliderWidget(),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Your Job Posts',
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w500),
-                      ),
-                      InkWell(
-                          child: Icon(Icons.add),
-                          onTap: () {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (_) => BlocProvider.value(
-                                      value: BlocProvider.of<JobsBloc>(context),
-                                        child: JobCreation())));
-                          }),
-                    ],
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.black),
+            title: Text(
+              'RyzeApp',
+              style: TextStyle(color: Colors.black),
+            ),
+            actions: [
+              IconButton(icon: Icon(Icons.notifications_none), onPressed: () {
+                Navigator.of(context).pushNamed('/notifications');
+              }),
+            ],
+          ),
+          body: RefreshIndicator(
+            onRefresh: (){
+              _jobsBloc.add(FetchJobsPosts());
+              return _jobsBloc.firstWhere((e) => e is !FetchJobsPosts);
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  NewsCarouselSliderWidget(),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Your Job Posts',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w500),
+                        ),
+                        InkWell(
+                            child: Icon(Icons.add),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (_) => BlocProvider.value(
+                                        value: BlocProvider.of<JobsBloc>(context),
+                                          child: JobCreation())));
+                            }),
+                      ],
+                    ),
                   ),
-                ),
-                _myJobPosts(state.list, context),
-                HomePageSectionHeader(
-                  title: 'Job Categories',
-                ),
-                CategoriesGridWidget(),
-                HomePageSectionHeader(title: 'Trending'),
-                _allJobPosts(context),
-              ],
+                  _myJobPosts(state.list, context),
+                  HomePageSectionHeader(
+                    title: 'Job Categories',
+                  ),
+                  CategoriesGridWidget(),
+                  HomePageSectionHeader(title: 'Trending'),
+                  _allJobPosts(context),
+                ],
+              ),
             ),
           ),
         );
