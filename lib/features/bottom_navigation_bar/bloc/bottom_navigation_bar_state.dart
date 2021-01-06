@@ -59,3 +59,13 @@ class BottomNavigationAccountPageLoaded extends BottomNavigationBarState {
   @override
   List<Object> get props => [];
 }
+
+class BottomNavigationExploreMapLoading extends BottomNavigationBarState {
+  @override
+  List<Object> get props => [];
+}
+
+class BottomNavigationExploreMapLoaded extends BottomNavigationBarState {
+  @override
+  List<Object> get props => [];
+}

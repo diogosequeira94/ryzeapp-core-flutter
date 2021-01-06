@@ -14,6 +14,11 @@ class BottomNavigationExplorePagePressed extends BottomNavigationBarEvent {
   List<Object> get props => [];
 }
 
+class BottomNavigationExploreMapPressed extends BottomNavigationBarEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class BottomNavigationAccountPagePressed extends BottomNavigationBarEvent {
   @override
   List<Object> get props => [];

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_overview_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
@@ -34,8 +35,13 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           } else if (state is BottomNavigationExplorePageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationExplorePageLoaded) {
-            return ExploreOverviewPage();
-          } else {
+            return BlocProvider.value(
+              value: BlocProvider.of<BottomNavigationBarBloc>(context),
+                child: ExploreOverviewPage());
+          } else if (state is BottomNavigationExploreMapLoaded) {
+            return ExploreMapPage();
+          }
+          else {
             return Container();
           }
         },

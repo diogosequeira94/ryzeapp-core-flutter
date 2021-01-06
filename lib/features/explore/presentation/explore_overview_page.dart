@@ -1,13 +1,14 @@
+import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExploreOverviewPage extends StatefulWidget {
   ExploreOverviewPage({Key key}) : super(key: key);
   final List<String> list = List.generate(10, (index) => "Text $index");
-
 
   @override
   _ExploreOverviewPageState createState() => _ExploreOverviewPageState();
@@ -18,33 +19,7 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text('Explore',
-          style: TextStyle(color: Colors.black)),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(context: context, delegate: Search(widget.list));
-            },
-            icon: Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/explore-map');
-            },
-            icon: Icon(Icons.map_outlined),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(child: _allJobPosts(context)) // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-
-  Widget _allJobPosts(BuildContext context) {
+    final _bottomNavBloc = context.watch<BottomNavigationBarBloc>();
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPost(
           jobID: job.jobID,
@@ -58,6 +33,34 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           languages: job.languages);
     }).toList();
 
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          title: Text('Explore', style: TextStyle(color: Colors.black)),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: Search(allJobsMock));
+              },
+              icon: Icon(Icons.search),
+            ),
+            IconButton(
+              onPressed: () {
+                _bottomNavBloc.add(BottomNavigationExploreMapPressed());
+              },
+              icon: Icon(Icons.map_outlined),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+            child: _allJobPosts(allJobsMock,
+                context)) // This trailing comma makes auto-formatting nicer for build methods.
+        );
+  }
+
+  Widget _allJobPosts(List<JobPost> allJobsMock, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ListView.builder(
@@ -67,7 +70,10 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              leading: Image.asset(LoginStrings.appLogoPath),
+              leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(allJobsMock[index].imageUrl,
+                      width: 50, height: 50, fit: BoxFit.cover)),
               title: Text(allJobsMock[index].title),
               subtitle: Text(allJobsMock[index].city),
               trailing: Text(allJobsMock[index].hourRate),
@@ -76,8 +82,8 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => JobDetailPage(
-                          jobPost: allJobsMock[index],
-                        )));
+                              jobPost: allJobsMock[index],
+                            )));
               },
             ),
           );
@@ -89,8 +95,8 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
 
 class Search extends SearchDelegate {
   String selectedResult;
-  final List<String> listExample;
-  Search(this.listExample);
+  final List<JobPost> jobsList;
+  Search(this.jobsList);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -114,28 +120,64 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(selectedResult),
-      ),
+    List<JobPost> resultsList = [];
+    query.isEmpty
+        ? resultsList = []
+        : resultsList.addAll(jobsList.where(
+            (element) => element.title.contains(query),
+          ));
+
+    return ListView.builder(
+      itemCount: resultsList.length,
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+            leading: Image.asset(LoginStrings.appLogoPath),
+            title: Text(jobsList[index].title),
+            subtitle: Text(jobsList[index].city),
+            trailing: Text(jobsList[index].hourRate),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => JobDetailPage(
+                            jobPost: jobsList[index],
+                          )));
+            },
+          ),
+        );
+      },
     );
   }
 
-  List<String> recentList = ['Text 4', 'Text 3'];
+  List<JobPost> recentList = [];
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> suggestionList = [];
+    List<JobPost> suggestionList = [];
     query.isEmpty
         ? suggestionList = recentList
-        : suggestionList.addAll(listExample.where(
-          (element) => element.contains(query),
-    ));
+        : suggestionList.addAll(jobsList.where(
+            (element) => element.title.contains(query),
+          ));
 
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(suggestionList[index]),
+        return Card(
+          child: ListTile(
+            leading: Image.asset(LoginStrings.appLogoPath),
+            title: Text(jobsList[index].title),
+            subtitle: Text(jobsList[index].city),
+            trailing: Text(jobsList[index].hourRate),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => JobDetailPage(
+                            jobPost: jobsList[index],
+                          )));
+            },
+          ),
         );
       },
     );

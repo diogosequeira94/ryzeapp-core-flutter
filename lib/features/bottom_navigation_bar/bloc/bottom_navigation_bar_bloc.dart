@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 
 part 'bottom_navigation_bar_event.dart';
 part 'bottom_navigation_bar_state.dart';
@@ -11,8 +9,7 @@ class BottomNavigationBarBloc
     extends Bloc<BottomNavigationBarEvent, BottomNavigationBarState> {
   int currentIndex = 0;
 
-  BottomNavigationBarBloc()
-      : super(BottomNavigationBarInitial());
+  BottomNavigationBarBloc() : super(BottomNavigationBarInitial());
 
   @override
   Stream<BottomNavigationBarState> mapEventToState(
@@ -26,6 +23,11 @@ class BottomNavigationBarBloc
     if (event is BottomNavigationExplorePagePressed) {
       yield BottomNavigationExplorePageLoading();
       yield BottomNavigationExplorePageLoaded();
+    }
+
+    if (event is BottomNavigationExploreMapPressed) {
+      yield BottomNavigationExploreMapLoading();
+      yield BottomNavigationExploreMapLoaded();
     }
 
     if (event is BottomNavigationAccountPagePressed) {
