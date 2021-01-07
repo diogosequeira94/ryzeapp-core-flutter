@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc
 import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
+import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -173,29 +174,7 @@ class _JobCreationState extends State<JobCreation> {
                   },
                 ),
                 SizedBox(height: 12.0),
-                InkWell(
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF0b0b0d),
-                            Color(0xFF1d1e22),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))),
-                    child: Center(
-                      child: const Text(
-                        JobPostStrings.previewJobBtn,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                RyzePrimaryButton(title: JobPostStrings.previewJobBtn, action: () => Navigator.pop(context), isAffirmative: false),
               ],
             ),
           ),

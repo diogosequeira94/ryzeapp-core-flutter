@@ -1,5 +1,8 @@
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page_header.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page/confirmation_page_header.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page/job_disclaimer.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page/location_image_preview.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
+import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -8,7 +11,8 @@ class JobConfirmationPage extends StatelessWidget {
   const JobConfirmationPage({@required this.jobPost});
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final mockJobLat = 38.702326;
+    final mockJobLong = -9.240135;
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -30,17 +34,9 @@ class JobConfirmationPage extends StatelessWidget {
           children: [
             ConfirmationPageHeader(jobEntityName: jobPost.title),
             Padding(
-              padding: const EdgeInsets.only(top: 24.0, bottom: 8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                child: Image.network(
-                    'https://www.sfmission.com/gallery_files/site_pics/Portugal/Lisbon/maps_and_guides/Lisbon-Google-Map.jpg',
-                    width: width,
-                    height: 200,
-                    fit: BoxFit.fill),
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: LocationImagePreview(lat: mockJobLat, long: mockJobLong),
             ),
-            const SizedBox(height: 20.0),
             Text(
               'Description',
               style: TextStyle(
@@ -52,6 +48,24 @@ class JobConfirmationPage extends StatelessWidget {
             const SizedBox(height: 6.0),
             Text(
               jobPost.description,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              'Date',
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 6.0),
+            Text(
+              '12 January 2021 @ 16:00 CET',
               style: TextStyle(
                 fontSize: 14.0,
                 color: Colors.black,
@@ -94,34 +108,21 @@ class JobConfirmationPage extends StatelessWidget {
                 fontWeight: FontWeight.normal,
               ),
             ),
-            const SizedBox(height: 26.0),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: InkWell(
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF3229bf),
-                          Color(0xFF4568ff),
-                        ],
-                      ),
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(50.0))),
-                  child: Center(
-                    child: const Text(
-                      'Add to my Calendar',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
+            const SizedBox(height: 8.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: JobDisclaimer(),
             ),
+            const SizedBox(height: 10.0),
+            RyzePrimaryButton(
+                title: 'Check In',
+                action: () => Navigator.pop(context),
+                isAffirmative: true),
+            const SizedBox(height: 12.0),
+            RyzePrimaryButton(
+                title: 'Cancel Job',
+                action: () => Navigator.pop(context),
+                isAffirmative: false),
             const SizedBox(height: 26.0),
           ],
         ),

@@ -20,12 +20,12 @@ class ConfirmationPageHeader extends StatelessWidget {
           ),
         ),
         Text(
-          '$jobEntityName has accepted your work appliance and is looking forward to working with you! You can see all the details for your gig below.',
+          '${jobEntityName.trimRight()} has accepted your work appliance and is looking forward to working with you! You can see all the details for your gig below.',
           style: TextStyle(
             fontSize: 16.0,
             color: Colors.grey[500],
           ),
-        )
+        ),
       ],
     );
   }

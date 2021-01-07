@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/account/presentation/widgets/section_h
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
+import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,9 +21,11 @@ class AccountOverviewPage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.notifications_none), onPressed: () {
-            Navigator.of(context).pushNamed('/notifications');
-          }),
+          IconButton(
+              icon: Icon(Icons.notifications_none),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/notifications');
+              }),
         ],
       ),
       body: SingleChildScrollView(
@@ -78,7 +81,8 @@ class AccountOverviewPage extends StatelessWidget {
                     title: Text('Change Language'),
                     trailing: Icon(Icons.keyboard_arrow_right),
                     onTap: () => print('Language change pressed'),
-                    onLongPress: () => Navigator.of(context).pushNamed('/onboarding'),
+                    onLongPress: () =>
+                        Navigator.of(context).pushNamed('/onboarding'),
                   ),
                 ],
               ),
@@ -115,37 +119,20 @@ class AccountOverviewPage extends StatelessWidget {
             SectionHeader(title: 'Premium'),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Text('Currently you have no active plans.', style: TextStyle(
-                fontSize: 16.0
-              ),),
+              child: Text(
+                'Currently you have no active plans.',
+                style: TextStyle(fontSize: 16.0),
+              ),
             ),
             SizedBox(height: 24.0),
             BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
-              return InkWell(
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF3229bf),
-                          Color(0xFF4568ff),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(50.0))),
-                  child: Center(
-                    child: const Text(
-                      LoginStrings.signOutButton,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  context.read<AuthBloc>().add(
-                        AuthEvent.signedOutPressed(),
-                      );
+              return RyzePrimaryButton(
+                title: LoginStrings.signOutButton,
+                action: () {
+                  context.read<AuthBloc>().add(AuthEvent.signedOutPressed());
                   Navigator.of(context).pushReplacementNamed('/login');
                 },
+                isAffirmative: true,
               );
             }),
           ],
