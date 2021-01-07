@@ -1,4 +1,5 @@
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
+import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -33,7 +34,8 @@ class JobDetailPage extends StatelessWidget {
                 height: height * 0.55,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(jobPost.imageUrl ?? 'https://static.wikia.nocookie.net/hitorijme-my-hero/images/c/c6/Image-placeholder.jpg/revision/latest?cb=20200207162338'),
+                    image: NetworkImage(jobPost.imageUrl ??
+                        'https://static.wikia.nocookie.net/hitorijme-my-hero/images/c/c6/Image-placeholder.jpg/revision/latest?cb=20200207162338'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -57,6 +59,22 @@ class JobDetailPage extends StatelessWidget {
                           fontSize: 26.0,
                           fontWeight: FontWeight.w800,
                           color: Colors.black),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                              child: Text(
+                            'RyzeApp',
+                            style: TextStyle(color: Colors.black54),
+                          )),
+                          const SizedBox(width: 6.0),
+                          Icon(Icons.check_circle,
+                              color: Color(0xFF4568ff), size: 22.0),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 20.0),
                     Text(
@@ -131,30 +149,14 @@ class JobDetailPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 26.0),
-                    InkWell(
-                      child: Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFF3229bf),
-                                Color(0xFF4568ff),
-                              ],
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0))),
-                        child: Center(
-                          child: const Text(
-                            'Apply Now',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.popAndPushNamed(context, '/job-confirmation-page', arguments: jobPost);
-                      },
-                    ),
+                    RyzePrimaryButton(
+                        title: 'Apply Now',
+                        action: () {
+                          Navigator.popAndPushNamed(
+                              context, '/job-confirmation-page',
+                              arguments: jobPost);
+                        },
+                        isAffirmative: true)
                   ],
                 ),
               )
