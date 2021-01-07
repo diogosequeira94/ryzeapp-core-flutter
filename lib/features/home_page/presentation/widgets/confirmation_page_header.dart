@@ -14,7 +14,7 @@ class ConfirmationPageHeader extends StatelessWidget {
           child: Text(
             'CONGRATULATIONS',
             style: TextStyle(
-              fontSize: 18.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -22,7 +22,7 @@ class ConfirmationPageHeader extends StatelessWidget {
         Text(
           '$jobEntityName has accepted your work appliance and is looking forward to working with you! You can see all the details for your gig below.',
           style: TextStyle(
-            fontSize: 14.0,
+            fontSize: 16.0,
             color: Colors.grey[500],
           ),
         )
