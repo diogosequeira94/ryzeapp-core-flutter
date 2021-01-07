@@ -152,7 +152,7 @@ class JobDetailPage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.popAndPushNamed(context, '/job-confirmation-page', arguments: jobPost);
                       },
                     ),
                   ],
