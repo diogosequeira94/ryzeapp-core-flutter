@@ -12,11 +12,11 @@ class UserProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
         title: Text(
           UserProfileString.profileTitle,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
           IconButton(icon: Icon(Icons.edit), onPressed: () {}),
@@ -70,12 +70,12 @@ class UserProfilePage extends StatelessWidget {
           SizedBox(height: 4),
           Text(
             'Jobs Completed: 3',
-            style: TextStyle(fontSize: 14.0, color: Colors.black54),
+            style: TextStyle(fontSize: 14.0),
           ),
           SizedBox(height: 4),
           Text(
             'No shows: 0',
-            style: TextStyle(fontSize: 14.0, color: Colors.black54),
+            style: TextStyle(fontSize: 14.0),
           ),
           SizedBox(height: 4),
           Row(
@@ -83,7 +83,7 @@ class UserProfilePage extends StatelessWidget {
             children: [
               Text(
                 'Average Performance:',
-                style: TextStyle(fontSize: 14.0, color: Colors.black54),
+                style: TextStyle(fontSize: 14.0),
               ),
               Icon(Icons.star, size: 18.0, color: Colors.amber),
               Icon(Icons.star, size: 18.0, color: Colors.amber),

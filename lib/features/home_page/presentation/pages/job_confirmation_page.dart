@@ -16,15 +16,15 @@ class JobConfirmationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          child: Icon(Icons.close, color: Colors.black),
+          child: Icon(Icons.close),
           onTap: () => Navigator.of(context).pop(),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
         automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           'Job Confirmation',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
       ),
       body: SingleChildScrollView(
@@ -41,7 +41,6 @@ class JobConfirmationPage extends StatelessWidget {
               'Description',
               style: TextStyle(
                 fontSize: 18.0,
-                color: Colors.black,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -50,7 +49,6 @@ class JobConfirmationPage extends StatelessWidget {
               jobPost.description,
               style: TextStyle(
                 fontSize: 14.0,
-                color: Colors.black,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -59,7 +57,6 @@ class JobConfirmationPage extends StatelessWidget {
               'Date',
               style: TextStyle(
                 fontSize: 18.0,
-                color: Colors.black,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -68,7 +65,6 @@ class JobConfirmationPage extends StatelessWidget {
               '12 January 2021 @ 16:00 CET',
               style: TextStyle(
                 fontSize: 14.0,
-                color: Colors.black,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -77,7 +73,6 @@ class JobConfirmationPage extends StatelessWidget {
               'Location',
               style: TextStyle(
                 fontSize: 18.0,
-                color: Colors.black,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -86,7 +81,6 @@ class JobConfirmationPage extends StatelessWidget {
               jobPost.city,
               style: TextStyle(
                 fontSize: 14.0,
-                color: Colors.black,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -95,7 +89,6 @@ class JobConfirmationPage extends StatelessWidget {
               'Pay Rate',
               style: TextStyle(
                 fontSize: 18.0,
-                color: Colors.black,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -104,7 +97,6 @@ class JobConfirmationPage extends StatelessWidget {
               jobPost.hourRate,
               style: TextStyle(
                 fontSize: 14.0,
-                color: Colors.black,
                 fontWeight: FontWeight.normal,
               ),
             ),

@@ -62,11 +62,11 @@ class _JobCreationState extends State<JobCreation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
         title: Text(
           JobPostStrings.jobCreationPageTitle,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
       ),
       body: BlocListener<JobsBloc, JobsState>(
@@ -118,8 +118,7 @@ class _JobCreationState extends State<JobCreation> {
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
-                  subtitle: Text(
-                      JobPostStrings.jobDisclaimer),
+                  subtitle: Text(JobPostStrings.jobDisclaimer),
                   controlAffinity: ListTileControlAffinity.platform,
                   contentPadding: EdgeInsets.all(0.0),
                   value: _isChecked,
@@ -131,50 +130,36 @@ class _JobCreationState extends State<JobCreation> {
                   },
                 ),
                 SizedBox(height: 24.0),
-                InkWell(
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF3229bf),
-                            Color(0xFF4568ff),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))),
-                    child: Center(
-                      child: const Text(
-                        JobPostStrings.createJobBtn,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    var uuid = Uuid();
-                    _jobsBloc.add(AddJobPost(JobPost(
-                      jobID: uuid.v4(),
-                      title: titleController.text == ''
-                          ? 'No title job'
-                          : titleController.text,
-                      description: descriptionController.text == ''
-                          ? HomePageStrings.dummyJobDescription
-                          : descriptionController.text,
-                      city: cityController.text == ''
-                          ? 'Unknown location'
-                          : cityController.text,
-                      imageUrl: null,
-                      hourRate: hourRateController.text == ''
-                          ? 'Volunteer job'
-                          : '${hourRateController.text.toString()}€ / h',
-                      isRemote: false,
-                      slotsAvailable: 1,
-                      languages: ['Portuguese'],
-                    )));
-                  },
-                ),
+                RyzePrimaryButton(
+                    title: JobPostStrings.createJobBtn,
+                    action: () {
+                      var uuid = Uuid();
+                      _jobsBloc.add(AddJobPost(JobPost(
+                        jobID: uuid.v4(),
+                        title: titleController.text == ''
+                            ? 'No title job'
+                            : titleController.text,
+                        description: descriptionController.text == ''
+                            ? HomePageStrings.dummyJobDescription
+                            : descriptionController.text,
+                        city: cityController.text == ''
+                            ? 'Unknown location'
+                            : cityController.text,
+                        imageUrl: null,
+                        hourRate: hourRateController.text == ''
+                            ? 'Volunteer job'
+                            : '${hourRateController.text.toString()}€ / h',
+                        isRemote: false,
+                        slotsAvailable: 1,
+                        languages: ['Portuguese'],
+                      )));
+                    },
+                    isAffirmative: true),
                 SizedBox(height: 12.0),
-                RyzePrimaryButton(title: JobPostStrings.previewJobBtn, action: () => Navigator.pop(context), isAffirmative: false),
+                RyzePrimaryButton(
+                    title: JobPostStrings.previewJobBtn,
+                    action: () => Navigator.pop(context),
+                    isAffirmative: false),
               ],
             ),
           ),
@@ -221,7 +206,7 @@ class _JobCreationState extends State<JobCreation> {
     }
 
     setState(() {
-      if(pickedFile != null){
+      if (pickedFile != null) {
         _image = File(pickedFile.path);
       }
     });

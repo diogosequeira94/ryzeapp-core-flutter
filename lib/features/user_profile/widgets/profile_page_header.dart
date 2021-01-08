@@ -44,17 +44,17 @@ class ProfilePageHeaderWidget extends StatelessWidget {
                 ),
                 Text(
                   user.jobTitle,
-                  style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                  style: TextStyle(fontSize: 16.0),
                 ),
                 SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(Icons.camera_alt, color: Colors.blueAccent),
+                    Icon(Icons.camera_alt, color: Theme.of(context).accentColor),
                     SizedBox(width: 8),
-                    Icon(Icons.mail, color: Colors.blueAccent),
+                    Icon(Icons.mail, color: Theme.of(context).accentColor),
                     SizedBox(width: 8),
-                    Icon(Icons.add, color: Colors.blueAccent),
+                    Icon(Icons.add, color: Theme.of(context).accentColor),
                   ],
                 ),
               ],

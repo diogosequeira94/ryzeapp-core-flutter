@@ -16,11 +16,11 @@ class WalletPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
         title: Text(
           'My Wallet',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
           IconButton(icon: Icon(Icons.add), onPressed: () {}),
@@ -38,14 +38,12 @@ class WalletPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black,
                     )),
               ),
               Text('Walter White',
                   style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black,
                   )),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),

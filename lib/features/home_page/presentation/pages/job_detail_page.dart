@@ -14,11 +14,13 @@ class JobDetailPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
         title: Text(
           'Job Details',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: Theme.of(context).textTheme.headline6.color
+          ),
         ),
         actions: [
           IconButton(icon: Icon(Icons.share), onPressed: () {}),
@@ -45,7 +47,7 @@ class JobDetailPage extends StatelessWidget {
                 margin: EdgeInsets.only(top: height * 0.5),
                 padding: const EdgeInsets.all(30.0),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.0),
                       topRight: Radius.circular(30.0),
@@ -56,9 +58,9 @@ class JobDetailPage extends StatelessWidget {
                     Text(
                       jobPost.title,
                       style: TextStyle(
-                          fontSize: 26.0,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black),
+                        fontSize: 26.0,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0),
@@ -68,11 +70,10 @@ class JobDetailPage extends StatelessWidget {
                           Flexible(
                               child: Text(
                             'RyzeApp',
-                            style: TextStyle(color: Colors.black54),
                           )),
                           const SizedBox(width: 6.0),
                           Icon(Icons.check_circle,
-                              color: Color(0xFF4568ff), size: 22.0),
+                              color: Theme.of(context).accentColor, size: 22.0),
                         ],
                       ),
                     ),
@@ -81,7 +82,6 @@ class JobDetailPage extends StatelessWidget {
                       'Description',
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -90,7 +90,6 @@ class JobDetailPage extends StatelessWidget {
                       jobPost.description,
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -99,7 +98,6 @@ class JobDetailPage extends StatelessWidget {
                       'Location',
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -108,7 +106,6 @@ class JobDetailPage extends StatelessWidget {
                       jobPost.city,
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -117,7 +114,6 @@ class JobDetailPage extends StatelessWidget {
                       'Pay Rate',
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -126,7 +122,6 @@ class JobDetailPage extends StatelessWidget {
                       jobPost.hourRate,
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -135,7 +130,6 @@ class JobDetailPage extends StatelessWidget {
                       'Positions Available',
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -144,7 +138,6 @@ class JobDetailPage extends StatelessWidget {
                       jobPost.slotsAvailable.toString(),
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                     ),

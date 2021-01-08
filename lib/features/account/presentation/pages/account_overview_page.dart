@@ -4,6 +4,8 @@ import 'package:firebaseblocryze/features/account/presentation/widgets/section_h
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile_page.dart';
+import 'package:firebaseblocryze/uikit/theme/app_themes.dart';
+import 'package:firebaseblocryze/uikit/theme/bloc/theme_bloc.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,11 +16,11 @@ class AccountOverviewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
         title: Text(
           'RyzeApp',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
           IconButton(
@@ -89,32 +91,42 @@ class AccountOverviewPage extends StatelessWidget {
             ),
             SectionHeader(title: 'Notification Settings'),
             SwitchListTile(
-              activeColor: Colors.blueAccent,
+              activeColor: Theme.of(context).accentColor,
               contentPadding: const EdgeInsets.all(0),
               value: true,
               title: Text('Receive Notifications'),
               onChanged: (isChecked) {},
             ),
             SwitchListTile(
-              activeColor: Colors.blueAccent,
+              activeColor: Theme.of(context).accentColor,
               contentPadding: const EdgeInsets.all(0),
               value: false,
               title: Text('Receive Newsletter'),
               onChanged: (isChecked) {},
             ),
             SwitchListTile(
-              activeColor: Colors.blueAccent,
+              activeColor: Theme.of(context).accentColor,
               contentPadding: const EdgeInsets.all(0),
               value: false,
               title: Text('Receive Offers Notification'),
               onChanged: (isChecked) {},
             ),
             SwitchListTile(
-              activeColor: Colors.blueAccent,
+              activeColor: Theme.of(context).accentColor,
               contentPadding: const EdgeInsets.all(0),
               value: true,
               title: Text('Receive Responses Notification'),
               onChanged: (isChecked) {},
+            ),
+            SectionHeader(title: 'Themes'),
+            SwitchListTile(
+              activeColor: Theme.of(context).accentColor,
+              contentPadding: const EdgeInsets.all(0),
+              value: true,
+              title: Text('Dark Mode'),
+              onChanged: (isChecked) {
+                context.read<ThemeBloc>().add(ThemeChanged(theme: AppTheme.values[1]));
+              },
             ),
             SectionHeader(title: 'Premium'),
             Padding(

@@ -6,12 +6,11 @@ class JobDisclaimer extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(Icons.info_outline_rounded, color: Colors.black54),
+        Icon(Icons.info_outline_rounded),
         const SizedBox(width: 8.0),
         Expanded(
             child: Text(
                 'We always encourage you to show up 30 min prior to your shifts.', style: TextStyle(
-              color: Colors.black54
             ),))
       ],
     );

@@ -16,13 +16,12 @@ class HomePage extends StatelessWidget {
     final _jobsBloc = context.watch<JobsBloc>();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          'RyzeApp',
-          style: TextStyle(color: Colors.black),
-        ),
+        title: Text('RyzeApp',
+            style:
+                TextStyle(color: Theme.of(context).textTheme.headline6.color)),
         actions: [
           IconButton(
               icon: Icon(Icons.notifications_none),

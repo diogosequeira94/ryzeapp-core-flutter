@@ -8,12 +8,12 @@ class NotificationsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: GestureDetector(
-            child: Icon(Icons.close, color: Colors.black),
+            child: Icon(Icons.close),
             onTap: () => Navigator.of(context).pop(),
           ),
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          iconTheme: Theme.of(context).iconTheme,
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.message_outlined, color: Colors.black54)),
@@ -22,7 +22,7 @@ class NotificationsPage extends StatelessWidget {
                       Icon(Icons.watch_later_outlined, color: Colors.black54)),
             ],
           ),
-          title: Text('Notifications', style: TextStyle(color: Colors.black)),
+          title: Text('Notifications', style: TextStyle(color: Theme.of(context).textTheme.headline6.color)),
         ),
         body: TabBarView(
           children: [

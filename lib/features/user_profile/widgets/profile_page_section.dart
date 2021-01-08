@@ -23,7 +23,7 @@ class ProfilePageSection extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             body,
-            style: TextStyle(fontSize: 14.0, color: Colors.black54),
+            style: TextStyle(fontSize: 14.0),
           ),
         ],
       ),
