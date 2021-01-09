@@ -6,6 +6,9 @@ class LoginStrings {
   static const String appLogoPath = "assets/ryze-app-logo.jpg";
   static const String firstOnBoardPath = "assets/onboarding-01.jpg";
   static const String secondOnBoardPath = "assets/onboarding-02.jpg";
+  static const String googleIconPath = 'assets/google-logo.png';
+
+
 
   //Failures
   static const String cancelledByUser = "Cancelled";
