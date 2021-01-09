@@ -33,6 +33,33 @@ class Password extends ValueObject<String> {
   const Password._(this.value);
 }
 
+class FirstName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory FirstName(String input){
+    assert(input != null);
+    return FirstName._(
+      validateFirstAndLastName(input),
+    );
+  }
+
+  const FirstName._(this.value);
+}
+
+class LastName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory LastName(String input){
+    assert(input != null);
+    return LastName._(
+      validateFirstAndLastName(input),
+    );
+  }
+
+  const LastName._(this.value);
+}
 //// Just an example on how can we get the failure or the actual content
 //void showTheEmailAddressOrFailure(){
 //  final emailAddress = EmailAddress('jasjd');

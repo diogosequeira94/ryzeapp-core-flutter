@@ -24,7 +24,7 @@ class RegisterForm extends StatelessWidget {
               ).show(context);
             },
             (_) {
-              Navigator.of(context).pushReplacementNamed('/login');
+              Navigator.of(context).pushReplacementNamed('/bottom-nav');
             },
           ),
         );
@@ -51,8 +51,17 @@ class RegisterForm extends StatelessWidget {
                           onChanged: (value) => context
                               .read<RegisterBloc>()
                               .add(RegisterEvent.firstNameChanged(value)),
-                          validator: (_) =>
-                              context.read<RegisterBloc>().state.firstName),
+                          validator: (_) => context
+                              .read<RegisterBloc>()
+                              .state
+                              .firstName
+                              .value
+                              .fold(
+                                  (f) => f.maybeMap(
+                                      shortFirstOrLastName: (_) =>
+                                          LoginStrings.textFieldFirstNameError,
+                                      orElse: () => null),
+                                  (_) => null)),
                       const SizedBox(height: 16.0),
                       TextFormField(
                           decoration: const InputDecoration(
@@ -63,8 +72,17 @@ class RegisterForm extends StatelessWidget {
                           onChanged: (value) => context
                               .read<RegisterBloc>()
                               .add(RegisterEvent.lastNameChanged(value)),
-                          validator: (_) =>
-                              context.read<RegisterBloc>().state.firstName),
+                          validator: (_) => context
+                              .read<RegisterBloc>()
+                              .state
+                              .lastName
+                              .value
+                              .fold(
+                                  (f) => f.maybeMap(
+                                      shortFirstOrLastName: (_) =>
+                                          LoginStrings.textFieldSurnameError,
+                                      orElse: () => null),
+                                  (_) => null)),
                       const SizedBox(height: 16.0),
                       TextFormField(
                         decoration: const InputDecoration(
@@ -129,12 +147,17 @@ class RegisterForm extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                              fontSize: 14.0,
-                              color: Theme.of(context).textTheme.headline6.color
-                            ),
+                                fontSize: 14.0,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .color),
                             children: [
                               new TextSpan(text: 'Already have an account? '),
-                              new TextSpan(text: 'Login', style: new TextStyle(fontWeight: FontWeight.bold)),
+                              new TextSpan(
+                                  text: 'Login',
+                                  style: new TextStyle(
+                                      fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),

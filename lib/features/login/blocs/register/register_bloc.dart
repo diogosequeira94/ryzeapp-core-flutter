@@ -20,6 +20,70 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> mapEventToState(
     RegisterEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    yield* event.map(emailChanged: (event) async* {
+      yield state.copyWith(
+        emailAddress: EmailAddress(event.email),
+        authFailureOrSuccessOption: none(),
+      );
+    }, passwordChanged: (event) async* {
+      yield state.copyWith(
+        password: Password(event.password),
+        authFailureOrSuccessOption: none(),
+      );
+    }, firstNameChanged: (event) async* {
+      yield state.copyWith(
+        firstName: FirstName(event.firstName),
+        authFailureOrSuccessOption: none(),
+      );
+    }, lastNameChanged: (event) async* {
+      yield state.copyWith(
+        lastName: LastName(event.lastName),
+        authFailureOrSuccessOption: none(),
+      );
+    }, registerWithEmailAndPasswordPressed: (event) async* {
+      yield* _performActionOnAuthFacadeWithEmailAndPassword(
+        _authFacade.registerWithEmailAndPassword,
+      );
+    });
+  }
+
+  Stream<RegisterState> _performActionOnAuthFacadeWithEmailAndPassword(
+    Future<Either<AuthFailure, Unit>> Function({
+      @required EmailAddress email,
+      @required Password password,
+      @required FirstName firstName,
+      @required LastName lastName,
+    })
+        forwardedCall,
+  ) async* {
+    Either<AuthFailure, Unit> failureOrSuccess;
+
+    final isEmailValid = state.emailAddress.isValid();
+    final isPasswordValid = state.password.isValid();
+    final isFirstNameValid = state.firstName.isValid();
+    final isLastNameValid = state.lastName.isValid();
+
+    if (isEmailValid &&
+        isPasswordValid &&
+        isFirstNameValid &&
+        isLastNameValid) {
+      yield state.copyWith(
+        isSubmitting: true,
+        showErrorMessages: false,
+        authFailureOrSuccessOption: none(),
+      );
+
+      failureOrSuccess = await forwardedCall(
+          email: state.emailAddress,
+          firstName: state.firstName,
+          lastName: state.lastName,
+          password: state.password);
+    }
+
+    yield state.copyWith(
+      isSubmitting: false,
+      showErrorMessages: true,
+      authFailureOrSuccessOption: optionOf(failureOrSuccess),
+    );
   }
 }

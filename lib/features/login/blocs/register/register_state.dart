@@ -3,8 +3,8 @@ part of 'register_bloc.dart';
 @freezed
 abstract class RegisterState with _$RegisterState {
   const factory RegisterState({
-    @required String firstName,
-    @required String lastName,
+    @required FirstName firstName,
+    @required LastName lastName,
     @required EmailAddress emailAddress,
     @required Password password,
     @required bool showErrorMessages,
@@ -13,8 +13,8 @@ abstract class RegisterState with _$RegisterState {
   }) = _RegisterState;
 
   factory RegisterState.initial() => RegisterState(
-    firstName: '',
-    lastName: '',
+    firstName: FirstName(''),
+    lastName: LastName(''),
     emailAddress: EmailAddress(''),
     password: Password(''),
     showErrorMessages: false,

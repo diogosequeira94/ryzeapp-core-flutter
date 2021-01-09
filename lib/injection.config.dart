@@ -37,8 +37,8 @@ GetIt $initGetIt(
   gh.lazySingleton<FirebaseAuth>(() => firebaseInjectableModule.firebaseAuth);
   gh.lazySingleton<Firestore>(() => firebaseInjectableModule.firebaseFireStore);
   gh.lazySingleton<GoogleSignIn>(() => firebaseInjectableModule.googleSignIn);
-  gh.lazySingleton<IAuthFacade>(
-      () => FirebaseAuthFacade(get<FirebaseAuth>(), get<GoogleSignIn>()));
+  gh.lazySingleton<IAuthFacade>(() => FirebaseAuthFacade(
+      get<FirebaseAuth>(), get<Firestore>(), get<GoogleSignIn>()));
   gh.lazySingleton<IJobPostRepository>(() => JobRepository(get<Firestore>()));
   gh.lazySingleton<INoteRepository>(() => NoteRepository(get<Firestore>()));
   gh.factory<NoteActorBloc>(() => NoteActorBloc(get<INoteRepository>()));

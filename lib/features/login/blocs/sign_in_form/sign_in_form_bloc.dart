@@ -25,7 +25,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     SignInFormEvent event,
   ) async* {
     yield* event.map(
-
       emailChanged: (event) async* {
         yield state.copyWith(
           emailAddress: EmailAddress(event.email),
@@ -37,11 +36,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         yield state.copyWith(
           password: Password(event.password),
           authFailureOrSuccessOption: none(),
-        );
-      },
-
-      registerWithEmailAndPasswordPressed: (event) async* {
-        yield* _performActionOnAuthFacadeWithEmailAndPassword(_authFacade.registerWithEmailAndPassword,
         );
       },
 

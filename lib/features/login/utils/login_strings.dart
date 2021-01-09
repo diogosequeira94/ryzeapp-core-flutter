@@ -23,6 +23,8 @@ class LoginStrings {
   static const String textFieldPasswordLabel = "Password";
   static const String textFieldEmailError = "Email is invalid";
   static const String textFieldPasswordError = "Password is too short";
+  static const String textFieldFirstNameError = "First name is too short";
+  static const String textFieldSurnameError = "Surname is too short";
 
   //Actions
   static const String signInButton = "Sign In";

@@ -12,15 +12,15 @@ T _$identity<T>(T value) => value;
 class _$RegisterEventTearOff {
   const _$RegisterEventTearOff();
 
-  FirstNameChanged firstNameChanged(String email) {
+  FirstNameChanged firstNameChanged(String firstName) {
     return FirstNameChanged(
-      email,
+      firstName,
     );
   }
 
-  LastNameChanged lastNameChanged(String email) {
+  LastNameChanged lastNameChanged(String lastName) {
     return LastNameChanged(
-      email,
+      lastName,
     );
   }
 
@@ -47,16 +47,16 @@ const $RegisterEvent = _$RegisterEventTearOff();
 mixin _$RegisterEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstNameChanged(String email),
-    @required Result lastNameChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
     @required Result emailChanged(String email),
     @required Result passwordChanged(String password),
     @required Result registerWithEmailAndPasswordPressed(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String email),
-    Result lastNameChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
     Result emailChanged(String email),
     Result passwordChanged(String password),
     Result registerWithEmailAndPasswordPressed(),
@@ -103,7 +103,7 @@ abstract class $FirstNameChangedCopyWith<$Res> {
   factory $FirstNameChangedCopyWith(
           FirstNameChanged value, $Res Function(FirstNameChanged) then) =
       _$FirstNameChangedCopyWithImpl<$Res>;
-  $Res call({String email});
+  $Res call({String firstName});
 }
 
 class _$FirstNameChangedCopyWithImpl<$Res>
@@ -118,36 +118,37 @@ class _$FirstNameChangedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object email = freezed,
+    Object firstName = freezed,
   }) {
     return _then(FirstNameChanged(
-      email == freezed ? _value.email : email as String,
+      firstName == freezed ? _value.firstName : firstName as String,
     ));
   }
 }
 
 class _$FirstNameChanged implements FirstNameChanged {
-  const _$FirstNameChanged(this.email) : assert(email != null);
+  const _$FirstNameChanged(this.firstName) : assert(firstName != null);
 
   @override
-  final String email;
+  final String firstName;
 
   @override
   String toString() {
-    return 'RegisterEvent.firstNameChanged(email: $email)';
+    return 'RegisterEvent.firstNameChanged(firstName: $firstName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is FirstNameChanged &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)));
+            (identical(other.firstName, firstName) ||
+                const DeepCollectionEquality()
+                    .equals(other.firstName, firstName)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(email);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(firstName);
 
   @override
   $FirstNameChangedCopyWith<FirstNameChanged> get copyWith =>
@@ -156,8 +157,8 @@ class _$FirstNameChanged implements FirstNameChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstNameChanged(String email),
-    @required Result lastNameChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
     @required Result emailChanged(String email),
     @required Result passwordChanged(String password),
     @required Result registerWithEmailAndPasswordPressed(),
@@ -167,14 +168,14 @@ class _$FirstNameChanged implements FirstNameChanged {
     assert(emailChanged != null);
     assert(passwordChanged != null);
     assert(registerWithEmailAndPasswordPressed != null);
-    return firstNameChanged(email);
+    return firstNameChanged(firstName);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String email),
-    Result lastNameChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
     Result emailChanged(String email),
     Result passwordChanged(String password),
     Result registerWithEmailAndPasswordPressed(),
@@ -182,7 +183,7 @@ class _$FirstNameChanged implements FirstNameChanged {
   }) {
     assert(orElse != null);
     if (firstNameChanged != null) {
-      return firstNameChanged(email);
+      return firstNameChanged(firstName);
     }
     return orElse();
   }
@@ -226,9 +227,9 @@ class _$FirstNameChanged implements FirstNameChanged {
 }
 
 abstract class FirstNameChanged implements RegisterEvent {
-  const factory FirstNameChanged(String email) = _$FirstNameChanged;
+  const factory FirstNameChanged(String firstName) = _$FirstNameChanged;
 
-  String get email;
+  String get firstName;
   $FirstNameChangedCopyWith<FirstNameChanged> get copyWith;
 }
 
@@ -236,7 +237,7 @@ abstract class $LastNameChangedCopyWith<$Res> {
   factory $LastNameChangedCopyWith(
           LastNameChanged value, $Res Function(LastNameChanged) then) =
       _$LastNameChangedCopyWithImpl<$Res>;
-  $Res call({String email});
+  $Res call({String lastName});
 }
 
 class _$LastNameChangedCopyWithImpl<$Res>
@@ -251,36 +252,37 @@ class _$LastNameChangedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object email = freezed,
+    Object lastName = freezed,
   }) {
     return _then(LastNameChanged(
-      email == freezed ? _value.email : email as String,
+      lastName == freezed ? _value.lastName : lastName as String,
     ));
   }
 }
 
 class _$LastNameChanged implements LastNameChanged {
-  const _$LastNameChanged(this.email) : assert(email != null);
+  const _$LastNameChanged(this.lastName) : assert(lastName != null);
 
   @override
-  final String email;
+  final String lastName;
 
   @override
   String toString() {
-    return 'RegisterEvent.lastNameChanged(email: $email)';
+    return 'RegisterEvent.lastNameChanged(lastName: $lastName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is LastNameChanged &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)));
+            (identical(other.lastName, lastName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastName, lastName)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(email);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(lastName);
 
   @override
   $LastNameChangedCopyWith<LastNameChanged> get copyWith =>
@@ -289,8 +291,8 @@ class _$LastNameChanged implements LastNameChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstNameChanged(String email),
-    @required Result lastNameChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
     @required Result emailChanged(String email),
     @required Result passwordChanged(String password),
     @required Result registerWithEmailAndPasswordPressed(),
@@ -300,14 +302,14 @@ class _$LastNameChanged implements LastNameChanged {
     assert(emailChanged != null);
     assert(passwordChanged != null);
     assert(registerWithEmailAndPasswordPressed != null);
-    return lastNameChanged(email);
+    return lastNameChanged(lastName);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String email),
-    Result lastNameChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
     Result emailChanged(String email),
     Result passwordChanged(String password),
     Result registerWithEmailAndPasswordPressed(),
@@ -315,7 +317,7 @@ class _$LastNameChanged implements LastNameChanged {
   }) {
     assert(orElse != null);
     if (lastNameChanged != null) {
-      return lastNameChanged(email);
+      return lastNameChanged(lastName);
     }
     return orElse();
   }
@@ -359,9 +361,9 @@ class _$LastNameChanged implements LastNameChanged {
 }
 
 abstract class LastNameChanged implements RegisterEvent {
-  const factory LastNameChanged(String email) = _$LastNameChanged;
+  const factory LastNameChanged(String lastName) = _$LastNameChanged;
 
-  String get email;
+  String get lastName;
   $LastNameChangedCopyWith<LastNameChanged> get copyWith;
 }
 
@@ -421,8 +423,8 @@ class _$EmailChanged implements EmailChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstNameChanged(String email),
-    @required Result lastNameChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
     @required Result emailChanged(String email),
     @required Result passwordChanged(String password),
     @required Result registerWithEmailAndPasswordPressed(),
@@ -438,8 +440,8 @@ class _$EmailChanged implements EmailChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String email),
-    Result lastNameChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
     Result emailChanged(String email),
     Result passwordChanged(String password),
     Result registerWithEmailAndPasswordPressed(),
@@ -555,8 +557,8 @@ class _$PasswordChanged implements PasswordChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstNameChanged(String email),
-    @required Result lastNameChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
     @required Result emailChanged(String email),
     @required Result passwordChanged(String password),
     @required Result registerWithEmailAndPasswordPressed(),
@@ -572,8 +574,8 @@ class _$PasswordChanged implements PasswordChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String email),
-    Result lastNameChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
     Result emailChanged(String email),
     Result passwordChanged(String password),
     Result registerWithEmailAndPasswordPressed(),
@@ -672,8 +674,8 @@ class _$RegisterWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstNameChanged(String email),
-    @required Result lastNameChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
     @required Result emailChanged(String email),
     @required Result passwordChanged(String password),
     @required Result registerWithEmailAndPasswordPressed(),
@@ -689,8 +691,8 @@ class _$RegisterWithEmailAndPasswordPressed
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String email),
-    Result lastNameChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
     Result emailChanged(String email),
     Result passwordChanged(String password),
     Result registerWithEmailAndPasswordPressed(),
@@ -750,8 +752,8 @@ class _$RegisterStateTearOff {
   const _$RegisterStateTearOff();
 
   _RegisterState call(
-      {@required String firstName,
-      @required String lastName,
+      {@required FirstName firstName,
+      @required LastName lastName,
       @required EmailAddress emailAddress,
       @required Password password,
       @required bool showErrorMessages,
@@ -773,8 +775,8 @@ class _$RegisterStateTearOff {
 const $RegisterState = _$RegisterStateTearOff();
 
 mixin _$RegisterState {
-  String get firstName;
-  String get lastName;
+  FirstName get firstName;
+  LastName get lastName;
   EmailAddress get emailAddress;
   Password get password;
   bool get showErrorMessages;
@@ -789,8 +791,8 @@ abstract class $RegisterStateCopyWith<$Res> {
           RegisterState value, $Res Function(RegisterState) then) =
       _$RegisterStateCopyWithImpl<$Res>;
   $Res call(
-      {String firstName,
-      String lastName,
+      {FirstName firstName,
+      LastName lastName,
       EmailAddress emailAddress,
       Password password,
       bool showErrorMessages,
@@ -817,8 +819,9 @@ class _$RegisterStateCopyWithImpl<$Res>
     Object authFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      firstName: firstName == freezed ? _value.firstName : firstName as String,
-      lastName: lastName == freezed ? _value.lastName : lastName as String,
+      firstName:
+          firstName == freezed ? _value.firstName : firstName as FirstName,
+      lastName: lastName == freezed ? _value.lastName : lastName as LastName,
       emailAddress: emailAddress == freezed
           ? _value.emailAddress
           : emailAddress as EmailAddress,
@@ -842,8 +845,8 @@ abstract class _$RegisterStateCopyWith<$Res>
       __$RegisterStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String firstName,
-      String lastName,
+      {FirstName firstName,
+      LastName lastName,
       EmailAddress emailAddress,
       Password password,
       bool showErrorMessages,
@@ -872,8 +875,9 @@ class __$RegisterStateCopyWithImpl<$Res>
     Object authFailureOrSuccessOption = freezed,
   }) {
     return _then(_RegisterState(
-      firstName: firstName == freezed ? _value.firstName : firstName as String,
-      lastName: lastName == freezed ? _value.lastName : lastName as String,
+      firstName:
+          firstName == freezed ? _value.firstName : firstName as FirstName,
+      lastName: lastName == freezed ? _value.lastName : lastName as LastName,
       emailAddress: emailAddress == freezed
           ? _value.emailAddress
           : emailAddress as EmailAddress,
@@ -908,9 +912,9 @@ class _$_RegisterState implements _RegisterState {
         assert(authFailureOrSuccessOption != null);
 
   @override
-  final String firstName;
+  final FirstName firstName;
   @override
-  final String lastName;
+  final LastName lastName;
   @override
   final EmailAddress emailAddress;
   @override
@@ -975,9 +979,9 @@ class _$_RegisterState implements _RegisterState {
 abstract class _RegisterState implements RegisterState {
   const factory _RegisterState(
           {@required
-              String firstName,
+              FirstName firstName,
           @required
-              String lastName,
+              LastName lastName,
           @required
               EmailAddress emailAddress,
           @required
@@ -991,9 +995,9 @@ abstract class _RegisterState implements RegisterState {
       _$_RegisterState;
 
   @override
-  String get firstName;
+  FirstName get firstName;
   @override
-  String get lastName;
+  LastName get lastName;
   @override
   EmailAddress get emailAddress;
   @override
