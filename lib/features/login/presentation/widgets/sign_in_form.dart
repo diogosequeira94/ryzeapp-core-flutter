@@ -2,6 +2,7 @@ import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/blocs/sign_in_form/sign_in_form_bloc.dart';
 import 'package:firebaseblocryze/features/login/presentation/widgets/sign_in_header.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
+import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,15 +21,15 @@ class SignInForm extends StatelessWidget {
                   cancelledByUser: (_) => LoginStrings.cancelledByUser,
                   serverError: (_) => LoginStrings.serverError,
                   emailAlreadyInUse: (_) => LoginStrings.emailAlreadyInUse,
-                  invalidCredentials: (_) =>
-                      LoginStrings.invalidCredentials,
+                  invalidCredentials: (_) => LoginStrings.invalidCredentials,
                 ),
               ).show(context);
             },
             (_) {
               Navigator.of(context).pushReplacementNamed('/bottom-nav');
-              context.bloc<AuthBloc>()
-              .add(const AuthEvent.authCheckRequested());
+              context
+                  .bloc<AuthBloc>()
+                  .add(const AuthEvent.authCheckRequested());
             },
           ),
         );
@@ -63,7 +64,8 @@ class SignInForm extends StatelessWidget {
                             .value
                             .fold(
                                 (f) => f.maybeMap(
-                                    invalidEmail: (_) => LoginStrings.textFieldEmailError,
+                                    invalidEmail: (_) =>
+                                        LoginStrings.textFieldEmailError,
                                     orElse: () => null),
                                 (_) => null),
                       ),
@@ -87,7 +89,8 @@ class SignInForm extends StatelessWidget {
                             .value
                             .fold(
                                 (f) => f.maybeMap(
-                                    shortPassword: (_) => LoginStrings.textFieldPasswordError,
+                                    shortPassword: (_) =>
+                                        LoginStrings.textFieldPasswordError,
                                     orElse: () => null),
                                 (_) => null),
                       ),
@@ -109,7 +112,8 @@ class SignInForm extends StatelessWidget {
                           Expanded(
                             child: FlatButton(
                               onPressed: () {
-                                Navigator.of(context).pushReplacementNamed('/register');
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/register');
                               },
                               child: const Text(LoginStrings.registerButton),
                             ),
@@ -117,35 +121,17 @@ class SignInForm extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 32.0),
-                      InkWell(
-                        child: Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFF3229bf),
-                                Color(0xFF4568ff),
-                            ],
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(50.0))
-                          ),
-                          child: Center(
-                            child: const Text(
-                              LoginStrings.signInGoogleButton,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        onTap:() {
-                          context.read<SignInFormBloc>().add(
-                            const SignInFormEvent.signInWithGooglePressed(),
-                          );
-                        },
-                      ),
-                      if (state.isSubmitting)...[
-                       const SizedBox(height: 8.0),
-                       const LinearProgressIndicator(value: null),
+                      RyzePrimaryButton(
+                          title: LoginStrings.signInGoogleButton,
+                          action: () {
+                            context.read<SignInFormBloc>().add(
+                                const SignInFormEvent
+                                    .signInWithGooglePressed());
+                          },
+                          isAffirmative: true),
+                      if (state.isSubmitting) ...[
+                        const SizedBox(height: 8.0),
+                        const LinearProgressIndicator(value: null),
                       ],
                     ],
                   ),

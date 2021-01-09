@@ -10,7 +10,13 @@ import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AccountOverviewPage extends StatelessWidget {
+class AccountOverviewPage extends StatefulWidget {
+  @override
+  _AccountOverviewPageState createState() => _AccountOverviewPageState();
+}
+
+class _AccountOverviewPageState extends State<AccountOverviewPage> {
+  bool isDarkModeActive = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,10 +128,19 @@ class AccountOverviewPage extends StatelessWidget {
             SwitchListTile(
               activeColor: Theme.of(context).accentColor,
               contentPadding: const EdgeInsets.all(0),
-              value: true,
+              value: isDarkModeActive,
               title: Text('Dark Mode'),
-              onChanged: (isChecked) {
-                context.read<ThemeBloc>().add(ThemeChanged(theme: AppTheme.values[1]));
+              onChanged: (bool value) {
+                setState(() {
+                  isDarkModeActive = value;
+                  isDarkModeActive
+                      ? context
+                          .read<ThemeBloc>()
+                          .add(ThemeChanged(theme: AppTheme.DarkRed))
+                      : context
+                          .read<ThemeBloc>()
+                          .add(ThemeChanged(theme: AppTheme.ClassicBlue));
+                });
               },
             ),
             SectionHeader(title: 'Premium'),

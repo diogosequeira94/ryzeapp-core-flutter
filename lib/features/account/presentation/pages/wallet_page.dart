@@ -1,4 +1,5 @@
 import 'package:firebaseblocryze/features/account/model/card_model.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/operations_slider.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/section_header_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -130,46 +131,10 @@ class WalletPage extends StatelessWidget {
                 ),
               ),
               SectionHeader(title: 'Operations'),
-              Container(
-                height: 120,
-                child: ListView.builder(
-                    itemCount: 3,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        child: Card(
-                          child: Container(
-                            width: 120.0,
-                            height: 80.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              color: Colors.white70,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.attach_money),
-                                const SizedBox(height: 8.0),
-                                Text(
-                                  'Withdraw',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        onTap: () => Navigator.of(context).pushNamed('/payment-error'),
-                      );
-                    }),
-              ),
+              OperationsSlider(),
               const SizedBox(height: 8.0),
               SectionHeader(title: 'Recent Activity'),
-              _myJobPosts(context),
+              _recentActivity(context),
             ],
           ),
         ),
@@ -177,7 +142,7 @@ class WalletPage extends StatelessWidget {
     );
   }
 
-  Widget _myJobPosts(BuildContext context) {
+  Widget _recentActivity(BuildContext context) {
     final myJobsMock = ['Bartender', 'Cleaner', 'Bartender', 'Cleaner'];
     return Padding(
       padding: const EdgeInsets.only(right: 4.0),
