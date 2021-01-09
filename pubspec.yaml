@@ -51,6 +51,7 @@ flutter:
      - assets/onboarding-01.jpg
      - assets/onboarding-02.jpg
      - assets/payment-error-01.png
+     - assets/google-logo.png
   # example:
   # fonts:
   #   - family: Schyler

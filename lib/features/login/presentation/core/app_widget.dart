@@ -1,6 +1,6 @@
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
-import 'file:///C:/Users/diogo/OneDrive/Bureau/Flutter%20Projects/firebaseblocryze/lib/route_generator.dart';
 import 'package:firebaseblocryze/injection.dart';
+import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/theme/bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

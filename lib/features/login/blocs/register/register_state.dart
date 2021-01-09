@@ -1,10 +1,24 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterState extends Equatable {
-  const RegisterState();
-}
+@freezed
+abstract class RegisterState with _$RegisterState {
+  const factory RegisterState({
+    @required String firstName,
+    @required String lastName,
+    @required EmailAddress emailAddress,
+    @required Password password,
+    @required bool showErrorMessages,
+    @required bool isSubmitting,
+    @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
+  }) = _RegisterState;
 
-class RegisterInitial extends RegisterState {
-  @override
-  List<Object> get props => [];
+  factory RegisterState.initial() => RegisterState(
+    firstName: '',
+    lastName: '',
+    emailAddress: EmailAddress(''),
+    password: Password(''),
+    showErrorMessages: false,
+    isSubmitting: false,
+    authFailureOrSuccessOption: none(),
+  );
 }

@@ -23,6 +23,13 @@ class _$ValueFailureTearOff {
       failedvalue: failedvalue,
     );
   }
+
+  ShortFirstOrLastName<T> shortFirstOrLastName<T>(
+      {@required String failedValue}) {
+    return ShortFirstOrLastName<T>(
+      failedValue: failedValue,
+    );
+  }
 }
 
 // ignore: unused_element
@@ -33,22 +40,26 @@ mixin _$ValueFailure<T> {
   Result when<Result extends Object>({
     @required Result invalidEmail(String failedValue),
     @required Result shortPassword(String failedvalue),
+    @required Result shortFirstOrLastName(String failedValue),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result invalidEmail(String failedValue),
     Result shortPassword(String failedvalue),
+    Result shortFirstOrLastName(String failedValue),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result invalidEmail(InvalidEmail<T> value),
     @required Result shortPassword(ShortPassword<T> value),
+    @required Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result invalidEmail(InvalidEmail<T> value),
     Result shortPassword(ShortPassword<T> value),
+    Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
     @required Result orElse(),
   });
 }
@@ -130,9 +141,11 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
   Result when<Result extends Object>({
     @required Result invalidEmail(String failedValue),
     @required Result shortPassword(String failedvalue),
+    @required Result shortFirstOrLastName(String failedValue),
   }) {
     assert(invalidEmail != null);
     assert(shortPassword != null);
+    assert(shortFirstOrLastName != null);
     return invalidEmail(failedValue);
   }
 
@@ -141,6 +154,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
   Result maybeWhen<Result extends Object>({
     Result invalidEmail(String failedValue),
     Result shortPassword(String failedvalue),
+    Result shortFirstOrLastName(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -155,9 +169,11 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
   Result map<Result extends Object>({
     @required Result invalidEmail(InvalidEmail<T> value),
     @required Result shortPassword(ShortPassword<T> value),
+    @required Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
   }) {
     assert(invalidEmail != null);
     assert(shortPassword != null);
+    assert(shortFirstOrLastName != null);
     return invalidEmail(this);
   }
 
@@ -166,6 +182,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
   Result maybeMap<Result extends Object>({
     Result invalidEmail(InvalidEmail<T> value),
     Result shortPassword(ShortPassword<T> value),
+    Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -246,9 +263,11 @@ class _$ShortPassword<T> implements ShortPassword<T> {
   Result when<Result extends Object>({
     @required Result invalidEmail(String failedValue),
     @required Result shortPassword(String failedvalue),
+    @required Result shortFirstOrLastName(String failedValue),
   }) {
     assert(invalidEmail != null);
     assert(shortPassword != null);
+    assert(shortFirstOrLastName != null);
     return shortPassword(failedvalue);
   }
 
@@ -257,6 +276,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
   Result maybeWhen<Result extends Object>({
     Result invalidEmail(String failedValue),
     Result shortPassword(String failedvalue),
+    Result shortFirstOrLastName(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -271,9 +291,11 @@ class _$ShortPassword<T> implements ShortPassword<T> {
   Result map<Result extends Object>({
     @required Result invalidEmail(InvalidEmail<T> value),
     @required Result shortPassword(ShortPassword<T> value),
+    @required Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
   }) {
     assert(invalidEmail != null);
     assert(shortPassword != null);
+    assert(shortFirstOrLastName != null);
     return shortPassword(this);
   }
 
@@ -282,6 +304,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
   Result maybeMap<Result extends Object>({
     Result invalidEmail(InvalidEmail<T> value),
     Result shortPassword(ShortPassword<T> value),
+    Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -298,4 +321,127 @@ abstract class ShortPassword<T> implements ValueFailure<T> {
 
   String get failedvalue;
   $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith;
+}
+
+abstract class $ShortFirstOrLastNameCopyWith<T, $Res> {
+  factory $ShortFirstOrLastNameCopyWith(ShortFirstOrLastName<T> value,
+          $Res Function(ShortFirstOrLastName<T>) then) =
+      _$ShortFirstOrLastNameCopyWithImpl<T, $Res>;
+  $Res call({String failedValue});
+}
+
+class _$ShortFirstOrLastNameCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $ShortFirstOrLastNameCopyWith<T, $Res> {
+  _$ShortFirstOrLastNameCopyWithImpl(ShortFirstOrLastName<T> _value,
+      $Res Function(ShortFirstOrLastName<T>) _then)
+      : super(_value, (v) => _then(v as ShortFirstOrLastName<T>));
+
+  @override
+  ShortFirstOrLastName<T> get _value => super._value as ShortFirstOrLastName<T>;
+
+  @override
+  $Res call({
+    Object failedValue = freezed,
+  }) {
+    return _then(ShortFirstOrLastName<T>(
+      failedValue:
+          failedValue == freezed ? _value.failedValue : failedValue as String,
+    ));
+  }
+}
+
+class _$ShortFirstOrLastName<T> implements ShortFirstOrLastName<T> {
+  const _$ShortFirstOrLastName({@required this.failedValue})
+      : assert(failedValue != null);
+
+  @override
+  final String failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.shortFirstOrLastName(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ShortFirstOrLastName<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+
+  @override
+  $ShortFirstOrLastNameCopyWith<T, ShortFirstOrLastName<T>> get copyWith =>
+      _$ShortFirstOrLastNameCopyWithImpl<T, ShortFirstOrLastName<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result invalidEmail(String failedValue),
+    @required Result shortPassword(String failedvalue),
+    @required Result shortFirstOrLastName(String failedValue),
+  }) {
+    assert(invalidEmail != null);
+    assert(shortPassword != null);
+    assert(shortFirstOrLastName != null);
+    return shortFirstOrLastName(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result invalidEmail(String failedValue),
+    Result shortPassword(String failedvalue),
+    Result shortFirstOrLastName(String failedValue),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (shortFirstOrLastName != null) {
+      return shortFirstOrLastName(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result invalidEmail(InvalidEmail<T> value),
+    @required Result shortPassword(ShortPassword<T> value),
+    @required Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
+  }) {
+    assert(invalidEmail != null);
+    assert(shortPassword != null);
+    assert(shortFirstOrLastName != null);
+    return shortFirstOrLastName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result invalidEmail(InvalidEmail<T> value),
+    Result shortPassword(ShortPassword<T> value),
+    Result shortFirstOrLastName(ShortFirstOrLastName<T> value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (shortFirstOrLastName != null) {
+      return shortFirstOrLastName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShortFirstOrLastName<T> implements ValueFailure<T> {
+  const factory ShortFirstOrLastName({@required String failedValue}) =
+      _$ShortFirstOrLastName<T>;
+
+  String get failedValue;
+  $ShortFirstOrLastNameCopyWith<T, ShortFirstOrLastName<T>> get copyWith;
 }

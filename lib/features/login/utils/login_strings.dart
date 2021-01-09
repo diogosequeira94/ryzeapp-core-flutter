@@ -14,6 +14,8 @@ class LoginStrings {
   static const String invalidCredentials = "Invalid email and password combination";
 
   //TextField
+  static const String textFieldFirstName = "First Name";
+  static const String textFieldLastName = "Surname";
   static const String textFieldEmailLabel = "Email";
   static const String textFieldPasswordLabel = "Password";
   static const String textFieldEmailError = "Email is invalid";
