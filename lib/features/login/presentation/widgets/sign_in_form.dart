@@ -22,6 +22,7 @@ class SignInForm extends StatelessWidget {
                   cancelledByUser: (_) => LoginStrings.cancelledByUser,
                   serverError: (_) => LoginStrings.serverError,
                   emailAlreadyInUse: (_) => LoginStrings.emailAlreadyInUse,
+                  emailNotFound: (_) => LoginStrings.emailNotFound,
                   invalidCredentials: (_) => LoginStrings.invalidCredentials,
                 ),
               ).show(context);
@@ -103,7 +104,7 @@ class SignInForm extends StatelessWidget {
                               'Forgot your password?',
                               style: TextStyle(fontSize: 14.0),
                             ),
-                            onTap: () {},
+                            onTap: () => Navigator.of(context).pushNamed('/password-reset'),
                           )),
                       const SizedBox(height: 16.0),
                       Padding(

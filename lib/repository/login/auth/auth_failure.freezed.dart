@@ -24,6 +24,10 @@ class _$AuthFailureTearOff {
     return const EmailAlreadyInUse();
   }
 
+  EmailNotFound emailNotFound() {
+    return const EmailNotFound();
+  }
+
   InvalidCredentials invalidCredentials() {
     return const InvalidCredentials();
   }
@@ -38,6 +42,7 @@ mixin _$AuthFailure {
     @required Result cancelledByUser(),
     @required Result serverError(),
     @required Result emailAlreadyInUse(),
+    @required Result emailNotFound(),
     @required Result invalidCredentials(),
   });
   @optionalTypeArgs
@@ -45,6 +50,7 @@ mixin _$AuthFailure {
     Result cancelledByUser(),
     Result serverError(),
     Result emailAlreadyInUse(),
+    Result emailNotFound(),
     Result invalidCredentials(),
     @required Result orElse(),
   });
@@ -53,6 +59,7 @@ mixin _$AuthFailure {
     @required Result cancelledByUser(CancelledByUser value),
     @required Result serverError(ServerError value),
     @required Result emailAlreadyInUse(EmailAlreadyInUse value),
+    @required Result emailNotFound(EmailNotFound value),
     @required Result invalidCredentials(InvalidCredentials value),
   });
   @optionalTypeArgs
@@ -60,6 +67,7 @@ mixin _$AuthFailure {
     Result cancelledByUser(CancelledByUser value),
     Result serverError(ServerError value),
     Result emailAlreadyInUse(EmailAlreadyInUse value),
+    Result emailNotFound(EmailNotFound value),
     Result invalidCredentials(InvalidCredentials value),
     @required Result orElse(),
   });
@@ -118,11 +126,13 @@ class _$CancelledByUser implements CancelledByUser {
     @required Result cancelledByUser(),
     @required Result serverError(),
     @required Result emailAlreadyInUse(),
+    @required Result emailNotFound(),
     @required Result invalidCredentials(),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return cancelledByUser();
   }
@@ -133,6 +143,7 @@ class _$CancelledByUser implements CancelledByUser {
     Result cancelledByUser(),
     Result serverError(),
     Result emailAlreadyInUse(),
+    Result emailNotFound(),
     Result invalidCredentials(),
     @required Result orElse(),
   }) {
@@ -149,11 +160,13 @@ class _$CancelledByUser implements CancelledByUser {
     @required Result cancelledByUser(CancelledByUser value),
     @required Result serverError(ServerError value),
     @required Result emailAlreadyInUse(EmailAlreadyInUse value),
+    @required Result emailNotFound(EmailNotFound value),
     @required Result invalidCredentials(InvalidCredentials value),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return cancelledByUser(this);
   }
@@ -164,6 +177,7 @@ class _$CancelledByUser implements CancelledByUser {
     Result cancelledByUser(CancelledByUser value),
     Result serverError(ServerError value),
     Result emailAlreadyInUse(EmailAlreadyInUse value),
+    Result emailNotFound(EmailNotFound value),
     Result invalidCredentials(InvalidCredentials value),
     @required Result orElse(),
   }) {
@@ -217,11 +231,13 @@ class _$ServerError implements ServerError {
     @required Result cancelledByUser(),
     @required Result serverError(),
     @required Result emailAlreadyInUse(),
+    @required Result emailNotFound(),
     @required Result invalidCredentials(),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return serverError();
   }
@@ -232,6 +248,7 @@ class _$ServerError implements ServerError {
     Result cancelledByUser(),
     Result serverError(),
     Result emailAlreadyInUse(),
+    Result emailNotFound(),
     Result invalidCredentials(),
     @required Result orElse(),
   }) {
@@ -248,11 +265,13 @@ class _$ServerError implements ServerError {
     @required Result cancelledByUser(CancelledByUser value),
     @required Result serverError(ServerError value),
     @required Result emailAlreadyInUse(EmailAlreadyInUse value),
+    @required Result emailNotFound(EmailNotFound value),
     @required Result invalidCredentials(InvalidCredentials value),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return serverError(this);
   }
@@ -263,6 +282,7 @@ class _$ServerError implements ServerError {
     Result cancelledByUser(CancelledByUser value),
     Result serverError(ServerError value),
     Result emailAlreadyInUse(EmailAlreadyInUse value),
+    Result emailNotFound(EmailNotFound value),
     Result invalidCredentials(InvalidCredentials value),
     @required Result orElse(),
   }) {
@@ -317,11 +337,13 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     @required Result cancelledByUser(),
     @required Result serverError(),
     @required Result emailAlreadyInUse(),
+    @required Result emailNotFound(),
     @required Result invalidCredentials(),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return emailAlreadyInUse();
   }
@@ -332,6 +354,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     Result cancelledByUser(),
     Result serverError(),
     Result emailAlreadyInUse(),
+    Result emailNotFound(),
     Result invalidCredentials(),
     @required Result orElse(),
   }) {
@@ -348,11 +371,13 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     @required Result cancelledByUser(CancelledByUser value),
     @required Result serverError(ServerError value),
     @required Result emailAlreadyInUse(EmailAlreadyInUse value),
+    @required Result emailNotFound(EmailNotFound value),
     @required Result invalidCredentials(InvalidCredentials value),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return emailAlreadyInUse(this);
   }
@@ -363,6 +388,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     Result cancelledByUser(CancelledByUser value),
     Result serverError(ServerError value),
     Result emailAlreadyInUse(EmailAlreadyInUse value),
+    Result emailNotFound(EmailNotFound value),
     Result invalidCredentials(InvalidCredentials value),
     @required Result orElse(),
   }) {
@@ -376,6 +402,111 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
 
 abstract class EmailAlreadyInUse implements AuthFailure {
   const factory EmailAlreadyInUse() = _$EmailAlreadyInUse;
+}
+
+abstract class $EmailNotFoundCopyWith<$Res> {
+  factory $EmailNotFoundCopyWith(
+          EmailNotFound value, $Res Function(EmailNotFound) then) =
+      _$EmailNotFoundCopyWithImpl<$Res>;
+}
+
+class _$EmailNotFoundCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
+    implements $EmailNotFoundCopyWith<$Res> {
+  _$EmailNotFoundCopyWithImpl(
+      EmailNotFound _value, $Res Function(EmailNotFound) _then)
+      : super(_value, (v) => _then(v as EmailNotFound));
+
+  @override
+  EmailNotFound get _value => super._value as EmailNotFound;
+}
+
+class _$EmailNotFound implements EmailNotFound {
+  const _$EmailNotFound();
+
+  @override
+  String toString() {
+    return 'AuthFailure.emailNotFound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is EmailNotFound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result cancelledByUser(),
+    @required Result serverError(),
+    @required Result emailAlreadyInUse(),
+    @required Result emailNotFound(),
+    @required Result invalidCredentials(),
+  }) {
+    assert(cancelledByUser != null);
+    assert(serverError != null);
+    assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
+    assert(invalidCredentials != null);
+    return emailNotFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result cancelledByUser(),
+    Result serverError(),
+    Result emailAlreadyInUse(),
+    Result emailNotFound(),
+    Result invalidCredentials(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (emailNotFound != null) {
+      return emailNotFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result cancelledByUser(CancelledByUser value),
+    @required Result serverError(ServerError value),
+    @required Result emailAlreadyInUse(EmailAlreadyInUse value),
+    @required Result emailNotFound(EmailNotFound value),
+    @required Result invalidCredentials(InvalidCredentials value),
+  }) {
+    assert(cancelledByUser != null);
+    assert(serverError != null);
+    assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
+    assert(invalidCredentials != null);
+    return emailNotFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result cancelledByUser(CancelledByUser value),
+    Result serverError(ServerError value),
+    Result emailAlreadyInUse(EmailAlreadyInUse value),
+    Result emailNotFound(EmailNotFound value),
+    Result invalidCredentials(InvalidCredentials value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (emailNotFound != null) {
+      return emailNotFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EmailNotFound implements AuthFailure {
+  const factory EmailNotFound() = _$EmailNotFound;
 }
 
 abstract class $InvalidCredentialsCopyWith<$Res> {
@@ -417,11 +548,13 @@ class _$InvalidCredentials implements InvalidCredentials {
     @required Result cancelledByUser(),
     @required Result serverError(),
     @required Result emailAlreadyInUse(),
+    @required Result emailNotFound(),
     @required Result invalidCredentials(),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return invalidCredentials();
   }
@@ -432,6 +565,7 @@ class _$InvalidCredentials implements InvalidCredentials {
     Result cancelledByUser(),
     Result serverError(),
     Result emailAlreadyInUse(),
+    Result emailNotFound(),
     Result invalidCredentials(),
     @required Result orElse(),
   }) {
@@ -448,11 +582,13 @@ class _$InvalidCredentials implements InvalidCredentials {
     @required Result cancelledByUser(CancelledByUser value),
     @required Result serverError(ServerError value),
     @required Result emailAlreadyInUse(EmailAlreadyInUse value),
+    @required Result emailNotFound(EmailNotFound value),
     @required Result invalidCredentials(InvalidCredentials value),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
+    assert(emailNotFound != null);
     assert(invalidCredentials != null);
     return invalidCredentials(this);
   }
@@ -463,6 +599,7 @@ class _$InvalidCredentials implements InvalidCredentials {
     Result cancelledByUser(CancelledByUser value),
     Result serverError(ServerError value),
     Result emailAlreadyInUse(EmailAlreadyInUse value),
+    Result emailNotFound(EmailNotFound value),
     Result invalidCredentials(InvalidCredentials value),
     @required Result orElse(),
   }) {

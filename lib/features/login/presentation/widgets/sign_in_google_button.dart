@@ -12,6 +12,7 @@ class SignInGoogleButton extends StatelessWidget {
           height: 50,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
+              color: Colors.white,
               border: Border.all(color: Colors.black),
               borderRadius: BorderRadius.all(Radius.circular(50.0))),
           child: Row(

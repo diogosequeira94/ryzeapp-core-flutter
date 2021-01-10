@@ -19,6 +19,7 @@ class RegisterForm extends StatelessWidget {
                   cancelledByUser: (_) => LoginStrings.cancelledByUser,
                   serverError: (_) => LoginStrings.serverError,
                   emailAlreadyInUse: (_) => LoginStrings.emailAlreadyInUse,
+                  emailNotFound: (_) => LoginStrings.emailNotFound,
                   invalidCredentials: (_) => LoginStrings.invalidCredentials,
                 ),
               ).show(context);

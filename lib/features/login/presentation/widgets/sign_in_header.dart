@@ -1,3 +1,4 @@
+import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:flutter/material.dart';
 
 class SignInHeader extends StatelessWidget {
@@ -8,7 +9,7 @@ class SignInHeader extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 2.7,
+            height: MediaQuery.of(context).size.height / 3,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -21,9 +22,9 @@ class SignInHeader extends StatelessWidget {
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(84.0))
             ),
             child: Center(
-              child: Icon(Icons.camera,
-                size: 80.0,
-                color: Colors.white,
+              child: Image.asset(LoginStrings.appLogoCirclePath,
+                width: 135.0,
+                height: 135.0,
               ),
             ),
           )
