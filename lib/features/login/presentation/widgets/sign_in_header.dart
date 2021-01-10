@@ -12,11 +12,11 @@ class SignInHeader extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 3,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF3229bf),
-                    Color(0xFF4568ff),
+                    Theme.of(context).buttonColor,
+                    Theme.of(context).accentColor,
                   ],
                 ),
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(84.0))
