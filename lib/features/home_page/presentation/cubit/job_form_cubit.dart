@@ -14,14 +14,17 @@ class JobFormCubit extends Cubit<JobFormState> {
   void titleChanged(String value) {
     final title = Title.dirty(value);
     emit(state.copyWith(
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
       title: title,
-      status: Formz.validate([title, state.description, state.city, state.hourRate]),
+      status: Formz.validate(
+          [title, state.description, state.city, state.hourRate]),
     ));
   }
 
   void descriptionChanged(String value) {
     final description = Description.dirty(value);
     emit(state.copyWith(
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
       description: description,
       status: Formz.validate(
           [state.title, description, state.city, state.hourRate]),
@@ -31,6 +34,7 @@ class JobFormCubit extends Cubit<JobFormState> {
   void cityChanged(String value) {
     final city = City.dirty(value);
     emit(state.copyWith(
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
       city: city,
       status: Formz.validate(
           [state.title, state.description, city, state.hourRate]),
@@ -40,9 +44,19 @@ class JobFormCubit extends Cubit<JobFormState> {
   void hourRateChanged(String value) {
     final hourRate = HourRate.dirty(value);
     emit(state.copyWith(
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
       hourRate: hourRate,
       status: Formz.validate(
           [state.title, state.description, state.city, hourRate]),
     ));
+  }
+
+  void disclaimerCheckboxChanged(bool value) {
+    emit(state.copyWith(
+      isDisclaimerAccepted: value,
+      status: Formz.validate(
+          [state.title, state.description, state.city, state.hourRate]),
+    ));
+    print('Emitted with: $value');
   }
 }

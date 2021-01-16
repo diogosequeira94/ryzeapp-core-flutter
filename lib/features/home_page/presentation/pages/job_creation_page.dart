@@ -51,7 +51,7 @@ class _JobCreationState extends State<JobCreation> {
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(16.0),
                         child: _image != null
-                            ? Image.file(_image, width: 250, height: 250, fit: BoxFit.fill,)
+                            ? Image.file(_image, width: 250, height: 250, fit: BoxFit.cover,)
                             : Image.asset(JobPostStrings.imagePlaceholder,
                                 width: 250, height: 250)),
                     onTap: () async => await getImage(true),

@@ -6,6 +6,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/job_creat
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_dismiss_background.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
@@ -84,8 +85,7 @@ class HomePage extends StatelessWidget {
                                     BlocProvider.value(
                                         value:
                                             BlocProvider.of<JobsBloc>(context)),
-                                    BlocProvider(
-                                        create: (_) => JobFormCubit())
+                                    BlocProvider(create: (_) => JobFormCubit())
                                   ], child: JobCreation()),
                                 ));
                               }),
@@ -128,42 +128,45 @@ class HomePage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: jobsList.length,
               itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(jobsList[index].title),
-                    subtitle: Text(jobsList[index].city),
-                    trailing: Text(jobsList[index].hourRate),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => JobDetailPage(
-                                    jobPost: jobsList[index],
-                                  )));
-                    },
-                    onLongPress: () {
-                      AwesomeDialog(
-                        context: context,
-                        width: 350,
-                        buttonsBorderRadius:
-                            BorderRadius.all(Radius.circular(2)),
-                        headerAnimationLoop: false,
-                        animType: AnimType.BOTTOMSLIDE,
-                        dialogType: DialogType.NO_HEADER,
-                        title: 'Delete Confirmation',
-                        desc:
-                            'Are you sure you want to permanently delete this job?',
-                        btnCancelText: 'Resume',
-                        btnCancelColor: Colors.blueAccent,
-                        btnOkText: 'Delete',
-                        btnOkColor: Colors.black,
-                        btnCancelOnPress: () {},
-                        btnOkOnPress: () {
-                          final _jobsBloc = context.read<JobsBloc>();
-                          _jobsBloc.add(DeleteJobPost(jobsList[index]));
-                        },
-                      )..show();
-                    },
+                return Dismissible(
+                  key: Key('${jobsList[index]}'),
+                  direction: DismissDirection.horizontal,
+                  background: JobDismissBackground(
+                      bgColor: Colors.lightGreen,
+                      icon: Icons.edit_outlined,
+                      iconAlignment: Alignment.centerLeft),
+                  secondaryBackground: JobDismissBackground(
+                      bgColor: Color(0xFFDD0000),
+                      icon: Icons.delete_outlined,
+                      iconAlignment: Alignment.centerRight),
+                  confirmDismiss: (DismissDirection dismissDirection) async {
+                    switch (dismissDirection) {
+                      case DismissDirection.endToStart:
+                        return await _showDeleteConfirmationDialog(
+                            context, jobsList[index]);
+                      case DismissDirection.startToEnd:
+                        return false;
+                      default:
+                        return false;
+                    }
+                  },
+                  child: Card(
+                    child: ListTile(
+                      title: Text(jobsList[index].title),
+                      subtitle: Text(jobsList[index].city),
+                      trailing: Text(jobsList[index].hourRate),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => JobDetailPage(
+                                      jobPost: jobsList[index],
+                                    )));
+                      },
+                      onLongPress: () {
+                        _showDeleteConfirmationDialog(context, jobsList[index]);
+                      },
+                    ),
                   ),
                 );
               },
@@ -210,5 +213,27 @@ class HomePage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  _showDeleteConfirmationDialog(BuildContext context, JobPost jobPost) {
+    AwesomeDialog(
+      context: context,
+      width: 350,
+      buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+      headerAnimationLoop: false,
+      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.NO_HEADER,
+      title: 'Delete Confirmation',
+      desc: 'Are you sure you want to permanently delete this job?',
+      btnCancelText: 'Resume',
+      btnCancelColor: Colors.blueAccent,
+      btnOkText: 'Delete',
+      btnOkColor: Colors.black,
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        final _jobsBloc = context.read<JobsBloc>();
+        _jobsBloc.add(DeleteJobPost(jobPost));
+      },
+    )..show();
   }
 }

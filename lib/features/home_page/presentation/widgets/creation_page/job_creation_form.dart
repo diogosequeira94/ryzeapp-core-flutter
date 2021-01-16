@@ -109,7 +109,7 @@ class _TitleInput extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
-            autofocus: true,
+            autofocus: false,
             maxLength: 50,
             keyboardType: TextInputType.text,
             enabled: true,
@@ -138,7 +138,7 @@ class _DescriptionInput extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
-          autofocus: true,
+          autofocus: false,
           maxLength: 50,
           keyboardType: TextInputType.text,
           enabled: true,
@@ -166,7 +166,7 @@ class _CityInput extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
-          autofocus: true,
+          autofocus: false,
           maxLength: 15,
           keyboardType: TextInputType.text,
           enabled: true,
@@ -219,11 +219,11 @@ class _CreateJobButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final JobsBloc _jobsBloc = BlocProvider.of<JobsBloc>(context);
     return BlocBuilder<JobFormCubit, JobFormState>(
-      buildWhen: (previous, current) => previous.status != current.status,
+      buildWhen: (previous, current) => previous.status != current.status || previous.isDisclaimerAccepted != current.isDisclaimerAccepted,
       builder: (context, state) {
         return RyzePrimaryButton(
           title: JobPostStrings.createJobBtn,
-          enabled: state.status.isValidated,
+          enabled: (state.status.isValidated && state.isDisclaimerAccepted),
           action: () {
             _jobsBloc.add(AddJobPost(JobPost(
               jobID: Uuid().v4(),
@@ -245,32 +245,29 @@ class _CreateJobButton extends StatelessWidget {
   }
 }
 
-class _JobDisclaimer extends StatefulWidget {
-  @override
-  __JobDisclaimerState createState() => __JobDisclaimerState();
-}
-
-class __JobDisclaimerState extends State<_JobDisclaimer> {
-  bool _isChecked = false;
+class _JobDisclaimer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-      title: Padding(
-        padding: const EdgeInsets.only(bottom: 14.0),
-        child: Text(
-          JobPostStrings.termsOfConsent,
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-      ),
-      subtitle: Text(JobPostStrings.jobDisclaimer),
-      controlAffinity: ListTileControlAffinity.platform,
-      contentPadding: EdgeInsets.all(0.0),
-      value: _isChecked,
-      activeColor: Color(0xFF3229bf),
-      onChanged: (bool value) {
-        setState(() {
-          _isChecked = value;
-        });
+    return BlocBuilder<JobFormCubit, JobFormState>(
+      builder: (context, state) {
+        return CheckboxListTile(
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 14.0),
+              child: Text(
+                JobPostStrings.termsOfConsent,
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+            subtitle: Text(JobPostStrings.jobDisclaimer),
+            controlAffinity: ListTileControlAffinity.platform,
+            contentPadding: EdgeInsets.all(0.0),
+            value: state.isDisclaimerAccepted,
+            activeColor: Color(0xFF3229bf),
+            onChanged: (bool checkBoxValue) {
+              context
+                  .read<JobFormCubit>()
+                  .disclaimerCheckboxChanged(checkBoxValue);
+            });
       },
     );
   }

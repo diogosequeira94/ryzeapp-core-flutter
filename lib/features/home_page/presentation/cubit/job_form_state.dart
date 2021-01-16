@@ -6,6 +6,7 @@ class JobFormState extends Equatable {
     this.description = const Description.pure(),
     this.city = const City.pure(),
     this.hourRate = const HourRate.pure(),
+    this.isDisclaimerAccepted = false,
     this.status = FormzStatus.pure,
   });
 
@@ -13,16 +14,18 @@ class JobFormState extends Equatable {
   final Description description;
   final City city;
   final HourRate hourRate;
+  final bool isDisclaimerAccepted;
   final FormzStatus status;
 
   @override
-  List<Object> get props => [title, description, city, hourRate, status];
+  List<Object> get props => [title, description, city, hourRate, isDisclaimerAccepted, status];
 
   JobFormState copyWith({
     Title title,
     Description description,
     City city,
     HourRate hourRate,
+    bool isDisclaimerAccepted,
     FormzStatus status,
   }) {
     return JobFormState(
@@ -30,6 +33,7 @@ class JobFormState extends Equatable {
       description: description ?? this.description,
       city: city ?? this.city,
       hourRate: hourRate ?? this.hourRate,
+      isDisclaimerAccepted: isDisclaimerAccepted ?? this.isDisclaimerAccepted,
       status: status ?? this.status,
     );
   }
