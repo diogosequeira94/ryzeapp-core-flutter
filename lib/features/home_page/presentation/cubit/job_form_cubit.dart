@@ -57,6 +57,5 @@ class JobFormCubit extends Cubit<JobFormState> {
       status: Formz.validate(
           [state.title, state.description, state.city, state.hourRate]),
     ));
-    print('Emitted with: $value');
   }
 }

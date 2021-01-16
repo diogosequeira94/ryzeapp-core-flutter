@@ -124,7 +124,6 @@ class _TitleInput extends StatelessWidget {
             ),
             onChanged: (title) {
               context.read<JobFormCubit>().titleChanged(title);
-              print(title);
             }),
       );
     });
