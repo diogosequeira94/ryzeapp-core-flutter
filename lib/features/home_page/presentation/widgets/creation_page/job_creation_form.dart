@@ -117,7 +117,7 @@ class _TitleInput extends StatelessWidget {
             decoration: InputDecoration(
               labelText: 'Title',
               hintText: 'Enter Title',
-              errorText: state.title.invalid ? 'Invalid Title' : null,
+              errorText: state.title.invalid ? 'Title must be at least 10 characters' : null,
               border: OutlineInputBorder(
                 borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
               ),
@@ -145,7 +145,7 @@ class _DescriptionInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Description',
             hintText: 'Enter Description',
-            errorText: state.description.invalid ? 'Invalid Description' : null,
+            errorText: state.description.invalid ? 'Description must be at least 25 characters' : null,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
