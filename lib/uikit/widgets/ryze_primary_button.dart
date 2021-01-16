@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 class RyzePrimaryButton extends StatelessWidget {
   final String title;
   final Function action;
+  final bool enabled;
   final bool isLoading;
   final bool isAffirmative;
 
@@ -11,26 +12,29 @@ class RyzePrimaryButton extends StatelessWidget {
       {@required this.title,
       @required this.action,
       this.isLoading = false,
+      this.enabled = true,
       @required this.isAffirmative});
 
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.bottomCenter,
-      child: InkWell(
+        alignment: Alignment.bottomCenter,
+        child: InkWell(
           child: Container(
             height: 50,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    isAffirmative
-                        ? Theme.of(context).buttonColor
-                        : Color(0xFF0b0b0d),
-                    isAffirmative
-                        ? Theme.of(context).accentColor
-                        : Color(0xFF1d1e22),
-                  ],
+                  colors: enabled
+                      ? [
+                          isAffirmative
+                              ? Theme.of(context).buttonColor
+                              : Color(0xFF0b0b0d),
+                          isAffirmative
+                              ? Theme.of(context).accentColor
+                              : Color(0xFF1d1e22),
+                        ]
+                      : [Colors.grey, Colors.grey],
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(50.0))),
             child: Center(
@@ -44,7 +48,7 @@ class RyzePrimaryButton extends StatelessWidget {
                     ),
             ),
           ),
-          onTap: () => action()),
-    );
+          onTap: () => enabled ? action() : null,
+        ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_creation_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
@@ -79,10 +80,14 @@ class HomePage extends StatelessWidget {
                               child: Icon(Icons.add),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => BlocProvider.value(
+                                  builder: (_) => MultiBlocProvider(providers: [
+                                    BlocProvider.value(
                                         value:
-                                            BlocProvider.of<JobsBloc>(context),
-                                        child: JobCreation())));
+                                            BlocProvider.of<JobsBloc>(context)),
+                                    BlocProvider(
+                                        create: (_) => JobFormCubit())
+                                  ], child: JobCreation()),
+                                ));
                               }),
                         ],
                       ),
