@@ -10,10 +10,11 @@ class FetchJobsPosts extends JobsEvent {
 }
 
 class AddJobPost extends JobsEvent {
+  final File jobPostImage;
   final JobPost jobPost;
-  AddJobPost(this.jobPost);
+  AddJobPost(this.jobPost, this.jobPostImage);
   @override
-  List<Object> get props => [jobPost];
+  List<Object> get props => [jobPost, jobPostImage];
 }
 
 class DeleteJobPost extends JobsEvent {

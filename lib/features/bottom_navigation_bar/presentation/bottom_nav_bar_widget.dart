@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
@@ -26,7 +27,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationHomePageLoaded) {
             return BlocProvider(
-                create: (_) => JobsBloc(JobRepository(Firestore.instance))..add(FetchJobsPosts()),
+                create: (_) => JobsBloc(
+                    JobRepository(Firestore.instance, FirebaseStorage.instance))
+                  ..add(FetchJobsPosts()),
                 child: HomePage());
           } else if (state is BottomNavigationAccountPageLoading) {
             return Center(child: CircularProgressIndicator());
@@ -36,12 +39,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationExplorePageLoaded) {
             return BlocProvider.value(
-              value: BlocProvider.of<BottomNavigationBarBloc>(context),
+                value: BlocProvider.of<BottomNavigationBarBloc>(context),
                 child: ExploreOverviewPage());
           } else if (state is BottomNavigationExploreMapLoaded) {
             return ExploreMapPage();
-          }
-          else {
+          } else {
             return Container();
           }
         },

@@ -9,6 +9,6 @@ class HourRate extends FormzInput<String, HourRateValidationError> {
 
   @override
   HourRateValidationError validator(String value) {
-    return value.length > minLength ? null : HourRateValidationError.invalid;
+    return value.length >= minLength ? null : HourRateValidationError.invalid;
   }
 }

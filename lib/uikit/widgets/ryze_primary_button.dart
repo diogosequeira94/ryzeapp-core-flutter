@@ -39,8 +39,23 @@ class RyzePrimaryButton extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(50.0))),
             child: Center(
               child: isLoading
-                  ? CircularProgressIndicator(
-                      backgroundColor: Colors.white,
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 20.0,
+                          width: 20.0,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(width: 8.0),
+                        Text(
+                          title,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     )
                   : Text(
                       title,
@@ -48,7 +63,7 @@ class RyzePrimaryButton extends StatelessWidget {
                     ),
             ),
           ),
-          onTap: () => enabled ? action() : null,
+          onTap: () => enabled && !isLoading ? action() : null,
         ));
   }
 }

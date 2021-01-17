@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
@@ -6,6 +7,7 @@ import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class JobForm extends StatefulWidget {
@@ -54,22 +56,28 @@ class _JobFormState extends State<JobForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _TitleInput(),
-        _DescriptionInput(),
-        _CityInput(),
-        _HourRateInput(),
-        const SizedBox(height: 8.0),
-        _JobDisclaimer(),
-        const SizedBox(height: 24.0),
-        RyzePrimaryButton(
-            title: JobPostStrings.previewJobBtn,
-            action: () => Navigator.pop(context),
-            isAffirmative: false),
-        const SizedBox(height: 12.0),
-        _CreateJobButton(),
-      ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            _JobPhoto(),
+            _TitleInput(),
+            _DescriptionInput(),
+            _CityInput(),
+            _HourRateInput(),
+            const SizedBox(height: 8.0),
+            _JobDisclaimer(),
+            const SizedBox(height: 24.0),
+            RyzePrimaryButton(
+                title: JobPostStrings.previewJobBtn,
+                action: () => Navigator.pop(context),
+                isAffirmative: false),
+            const SizedBox(height: 12.0),
+            _CreateJobButton(),
+          ],
+        ),
+      ),
     );
   }
 
@@ -117,7 +125,9 @@ class _TitleInput extends StatelessWidget {
             decoration: InputDecoration(
               labelText: 'Title',
               hintText: 'Enter Title',
-              errorText: state.title.invalid ? 'Title must be at least 10 characters' : null,
+              errorText: state.title.invalid
+                  ? 'Title must be at least 10 characters'
+                  : null,
               border: OutlineInputBorder(
                 borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
               ),
@@ -145,7 +155,9 @@ class _DescriptionInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Description',
             hintText: 'Enter Description',
-            errorText: state.description.invalid ? 'Description must be at least 25 characters' : null,
+            errorText: state.description.invalid
+                ? 'Description must be at least 25 characters'
+                : null,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
@@ -193,7 +205,7 @@ class _HourRateInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
           autofocus: false,
-          maxLength: 50,
+          maxLength: 4,
           keyboardType: TextInputType.number,
           enabled: true,
           textInputAction: TextInputAction.next,
@@ -218,26 +230,35 @@ class _CreateJobButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final JobsBloc _jobsBloc = BlocProvider.of<JobsBloc>(context);
     return BlocBuilder<JobFormCubit, JobFormState>(
-      buildWhen: (previous, current) => previous.status != current.status || previous.isDisclaimerAccepted != current.isDisclaimerAccepted,
-      builder: (context, state) {
-        return RyzePrimaryButton(
-          title: JobPostStrings.createJobBtn,
-          enabled: (state.status.isValidated && state.isDisclaimerAccepted),
-          action: () {
-            _jobsBloc.add(AddJobPost(JobPost(
-              jobID: Uuid().v4(),
-              title: state.title.value,
-              description: state.description.value,
-              city: state.city.value,
-              imageUrl: null,
-              hourRate: '${state.hourRate.value}€ / h',
-              isRemote: false,
-              slotsAvailable: 1,
-              languages: ['Portuguese'],
-            )));
+      buildWhen: (previous, current) =>
+          previous.status != current.status ||
+          previous.isDisclaimerAccepted != current.isDisclaimerAccepted,
+      builder: (context, formState) {
+        return BlocBuilder<JobsBloc, JobsState>(
+          builder: (context, jobState) {
+            return RyzePrimaryButton(
+              title: JobPostStrings.createJobBtn,
+              enabled: (formState.status.isValidated &&
+                  formState.isDisclaimerAccepted),
+              action: () {
+                _jobsBloc.add(AddJobPost(
+                    JobPost(
+                      jobID: Uuid().v4(),
+                      title: formState.title.value,
+                      description: formState.description.value,
+                      city: formState.city.value,
+                      imageUrl: null,
+                      hourRate: '${formState.hourRate.value}€ / h',
+                      isRemote: false,
+                      slotsAvailable: 1,
+                      languages: ['Portuguese'],
+                    ),
+                    formState.image));
+              },
+              isAffirmative: true,
+              isLoading: jobState is AddJobInProgress,
+            );
           },
-          isAffirmative: true,
-          isLoading: state.status.isSubmissionInProgress,
         );
       },
     );
@@ -269,5 +290,45 @@ class _JobDisclaimer extends StatelessWidget {
             });
       },
     );
+  }
+}
+
+class _JobPhoto extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<JobFormCubit, JobFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 24.0),
+          child: InkWell(
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                child: state.image != null
+                    ? Image.file(
+                        state.image,
+                        width: 250,
+                        height: 250,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        JobPostStrings.imagePlaceholder,
+                        width: 250,
+                        height: 250,
+                        fit: BoxFit.cover,
+                      )),
+            onTap: () async => await getImage(context),
+          ),
+        );
+      },
+    );
+  }
+
+  Future getImage(BuildContext context) async {
+    ImagePicker picker = ImagePicker();
+    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final _image = File(pickedFile.path);
+      context.read<JobFormCubit>().jobPictureSelected(_image);
+    }
   }
 }

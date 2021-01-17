@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
@@ -18,7 +19,10 @@ class RouteGenerator {
       case '/home':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                create: (_) => JobsBloc(JobRepository(Firestore.instance))..add(FetchJobsPosts()), child: HomePage()));
+                create: (_) => JobsBloc(
+                    JobRepository(Firestore.instance, FirebaseStorage.instance))
+                  ..add(FetchJobsPosts()),
+                child: HomePage()));
       case '/user-profile':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
@@ -26,7 +30,8 @@ class RouteGenerator {
       case '/settings':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                create: (_) => getIt<AuthBloc>(), child: AccountOverviewPage()));
+                create: (_) => getIt<AuthBloc>(),
+                child: AccountOverviewPage()));
       default:
         return _errorRoute();
     }

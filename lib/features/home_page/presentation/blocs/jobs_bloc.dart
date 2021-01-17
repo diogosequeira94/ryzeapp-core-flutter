@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
@@ -28,7 +29,17 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       );
     } else if (event is AddJobPost) {
       yield AddJobInProgress();
-      final result = await _jobRepository.create(event.jobPost);
+      print('############## BLOC RECEIVED EVENT ##############');
+      final jobPostImageUrl =
+          await _jobRepository.uploadJobImage(event.jobPostImage);
+      final imageUrl = jobPostImageUrl == null
+          ? null
+          : jobPostImageUrl.fold((failure) {
+              AddJobFailure('Failed uploading image');
+              return;
+            }, (url) => url);
+      final result = await _jobRepository
+          .create(event.jobPost.copyWith(imageUrl: imageUrl));
       yield result.fold(
         (failure) => AddJobFailure('Failed creating job.'),
         (success) => AddJobSuccess(),
