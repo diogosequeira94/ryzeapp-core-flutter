@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/repository/job_posts/error/job_post_failure.dart';
 import 'package:firebaseblocryze/repository/job_posts/i_job_post_repository.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 
@@ -19,9 +19,7 @@ class JobRepository implements IJobPostRepository {
   @override
   Future<Either<JobPostFailure, void>> create(JobPost jobPost) async {
     try {
-       return Right(_fireStore.collection('jobs').add(
-          jobPost.toJson()
-      ));
+      return Right(_fireStore.collection('jobs').add(jobPost.toJson()));
     } on Exception {
       return Left(JobPostFailure.unexpected());
     }
@@ -30,7 +28,11 @@ class JobRepository implements IJobPostRepository {
   @override
   Future<Either<JobPostFailure, void>> delete(JobPost jobPost) async {
     try {
-      return Right(_fireStore.collection('jobs').where('jobID', isEqualTo: jobPost.jobID).getDocuments().then((value) {
+      return Right(_fireStore
+          .collection('jobs')
+          .where('jobID', isEqualTo: jobPost.jobID)
+          .getDocuments()
+          .then((value) {
         value.documents.forEach((element) {
           _fireStore.collection('jobs').document(element.documentID).delete();
         });
@@ -43,10 +45,9 @@ class JobRepository implements IJobPostRepository {
   @override
   Future<Either<JobPostFailure, List<JobPost>>> getJobs() async {
     try {
-      final jobsList =
-          await _fireStore.collection('jobs').getDocuments().then((snapshot) =>
-        snapshot.documents.map((e) => JobPost.fromJson(e.data)).toList()
-      );
+      final jobsList = await _fireStore.collection('jobs').getDocuments().then(
+          (snapshot) =>
+              snapshot.documents.map((e) => JobPost.fromJson(e.data)).toList());
       return Right(jobsList);
     } on Exception {
       return Left(const JobPostFailure.unexpected());
@@ -60,21 +61,23 @@ class JobRepository implements IJobPostRepository {
   }
 
   Future<Either<JobPostFailure, String>> uploadJobImage(File _image) async {
-    print('############## STARTED UPLOADING JOB ##############');
-    if (_image != null){
-      try{
-        final storageReference = _firebaseStorage.ref().child('jobImages/${basename(_image.path)}');
+    if (_image != null) {
+      try {
+        final storageReference =
+            _firebaseStorage.ref().child('jobImages/${basename(_image.path)}');
         final uploadTask = storageReference.putFile(_image);
         await uploadTask.onComplete;
-        print('############## FILE UPLOADED ##############');
         String returnURL;
         await storageReference.getDownloadURL().then((fileURL) {
-          returnURL =  fileURL;
-          print('############## $fileURL ##############');
+          returnURL = fileURL;
         });
         return Right(returnURL);
-      } on Exception {
-        return Left(const JobPostFailure.unexpected());
+      } on PlatformException catch (e) {
+        if(e.code == 'DATA_LOSS'){
+          return Left(const JobPostFailure.dataCorrupted());
+        } else {
+          return Left(const JobPostFailure.unexpected());
+        }
       }
     }
     return null;

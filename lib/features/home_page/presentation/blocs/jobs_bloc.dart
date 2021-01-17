@@ -29,7 +29,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       );
     } else if (event is AddJobPost) {
       yield AddJobInProgress();
-      print('############## BLOC RECEIVED EVENT ##############');
       final jobPostImageUrl =
           await _jobRepository.uploadJobImage(event.jobPostImage);
       final imageUrl = jobPostImageUrl == null

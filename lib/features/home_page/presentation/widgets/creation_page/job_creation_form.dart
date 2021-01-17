@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
@@ -126,7 +127,7 @@ class _TitleInput extends StatelessWidget {
               labelText: 'Title',
               hintText: 'Enter Title',
               errorText: state.title.invalid
-                  ? 'Title must be at least 10 characters'
+                  ? JobPostStrings.jobFormInvalidTitle
                   : null,
               border: OutlineInputBorder(
                 borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
@@ -156,7 +157,7 @@ class _DescriptionInput extends StatelessWidget {
             labelText: 'Description',
             hintText: 'Enter Description',
             errorText: state.description.invalid
-                ? 'Description must be at least 25 characters'
+                ? JobPostStrings.jobFormInvalidDescription
                 : null,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
@@ -185,7 +186,8 @@ class _CityInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'City',
             hintText: 'Enter City',
-            errorText: state.city.invalid ? 'Invalid City' : null,
+            errorText:
+                state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
@@ -212,7 +214,9 @@ class _HourRateInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Hour Rate',
             hintText: 'Enter Hour Rate',
-            errorText: state.hourRate.invalid ? 'Invalid Hour Rate' : null,
+            errorText: state.hourRate.invalid
+                ? JobPostStrings.jobFormInvalidHourRate
+                : null,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
@@ -241,19 +245,9 @@ class _CreateJobButton extends StatelessWidget {
               enabled: (formState.status.isValidated &&
                   formState.isDisclaimerAccepted),
               action: () {
-                _jobsBloc.add(AddJobPost(
-                    JobPost(
-                      jobID: Uuid().v4(),
-                      title: formState.title.value,
-                      description: formState.description.value,
-                      city: formState.city.value,
-                      imageUrl: null,
-                      hourRate: '${formState.hourRate.value}€ / h',
-                      isRemote: false,
-                      slotsAvailable: 1,
-                      languages: ['Portuguese'],
-                    ),
-                    formState.image));
+                formState.image == null
+                    ? _showConfirmationDialog(context, formState)
+                    : _createJobPost(context, formState);
               },
               isAffirmative: true,
               isLoading: jobState is AddJobInProgress,
@@ -262,6 +256,45 @@ class _CreateJobButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  _createJobPost(BuildContext context, JobFormState formState) {
+    final _jobsBloc = context.read<JobsBloc>();
+    _jobsBloc.add(AddJobPost(
+        JobPost(
+          jobID: Uuid().v4(),
+          title: formState.title.value,
+          description: formState.description.value,
+          city: formState.city.value,
+          imageUrl: null,
+          hourRate: '${formState.hourRate.value}€ / h',
+          isRemote: false,
+          slotsAvailable: 1,
+          languages: ['Portuguese'],
+        ),
+        formState.image));
+  }
+
+  _showConfirmationDialog(BuildContext context, JobFormState formState) {
+    AwesomeDialog(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      context: context,
+      width: 350,
+      buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+      headerAnimationLoop: false,
+      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.NO_HEADER,
+      title: 'Confirmation',
+      desc: JobPostStrings.confirmCreationDialogText,
+      btnCancelText: 'Go Back',
+      btnCancelColor: Theme.of(context).accentColor,
+      btnOkText: 'Continue',
+      btnOkColor: Colors.black,
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        _createJobPost(context, formState);
+      },
+    )..show();
   }
 }
 
@@ -294,6 +327,7 @@ class _JobDisclaimer extends StatelessWidget {
 }
 
 class _JobPhoto extends StatelessWidget {
+  final photoHeightWidth = 250.0;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobFormCubit, JobFormState>(
@@ -306,14 +340,14 @@ class _JobPhoto extends StatelessWidget {
                 child: state.image != null
                     ? Image.file(
                         state.image,
-                        width: 250,
-                        height: 250,
+                        width: photoHeightWidth,
+                        height: photoHeightWidth,
                         fit: BoxFit.cover,
                       )
                     : Image.asset(
                         JobPostStrings.imagePlaceholder,
-                        width: 250,
-                        height: 250,
+                        width: photoHeightWidth,
+                        height: photoHeightWidth,
                         fit: BoxFit.cover,
                       )),
             onTap: () async => await getImage(context),
