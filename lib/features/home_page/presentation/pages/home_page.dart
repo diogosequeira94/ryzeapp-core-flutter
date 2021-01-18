@@ -9,6 +9,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_pa
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_dismiss_background.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
+import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -94,9 +95,9 @@ class HomePage extends StatelessWidget {
                   state is JobsFetchSuccess
                       ? _myJobPosts(state.list, context)
                       : Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
                   HomePageSectionHeader(
                     title: 'Job Categories',
                   ),
@@ -151,7 +152,13 @@ class HomePage extends StatelessWidget {
                     child: ListTile(
                       title: Text(jobsList[index].title),
                       subtitle: Text(jobsList[index].city),
-                      trailing: Text(jobsList[index].hourRate),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(jobsList[index].hourRate),
+                          JobStatusPill(jobStatus: 'Active'),
+                        ],
+                      ),
                       onTap: () {
                         Navigator.push(
                             context,
