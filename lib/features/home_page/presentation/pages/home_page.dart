@@ -156,7 +156,7 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(jobsList[index].hourRate),
-                          JobStatusPill(jobStatus: 'Active'),
+                          JobStatusPill(jobStatus: jobsList[index].status),
                         ],
                       ),
                       onTap: () {

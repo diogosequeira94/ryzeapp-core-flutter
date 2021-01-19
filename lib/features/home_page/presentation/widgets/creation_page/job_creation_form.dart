@@ -384,7 +384,7 @@ class _DateTimeCalendar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
+            padding: const EdgeInsets.only(bottom: 6.0),
             child: Text('From:'),
           ),
           InkWell(
@@ -400,7 +400,7 @@ class _DateTimeCalendar extends StatelessWidget {
             onTap: () => _pickDate(context),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 12.0, bottom: 4.0),
+            padding: const EdgeInsets.only(top: 12.0, bottom: 6.0),
             child: Text('Until:'),
           ),
           InkWell(
@@ -468,26 +468,24 @@ class _AdditionalInformationInput extends StatelessWidget {
     return BlocBuilder<JobFormCubit, JobFormState>(builder: (context, state) {
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
-        child: Expanded(
-          child: TextFormField(
-            autofocus: false,
-            minLines: 3,
-            maxLines: 16,
-            maxLengthEnforced: true,
-            maxLength: 500,
-            keyboardType: TextInputType.text,
-            enabled: true,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-              labelText: 'Additional Notes',
-              hintText: 'Details you want to share with appliances.',
-              border: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
-              ),
+        child: TextFormField(
+          autofocus: false,
+          minLines: 3,
+          maxLines: 16,
+          maxLengthEnforced: true,
+          maxLength: 500,
+          keyboardType: TextInputType.text,
+          enabled: true,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            labelText: 'Additional Notes',
+            hintText: 'Details you want to share with appliances.',
+            border: OutlineInputBorder(
+              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
-            onChanged: (hourRate) =>
-                context.read<JobFormCubit>().hourRateChanged(hourRate),
           ),
+          onChanged: (hourRate) =>
+              context.read<JobFormCubit>().hourRateChanged(hourRate),
         ),
       );
     });
