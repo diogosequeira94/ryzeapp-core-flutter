@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/creation_page/job_category_picker.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
@@ -67,6 +68,9 @@ class _JobFormState extends State<JobForm> {
             _DescriptionInput(),
             _CityInput(),
             _HourRateInput(),
+            JobCategoryPicker(),
+            _DateTimeCalendar(),
+            _AdditionalInformationInput(),
             const SizedBox(height: 8.0),
             _JobDisclaimer(),
             const SizedBox(height: 24.0),
@@ -155,7 +159,7 @@ class _DescriptionInput extends StatelessWidget {
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             labelText: 'Description',
-            hintText: 'Enter Description',
+            hintText: 'Describe what this job is about',
             errorText: state.description.invalid
                 ? JobPostStrings.jobFormInvalidDescription
                 : null,
@@ -185,7 +189,7 @@ class _CityInput extends StatelessWidget {
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             labelText: 'City',
-            hintText: 'Enter City',
+            hintText: 'E.g Lisbon',
             errorText:
                 state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
             border: OutlineInputBorder(
@@ -265,6 +269,7 @@ class _CreateJobButton extends StatelessWidget {
           jobID: Uuid().v4(),
           title: formState.title.value,
           description: formState.description.value,
+          status: 'Active',
           city: formState.city.value,
           imageUrl: null,
           hourRate: '${formState.hourRate.value}€ / h',
@@ -315,7 +320,7 @@ class _JobDisclaimer extends StatelessWidget {
             controlAffinity: ListTileControlAffinity.platform,
             contentPadding: EdgeInsets.all(0.0),
             value: state.isDisclaimerAccepted,
-            activeColor: Color(0xFF3229bf),
+            activeColor: Theme.of(context).accentColor,
             onChanged: (bool checkBoxValue) {
               context
                   .read<JobFormCubit>()
@@ -364,5 +369,127 @@ class _JobPhoto extends StatelessWidget {
       final _image = File(pickedFile.path);
       context.read<JobFormCubit>().jobPictureSelected(_image);
     }
+  }
+}
+
+class _DateTimeCalendar extends StatelessWidget {
+  var pickedDate = DateTime.now();
+  var pickedTime = TimeOfDay.now();
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4.0),
+            child: Text('From:'),
+          ),
+          InkWell(
+            child: Row(
+              children: [
+                Image.asset(JobPostStrings.calendarIcon,
+                    width: 24.0, height: 24.0),
+                SizedBox(width: 10),
+                Text(
+                    "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 16:00 CET"),
+              ],
+            ),
+            onTap: () => _pickDate(context),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 12.0, bottom: 4.0),
+            child: Text('Until:'),
+          ),
+          InkWell(
+            child: Row(
+              children: [
+                Image.asset(JobPostStrings.calendarIcon,
+                    width: 24.0, height: 24.0),
+                SizedBox(width: 10),
+                Text(
+                    "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 19:00 CET"),
+              ],
+            ),
+            onTap: () => _pickDate(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _pickDate(BuildContext context) async {
+    DateTime date = await showDatePicker(
+        context: context,
+        initialDate: pickedDate,
+        firstDate: DateTime.now().subtract(Duration(days: 0)),
+        lastDate: DateTime(DateTime.now().year + 2),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              dialogBackgroundColor: Colors.white,
+              colorScheme: ColorScheme.light().copyWith(
+                primary: Theme.of(context).accentColor,
+              ),
+            ),
+            child: child,
+          );
+        });
+    if (date != null) {
+      pickedDate = date;
+      _pickTime(context);
+    }
+  }
+
+  _pickTime(BuildContext context) async {
+    TimeOfDay time = await showTimePicker(
+        context: context,
+        initialTime: pickedTime,
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              dialogBackgroundColor: Colors.white,
+              colorScheme: ColorScheme.light().copyWith(
+                primary: Theme.of(context).accentColor,
+              ),
+            ),
+            child: child,
+          );
+        });
+    if (time != null) pickedTime = time;
+  }
+}
+
+class _AdditionalInformationInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<JobFormCubit, JobFormState>(builder: (context, state) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: Expanded(
+          child: TextFormField(
+            autofocus: false,
+            minLines: 3,
+            maxLines: 16,
+            maxLengthEnforced: true,
+            maxLength: 500,
+            keyboardType: TextInputType.text,
+            enabled: true,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              labelText: 'Additional Notes',
+              hintText: 'Details you want to share with appliances.',
+              border: OutlineInputBorder(
+                borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              ),
+            ),
+            onChanged: (hourRate) =>
+                context.read<JobFormCubit>().hourRateChanged(hourRate),
+          ),
+        ),
+      );
+    });
   }
 }

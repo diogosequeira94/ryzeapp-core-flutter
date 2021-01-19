@@ -55,6 +55,7 @@ flutter:
      - assets/onboarding-02.jpg
      - assets/payment-error-01.png
      - assets/google-logo.png
+     - assets/ryze-calendar-icon.png
   # example:
   # fonts:
   #   - family: Schyler

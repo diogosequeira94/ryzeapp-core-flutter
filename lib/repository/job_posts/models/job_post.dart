@@ -10,6 +10,7 @@ class JobPost extends Equatable {
   final String title;
   final String description;
   final String imageUrl;
+  final String status;
   final String city;
   final String hourRate;
   final bool isRemote;
@@ -21,6 +22,7 @@ class JobPost extends Equatable {
       @required this.title,
       @required this.description,
       @required this.imageUrl,
+      @required this.status,
       @required this.city,
       @required this.hourRate,
       @required this.isRemote,
@@ -33,6 +35,7 @@ class JobPost extends Equatable {
         title,
         description,
         imageUrl,
+        status,
         city,
         hourRate,
         isRemote,
@@ -45,6 +48,7 @@ class JobPost extends Equatable {
     String title,
     String description,
     String imageUrl,
+    String status,
     String city,
     String hourRate,
     bool isRemote,
@@ -56,6 +60,7 @@ class JobPost extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       imageUrl: imageUrl ?? this.imageUrl,
+      status: status ?? this.status,
       city: city ?? this.city,
       hourRate: hourRate ?? this.hourRate,
       isRemote: isRemote ?? this.isRemote,

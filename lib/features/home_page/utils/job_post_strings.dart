@@ -3,7 +3,7 @@ class JobPostStrings {
   static const String jobCreationPageTitle = 'Add Job';
   static const String termsOfConsent = 'Terms of Consent';
   static const String jobDisclaimer =
-      'By submitting this job, you agree to share all the information with RyzeApp and its users.';
+      'By submitting this job, you are aware of the terms of agreement and to share all the job information with RyzeApp and its users.';
   static const String createJobBtn = 'Create Job';
   static const String previewJobBtn = 'Preview Post';
   static const String confirmCreationDialogText =
@@ -19,4 +19,5 @@ class JobPostStrings {
 
   //Image shortcuts
   static const String imagePlaceholder = 'assets/no-image-placeholder.jpg';
+  static const String calendarIcon = 'assets/ryze-calendar-icon.png';
 }
