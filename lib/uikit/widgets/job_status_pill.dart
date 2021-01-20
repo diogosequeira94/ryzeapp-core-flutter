@@ -34,8 +34,8 @@ class JobStatusPill extends StatelessWidget {
       case 'Inactive':
         return Colors.orangeAccent;
         break;
-      case 'On Going':
-        return Colors.deepPurple;
+      case 'Live':
+        return Colors.blueAccent;
         break;
       case 'Done':
         return Color(0xFFDD0000);

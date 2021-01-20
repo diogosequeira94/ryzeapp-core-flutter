@@ -100,6 +100,7 @@ class HomePage extends StatelessWidget {
                         ),
                   HomePageSectionHeader(
                     title: 'Job Categories',
+                    edgeInsets: const EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 6.0),
                   ),
                   CategoriesGridWidget(),
                   HomePageSectionHeader(title: 'Trending'),
@@ -121,59 +122,85 @@ class HomePage extends StatelessWidget {
           )
         : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: jobsList.length,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                  key: Key('${jobsList[index]}'),
-                  direction: DismissDirection.horizontal,
-                  background: JobDismissBackground(
-                      bgColor: Colors.lightGreen,
-                      icon: Icons.edit_outlined,
-                      iconAlignment: Alignment.centerLeft),
-                  secondaryBackground: JobDismissBackground(
-                      bgColor: Color(0xFFDD0000),
-                      icon: Icons.delete_outlined,
-                      iconAlignment: Alignment.centerRight),
-                  confirmDismiss: (DismissDirection dismissDirection) async {
-                    switch (dismissDirection) {
-                      case DismissDirection.endToStart:
-                        return await _showDeleteConfirmationDialog(
-                            context, jobsList[index]);
-                      case DismissDirection.startToEnd:
-                        return false;
-                      default:
-                        return false;
-                    }
-                  },
-                  child: Card(
-                    child: ListTile(
-                      title: Text(jobsList[index].title),
-                      subtitle: Text(jobsList[index].city),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(jobsList[index].hourRate),
-                          JobStatusPill(jobStatus: jobsList[index].status),
-                        ],
+            child: Column(
+              children: [
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 2,
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                      key: Key('${jobsList[index]}'),
+                      direction: DismissDirection.horizontal,
+                      background: JobDismissBackground(
+                          bgColor: Colors.lightGreen,
+                          icon: Icons.edit_outlined,
+                          iconAlignment: Alignment.centerLeft),
+                      secondaryBackground: JobDismissBackground(
+                          bgColor: Color(0xFFDD0000),
+                          icon: Icons.delete_outlined,
+                          iconAlignment: Alignment.centerRight),
+                      confirmDismiss:
+                          (DismissDirection dismissDirection) async {
+                        switch (dismissDirection) {
+                          case DismissDirection.endToStart:
+                            return await _showDeleteConfirmationDialog(
+                                context, jobsList[index]);
+                          case DismissDirection.startToEnd:
+                            return false;
+                          default:
+                            return false;
+                        }
+                      },
+                      child: Card(
+                        child: ListTile(
+                          title: Text(jobsList[index].title),
+                          subtitle: Text(jobsList[index].city),
+                          trailing: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(jobsList[index].hourRate),
+                              JobStatusPill(jobStatus: jobsList[index].status),
+                            ],
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => JobDetailPage(
+                                          jobPost: jobsList[index],
+                                        )));
+                          },
+                          onLongPress: () {
+                            _showDeleteConfirmationDialog(
+                                context, jobsList[index]);
+                          },
+                        ),
                       ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => JobDetailPage(
-                                      jobPost: jobsList[index],
-                                    )));
-                      },
-                      onLongPress: () {
-                        _showDeleteConfirmationDialog(context, jobsList[index]);
-                      },
-                    ),
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+                jobsList.length > 2
+                    ? GestureDetector(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8.0, right: 6.0),
+                          child: Container(
+                            height: 25.0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text('See All'),
+                                SizedBox(width: 4.0),
+                                Icon(Icons.arrow_forward, size: 18.0),
+                              ],
+                            ),
+                          ),
+                        ),
+                        onTap: () {},
+                      )
+                    : SizedBox.shrink(),
+              ],
             ),
           );
   }
@@ -184,6 +211,7 @@ class HomePage extends StatelessWidget {
           jobID: job.jobID,
           title: job.title,
           description: job.description,
+          status: 'Active',
           hourRate: job.hourRate,
           imageUrl: job.imageUrl,
           city: job.city,
