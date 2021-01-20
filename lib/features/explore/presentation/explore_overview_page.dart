@@ -24,6 +24,7 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           title: job.title,
           description: job.description,
           hourRate: job.hourRate,
+          status: job.status,
           imageUrl: job.imageUrl,
           city: job.city,
           isRemote: job.isRemote,

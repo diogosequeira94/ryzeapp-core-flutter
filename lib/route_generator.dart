@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/bot
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_confirmation_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/pages/job_hub_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/password_reset_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/register_page.dart';
@@ -44,6 +45,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => PaymentFailedPage());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => NotificationsPage());
+      case '/job-hub':
+        return MaterialPageRoute(builder: (_) => JobHubPage(myJobsList: args));
       case '/job-confirmation-page':
         return MaterialPageRoute(builder: (_) => JobConfirmationPage(jobPost: args));
       default:

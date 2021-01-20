@@ -17,6 +17,8 @@ class JobPostStrings {
   static const String jobFormInvalidCity = 'Invalid City';
   static const String jobFormInvalidHourRate = 'Invalid Hour Rate';
 
+  //Job Hub
+  static const String jobHubPageTitle = 'My Jobs';
   //Image shortcuts
   static const String imagePlaceholder = 'assets/no-image-placeholder.jpg';
   static const String calendarIcon = 'assets/ryze-calendar-icon.png';

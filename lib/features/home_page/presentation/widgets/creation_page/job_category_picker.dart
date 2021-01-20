@@ -24,8 +24,9 @@ class _JobCategoryPickerState extends State<JobCategoryPicker> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 children: <Widget>[
-                  Expanded(child: TextField(enableInteractiveSelection: false, controller: _controller, decoration: InputDecoration(
+                  Expanded(child: TextField(enableInteractiveSelection: false, readOnly: true, controller: _controller, decoration: InputDecoration(
                     labelText: 'Category',
+                    hintText: 'Select a Category',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
                     ),

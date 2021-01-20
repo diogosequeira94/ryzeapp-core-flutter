@@ -197,7 +197,9 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/job-hub', arguments: jobsList);
+                        },
                       )
                     : SizedBox.shrink(),
               ],

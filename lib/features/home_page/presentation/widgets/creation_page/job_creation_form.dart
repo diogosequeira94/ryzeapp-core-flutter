@@ -391,7 +391,7 @@ class _DateTimeCalendar extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(JobPostStrings.calendarIcon,
-                    width: 24.0, height: 24.0),
+                    width: 34.0, height: 34.0),
                 SizedBox(width: 10),
                 Text(
                     "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 16:00 CET"),
@@ -400,14 +400,14 @@ class _DateTimeCalendar extends StatelessWidget {
             onTap: () => _pickDate(context),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 12.0, bottom: 6.0),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
             child: Text('Until:'),
           ),
           InkWell(
             child: Row(
               children: [
                 Image.asset(JobPostStrings.calendarIcon,
-                    width: 24.0, height: 24.0),
+                    width: 34.0, height: 34.0),
                 SizedBox(width: 10),
                 Text(
                     "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 19:00 CET"),
