@@ -72,7 +72,7 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
               leading: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(allJobsMock[index].imageUrl,
-                      width: 50, height: 50, fit: BoxFit.cover)),
+                      width: 75, height: 75, fit: BoxFit.cover)),
               title: Text(allJobsMock[index].title),
               subtitle: Text(allJobsMock[index].city),
               trailing: Text(allJobsMock[index].hourRate),
