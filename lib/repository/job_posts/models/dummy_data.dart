@@ -34,7 +34,7 @@ const DUMMY_CATEGORIES = const [
   ),
   Category(
     id: 'c6',
-    title: 'Any',
+    title: 'All',
     color: Colors.white,
     imageUrl: 'https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/briefcase-512.png',
   ),

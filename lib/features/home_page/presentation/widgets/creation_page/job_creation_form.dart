@@ -377,46 +377,50 @@ class _DateTimeCalendar extends StatelessWidget {
   var pickedTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 6.0),
-            child: Text('From:'),
+    return BlocBuilder<JobFormCubit, JobFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 6.0),
+                child: Text('From:'),
+              ),
+              InkWell(
+                child: Row(
+                  children: [
+                    Image.asset(JobPostStrings.calendarIcon,
+                        width: 34.0, height: 34.0),
+                    SizedBox(width: 10),
+                    Text(
+                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 16:00 CET"),
+                  ],
+                ),
+                onTap: () => _pickDate(context),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
+                child: Text('Until:'),
+              ),
+              InkWell(
+                child: Row(
+                  children: [
+                    Image.asset(JobPostStrings.calendarIcon,
+                        width: 34.0, height: 34.0),
+                    SizedBox(width: 10),
+                    Text(
+                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 19:00 CET"),
+                  ],
+                ),
+                onTap: () => _pickDate(context),
+              ),
+            ],
           ),
-          InkWell(
-            child: Row(
-              children: [
-                Image.asset(JobPostStrings.calendarIcon,
-                    width: 34.0, height: 34.0),
-                SizedBox(width: 10),
-                Text(
-                    "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 16:00 CET"),
-              ],
-            ),
-            onTap: () => _pickDate(context),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
-            child: Text('Until:'),
-          ),
-          InkWell(
-            child: Row(
-              children: [
-                Image.asset(JobPostStrings.calendarIcon,
-                    width: 34.0, height: 34.0),
-                SizedBox(width: 10),
-                Text(
-                    "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 19:00 CET"),
-              ],
-            ),
-            onTap: () => _pickDate(context),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

@@ -16,6 +16,8 @@ class JobFormCubit extends Cubit<JobFormState> {
   void titleChanged(String value) {
     final title = Title.dirty(value);
     emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: state.endDateTime,
       image: state.image,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       title: title,
@@ -27,6 +29,8 @@ class JobFormCubit extends Cubit<JobFormState> {
   void descriptionChanged(String value) {
     final description = Description.dirty(value);
     emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: state.endDateTime,
       image: state.image,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       description: description,
@@ -38,6 +42,8 @@ class JobFormCubit extends Cubit<JobFormState> {
   void cityChanged(String value) {
     final city = City.dirty(value);
     emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: state.endDateTime,
       image: state.image,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       city: city,
@@ -49,6 +55,8 @@ class JobFormCubit extends Cubit<JobFormState> {
   void hourRateChanged(String value) {
     final hourRate = HourRate.dirty(value);
     emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: state.endDateTime,
       image: state.image,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       hourRate: hourRate,
@@ -59,6 +67,8 @@ class JobFormCubit extends Cubit<JobFormState> {
 
   void disclaimerCheckboxChanged(bool value) {
     emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: state.endDateTime,
       image: state.image,
       isDisclaimerAccepted: value,
       status: Formz.validate(
@@ -68,7 +78,31 @@ class JobFormCubit extends Cubit<JobFormState> {
 
   void jobPictureSelected(File imageFile) {
     emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: state.endDateTime,
       image: imageFile,
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
+      status: Formz.validate(
+          [state.title, state.description, state.city, state.hourRate]),
+    ));
+  }
+
+  void startDateTimeSelected(String value) {
+    emit(state.copyWith(
+      startDateTime: value,
+      endDateTime: state.endDateTime,
+      image: state.image,
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
+      status: Formz.validate(
+          [state.title, state.description, state.city, state.hourRate]),
+    ));
+  }
+
+  void endDateTimeSelected(String value) {
+    emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: value,
+      image: state.image,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       status: Formz.validate(
           [state.title, state.description, state.city, state.hourRate]),

@@ -8,9 +8,10 @@ class JobCategoryPicker extends StatefulWidget {
 class _JobCategoryPickerState extends State<JobCategoryPicker> {
   final TextEditingController _controller = new TextEditingController();
   var jobCategoryTitles = [
-    'Administration',
-    'Languages',
-    'IT',
+    'Bar',
+    'Multi-Language',
+    'Driver',
+    'Healthy',
     'Hospitality',
     'Other',
   ];
