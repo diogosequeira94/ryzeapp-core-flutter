@@ -6,19 +6,19 @@ const DUMMY_CATEGORIES = const [
     id: 'c1',
     title: 'Bar',
     color: Colors.white,
-    imageUrl: 'https://iconarchive.com/download/i57304/miniartx/drinks/Cocktail-Green-Agave.ico',
+    imageUrl: 'https://cdn0.iconfinder.com/data/icons/food-icons-rounded/110/Cocktail-512.png',
   ),
   Category(
     id: 'c2',
     title: 'IT',
     color: Colors.white,
-    imageUrl: 'https://images.vexels.com/media/users/3/128132/isolated/preview/fa3b9aad78a9db81459bd03294a0f985-flat-laptop-icon-design-by-vexels.png',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Circle-icons-computer.svg/1024px-Circle-icons-computer.svg.png',
   ),
   Category(
     id: 'c3',
     title: 'Driver',
     color: Colors.white,
-    imageUrl: 'https://cdn4.iconfinder.com/data/icons/car-silhouettes/1000/sedan-512.png',
+    imageUrl: 'https://www.clipartmax.com/png/full/67-676413_free-e-commerce-icons-plain-white-t-shirts.png',
   ),
   Category(
     id: 'c4',
@@ -30,12 +30,12 @@ const DUMMY_CATEGORIES = const [
     id: 'c5',
     title: 'Healthy',
     color: Colors.white,
-    imageUrl: 'https://image.flaticon.com/icons/png/512/1995/1995296.png',
+    imageUrl: 'https://image.flaticon.com/icons/png/512/249/249187.png',
   ),
   Category(
     id: 'c6',
     title: 'Any',
     color: Colors.white,
-    imageUrl: 'https://cdn0.iconfinder.com/data/icons/job-seeker/256/notes_job_seeker_employee_unemployee_work-64.png',
+    imageUrl: 'https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/briefcase-512.png',
   ),
 ];

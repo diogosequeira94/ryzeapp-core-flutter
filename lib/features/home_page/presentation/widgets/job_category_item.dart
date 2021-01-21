@@ -9,32 +9,44 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(12.0),
-      onTap: (){},
-      child: Card(
-        child: Container(
-          padding: EdgeInsets.all(15.0),
-          child:
-          Column(
-            children: <Widget>[
-              Text(category.title),
-              SizedBox(height: 10.0),
-              Image.network(category.imageUrl,
-                  height: 40,
-                  width: double.infinity,
-                  fit: BoxFit.contain)
-            ],
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            gradient: LinearGradient(
-                colors:[
-                  category?.color?.withOpacity(0.5),
-                  category?.color
+    return Padding(
+      padding: const EdgeInsets.only(top: 4.0, left: 1.0, right: 1.0),
+      child: GestureDetector(
+        onTap: (){},
+        child: Material(
+          borderRadius: BorderRadius.circular(15.0),
+          elevation: 1.0,
+          child: Container(
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).cardColor.withOpacity(0.3),
+                    spreadRadius: 2.0,
+                    blurRadius: 3.0,
+                  ),
                 ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight
+                color: Theme.of(context).cardColor
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Container(
+                    child: Image.network(category.imageUrl,
+                        height: 50,
+                        width: double.infinity,
+                        fit: BoxFit.contain),
+                  ),
+                ),
+                Text(category.title,
+                  style: TextStyle(
+                    fontSize: 15.0,
+                  ),)
+              ],
             ),
           ),
         ),

@@ -8,7 +8,7 @@ class CategoriesGridWidget extends StatelessWidget {
       return GridView.count(
           primary: false,
           shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           crossAxisCount: 3,
