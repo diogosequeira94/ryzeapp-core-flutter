@@ -9,6 +9,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_pa
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_dismiss_background.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/news_carrousel_slider.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
+import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -198,7 +199,10 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.of(context).pushNamed('/job-hub', arguments: jobsList);
+                          Navigator.of(context).pushNamed('/job-hub', arguments: JobHubArguments(
+                            jobPostList: jobsList,
+                            jobsBloc: context.read<JobsBloc>(),
+                          ));
                         },
                       )
                     : SizedBox.shrink(),

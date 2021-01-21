@@ -37,7 +37,7 @@ class JobDetailPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(jobPost.imageUrl ??
-                        'https://static.wikia.nocookie.net/hitorijme-my-hero/images/c/c6/Image-placeholder.jpg/revision/latest?cb=20200207162338'),
+                        'https://play-lh.googleusercontent.com/Mcz7BCEGO4vs71T3RklGvQi2vJuzxjYt_ElnuLHIlk4kkshIf0Og-JXvwbCiZatRRACS'),
                     fit: BoxFit.cover,
                   ),
                 ),

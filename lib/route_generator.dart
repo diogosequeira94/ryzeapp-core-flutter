@@ -3,6 +3,7 @@ import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navi
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/bottom_nav_bar_widget.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_confirmation_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_hub_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
@@ -10,11 +11,19 @@ import 'package:firebaseblocryze/features/login/presentation/pages/password_rese
 import 'package:firebaseblocryze/features/login/presentation/pages/register_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/splash_page.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/explore/presentation/explore_overview_page.dart';
+
+class JobHubArguments {
+  final List<JobPost> jobPostList;
+  final JobsBloc jobsBloc;
+
+  JobHubArguments({this.jobPostList, this.jobsBloc});
+}
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -46,9 +55,13 @@ class RouteGenerator {
       case '/notifications':
         return MaterialPageRoute(builder: (_) => NotificationsPage());
       case '/job-hub':
-        return MaterialPageRoute(builder: (_) => JobHubPage(myJobsList: args));
+        return MaterialPageRoute(builder: (_) {
+          final JobHubArguments argument = args;
+          return JobHubPage(myJobsList: argument.jobPostList, jobsBloc: argument.jobsBloc);
+        });
       case '/job-confirmation-page':
-        return MaterialPageRoute(builder: (_) => JobConfirmationPage(jobPost: args));
+        return MaterialPageRoute(
+            builder: (_) => JobConfirmationPage(jobPost: args));
       default:
         return _errorRoute();
     }
