@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebaseblocryze/features/user_profile/model/user_profile_model.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ProfilePageHeaderWidget extends StatelessWidget {
               width: 150,
               height: 150,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1.2),
+                border: Border.all(color: Theme.of(context).textTheme.headline6.color, width: 1.2),
                 borderRadius: BorderRadius.circular(16.0),
               ),
               child: ClipRRect(
@@ -48,13 +49,16 @@ class ProfilePageHeaderWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.camera_alt, color: Theme.of(context).accentColor),
-                    SizedBox(width: 8),
-                    Icon(Icons.mail, color: Theme.of(context).accentColor),
-                    SizedBox(width: 8),
-                    Icon(Icons.add, color: Theme.of(context).accentColor),
+                    CachedNetworkImage(imageUrl: 'https://assets.stickpng.com/images/58e91afdeb97430e81906504.png', width: 24, height: 24, fit: BoxFit.cover),
+                    const SizedBox(width: 12.0),
+                    CachedNetworkImage(imageUrl: 'https://blueprint-api-production.s3.amazonaws.com/uploads/story/thumbnail/72606/948737b3-1919-47f7-b549-36da4f6a304e.png', width: 26, height: 26, fit: BoxFit.fill),
+                    const SizedBox(width: 12.0),
+                    CachedNetworkImage(imageUrl: 'https://cdn.iconscout.com/icon/free/png-512/apple-phone-2-493154.png', width: 26, height: 26, fit: BoxFit.fill),
+
                   ],
                 ),
               ],

@@ -29,7 +29,13 @@ class UserProfilePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProfilePageHeaderWidget(user: user),
-              SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, left: 6.0, right: 6.0),
+                child: Divider(
+                  color: Colors.grey[300],
+                  thickness: 2.0,
+                ),
+              ),
               ProfilePageSection(
                   title: UserProfileString.aboutSection, body: user.about),
               buildJobStatistics(),
