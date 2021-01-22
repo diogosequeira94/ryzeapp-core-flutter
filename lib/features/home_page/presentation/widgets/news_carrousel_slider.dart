@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +67,7 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             child: Stack(
               children: <Widget>[
-                Image.network(item, fit: BoxFit.cover, width: double.infinity),
+                CachedNetworkImage(imageUrl: item, fit: BoxFit.cover, width: double.infinity),
                 Positioned(
                   bottom: 0.0,
                   left: 0.0,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/explore/presentation/widgets/no_results_found_widget.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
@@ -14,7 +15,6 @@ class ExploreOverviewPage extends StatefulWidget {
 }
 
 class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
-
   @override
   Widget build(BuildContext context) {
     final _bottomNavBloc = context.watch<BottomNavigationBarBloc>();
@@ -37,11 +37,15 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           iconTheme: Theme.of(context).iconTheme,
-          title: Text('Explore', style: TextStyle(color: Theme.of(context).textTheme.headline6.color)),
+          title: Text('Explore',
+              style: TextStyle(
+                  color: Theme.of(context).textTheme.headline6.color)),
           actions: [
             IconButton(
               onPressed: () {
-                showSearch(context: context, delegate: ExploreModuleSearch(allJobsMock));
+                showSearch(
+                    context: context,
+                    delegate: ExploreModuleSearch(allJobsMock));
               },
               icon: Icon(Icons.search),
             ),
@@ -71,8 +75,11 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
             child: ListTile(
               leading: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(allJobsMock[index].imageUrl,
-                      width: 75, height: 75, fit: BoxFit.cover)),
+                  child: CachedNetworkImage(
+                      imageUrl: allJobsMock[index].imageUrl,
+                      width: 75,
+                      height: 75,
+                      fit: BoxFit.cover)),
               title: Text(allJobsMock[index].title),
               subtitle: Text(allJobsMock[index].city),
               trailing: Text(allJobsMock[index].hourRate),
