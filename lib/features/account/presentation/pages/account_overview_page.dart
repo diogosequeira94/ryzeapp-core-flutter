@@ -25,7 +25,7 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         iconTheme: Theme.of(context).iconTheme,
         title: Text(
-          'RyzeApp',
+          'My Account',
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
@@ -42,6 +42,7 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
+              margin: const EdgeInsets.symmetric(vertical: 4.0),
               elevation: 8.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
@@ -57,7 +58,9 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                   backgroundImage: NetworkImage(
                       'https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg'),
                 ),
-                trailing: Icon(Icons.edit),
+                trailing: Icon(
+                  Icons.keyboard_arrow_right,
+                ),
               ),
             ),
             Card(

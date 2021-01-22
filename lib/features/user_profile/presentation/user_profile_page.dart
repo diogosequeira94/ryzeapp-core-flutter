@@ -1,9 +1,9 @@
-import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/about_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/activity_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/education_section_tab.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_personal_info_section.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_section.dart';
 import 'package:flutter/material.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -19,7 +19,9 @@ class UserProfilePage extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.edit), onPressed: () {}),
+          IconButton(icon: Icon(Icons.edit), onPressed: () {
+            Navigator.of(context).pushNamed('/edit-profile');
+          }),
         ],
       ),
       body: SingleChildScrollView(
@@ -36,70 +38,44 @@ class UserProfilePage extends StatelessWidget {
                   thickness: 2.0,
                 ),
               ),
-              ProfilePageSection(
-                  title: UserProfileString.aboutSection, body: user.about),
-              buildJobStatistics(),
-              ProfilePagePersonalInfo(
-                  email: user.email,
-                  dateOfBirth: user.dateOfBirth,
-                  city: user.currentCity),
-              ProfilePageSection(
-                  title: UserProfileString.educationSection,
-                  body: HomePageStrings.dummyProfileSection),
-              ProfilePageSection(
-                  title: UserProfileString.skillsSection,
-                  body: HomePageStrings.dummyProfileSection),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 24.0),
-                child: ProfilePageSection(
-                    title: UserProfileString.attachmentsSection,
-                    body: HomePageStrings.dummyProfileSection),
-              ),
+              _TabsSection(),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget buildJobStatistics(){
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
+class _TabsSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            UserProfileString.statisticsSection,
-            style:
-            TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            child: TabBar(
+                labelColor: Theme.of(context).textTheme.headline6.color,
+                indicatorColor: Theme.of(context).accentColor,
+                tabs: [
+                  Tab(text: "ABOUT"),
+                  Tab(text: "EDUCATION"),
+                  Tab(text: "ACTIVITY"),
+                ]),
           ),
-          SizedBox(height: 4),
-          Text(
-            'Jobs Completed: 3',
-            style: TextStyle(fontSize: 14.0),
-          ),
-          SizedBox(height: 4),
-          Text(
-            'No shows: 0',
-            style: TextStyle(fontSize: 14.0),
-          ),
-          SizedBox(height: 4),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Average Performance:',
-                style: TextStyle(fontSize: 14.0),
-              ),
-              Icon(Icons.star, size: 18.0, color: Colors.amber),
-              Icon(Icons.star, size: 18.0, color: Colors.amber),
-              Icon(Icons.star, size: 18.0, color: Colors.amber),
-              Icon(Icons.star, size: 18.0, color: Colors.amber),
-              Icon(Icons.star, size: 18.0, color: Colors.amber),
-            ],
+          Container(
+            height: MediaQuery.of(context).size.height / 1.5,
+            child: TabBarView(children: [
+              AboutSectionTab(),
+              EducationSectionTab(),
+              ActivitySectionTab(),
+            ]),
           ),
         ],
       ),
     );
   }
 }
+

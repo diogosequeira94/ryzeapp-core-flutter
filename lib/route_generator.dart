@@ -11,6 +11,7 @@ import 'package:firebaseblocryze/features/login/presentation/pages/password_rese
 import 'package:firebaseblocryze/features/login/presentation/pages/register_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/splash_page.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/edit_information_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => PaymentFailedPage());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => NotificationsPage());
+      case '/edit-profile':
+        return MaterialPageRoute(builder: (_) => EditInformationPage());
       case '/job-hub':
         return MaterialPageRoute(builder: (_) {
           final JobHubArguments argument = args;

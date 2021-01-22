@@ -14,7 +14,7 @@ class ProfilePagePersonalInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
+      padding: const EdgeInsets.only(top: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,6 +43,13 @@ class ProfilePagePersonalInfo extends StatelessWidget {
             'Drivers Licence: Yes',
             style: TextStyle(fontSize: 14.0),
           ),
+          const SizedBox(height: 6),
+          Divider(
+            color: Colors.grey[300],
+            thickness: 2.0,
+            indent: 8.0,
+            endIndent: 8.0,
+          )
         ],
       ),
     );

@@ -1,5 +1,6 @@
 class UserProfileString {
   static const profileTitle = 'Profile';
+  static const editProfileTitle = 'Edit Profile';
   static const aboutSection = 'About';
   static const personalSection = 'Personal';
   static const statisticsSection = 'Job Statistics';
