@@ -24,7 +24,9 @@ class WalletPage extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.add), onPressed: () {}),
+          IconButton(icon: Icon(Icons.add), onPressed: () {
+            Navigator.of(context).pushNamed('/add-card');
+          }),
         ],
       ),
       body: SingleChildScrollView(

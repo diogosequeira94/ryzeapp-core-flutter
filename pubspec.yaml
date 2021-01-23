@@ -57,11 +57,13 @@ flutter:
      - assets/payment-error-01.png
      - assets/google-logo.png
      - assets/ryze-calendar-icon.png
+     - assets/creditcard/mastercard.png
+     - assets/creditcard/contact_less.png
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: CourrierPrime
+      fonts:
+        - asset: assets/fonts/CourierPrime-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

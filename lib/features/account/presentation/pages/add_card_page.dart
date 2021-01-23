@@ -2,7 +2,7 @@ import 'package:firebaseblocryze/features/account/utils/account_strings.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 
-class ChangePassword extends StatelessWidget {
+class AddCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +10,7 @@ class ChangePassword extends StatelessWidget {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         iconTheme: Theme.of(context).iconTheme,
         title: Text(
-          AccountStrings.changePasswordTitle,
+          AccountStrings.addCardTitle,
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
       ),
@@ -19,12 +19,13 @@ class ChangePassword extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              _CurrentPasswordInput(),
-              _NewPasswordInput(),
-              _ConfirmNewPasswordInput(),
+              _CardHolderInput(),
+              _CardNumberInput(),
+              _ExpiryDateInput(),
+              _CVV(),
               const SizedBox(height: 24.0),
               RyzePrimaryButton(
-                  title: AccountStrings.submitChangesBtn,
+                  title: AccountStrings.addCardBtn,
                   action: () => Navigator.pop(context),
                   isAffirmative: true),
               const SizedBox(height: 12.0),
@@ -36,7 +37,7 @@ class ChangePassword extends StatelessWidget {
   }
 }
 
-class _CurrentPasswordInput extends StatelessWidget {
+class _CardHolderInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,8 +49,8 @@ class _CurrentPasswordInput extends StatelessWidget {
           enabled: true,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            labelText: AccountStrings.currentPasswordLabel,
-            hintText: AccountStrings.currentPasswordHint,
+            labelText: AccountStrings.cardholderLabel,
+            hintText: AccountStrings.cardholderHint,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
@@ -59,20 +60,20 @@ class _CurrentPasswordInput extends StatelessWidget {
   }
 }
 
-class _NewPasswordInput extends StatelessWidget {
+class _CardNumberInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: TextFormField(
           autofocus: false,
-          maxLength: 50,
-          keyboardType: TextInputType.text,
+          maxLength: 16,
+          keyboardType: TextInputType.number,
           enabled: true,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            labelText: AccountStrings.newPasswordLabel,
-            hintText: AccountStrings.newPasswordHint,
+            labelText: AccountStrings.cardNumberLabel,
+            hintText: AccountStrings.cardNumberHint,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
@@ -82,7 +83,7 @@ class _NewPasswordInput extends StatelessWidget {
   }
 }
 
-class _ConfirmNewPasswordInput extends StatelessWidget {
+class _ExpiryDateInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -90,12 +91,34 @@ class _ConfirmNewPasswordInput extends StatelessWidget {
       child: TextFormField(
           autofocus: false,
           maxLength: 50,
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.number,
           enabled: true,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            labelText: AccountStrings.confirmPasswordLabel,
-            hintText: AccountStrings.confirmPasswordHint,
+            labelText: AccountStrings.expiryDateLabel,
+            hintText: AccountStrings.expiryDateHint,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+            ),
+          ),
+          onChanged: (description) => {}),
+    );
+  }
+}
+
+class _CVV extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: TextFormField(
+          autofocus: false,
+          maxLength: 3,
+          keyboardType: TextInputType.number,
+          enabled: true,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            labelText: AccountStrings.cvvLabel,
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
