@@ -61,7 +61,7 @@ class _CardHolderInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
             autofocus: false,
-            maxLength: 50,
+            maxLength: 20,
             keyboardType: TextInputType.text,
             enabled: true,
             textInputAction: TextInputAction.next,
