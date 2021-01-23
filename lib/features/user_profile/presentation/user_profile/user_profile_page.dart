@@ -1,6 +1,6 @@
-import 'package:firebaseblocryze/features/user_profile/presentation/about_section_tab.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/activity_section_tab.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/education_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/about_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/activity_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/education_section_tab.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';

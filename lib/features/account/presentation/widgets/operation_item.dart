@@ -8,34 +8,44 @@ class OperationItem extends StatelessWidget {
   const OperationItem({@required this.title, @required this.operationIcon});
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Card(
-        child: Container(
-          width: 120.0,
-          height: 80.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            color: Colors.white70,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              operationIcon,
-              const SizedBox(height: 8.0),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w700,
+    return Padding(
+      padding: const EdgeInsets.only(top: 4.0, right: 8.0),
+      child: GestureDetector(
+        onTap: () {},
+        child: Material(
+          borderRadius: BorderRadius.circular(15.0),
+          elevation: 1.0,
+          child: Container(
+            height: 120,
+            width: 120,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).cardColor.withOpacity(0.3),
+                    spreadRadius: 2.0,
+                    blurRadius: 3.0,
+                  ),
+                ],
+                color: Theme.of(context).cardColor),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Container(child: operationIcon),
                 ),
-              )
-            ],
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 15.0,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
-      onTap: () => Navigator.of(context).pushNamed('/payment-error'),
     );
   }
 }

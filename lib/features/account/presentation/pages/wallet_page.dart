@@ -145,13 +145,14 @@ class WalletPage extends StatelessWidget {
   Widget _recentActivity(BuildContext context) {
     final myJobsMock = ['Bartender', 'Cleaner', 'Bartender', 'Cleaner'];
     return Padding(
-      padding: const EdgeInsets.only(right: 4.0),
+      padding: const EdgeInsets.only(right: 8.0),
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: myJobsMock.length,
         itemBuilder: (context, index) {
           return Card(
+            margin: const EdgeInsets.symmetric(vertical: 4.0),
             child: ListTile(
               title: Text(myJobsMock[index]),
               subtitle: Text('28/12/2020'),

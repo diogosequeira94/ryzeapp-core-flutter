@@ -7,4 +7,9 @@ class UserProfileString {
   static const educationSection = 'Education';
   static const skillsSection = 'Skills';
   static const attachmentsSection = 'Attachments';
+
+  //Change password
+  static const changePasswordTitle = 'Change Password';
+  static const submitChangesBtn = 'Submit Changes';
+
 }

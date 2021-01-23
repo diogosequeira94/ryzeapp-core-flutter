@@ -5,14 +5,17 @@ class OperationsSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var operations = _buildOperationsList();
-    return Container(
-      height: 120,
-      child: ListView.builder(
-          itemCount: operations.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return operations[index];
-          }),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 3.0),
+      child: Container(
+        height: 120,
+        child: ListView.builder(
+            itemCount: operations.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return operations[index];
+            }),
+      ),
     );
   }
 
