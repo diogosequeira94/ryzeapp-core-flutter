@@ -1,7 +1,10 @@
+import 'package:firebaseblocryze/features/account/cubit/add_card_form_cubit.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/credit_card_widget.dart';
 import 'package:firebaseblocryze/features/account/utils/account_strings.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AddCardPage extends StatelessWidget {
   @override
@@ -20,12 +23,16 @@ class AddCardPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: CreditCardWidget(
-                    cardNumber: 'XXXX XXXX XXXX XXXX',
-                    cardHolder: 'Walter White',
-                    cardExpirationDate: '04/2030'),
+              BlocBuilder<AddCardFormCubit, AddCardFormState>(
+                builder: (context, state) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: CreditCardWidget(
+                        cardNumber: state.cardNumber.value,
+                        cardHolder: state.cardholder.value,
+                        cardExpirationDate: state.expiryDate.value),
+                  );
+                },
               ),
               _CardHolderInput(),
               _CardNumberInput(),
@@ -48,45 +55,61 @@ class AddCardPage extends StatelessWidget {
 class _CardHolderInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: TextFormField(
-          autofocus: false,
-          maxLength: 50,
-          keyboardType: TextInputType.text,
-          enabled: true,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            labelText: AccountStrings.cardholderLabel,
-            hintText: AccountStrings.cardholderHint,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+    return BlocBuilder<AddCardFormCubit, AddCardFormState>(
+        builder: (context, state) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: TextFormField(
+            autofocus: false,
+            maxLength: 50,
+            keyboardType: TextInputType.text,
+            enabled: true,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              labelText: AccountStrings.cardholderLabel,
+              hintText: AccountStrings.cardholderHint,
+              errorText: state.cardholder.invalid ? 'Invalid Cardholder' : null,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              ),
             ),
-          ),
-          onChanged: (description) => {}),
-    );
+            onChanged: (cardholder) {
+              context.read<AddCardFormCubit>().cardholderChanged(cardholder);
+            }),
+      );
+    });
   }
 }
 
 class _CardNumberInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: TextFormField(
-          autofocus: false,
-          maxLength: 16,
-          keyboardType: TextInputType.number,
-          enabled: true,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            labelText: AccountStrings.cardNumberLabel,
-            hintText: AccountStrings.cardNumberHint,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
-            ),
-          ),
-          onChanged: (description) => {}),
+    final cardNumberMaskFormatter = new MaskTextInputFormatter(mask: '#### #### #### ####', filter: { "#": RegExp(r'[0-9]') });
+    return BlocBuilder<AddCardFormCubit, AddCardFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: TextFormField(
+            inputFormatters: [cardNumberMaskFormatter],
+              autofocus: false,
+              maxLength: 20,
+              keyboardType: TextInputType.number,
+              enabled: true,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                labelText: AccountStrings.cardNumberLabel,
+                hintText: AccountStrings.cardNumberHint,
+                errorText:
+                    state.cardNumber.invalid ? 'Invalid CardNumber' : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+                ),
+              ),
+              onChanged: (cardNumber) {
+                context.read<AddCardFormCubit>().cardNumberChanged(cardNumber);
+              }),
+        );
+      },
     );
   }
 }
@@ -94,22 +117,32 @@ class _CardNumberInput extends StatelessWidget {
 class _ExpiryDateInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: TextFormField(
-          autofocus: false,
-          maxLength: 7,
-          keyboardType: TextInputType.number,
-          enabled: true,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            labelText: AccountStrings.expiryDateLabel,
-            hintText: AccountStrings.expiryDateHint,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
-            ),
-          ),
-          onChanged: (description) => {}),
+    final expiryDateMaskFormatter = new MaskTextInputFormatter(mask: '##/##', filter: { "#": RegExp(r'[0-9]') });
+    return BlocBuilder<AddCardFormCubit, AddCardFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: TextFormField(
+            inputFormatters: [expiryDateMaskFormatter],
+              autofocus: false,
+              maxLength: 5,
+              keyboardType: TextInputType.number,
+              enabled: true,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                labelText: AccountStrings.expiryDateLabel,
+                hintText: AccountStrings.expiryDateHint,
+                errorText:
+                    state.cardNumber.invalid ? 'Invalid ExpiryDate' : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+                ),
+              ),
+              onChanged: (expiryDate) {
+                context.read<AddCardFormCubit>().expiryDateChanged(expiryDate);
+              }),
+        );
+      },
     );
   }
 }
@@ -117,21 +150,31 @@ class _ExpiryDateInput extends StatelessWidget {
 class _CVV extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: TextFormField(
-          autofocus: false,
-          maxLength: 3,
-          keyboardType: TextInputType.number,
-          enabled: true,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            labelText: AccountStrings.cvvLabel,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
-            ),
-          ),
-          onChanged: (description) => {}),
+    return BlocBuilder<AddCardFormCubit, AddCardFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: TextFormField(
+              autofocus: false,
+              maxLength: 3,
+              obscureText: true,
+              keyboardType: TextInputType.number,
+              enabled: true,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                labelText: AccountStrings.cvvLabel,
+                errorText: state.cardNumber.invalid
+                    ? 'CVV needs to be exactly 3 digits'
+                    : null,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+                ),
+              ),
+              onChanged: (cvv) {
+                context.read<AddCardFormCubit>().cvvChanged(cvv);
+              }),
+        );
+      },
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebaseblocryze/features/account/cubit/add_card_form_cubit.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/add_card_page.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/change_password_page.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/error/payment_failed_page.dart';
@@ -62,7 +63,9 @@ class RouteGenerator {
       case '/change-password':
         return MaterialPageRoute(builder: (_) => ChangePassword());
       case '/add-card':
-        return MaterialPageRoute(builder: (_) => AddCardPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (_) => AddCardFormCubit(), child: AddCardPage()));
       case '/job-hub':
         return MaterialPageRoute(builder: (_) {
           final JobHubArguments argument = args;
