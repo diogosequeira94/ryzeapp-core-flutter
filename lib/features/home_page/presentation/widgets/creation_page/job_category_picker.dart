@@ -10,7 +10,7 @@ class _JobCategoryPickerState extends State<JobCategoryPicker> {
   var jobCategoryTitles = [
     'Bar',
     'Multi-Language',
-    'Driver',
+    'Education',
     'Healthy',
     'Hospitality',
     'Other',

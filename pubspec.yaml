@@ -57,6 +57,7 @@ flutter:
      - assets/onboarding-02.jpg
      - assets/payment-error-01.png
      - assets/google-logo.png
+     - assets/ryze-placeholder-category.png
      - assets/ryze-calendar-icon.png
      - assets/creditcard/mastercard.png
      - assets/creditcard/contact_less.png

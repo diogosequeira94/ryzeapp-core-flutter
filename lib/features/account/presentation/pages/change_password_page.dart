@@ -22,7 +22,7 @@ class ChangePassword extends StatelessWidget {
               _CurrentPasswordInput(),
               _NewPasswordInput(),
               _ConfirmNewPasswordInput(),
-              const SizedBox(height: 24.0),
+              const SizedBox(height: 42.0),
               RyzePrimaryButton(
                   title: AccountStrings.submitChangesBtn,
                   action: () => Navigator.pop(context),

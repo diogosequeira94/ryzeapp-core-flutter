@@ -34,11 +34,16 @@ class CategoryItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(5.0),
                   child: Container(
-                    child: CachedNetworkImage(
-                        imageUrl: category.imageUrl,
-                        height: 50,
-                        width: double.infinity,
-                        fit: BoxFit.contain),
+                    child: category.imageUrl == null
+                        ? Image.asset('assets/ryze-placeholder-category.png',
+                            height: 51,
+                            width: double.infinity,
+                            fit: BoxFit.contain)
+                        : CachedNetworkImage(
+                            imageUrl: category.imageUrl,
+                            height: 50,
+                            width: double.infinity,
+                            fit: BoxFit.contain),
                   ),
                 ),
                 Text(
