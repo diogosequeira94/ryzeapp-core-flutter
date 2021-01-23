@@ -125,7 +125,7 @@ class _ExpiryDateInput extends StatelessWidget {
           child: TextFormField(
             inputFormatters: [expiryDateMaskFormatter],
               autofocus: false,
-              maxLength: 5,
+              maxLength: 7,
               keyboardType: TextInputType.number,
               enabled: true,
               textInputAction: TextInputAction.next,
@@ -133,7 +133,7 @@ class _ExpiryDateInput extends StatelessWidget {
                 labelText: AccountStrings.expiryDateLabel,
                 hintText: AccountStrings.expiryDateHint,
                 errorText:
-                    state.cardNumber.invalid ? 'Invalid ExpiryDate' : null,
+                    state.expiryDate.invalid ? 'Invalid ExpiryDate' : null,
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
                 ),
@@ -163,7 +163,7 @@ class _CVV extends StatelessWidget {
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: AccountStrings.cvvLabel,
-                errorText: state.cardNumber.invalid
+                errorText: state.cvv.invalid
                     ? 'CVV needs to be exactly 3 digits'
                     : null,
                 border: OutlineInputBorder(

@@ -4,7 +4,7 @@ enum ExpiryDateValidationError { invalid }
 
 class ExpiryDate extends FormzInput<String, ExpiryDateValidationError> {
   final minLength = 5;
-  const ExpiryDate.pure() : super.pure('03/24');
+  const ExpiryDate.pure() : super.pure('03/2024');
   const ExpiryDate.dirty([String value = '']) : super.dirty(value);
 
   @override

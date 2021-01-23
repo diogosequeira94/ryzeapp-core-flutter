@@ -16,9 +16,9 @@ const DUMMY_CATEGORIES = const [
   ),
   Category(
     id: 'c3',
-    title: 'Driver',
+    title: 'Education',
     color: Colors.white,
-    imageUrl: 'https://www.clipartmax.com/png/full/67-676413_free-e-commerce-icons-plain-white-t-shirts.png',
+    imageUrl: 'https://www.afabc.org/wp-content/uploads/2016/07/Graduation-Icon.png',
   ),
   Category(
     id: 'c4',
