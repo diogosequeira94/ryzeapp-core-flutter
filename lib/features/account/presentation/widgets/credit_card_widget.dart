@@ -5,13 +5,16 @@ class CreditCardWidget extends StatelessWidget {
   final String cardNumber;
   final String cardHolder;
   final String cardExpirationDate;
+  final Color cardColor;
   CreditCardWidget(
       {@required this.cardNumber,
       @required this.cardHolder,
-      @required this.cardExpirationDate});
+      @required this.cardExpirationDate,
+      this.cardColor = Colors.black});
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: cardColor,
       elevation: 4.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
       child: Container(
@@ -32,16 +35,19 @@ class CreditCardWidget extends StatelessWidget {
                     fontFamily: 'CourrierPrime'),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                _buildDetailsBlock(
-                  label: 'CARDHOLDER',
-                  value: cardHolder,
-                ),
-                _buildDetailsBlock(
-                    label: 'VALID UNTIL', value: cardExpirationDate),
-              ],
+            IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  _buildDetailsBlock(
+                    label: 'CARDHOLDER',
+                    value: cardHolder,
+                  ),
+                  _buildDetailsBlock(
+                      label: 'VALID UNTIL', value: cardExpirationDate),
+                ],
+              ),
             ),
           ],
         ),
@@ -49,18 +55,17 @@ class CreditCardWidget extends StatelessWidget {
     );
   }
 
-  // Build the top row containing logos
   Row _buildLogosBlock() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Image.asset(
-          "assets/images/contact_less.png",
+          "assets/creditcard/contact_less.png",
           height: 20,
           width: 18,
         ),
         Image.asset(
-          "assets/images/mastercard.png",
+          "assets/creditcard/mastercard.png",
           height: 50,
           width: 50,
         ),
@@ -68,7 +73,6 @@ class CreditCardWidget extends StatelessWidget {
     );
   }
 
-// Build Column containing the cardholder and expiration information
   Column _buildDetailsBlock({@required String label, @required String value}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

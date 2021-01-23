@@ -4,42 +4,36 @@ class CardModel {
   String cardExpired;
   String cardType;
   int cardBackground;
-  String cardElementTop;
-  String cardElementBottom;
 
   CardModel(this.user, this.cardNumber, this.cardExpired, this.cardType,
-      this.cardBackground, this.cardElementTop, this.cardElementBottom);
+      this.cardBackground);
 }
 
-List<CardModel> cards = cardData.map(
+List<CardModel> cards = cardData
+    .map(
       (item) => CardModel(
-    item['user'],
-    item['cardNumber'],
-    item['cardExpired'],
-    item['cardType'],
-    item['cardBackground'],
-    item['cardElementTop'],
-    item['cardElementBottom'],
-  ),
-).toList();
+        item['user'],
+        item['cardNumber'],
+        item['cardExpired'],
+        item['cardType'],
+        item['cardBackground'],
+      ),
+    )
+    .toList();
 
 var cardData = [
   {
     "user": "Walter White",
     "cardNumber": "**** **** **** 1425",
-    "cardExpired": "03-01-2023",
+    "cardExpired": "03/2030",
     "cardType": "assets/mastercard_logo.png",
     "cardBackground": 0xFF1E1E99,
-    "cardElementTop": "assets/svg/ellipse_top_pink.svg",
-    "cardElementBottom": "assets/svg/ellipse_bottom_pink.svg"
   },
   {
     "user": "Uncle Hank",
     "cardNumber": "**** **** **** 8287",
-    "cardExpired": "04-06-2025",
+    "cardExpired": "04/2027",
     "cardType": "assets/mastercard_logo.png",
     "cardBackground": 0xFFFF70A3,
-    "cardElementTop": "assets/svg/ellipse_top_blue.svg",
-    "cardElementBottom": "assets/svg/ellipse_bottom_blue.svg"
   }
 ];

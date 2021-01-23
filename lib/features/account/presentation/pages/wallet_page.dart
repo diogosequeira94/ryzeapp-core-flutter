@@ -1,4 +1,5 @@
 import 'package:firebaseblocryze/features/account/model/card_model.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/credit_card_widget.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/operations_slider.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/section_header_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,11 @@ class WalletPage extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.add), onPressed: () {
-            Navigator.of(context).pushNamed('/add-card');
-          }),
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/add-card');
+              }),
         ],
       ),
       body: SingleChildScrollView(
@@ -58,76 +61,14 @@ class WalletPage extends StatelessWidget {
                       itemCount: cards.length,
                       itemBuilder: (context, index) {
                         return Container(
-                          margin: EdgeInsets.only(right: 8.0),
                           height: 200,
-                          width: 350,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(28.0),
-                              color: Color(cards[index].cardBackground)),
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                  left: 30.0,
-                                  top: 48.0,
-                                  child: Text(
-                                    'Card Number',
-                                    style: TextStyle(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  )),
-                              Positioned(
-                                  left: 30.0,
-                                  top: 65.0,
-                                  child: Text(
-                                    cards[index].cardNumber,
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white),
-                                  )),
-                              Positioned(
-                                  left: 30.0,
-                                  bottom: 45.0,
-                                  child: Text(
-                                    'Cardholder Name',
-                                    style: TextStyle(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  )),
-                              Positioned(
-                                  left: 30.0,
-                                  bottom: 22.0,
-                                  child: Text(
-                                    cards[index].user,
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white),
-                                  )),
-                              Positioned(
-                                  left: 202.0,
-                                  bottom: 45.0,
-                                  child: Text(
-                                    'Expiry date',
-                                    style: TextStyle(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  )),
-                              Positioned(
-                                  left: 202.0,
-                                  bottom: 22.0,
-                                  child: Text(
-                                    cards[index].cardExpired,
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white),
-                                  )),
-                            ],
-                          ),
+                          width: 320,
+                          child: CreditCardWidget(
+                              cardNumber: cards[index].cardNumber,
+                              cardHolder: cards[index].user,
+                              cardExpirationDate: cards[index].cardExpired,
+                              cardColor:
+                                  index % 2 == 0 ? Colors.blue : Colors.black),
                         );
                       }),
                 ),
