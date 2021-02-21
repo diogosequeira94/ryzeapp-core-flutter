@@ -1,3 +1,4 @@
+import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_personal_info_section.dart';
@@ -17,6 +18,9 @@ class AboutSectionTab extends StatelessWidget {
             email: user.email,
             dateOfBirth: user.dateOfBirth,
             city: user.currentCity),
+        ProfilePageSection(
+            title: UserProfileString.skillsSection,
+            body: HomePageStrings.dummyProfileSection),
       ],
     );
   }

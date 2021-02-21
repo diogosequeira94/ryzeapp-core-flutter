@@ -14,9 +14,6 @@ class EducationSectionTab extends StatelessWidget {
         ProfilePageSection(
             title: UserProfileString.educationSection,
             body: HomePageStrings.dummyProfileSection),
-        ProfilePageSection(
-            title: UserProfileString.skillsSection,
-            body: HomePageStrings.dummyProfileSection),
         Padding(
           padding: const EdgeInsets.only(bottom: 24.0),
           child: ProfilePageSection(
