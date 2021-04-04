@@ -3,6 +3,7 @@ import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_personal_info_section.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_section.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/skills_section.dart';
 import 'package:flutter/material.dart';
 
 class AboutSectionTab extends StatelessWidget {
@@ -19,8 +20,10 @@ class AboutSectionTab extends StatelessWidget {
             dateOfBirth: user.dateOfBirth,
             city: user.currentCity),
         ProfilePageSection(
-            title: UserProfileString.skillsSection,
-            body: HomePageStrings.dummyProfileSection),
+          title: UserProfileString.skillsSection,
+          body: HomePageStrings.dummyProfileSection,
+          widget: SkillTagsSection(),
+        ),
       ],
     );
   }

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class ProfilePageSection extends StatelessWidget {
   final String title;
   final String body;
+  final Widget widget;
   final bool hasDivider;
 
   ProfilePageSection({
     @required this.title,
     @required this.body,
+    this.widget,
     this.hasDivider = true,
   });
 
@@ -27,6 +29,8 @@ class ProfilePageSection extends StatelessWidget {
             body,
             style: TextStyle(fontSize: 14.0),
           ),
+          const SizedBox(height: 6),
+          widget,
           const SizedBox(height: 6),
           hasDivider
               ? Divider(
