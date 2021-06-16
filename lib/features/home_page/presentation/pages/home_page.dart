@@ -32,6 +32,11 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushNamed('/notifications');
               }),
+          IconButton(
+              icon: Icon(Icons.chat_outlined),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/messages');
+              }),
         ],
       ),
       body: BlocConsumer<JobsBloc, JobsState>(

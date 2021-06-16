@@ -154,6 +154,35 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
+            SectionHeader(title: 'F.A.Q'),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                'How to Start you first job',
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                'How to Start you first job',
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                'Check-in and Checkout',
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                'Currently you have no active plans.',
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
             SizedBox(height: 24.0),
             BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
               return RyzePrimaryButton(

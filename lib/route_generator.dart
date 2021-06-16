@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/account/presentation/pages/change_pass
 import 'package:firebaseblocryze/features/account/presentation/pages/error/payment_failed_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/bottom_nav_bar_widget.dart';
+import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/chat_messages_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
@@ -58,6 +59,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => PaymentFailedPage());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => NotificationsPage());
+      case '/messages':
+        return MaterialPageRoute(builder: (_) => ChatMessagesPage());
       case '/edit-profile':
         return MaterialPageRoute(builder: (_) => EditInformationPage());
       case '/change-password':
