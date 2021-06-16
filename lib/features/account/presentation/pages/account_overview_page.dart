@@ -34,6 +34,11 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
               onPressed: () {
                 Navigator.of(context).pushNamed('/notifications');
               }),
+          IconButton(
+              icon: Icon(Icons.chat_outlined),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/messages');
+              }),
         ],
       ),
       body: SingleChildScrollView(
@@ -148,40 +153,32 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
             ),
             SectionHeader(title: 'Premium'),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
                 'Currently you have no active plans.',
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
             SectionHeader(title: 'F.A.Q'),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'How to Start you first job',
-                style: TextStyle(fontSize: 16.0),
-              ),
+            ListTile(
+              title: Text('How to start your first job'),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'How to Start you first job',
-                style: TextStyle(fontSize: 16.0),
-              ),
+            ListTile(
+              title: Text('Do I need an Insurance?'),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'Check-in and Checkout',
-                style: TextStyle(fontSize: 16.0),
-              ),
+            ListTile(
+              title: Text('Check-in and Checkout'),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {},
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'Currently you have no active plans.',
-                style: TextStyle(fontSize: 16.0),
-              ),
+            ListTile(
+              title: Text('Terms of Contract'),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {},
             ),
             SizedBox(height: 24.0),
             BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {

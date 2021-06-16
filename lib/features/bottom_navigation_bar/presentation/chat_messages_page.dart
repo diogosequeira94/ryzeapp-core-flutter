@@ -16,24 +16,19 @@ class ChatMessagesPage extends StatelessWidget {
             style:
                 TextStyle(color: Theme.of(context).textTheme.headline6.color)),
       ),
-      body: _buildNotificationDummy(),
-    );
-  }
-
-  _buildNotificationDummy() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(Icons.message_outlined, size: 80, color: Colors.black45),
-          const SizedBox(height: 24.0),
-          Text('You have no messages or chats.',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center),
-          const SizedBox(height: 8.0),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.message_outlined, size: 80, color: Colors.black45),
+            const SizedBox(height: 24.0),
+            Text('You have no messages or chats.',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center),
+            const SizedBox(height: 8.0),
+          ],
+        ),
       ),
     );
   }
