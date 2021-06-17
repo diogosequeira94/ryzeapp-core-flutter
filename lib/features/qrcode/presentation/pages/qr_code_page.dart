@@ -16,43 +16,40 @@ class QrCodePage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                QrImage(
-                  data: "Data: JobId, JobTitle, UserId",
-                  version: 3,
-                  size: 250.0,
-                ),
-                const SizedBox(height: 15.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(children: [
-                    Icon(Icons.info_outline),
-                    SizedBox(width: 5.0),
-                    Expanded(child: Text('Upon arrival, ask your employer to scan the QR Code')),
-                  ],
-                  ),
-                ),
-                const SizedBox(height: 60.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: RyzePrimaryButton(
-                      title: 'Click to Scan',
-                      action: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => QRCodeReader()),
-                        );
-                      },
-                      isAffirmative: true),
-                ),
-              ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 80.0),
+            QrImage(
+              data: "Data: JobId, JobTitle, UserId",
+              version: 3,
+              size: 250.0,
             ),
-          ),
+            const SizedBox(height: 15.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(children: [
+                Icon(Icons.info_outline),
+                SizedBox(width: 5.0),
+                Expanded(child: Text('Upon arrival, ask your employer to scan the QR Code')),
+              ],
+              ),
+            ),
+            const SizedBox(height: 60.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: RyzePrimaryButton(
+                  title: 'Click to Scan',
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => QRCodeReader()),
+                    );
+                  },
+                  isAffirmative: true),
+            ),
+          ],
         ),
       ),
     );
