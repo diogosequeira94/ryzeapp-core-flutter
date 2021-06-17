@@ -108,13 +108,19 @@ class JobConfirmationPage extends StatelessWidget {
             const SizedBox(height: 10.0),
             RyzePrimaryButton(
                 title: 'Check In',
-                action: () => Navigator.pop(context),
+                action: () {
+                  Navigator.popAndPushNamed(
+                    context,
+                    '/qrcode-generator',
+                  );
+                },
                 isAffirmative: true),
             const SizedBox(height: 12.0),
             RyzePrimaryButton(
-                title: 'Cancel Job',
-                action: () => Navigator.pop(context),
-                isAffirmative: false),
+              title: 'Cancel Job',
+              action: () => Navigator.pop(context),
+              isAffirmative: false,
+            ),
             const SizedBox(height: 26.0),
           ],
         ),

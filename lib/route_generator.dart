@@ -15,6 +15,7 @@ import 'package:firebaseblocryze/features/login/presentation/pages/password_rese
 import 'package:firebaseblocryze/features/login/presentation/pages/register_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/splash_page.dart';
+import 'package:firebaseblocryze/features/qrcode/presentation/pages/qr_code_page.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/edit_information_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,6 +66,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => EditInformationPage());
       case '/change-password':
         return MaterialPageRoute(builder: (_) => ChangePassword());
+      case '/qrcode-generator':
+        return MaterialPageRoute(builder: (_) => QrCodePage());
       case '/add-card':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
