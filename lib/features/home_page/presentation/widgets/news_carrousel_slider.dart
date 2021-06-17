@@ -28,6 +28,7 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
               items: imageSliders(),
               options: CarouselOptions(
                   autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 6),
                   viewportFraction: 1.0,
                   enlargeCenterPage: false,
                   aspectRatio: 2.3,
