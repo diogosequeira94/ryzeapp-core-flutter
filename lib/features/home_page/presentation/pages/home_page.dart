@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_creation_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/covid_pandemic_alert.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_categories_grid.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_dismiss_background.dart';
@@ -72,6 +73,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   NewsCarouselSliderWidget(),
+                  CovidPandemicAlert(showAlert: true),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),

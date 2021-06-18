@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:firebaseblocryze/features/explore/presentation/widgets/categories_horizontal_list.dart';
 import 'package:firebaseblocryze/features/explore/presentation/widgets/no_results_found_widget.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
@@ -61,51 +62,70 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
         ),
         body: SingleChildScrollView(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            HomePageSectionHeader(
-              title: 'Job Categories',
-              edgeInsets: const EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 6.0),
-            ),
-            CategoriesGridWidget(),
-            Text('${allJobsMock.length.toString()} jobs found'),
+            _jobCategoriesSection(),
             _allJobPosts(allJobsMock, context),
           ],
         )) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 
+  Widget _jobCategoriesSection(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        HomePageSectionHeader(
+          title: 'Job Categories',
+        ),
+        Container(
+            height: 100.0,
+            child: CategoriesHorizontalListWidget()),
+      ],
+    );
+  }
+
   Widget _allJobPosts(List<JobPost> allJobsMock, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: allJobsMock.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: CachedNetworkImage(
-                      imageUrl: allJobsMock[index].imageUrl,
-                      width: 75,
-                      height: 75,
-                      fit: BoxFit.cover)),
-              title: Text(allJobsMock[index].title),
-              subtitle: Text(allJobsMock[index].city),
-              trailing: Text(allJobsMock[index].hourRate),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => JobDetailPage(
-                              jobPost: allJobsMock[index],
-                            )));
-              },
-            ),
-          );
-        },
+      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
+            child: Text('${allJobsMock.length.toString()} Jobs found'),
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: allJobsMock.length,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: CachedNetworkImage(
+                          imageUrl: allJobsMock[index].imageUrl,
+                          width: 75,
+                          height: 75,
+                          fit: BoxFit.cover)),
+                  title: Text(allJobsMock[index].title),
+                  subtitle: Text(allJobsMock[index].city),
+                  trailing: Text(allJobsMock[index].hourRate),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => JobDetailPage(
+                                  jobPost: allJobsMock[index],
+                                )));
+                  },
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
