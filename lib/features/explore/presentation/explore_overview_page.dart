@@ -6,6 +6,8 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detai
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_categories_grid.dart';
 
 class ExploreOverviewPage extends StatefulWidget {
   ExploreOverviewPage({Key key}) : super(key: key);
@@ -58,8 +60,18 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           ],
         ),
         body: SingleChildScrollView(
-            child: _allJobPosts(allJobsMock,
-                context)) // This trailing comma makes auto-formatting nicer for build methods.
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            HomePageSectionHeader(
+              title: 'Job Categories',
+              edgeInsets: const EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 6.0),
+            ),
+            CategoriesGridWidget(),
+            Text('${allJobsMock.length.toString()} jobs found'),
+            _allJobPosts(allJobsMock, context),
+          ],
+        )) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 
