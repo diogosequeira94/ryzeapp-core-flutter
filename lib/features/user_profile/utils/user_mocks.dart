@@ -4,14 +4,14 @@ import 'package:firebaseblocryze/features/user_profile/model/user_profile_model.
 class UserMocks {
   static UserProfileModel getMockUser() {
     return UserProfileModel(
-        name: 'Walter White',
-        jobTitle: 'Meth Professor',
+        name: 'Diogo Sequeira',
+        jobTitle: 'Software Programmer',
         profilePic:
-            'https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQU03HNQk4dsJUHxDwZuJaAPI164FWc6wjg&usqp=CAU',
         about: HomePageStrings.dummyProfileSection +
             HomePageStrings.dummyProfileSection,
-    email: 'bluemethdealer@gmail.com',
-    currentCity: 'Albuquerque ',
-    dateOfBirth: '6/5/1956');
+    email: 'diogocnsequeira@gmail.com',
+    currentCity: 'Lisbon ',
+    dateOfBirth: '6/5/1994');
   }
 }

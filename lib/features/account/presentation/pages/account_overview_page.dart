@@ -63,13 +63,13 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                       );
                     },
                     title: Text(
-                      'Walter White',
+                      'Diogo Sequeira',
                       style: TextStyle(fontSize: 18.0),
                     ),
                     leading: CircleAvatar(
                       radius: 30.0,
                       backgroundImage: NetworkImage(
-                          'https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg'),
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQU03HNQk4dsJUHxDwZuJaAPI164FWc6wjg&usqp=CAU'),
                     ),
                     trailing: Icon(
                       Icons.keyboard_arrow_right,
