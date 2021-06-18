@@ -46,25 +46,35 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              margin: const EdgeInsets.symmetric(vertical: 4.0),
-              elevation: 8.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UserProfilePage()),
-                  );
-                },
-                title: Text('Walter White'),
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg'),
-                ),
-                trailing: Icon(
-                  Icons.keyboard_arrow_right,
+            SizedBox(
+              height: 100.0,
+              child: Card(
+                margin: const EdgeInsets.symmetric(vertical: 2.0),
+                elevation: 8.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Center(
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UserProfilePage()),
+                      );
+                    },
+                    title: Text(
+                      'Walter White',
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    leading: CircleAvatar(
+                      radius: 30.0,
+                      backgroundImage: NetworkImage(
+                          'https://i.insider.com/5dade9bc045a3139e8686c33?width=1136&format=jpeg'),
+                    ),
+                    trailing: Icon(
+                      Icons.keyboard_arrow_right,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -89,7 +99,8 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                     leading: Icon(Icons.lock_outline),
                     title: Text('Change Password'),
                     trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () => Navigator.of(context).pushNamed('/change-password'),
+                    onTap: () =>
+                        Navigator.of(context).pushNamed('/change-password'),
                   ),
                   HorizontalDivider(),
                   ListTile(
