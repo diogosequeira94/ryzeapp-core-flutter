@@ -32,7 +32,7 @@ class UserProfilePage extends StatelessWidget {
             children: [
               ProfilePageHeaderWidget(user: user),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0, left: 6.0, right: 6.0),
+                padding: const EdgeInsets.only(left: 6.0, right: 6.0),
                 child: Divider(
                   color: Colors.grey[300],
                   thickness: 2.0,

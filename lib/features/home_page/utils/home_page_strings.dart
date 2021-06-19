@@ -10,5 +10,5 @@ class HomePageStrings {
 
   //JobPost
   static const String dummyJobDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros,pulvinar facilisis justo mollis, auctor consequat urna. Morbi a bibendum metus.Donec scelerisque sollicitudin enim eu venenatis. Duis tincidunt laoreet ex, in pretium orci vestibulum eget. Class aptent taciti sociosqu ad litora torquentper conubia nostra, per inceptos himenaeos. Duis pharetra luctus lacus utvestibulum. Maecenas ipsum lacus, lacinia quis posuere ut, pulvinar vitae dolor.Integer eu nibh at nisi ullamcorper sagittis id vel leo.';
-  static const String dummyProfileSection = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros,pulvinar facilisis justo mollis, auctor consequat urna.';
+  static const String dummyProfileSection = 'I am a motivated worker always striving to do my best in everything I do. I have worked 4 years in Hospitality, before making a career shift to become a Mobile Software Developer!';
 }

@@ -8,8 +8,7 @@ class UserMocks {
         jobTitle: 'Software Programmer',
         profilePic:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQU03HNQk4dsJUHxDwZuJaAPI164FWc6wjg&usqp=CAU',
-        about: HomePageStrings.dummyProfileSection +
-            HomePageStrings.dummyProfileSection,
+        about: HomePageStrings.dummyProfileSection,
     email: 'diogocnsequeira@gmail.com',
     currentCity: 'Lisbon ',
     dateOfBirth: '6/5/1994');
