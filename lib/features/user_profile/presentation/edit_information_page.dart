@@ -2,6 +2,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_
 import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/date_of_birth_picker.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_section.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
@@ -36,9 +37,9 @@ class EditInformationPage extends StatelessWidget {
                 ),
               ),
               _AboutInput(),
+              DateOfBirthPicker(),
               _CityInput(),
               _PhoneNumberInput(),
-
               _EducationInput(),
               _SkillsInput(),
               Padding(
@@ -194,7 +195,7 @@ class _PhoneNumberInput extends StatelessWidget {
             borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
           ),
         ),
-        onChanged: (city) => context.read<JobFormCubit>().cityChanged(city),
+        onChanged: (city){},
       ),
     );
   }

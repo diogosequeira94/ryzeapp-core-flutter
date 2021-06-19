@@ -8,13 +8,15 @@ class ActivitySectionTab extends StatelessWidget {
   final user = UserMocks.getMockUser();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        JobStatistics(),
-        ProfileJobActivity(),
-        ProfileReviews(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          JobStatistics(),
+          ProfileJobActivity(),
+          ProfileReviews(),
+        ],
+      ),
     );
   }
 }
