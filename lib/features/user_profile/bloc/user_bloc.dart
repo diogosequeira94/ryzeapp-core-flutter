@@ -45,7 +45,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return;
     }
 
-    print('######### User Profile Data in BLoc: $_userProfile');
+    print('######### User Profile Data in BLoc: ${_userProfile.toJson().toString()}');
     yield UserLoadSuccess(userProfile: _userProfile);
   }
 }

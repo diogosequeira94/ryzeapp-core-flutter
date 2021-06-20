@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'note_failure.dart';
 
@@ -9,68 +9,77 @@ part of 'note_failure.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$NoteFailureTearOff {
   const _$NoteFailureTearOff();
 
+// ignore: unused_element
   _Unexpected unexpected() {
     return const _Unexpected();
   }
 
+// ignore: unused_element
   _InsufficientPermission insufficientPermission() {
     return const _InsufficientPermission();
   }
 
+// ignore: unused_element
   _UnableToUpdate unableToUpdate() {
     return const _UnableToUpdate();
   }
 
+// ignore: unused_element
   _UnableToDelete unableToDelete() {
     return const _UnableToDelete();
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $NoteFailure = _$NoteFailureTearOff();
 
+/// @nodoc
 mixin _$NoteFailure {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result insufficientPermission(),
-    @required Result unableToUpdate(),
-    @required Result unableToDelete(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult insufficientPermission(),
+    @required TResult unableToUpdate(),
+    @required TResult unableToDelete(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result insufficientPermission(),
-    Result unableToUpdate(),
-    Result unableToDelete(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult insufficientPermission(),
+    TResult unableToUpdate(),
+    TResult unableToDelete(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result insufficientPermission(_InsufficientPermission value),
-    @required Result unableToUpdate(_UnableToUpdate value),
-    @required Result unableToDelete(_UnableToDelete value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult insufficientPermission(_InsufficientPermission value),
+    @required TResult unableToUpdate(_UnableToUpdate value),
+    @required TResult unableToDelete(_UnableToDelete value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result insufficientPermission(_InsufficientPermission value),
-    Result unableToUpdate(_UnableToUpdate value),
-    Result unableToDelete(_UnableToDelete value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult insufficientPermission(_InsufficientPermission value),
+    TResult unableToUpdate(_UnableToUpdate value),
+    TResult unableToDelete(_UnableToDelete value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $NoteFailureCopyWith<$Res> {
   factory $NoteFailureCopyWith(
           NoteFailure value, $Res Function(NoteFailure) then) =
       _$NoteFailureCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$NoteFailureCopyWithImpl<$Res> implements $NoteFailureCopyWith<$Res> {
   _$NoteFailureCopyWithImpl(this._value, this._then);
 
@@ -79,12 +88,14 @@ class _$NoteFailureCopyWithImpl<$Res> implements $NoteFailureCopyWith<$Res> {
   final $Res Function(NoteFailure) _then;
 }
 
+/// @nodoc
 abstract class _$UnexpectedCopyWith<$Res> {
   factory _$UnexpectedCopyWith(
           _Unexpected value, $Res Function(_Unexpected) then) =
       __$UnexpectedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$UnexpectedCopyWithImpl<$Res> extends _$NoteFailureCopyWithImpl<$Res>
     implements _$UnexpectedCopyWith<$Res> {
   __$UnexpectedCopyWithImpl(
@@ -95,6 +106,7 @@ class __$UnexpectedCopyWithImpl<$Res> extends _$NoteFailureCopyWithImpl<$Res>
   _Unexpected get _value => super._value as _Unexpected;
 }
 
+/// @nodoc
 class _$_Unexpected implements _Unexpected {
   const _$_Unexpected();
 
@@ -113,11 +125,11 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result insufficientPermission(),
-    @required Result unableToUpdate(),
-    @required Result unableToDelete(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult insufficientPermission(),
+    @required TResult unableToUpdate(),
+    @required TResult unableToDelete(),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -128,12 +140,12 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result insufficientPermission(),
-    Result unableToUpdate(),
-    Result unableToDelete(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult insufficientPermission(),
+    TResult unableToUpdate(),
+    TResult unableToDelete(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unexpected != null) {
@@ -144,11 +156,11 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result insufficientPermission(_InsufficientPermission value),
-    @required Result unableToUpdate(_UnableToUpdate value),
-    @required Result unableToDelete(_UnableToDelete value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult insufficientPermission(_InsufficientPermission value),
+    @required TResult unableToUpdate(_UnableToUpdate value),
+    @required TResult unableToDelete(_UnableToDelete value),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -159,12 +171,12 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result insufficientPermission(_InsufficientPermission value),
-    Result unableToUpdate(_UnableToUpdate value),
-    Result unableToDelete(_UnableToDelete value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult insufficientPermission(_InsufficientPermission value),
+    TResult unableToUpdate(_UnableToUpdate value),
+    TResult unableToDelete(_UnableToDelete value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unexpected != null) {
@@ -178,12 +190,14 @@ abstract class _Unexpected implements NoteFailure {
   const factory _Unexpected() = _$_Unexpected;
 }
 
+/// @nodoc
 abstract class _$InsufficientPermissionCopyWith<$Res> {
   factory _$InsufficientPermissionCopyWith(_InsufficientPermission value,
           $Res Function(_InsufficientPermission) then) =
       __$InsufficientPermissionCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$InsufficientPermissionCopyWithImpl<$Res>
     extends _$NoteFailureCopyWithImpl<$Res>
     implements _$InsufficientPermissionCopyWith<$Res> {
@@ -195,6 +209,7 @@ class __$InsufficientPermissionCopyWithImpl<$Res>
   _InsufficientPermission get _value => super._value as _InsufficientPermission;
 }
 
+/// @nodoc
 class _$_InsufficientPermission implements _InsufficientPermission {
   const _$_InsufficientPermission();
 
@@ -213,11 +228,11 @@ class _$_InsufficientPermission implements _InsufficientPermission {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result insufficientPermission(),
-    @required Result unableToUpdate(),
-    @required Result unableToDelete(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult insufficientPermission(),
+    @required TResult unableToUpdate(),
+    @required TResult unableToDelete(),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -228,12 +243,12 @@ class _$_InsufficientPermission implements _InsufficientPermission {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result insufficientPermission(),
-    Result unableToUpdate(),
-    Result unableToDelete(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult insufficientPermission(),
+    TResult unableToUpdate(),
+    TResult unableToDelete(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (insufficientPermission != null) {
@@ -244,11 +259,11 @@ class _$_InsufficientPermission implements _InsufficientPermission {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result insufficientPermission(_InsufficientPermission value),
-    @required Result unableToUpdate(_UnableToUpdate value),
-    @required Result unableToDelete(_UnableToDelete value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult insufficientPermission(_InsufficientPermission value),
+    @required TResult unableToUpdate(_UnableToUpdate value),
+    @required TResult unableToDelete(_UnableToDelete value),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -259,12 +274,12 @@ class _$_InsufficientPermission implements _InsufficientPermission {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result insufficientPermission(_InsufficientPermission value),
-    Result unableToUpdate(_UnableToUpdate value),
-    Result unableToDelete(_UnableToDelete value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult insufficientPermission(_InsufficientPermission value),
+    TResult unableToUpdate(_UnableToUpdate value),
+    TResult unableToDelete(_UnableToDelete value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (insufficientPermission != null) {
@@ -278,12 +293,14 @@ abstract class _InsufficientPermission implements NoteFailure {
   const factory _InsufficientPermission() = _$_InsufficientPermission;
 }
 
+/// @nodoc
 abstract class _$UnableToUpdateCopyWith<$Res> {
   factory _$UnableToUpdateCopyWith(
           _UnableToUpdate value, $Res Function(_UnableToUpdate) then) =
       __$UnableToUpdateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$UnableToUpdateCopyWithImpl<$Res>
     extends _$NoteFailureCopyWithImpl<$Res>
     implements _$UnableToUpdateCopyWith<$Res> {
@@ -295,6 +312,7 @@ class __$UnableToUpdateCopyWithImpl<$Res>
   _UnableToUpdate get _value => super._value as _UnableToUpdate;
 }
 
+/// @nodoc
 class _$_UnableToUpdate implements _UnableToUpdate {
   const _$_UnableToUpdate();
 
@@ -313,11 +331,11 @@ class _$_UnableToUpdate implements _UnableToUpdate {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result insufficientPermission(),
-    @required Result unableToUpdate(),
-    @required Result unableToDelete(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult insufficientPermission(),
+    @required TResult unableToUpdate(),
+    @required TResult unableToDelete(),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -328,12 +346,12 @@ class _$_UnableToUpdate implements _UnableToUpdate {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result insufficientPermission(),
-    Result unableToUpdate(),
-    Result unableToDelete(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult insufficientPermission(),
+    TResult unableToUpdate(),
+    TResult unableToDelete(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unableToUpdate != null) {
@@ -344,11 +362,11 @@ class _$_UnableToUpdate implements _UnableToUpdate {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result insufficientPermission(_InsufficientPermission value),
-    @required Result unableToUpdate(_UnableToUpdate value),
-    @required Result unableToDelete(_UnableToDelete value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult insufficientPermission(_InsufficientPermission value),
+    @required TResult unableToUpdate(_UnableToUpdate value),
+    @required TResult unableToDelete(_UnableToDelete value),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -359,12 +377,12 @@ class _$_UnableToUpdate implements _UnableToUpdate {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result insufficientPermission(_InsufficientPermission value),
-    Result unableToUpdate(_UnableToUpdate value),
-    Result unableToDelete(_UnableToDelete value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult insufficientPermission(_InsufficientPermission value),
+    TResult unableToUpdate(_UnableToUpdate value),
+    TResult unableToDelete(_UnableToDelete value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unableToUpdate != null) {
@@ -378,12 +396,14 @@ abstract class _UnableToUpdate implements NoteFailure {
   const factory _UnableToUpdate() = _$_UnableToUpdate;
 }
 
+/// @nodoc
 abstract class _$UnableToDeleteCopyWith<$Res> {
   factory _$UnableToDeleteCopyWith(
           _UnableToDelete value, $Res Function(_UnableToDelete) then) =
       __$UnableToDeleteCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$UnableToDeleteCopyWithImpl<$Res>
     extends _$NoteFailureCopyWithImpl<$Res>
     implements _$UnableToDeleteCopyWith<$Res> {
@@ -395,6 +415,7 @@ class __$UnableToDeleteCopyWithImpl<$Res>
   _UnableToDelete get _value => super._value as _UnableToDelete;
 }
 
+/// @nodoc
 class _$_UnableToDelete implements _UnableToDelete {
   const _$_UnableToDelete();
 
@@ -413,11 +434,11 @@ class _$_UnableToDelete implements _UnableToDelete {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result insufficientPermission(),
-    @required Result unableToUpdate(),
-    @required Result unableToDelete(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult insufficientPermission(),
+    @required TResult unableToUpdate(),
+    @required TResult unableToDelete(),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -428,12 +449,12 @@ class _$_UnableToDelete implements _UnableToDelete {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result insufficientPermission(),
-    Result unableToUpdate(),
-    Result unableToDelete(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult insufficientPermission(),
+    TResult unableToUpdate(),
+    TResult unableToDelete(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unableToDelete != null) {
@@ -444,11 +465,11 @@ class _$_UnableToDelete implements _UnableToDelete {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result insufficientPermission(_InsufficientPermission value),
-    @required Result unableToUpdate(_UnableToUpdate value),
-    @required Result unableToDelete(_UnableToDelete value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult insufficientPermission(_InsufficientPermission value),
+    @required TResult unableToUpdate(_UnableToUpdate value),
+    @required TResult unableToDelete(_UnableToDelete value),
   }) {
     assert(unexpected != null);
     assert(insufficientPermission != null);
@@ -459,12 +480,12 @@ class _$_UnableToDelete implements _UnableToDelete {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result insufficientPermission(_InsufficientPermission value),
-    Result unableToUpdate(_UnableToUpdate value),
-    Result unableToDelete(_UnableToDelete value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult insufficientPermission(_InsufficientPermission value),
+    TResult unableToUpdate(_UnableToUpdate value),
+    TResult unableToDelete(_UnableToDelete value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unableToDelete != null) {

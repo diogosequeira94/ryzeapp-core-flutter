@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'job_post_failure.dart';
 
@@ -9,52 +9,59 @@ part of 'job_post_failure.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$JobPostFailureTearOff {
   const _$JobPostFailureTearOff();
 
+// ignore: unused_element
   _Unexpected unexpected() {
     return const _Unexpected();
   }
 
+// ignore: unused_element
   _DataCorrupted dataCorrupted() {
     return const _DataCorrupted();
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $JobPostFailure = _$JobPostFailureTearOff();
 
+/// @nodoc
 mixin _$JobPostFailure {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result dataCorrupted(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult dataCorrupted(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result dataCorrupted(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult dataCorrupted(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result dataCorrupted(_DataCorrupted value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult dataCorrupted(_DataCorrupted value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result dataCorrupted(_DataCorrupted value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult dataCorrupted(_DataCorrupted value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $JobPostFailureCopyWith<$Res> {
   factory $JobPostFailureCopyWith(
           JobPostFailure value, $Res Function(JobPostFailure) then) =
       _$JobPostFailureCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$JobPostFailureCopyWithImpl<$Res>
     implements $JobPostFailureCopyWith<$Res> {
   _$JobPostFailureCopyWithImpl(this._value, this._then);
@@ -64,12 +71,14 @@ class _$JobPostFailureCopyWithImpl<$Res>
   final $Res Function(JobPostFailure) _then;
 }
 
+/// @nodoc
 abstract class _$UnexpectedCopyWith<$Res> {
   factory _$UnexpectedCopyWith(
           _Unexpected value, $Res Function(_Unexpected) then) =
       __$UnexpectedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$UnexpectedCopyWithImpl<$Res> extends _$JobPostFailureCopyWithImpl<$Res>
     implements _$UnexpectedCopyWith<$Res> {
   __$UnexpectedCopyWithImpl(
@@ -80,6 +89,7 @@ class __$UnexpectedCopyWithImpl<$Res> extends _$JobPostFailureCopyWithImpl<$Res>
   _Unexpected get _value => super._value as _Unexpected;
 }
 
+/// @nodoc
 class _$_Unexpected implements _Unexpected {
   const _$_Unexpected();
 
@@ -98,9 +108,9 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result dataCorrupted(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult dataCorrupted(),
   }) {
     assert(unexpected != null);
     assert(dataCorrupted != null);
@@ -109,10 +119,10 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result dataCorrupted(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult dataCorrupted(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unexpected != null) {
@@ -123,9 +133,9 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result dataCorrupted(_DataCorrupted value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult dataCorrupted(_DataCorrupted value),
   }) {
     assert(unexpected != null);
     assert(dataCorrupted != null);
@@ -134,10 +144,10 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result dataCorrupted(_DataCorrupted value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult dataCorrupted(_DataCorrupted value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unexpected != null) {
@@ -151,12 +161,14 @@ abstract class _Unexpected implements JobPostFailure {
   const factory _Unexpected() = _$_Unexpected;
 }
 
+/// @nodoc
 abstract class _$DataCorruptedCopyWith<$Res> {
   factory _$DataCorruptedCopyWith(
           _DataCorrupted value, $Res Function(_DataCorrupted) then) =
       __$DataCorruptedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$DataCorruptedCopyWithImpl<$Res>
     extends _$JobPostFailureCopyWithImpl<$Res>
     implements _$DataCorruptedCopyWith<$Res> {
@@ -168,6 +180,7 @@ class __$DataCorruptedCopyWithImpl<$Res>
   _DataCorrupted get _value => super._value as _DataCorrupted;
 }
 
+/// @nodoc
 class _$_DataCorrupted implements _DataCorrupted {
   const _$_DataCorrupted();
 
@@ -186,9 +199,9 @@ class _$_DataCorrupted implements _DataCorrupted {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result unexpected(),
-    @required Result dataCorrupted(),
+  TResult when<TResult extends Object>({
+    @required TResult unexpected(),
+    @required TResult dataCorrupted(),
   }) {
     assert(unexpected != null);
     assert(dataCorrupted != null);
@@ -197,10 +210,10 @@ class _$_DataCorrupted implements _DataCorrupted {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result unexpected(),
-    Result dataCorrupted(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult unexpected(),
+    TResult dataCorrupted(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (dataCorrupted != null) {
@@ -211,9 +224,9 @@ class _$_DataCorrupted implements _DataCorrupted {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result unexpected(_Unexpected value),
-    @required Result dataCorrupted(_DataCorrupted value),
+  TResult map<TResult extends Object>({
+    @required TResult unexpected(_Unexpected value),
+    @required TResult dataCorrupted(_DataCorrupted value),
   }) {
     assert(unexpected != null);
     assert(dataCorrupted != null);
@@ -222,10 +235,10 @@ class _$_DataCorrupted implements _DataCorrupted {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result unexpected(_Unexpected value),
-    Result dataCorrupted(_DataCorrupted value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult unexpected(_Unexpected value),
+    TResult dataCorrupted(_DataCorrupted value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (dataCorrupted != null) {

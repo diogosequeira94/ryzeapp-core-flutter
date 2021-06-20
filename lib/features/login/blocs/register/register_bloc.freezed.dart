@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'register_bloc.dart';
 
@@ -9,87 +9,97 @@ part of 'register_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$RegisterEventTearOff {
   const _$RegisterEventTearOff();
 
+// ignore: unused_element
   FirstNameChanged firstNameChanged(String firstName) {
     return FirstNameChanged(
       firstName,
     );
   }
 
+// ignore: unused_element
   LastNameChanged lastNameChanged(String lastName) {
     return LastNameChanged(
       lastName,
     );
   }
 
+// ignore: unused_element
   EmailChanged emailChanged(String email) {
     return EmailChanged(
       email,
     );
   }
 
+// ignore: unused_element
   PasswordChanged passwordChanged(String password) {
     return PasswordChanged(
       password,
     );
   }
 
+// ignore: unused_element
   RegisterWithEmailAndPasswordPressed registerWithEmailAndPasswordPressed() {
     return const RegisterWithEmailAndPasswordPressed();
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $RegisterEvent = _$RegisterEventTearOff();
 
+/// @nodoc
 mixin _$RegisterEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
-    @required Result emailChanged(String email),
-    @required Result passwordChanged(String password),
-    @required Result registerWithEmailAndPasswordPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult firstNameChanged(String firstName),
+    @required TResult lastNameChanged(String lastName),
+    @required TResult emailChanged(String email),
+    @required TResult passwordChanged(String password),
+    @required TResult registerWithEmailAndPasswordPressed(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
-    Result emailChanged(String email),
-    Result passwordChanged(String password),
-    Result registerWithEmailAndPasswordPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult firstNameChanged(String firstName),
+    TResult lastNameChanged(String lastName),
+    TResult emailChanged(String email),
+    TResult passwordChanged(String password),
+    TResult registerWithEmailAndPasswordPressed(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
-    @required Result emailChanged(EmailChanged value),
-    @required Result passwordChanged(PasswordChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult firstNameChanged(FirstNameChanged value),
+    @required TResult lastNameChanged(LastNameChanged value),
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required
-        Result registerWithEmailAndPasswordPressed(
+        TResult registerWithEmailAndPasswordPressed(
             RegisterWithEmailAndPasswordPressed value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
-    Result emailChanged(EmailChanged value),
-    Result passwordChanged(PasswordChanged value),
-    Result registerWithEmailAndPasswordPressed(
+  TResult maybeMap<TResult extends Object>({
+    TResult firstNameChanged(FirstNameChanged value),
+    TResult lastNameChanged(LastNameChanged value),
+    TResult emailChanged(EmailChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult registerWithEmailAndPasswordPressed(
         RegisterWithEmailAndPasswordPressed value),
-    @required Result orElse(),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $RegisterEventCopyWith<$Res> {
   factory $RegisterEventCopyWith(
           RegisterEvent value, $Res Function(RegisterEvent) then) =
       _$RegisterEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$RegisterEventCopyWithImpl<$Res>
     implements $RegisterEventCopyWith<$Res> {
   _$RegisterEventCopyWithImpl(this._value, this._then);
@@ -99,6 +109,7 @@ class _$RegisterEventCopyWithImpl<$Res>
   final $Res Function(RegisterEvent) _then;
 }
 
+/// @nodoc
 abstract class $FirstNameChangedCopyWith<$Res> {
   factory $FirstNameChangedCopyWith(
           FirstNameChanged value, $Res Function(FirstNameChanged) then) =
@@ -106,6 +117,7 @@ abstract class $FirstNameChangedCopyWith<$Res> {
   $Res call({String firstName});
 }
 
+/// @nodoc
 class _$FirstNameChangedCopyWithImpl<$Res>
     extends _$RegisterEventCopyWithImpl<$Res>
     implements $FirstNameChangedCopyWith<$Res> {
@@ -126,6 +138,7 @@ class _$FirstNameChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$FirstNameChanged implements FirstNameChanged {
   const _$FirstNameChanged(this.firstName) : assert(firstName != null);
 
@@ -150,18 +163,19 @@ class _$FirstNameChanged implements FirstNameChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(firstName);
 
+  @JsonKey(ignore: true)
   @override
   $FirstNameChangedCopyWith<FirstNameChanged> get copyWith =>
       _$FirstNameChangedCopyWithImpl<FirstNameChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
-    @required Result emailChanged(String email),
-    @required Result passwordChanged(String password),
-    @required Result registerWithEmailAndPasswordPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult firstNameChanged(String firstName),
+    @required TResult lastNameChanged(String lastName),
+    @required TResult emailChanged(String email),
+    @required TResult passwordChanged(String password),
+    @required TResult registerWithEmailAndPasswordPressed(),
   }) {
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
@@ -173,13 +187,13 @@ class _$FirstNameChanged implements FirstNameChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
-    Result emailChanged(String email),
-    Result passwordChanged(String password),
-    Result registerWithEmailAndPasswordPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult firstNameChanged(String firstName),
+    TResult lastNameChanged(String lastName),
+    TResult emailChanged(String email),
+    TResult passwordChanged(String password),
+    TResult registerWithEmailAndPasswordPressed(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (firstNameChanged != null) {
@@ -190,13 +204,13 @@ class _$FirstNameChanged implements FirstNameChanged {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
-    @required Result emailChanged(EmailChanged value),
-    @required Result passwordChanged(PasswordChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult firstNameChanged(FirstNameChanged value),
+    @required TResult lastNameChanged(LastNameChanged value),
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required
-        Result registerWithEmailAndPasswordPressed(
+        TResult registerWithEmailAndPasswordPressed(
             RegisterWithEmailAndPasswordPressed value),
   }) {
     assert(firstNameChanged != null);
@@ -209,14 +223,14 @@ class _$FirstNameChanged implements FirstNameChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
-    Result emailChanged(EmailChanged value),
-    Result passwordChanged(PasswordChanged value),
-    Result registerWithEmailAndPasswordPressed(
+  TResult maybeMap<TResult extends Object>({
+    TResult firstNameChanged(FirstNameChanged value),
+    TResult lastNameChanged(LastNameChanged value),
+    TResult emailChanged(EmailChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult registerWithEmailAndPasswordPressed(
         RegisterWithEmailAndPasswordPressed value),
-    @required Result orElse(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (firstNameChanged != null) {
@@ -230,9 +244,11 @@ abstract class FirstNameChanged implements RegisterEvent {
   const factory FirstNameChanged(String firstName) = _$FirstNameChanged;
 
   String get firstName;
+  @JsonKey(ignore: true)
   $FirstNameChangedCopyWith<FirstNameChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $LastNameChangedCopyWith<$Res> {
   factory $LastNameChangedCopyWith(
           LastNameChanged value, $Res Function(LastNameChanged) then) =
@@ -240,6 +256,7 @@ abstract class $LastNameChangedCopyWith<$Res> {
   $Res call({String lastName});
 }
 
+/// @nodoc
 class _$LastNameChangedCopyWithImpl<$Res>
     extends _$RegisterEventCopyWithImpl<$Res>
     implements $LastNameChangedCopyWith<$Res> {
@@ -260,6 +277,7 @@ class _$LastNameChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$LastNameChanged implements LastNameChanged {
   const _$LastNameChanged(this.lastName) : assert(lastName != null);
 
@@ -284,18 +302,19 @@ class _$LastNameChanged implements LastNameChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(lastName);
 
+  @JsonKey(ignore: true)
   @override
   $LastNameChangedCopyWith<LastNameChanged> get copyWith =>
       _$LastNameChangedCopyWithImpl<LastNameChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
-    @required Result emailChanged(String email),
-    @required Result passwordChanged(String password),
-    @required Result registerWithEmailAndPasswordPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult firstNameChanged(String firstName),
+    @required TResult lastNameChanged(String lastName),
+    @required TResult emailChanged(String email),
+    @required TResult passwordChanged(String password),
+    @required TResult registerWithEmailAndPasswordPressed(),
   }) {
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
@@ -307,13 +326,13 @@ class _$LastNameChanged implements LastNameChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
-    Result emailChanged(String email),
-    Result passwordChanged(String password),
-    Result registerWithEmailAndPasswordPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult firstNameChanged(String firstName),
+    TResult lastNameChanged(String lastName),
+    TResult emailChanged(String email),
+    TResult passwordChanged(String password),
+    TResult registerWithEmailAndPasswordPressed(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (lastNameChanged != null) {
@@ -324,13 +343,13 @@ class _$LastNameChanged implements LastNameChanged {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
-    @required Result emailChanged(EmailChanged value),
-    @required Result passwordChanged(PasswordChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult firstNameChanged(FirstNameChanged value),
+    @required TResult lastNameChanged(LastNameChanged value),
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required
-        Result registerWithEmailAndPasswordPressed(
+        TResult registerWithEmailAndPasswordPressed(
             RegisterWithEmailAndPasswordPressed value),
   }) {
     assert(firstNameChanged != null);
@@ -343,14 +362,14 @@ class _$LastNameChanged implements LastNameChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
-    Result emailChanged(EmailChanged value),
-    Result passwordChanged(PasswordChanged value),
-    Result registerWithEmailAndPasswordPressed(
+  TResult maybeMap<TResult extends Object>({
+    TResult firstNameChanged(FirstNameChanged value),
+    TResult lastNameChanged(LastNameChanged value),
+    TResult emailChanged(EmailChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult registerWithEmailAndPasswordPressed(
         RegisterWithEmailAndPasswordPressed value),
-    @required Result orElse(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (lastNameChanged != null) {
@@ -364,9 +383,11 @@ abstract class LastNameChanged implements RegisterEvent {
   const factory LastNameChanged(String lastName) = _$LastNameChanged;
 
   String get lastName;
+  @JsonKey(ignore: true)
   $LastNameChangedCopyWith<LastNameChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $EmailChangedCopyWith<$Res> {
   factory $EmailChangedCopyWith(
           EmailChanged value, $Res Function(EmailChanged) then) =
@@ -374,6 +395,7 @@ abstract class $EmailChangedCopyWith<$Res> {
   $Res call({String email});
 }
 
+/// @nodoc
 class _$EmailChangedCopyWithImpl<$Res> extends _$RegisterEventCopyWithImpl<$Res>
     implements $EmailChangedCopyWith<$Res> {
   _$EmailChangedCopyWithImpl(
@@ -393,6 +415,7 @@ class _$EmailChangedCopyWithImpl<$Res> extends _$RegisterEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$EmailChanged implements EmailChanged {
   const _$EmailChanged(this.email) : assert(email != null);
 
@@ -416,18 +439,19 @@ class _$EmailChanged implements EmailChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(email);
 
+  @JsonKey(ignore: true)
   @override
   $EmailChangedCopyWith<EmailChanged> get copyWith =>
       _$EmailChangedCopyWithImpl<EmailChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
-    @required Result emailChanged(String email),
-    @required Result passwordChanged(String password),
-    @required Result registerWithEmailAndPasswordPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult firstNameChanged(String firstName),
+    @required TResult lastNameChanged(String lastName),
+    @required TResult emailChanged(String email),
+    @required TResult passwordChanged(String password),
+    @required TResult registerWithEmailAndPasswordPressed(),
   }) {
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
@@ -439,13 +463,13 @@ class _$EmailChanged implements EmailChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
-    Result emailChanged(String email),
-    Result passwordChanged(String password),
-    Result registerWithEmailAndPasswordPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult firstNameChanged(String firstName),
+    TResult lastNameChanged(String lastName),
+    TResult emailChanged(String email),
+    TResult passwordChanged(String password),
+    TResult registerWithEmailAndPasswordPressed(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (emailChanged != null) {
@@ -456,13 +480,13 @@ class _$EmailChanged implements EmailChanged {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
-    @required Result emailChanged(EmailChanged value),
-    @required Result passwordChanged(PasswordChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult firstNameChanged(FirstNameChanged value),
+    @required TResult lastNameChanged(LastNameChanged value),
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required
-        Result registerWithEmailAndPasswordPressed(
+        TResult registerWithEmailAndPasswordPressed(
             RegisterWithEmailAndPasswordPressed value),
   }) {
     assert(firstNameChanged != null);
@@ -475,14 +499,14 @@ class _$EmailChanged implements EmailChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
-    Result emailChanged(EmailChanged value),
-    Result passwordChanged(PasswordChanged value),
-    Result registerWithEmailAndPasswordPressed(
+  TResult maybeMap<TResult extends Object>({
+    TResult firstNameChanged(FirstNameChanged value),
+    TResult lastNameChanged(LastNameChanged value),
+    TResult emailChanged(EmailChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult registerWithEmailAndPasswordPressed(
         RegisterWithEmailAndPasswordPressed value),
-    @required Result orElse(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (emailChanged != null) {
@@ -496,9 +520,11 @@ abstract class EmailChanged implements RegisterEvent {
   const factory EmailChanged(String email) = _$EmailChanged;
 
   String get email;
+  @JsonKey(ignore: true)
   $EmailChangedCopyWith<EmailChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $PasswordChangedCopyWith<$Res> {
   factory $PasswordChangedCopyWith(
           PasswordChanged value, $Res Function(PasswordChanged) then) =
@@ -506,6 +532,7 @@ abstract class $PasswordChangedCopyWith<$Res> {
   $Res call({String password});
 }
 
+/// @nodoc
 class _$PasswordChangedCopyWithImpl<$Res>
     extends _$RegisterEventCopyWithImpl<$Res>
     implements $PasswordChangedCopyWith<$Res> {
@@ -526,6 +553,7 @@ class _$PasswordChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$PasswordChanged implements PasswordChanged {
   const _$PasswordChanged(this.password) : assert(password != null);
 
@@ -550,18 +578,19 @@ class _$PasswordChanged implements PasswordChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(password);
 
+  @JsonKey(ignore: true)
   @override
   $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
       _$PasswordChangedCopyWithImpl<PasswordChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
-    @required Result emailChanged(String email),
-    @required Result passwordChanged(String password),
-    @required Result registerWithEmailAndPasswordPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult firstNameChanged(String firstName),
+    @required TResult lastNameChanged(String lastName),
+    @required TResult emailChanged(String email),
+    @required TResult passwordChanged(String password),
+    @required TResult registerWithEmailAndPasswordPressed(),
   }) {
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
@@ -573,13 +602,13 @@ class _$PasswordChanged implements PasswordChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
-    Result emailChanged(String email),
-    Result passwordChanged(String password),
-    Result registerWithEmailAndPasswordPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult firstNameChanged(String firstName),
+    TResult lastNameChanged(String lastName),
+    TResult emailChanged(String email),
+    TResult passwordChanged(String password),
+    TResult registerWithEmailAndPasswordPressed(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (passwordChanged != null) {
@@ -590,13 +619,13 @@ class _$PasswordChanged implements PasswordChanged {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
-    @required Result emailChanged(EmailChanged value),
-    @required Result passwordChanged(PasswordChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult firstNameChanged(FirstNameChanged value),
+    @required TResult lastNameChanged(LastNameChanged value),
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required
-        Result registerWithEmailAndPasswordPressed(
+        TResult registerWithEmailAndPasswordPressed(
             RegisterWithEmailAndPasswordPressed value),
   }) {
     assert(firstNameChanged != null);
@@ -609,14 +638,14 @@ class _$PasswordChanged implements PasswordChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
-    Result emailChanged(EmailChanged value),
-    Result passwordChanged(PasswordChanged value),
-    Result registerWithEmailAndPasswordPressed(
+  TResult maybeMap<TResult extends Object>({
+    TResult firstNameChanged(FirstNameChanged value),
+    TResult lastNameChanged(LastNameChanged value),
+    TResult emailChanged(EmailChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult registerWithEmailAndPasswordPressed(
         RegisterWithEmailAndPasswordPressed value),
-    @required Result orElse(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (passwordChanged != null) {
@@ -630,9 +659,11 @@ abstract class PasswordChanged implements RegisterEvent {
   const factory PasswordChanged(String password) = _$PasswordChanged;
 
   String get password;
+  @JsonKey(ignore: true)
   $PasswordChangedCopyWith<PasswordChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $RegisterWithEmailAndPasswordPressedCopyWith<$Res> {
   factory $RegisterWithEmailAndPasswordPressedCopyWith(
           RegisterWithEmailAndPasswordPressed value,
@@ -640,6 +671,7 @@ abstract class $RegisterWithEmailAndPasswordPressedCopyWith<$Res> {
       _$RegisterWithEmailAndPasswordPressedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$RegisterWithEmailAndPasswordPressedCopyWithImpl<$Res>
     extends _$RegisterEventCopyWithImpl<$Res>
     implements $RegisterWithEmailAndPasswordPressedCopyWith<$Res> {
@@ -653,6 +685,7 @@ class _$RegisterWithEmailAndPasswordPressedCopyWithImpl<$Res>
       super._value as RegisterWithEmailAndPasswordPressed;
 }
 
+/// @nodoc
 class _$RegisterWithEmailAndPasswordPressed
     implements RegisterWithEmailAndPasswordPressed {
   const _$RegisterWithEmailAndPasswordPressed();
@@ -673,12 +706,12 @@ class _$RegisterWithEmailAndPasswordPressed
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
-    @required Result emailChanged(String email),
-    @required Result passwordChanged(String password),
-    @required Result registerWithEmailAndPasswordPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult firstNameChanged(String firstName),
+    @required TResult lastNameChanged(String lastName),
+    @required TResult emailChanged(String email),
+    @required TResult passwordChanged(String password),
+    @required TResult registerWithEmailAndPasswordPressed(),
   }) {
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
@@ -690,13 +723,13 @@ class _$RegisterWithEmailAndPasswordPressed
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
-    Result emailChanged(String email),
-    Result passwordChanged(String password),
-    Result registerWithEmailAndPasswordPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult firstNameChanged(String firstName),
+    TResult lastNameChanged(String lastName),
+    TResult emailChanged(String email),
+    TResult passwordChanged(String password),
+    TResult registerWithEmailAndPasswordPressed(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (registerWithEmailAndPasswordPressed != null) {
@@ -707,13 +740,13 @@ class _$RegisterWithEmailAndPasswordPressed
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
-    @required Result emailChanged(EmailChanged value),
-    @required Result passwordChanged(PasswordChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult firstNameChanged(FirstNameChanged value),
+    @required TResult lastNameChanged(LastNameChanged value),
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required
-        Result registerWithEmailAndPasswordPressed(
+        TResult registerWithEmailAndPasswordPressed(
             RegisterWithEmailAndPasswordPressed value),
   }) {
     assert(firstNameChanged != null);
@@ -726,14 +759,14 @@ class _$RegisterWithEmailAndPasswordPressed
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
-    Result emailChanged(EmailChanged value),
-    Result passwordChanged(PasswordChanged value),
-    Result registerWithEmailAndPasswordPressed(
+  TResult maybeMap<TResult extends Object>({
+    TResult firstNameChanged(FirstNameChanged value),
+    TResult lastNameChanged(LastNameChanged value),
+    TResult emailChanged(EmailChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult registerWithEmailAndPasswordPressed(
         RegisterWithEmailAndPasswordPressed value),
-    @required Result orElse(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (registerWithEmailAndPasswordPressed != null) {
@@ -748,9 +781,11 @@ abstract class RegisterWithEmailAndPasswordPressed implements RegisterEvent {
       _$RegisterWithEmailAndPasswordPressed;
 }
 
+/// @nodoc
 class _$RegisterStateTearOff {
   const _$RegisterStateTearOff();
 
+// ignore: unused_element
   _RegisterState call(
       {@required FirstName firstName,
       @required LastName lastName,
@@ -771,9 +806,11 @@ class _$RegisterStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $RegisterState = _$RegisterStateTearOff();
 
+/// @nodoc
 mixin _$RegisterState {
   FirstName get firstName;
   LastName get lastName;
@@ -783,9 +820,11 @@ mixin _$RegisterState {
   bool get isSubmitting;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
 
+  @JsonKey(ignore: true)
   $RegisterStateCopyWith<RegisterState> get copyWith;
 }
 
+/// @nodoc
 abstract class $RegisterStateCopyWith<$Res> {
   factory $RegisterStateCopyWith(
           RegisterState value, $Res Function(RegisterState) then) =
@@ -800,6 +839,7 @@ abstract class $RegisterStateCopyWith<$Res> {
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
+/// @nodoc
 class _$RegisterStateCopyWithImpl<$Res>
     implements $RegisterStateCopyWith<$Res> {
   _$RegisterStateCopyWithImpl(this._value, this._then);
@@ -838,6 +878,7 @@ class _$RegisterStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$RegisterStateCopyWith<$Res>
     implements $RegisterStateCopyWith<$Res> {
   factory _$RegisterStateCopyWith(
@@ -854,6 +895,7 @@ abstract class _$RegisterStateCopyWith<$Res>
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
+/// @nodoc
 class __$RegisterStateCopyWithImpl<$Res>
     extends _$RegisterStateCopyWithImpl<$Res>
     implements _$RegisterStateCopyWith<$Res> {
@@ -894,6 +936,7 @@ class __$RegisterStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_RegisterState implements _RegisterState {
   const _$_RegisterState(
       {@required this.firstName,
@@ -971,6 +1014,7 @@ class _$_RegisterState implements _RegisterState {
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(authFailureOrSuccessOption);
 
+  @JsonKey(ignore: true)
   @override
   _$RegisterStateCopyWith<_RegisterState> get copyWith =>
       __$RegisterStateCopyWithImpl<_RegisterState>(this, _$identity);
@@ -1009,5 +1053,6 @@ abstract class _RegisterState implements RegisterState {
   @override
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
   @override
+  @JsonKey(ignore: true)
   _$RegisterStateCopyWith<_RegisterState> get copyWith;
 }

@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+part 'user_profile.g.dart';
+
 @JsonSerializable(explicitToJson: true)
 class UserProfile extends Equatable {
   final String firstName;
@@ -38,4 +40,9 @@ class UserProfile extends Equatable {
         skills,
         education,
       ];
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserProfileToJson(this);
 }

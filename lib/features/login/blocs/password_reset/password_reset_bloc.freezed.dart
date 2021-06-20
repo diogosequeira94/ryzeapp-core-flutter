@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'password_reset_bloc.dart';
 
@@ -9,56 +9,63 @@ part of 'password_reset_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PasswordResetEventTearOff {
   const _$PasswordResetEventTearOff();
 
+// ignore: unused_element
   EmailChanged emailChanged(String email) {
     return EmailChanged(
       email,
     );
   }
 
+// ignore: unused_element
   SendPasswordResetEmailPressed sendPasswordResetEmailPressed() {
     return const SendPasswordResetEmailPressed();
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PasswordResetEvent = _$PasswordResetEventTearOff();
 
+/// @nodoc
 mixin _$PasswordResetEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result emailChanged(String email),
-    @required Result sendPasswordResetEmailPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult emailChanged(String email),
+    @required TResult sendPasswordResetEmailPressed(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result emailChanged(String email),
-    Result sendPasswordResetEmailPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult emailChanged(String email),
+    TResult sendPasswordResetEmailPressed(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result emailChanged(EmailChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
     @required
-        Result sendPasswordResetEmailPressed(
+        TResult sendPasswordResetEmailPressed(
             SendPasswordResetEmailPressed value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result emailChanged(EmailChanged value),
-    Result sendPasswordResetEmailPressed(SendPasswordResetEmailPressed value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult sendPasswordResetEmailPressed(SendPasswordResetEmailPressed value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $PasswordResetEventCopyWith<$Res> {
   factory $PasswordResetEventCopyWith(
           PasswordResetEvent value, $Res Function(PasswordResetEvent) then) =
       _$PasswordResetEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$PasswordResetEventCopyWithImpl<$Res>
     implements $PasswordResetEventCopyWith<$Res> {
   _$PasswordResetEventCopyWithImpl(this._value, this._then);
@@ -68,6 +75,7 @@ class _$PasswordResetEventCopyWithImpl<$Res>
   final $Res Function(PasswordResetEvent) _then;
 }
 
+/// @nodoc
 abstract class $EmailChangedCopyWith<$Res> {
   factory $EmailChangedCopyWith(
           EmailChanged value, $Res Function(EmailChanged) then) =
@@ -75,6 +83,7 @@ abstract class $EmailChangedCopyWith<$Res> {
   $Res call({String email});
 }
 
+/// @nodoc
 class _$EmailChangedCopyWithImpl<$Res>
     extends _$PasswordResetEventCopyWithImpl<$Res>
     implements $EmailChangedCopyWith<$Res> {
@@ -95,6 +104,7 @@ class _$EmailChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$EmailChanged implements EmailChanged {
   const _$EmailChanged(this.email) : assert(email != null);
 
@@ -118,15 +128,16 @@ class _$EmailChanged implements EmailChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(email);
 
+  @JsonKey(ignore: true)
   @override
   $EmailChangedCopyWith<EmailChanged> get copyWith =>
       _$EmailChangedCopyWithImpl<EmailChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result emailChanged(String email),
-    @required Result sendPasswordResetEmailPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult emailChanged(String email),
+    @required TResult sendPasswordResetEmailPressed(),
   }) {
     assert(emailChanged != null);
     assert(sendPasswordResetEmailPressed != null);
@@ -135,10 +146,10 @@ class _$EmailChanged implements EmailChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result emailChanged(String email),
-    Result sendPasswordResetEmailPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult emailChanged(String email),
+    TResult sendPasswordResetEmailPressed(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (emailChanged != null) {
@@ -149,10 +160,10 @@ class _$EmailChanged implements EmailChanged {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result emailChanged(EmailChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
     @required
-        Result sendPasswordResetEmailPressed(
+        TResult sendPasswordResetEmailPressed(
             SendPasswordResetEmailPressed value),
   }) {
     assert(emailChanged != null);
@@ -162,10 +173,10 @@ class _$EmailChanged implements EmailChanged {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result emailChanged(EmailChanged value),
-    Result sendPasswordResetEmailPressed(SendPasswordResetEmailPressed value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult sendPasswordResetEmailPressed(SendPasswordResetEmailPressed value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (emailChanged != null) {
@@ -179,9 +190,11 @@ abstract class EmailChanged implements PasswordResetEvent {
   const factory EmailChanged(String email) = _$EmailChanged;
 
   String get email;
+  @JsonKey(ignore: true)
   $EmailChangedCopyWith<EmailChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $SendPasswordResetEmailPressedCopyWith<$Res> {
   factory $SendPasswordResetEmailPressedCopyWith(
           SendPasswordResetEmailPressed value,
@@ -189,6 +202,7 @@ abstract class $SendPasswordResetEmailPressedCopyWith<$Res> {
       _$SendPasswordResetEmailPressedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SendPasswordResetEmailPressedCopyWithImpl<$Res>
     extends _$PasswordResetEventCopyWithImpl<$Res>
     implements $SendPasswordResetEmailPressedCopyWith<$Res> {
@@ -202,6 +216,7 @@ class _$SendPasswordResetEmailPressedCopyWithImpl<$Res>
       super._value as SendPasswordResetEmailPressed;
 }
 
+/// @nodoc
 class _$SendPasswordResetEmailPressed implements SendPasswordResetEmailPressed {
   const _$SendPasswordResetEmailPressed();
 
@@ -220,9 +235,9 @@ class _$SendPasswordResetEmailPressed implements SendPasswordResetEmailPressed {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result emailChanged(String email),
-    @required Result sendPasswordResetEmailPressed(),
+  TResult when<TResult extends Object>({
+    @required TResult emailChanged(String email),
+    @required TResult sendPasswordResetEmailPressed(),
   }) {
     assert(emailChanged != null);
     assert(sendPasswordResetEmailPressed != null);
@@ -231,10 +246,10 @@ class _$SendPasswordResetEmailPressed implements SendPasswordResetEmailPressed {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result emailChanged(String email),
-    Result sendPasswordResetEmailPressed(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult emailChanged(String email),
+    TResult sendPasswordResetEmailPressed(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (sendPasswordResetEmailPressed != null) {
@@ -245,10 +260,10 @@ class _$SendPasswordResetEmailPressed implements SendPasswordResetEmailPressed {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result emailChanged(EmailChanged value),
+  TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
     @required
-        Result sendPasswordResetEmailPressed(
+        TResult sendPasswordResetEmailPressed(
             SendPasswordResetEmailPressed value),
   }) {
     assert(emailChanged != null);
@@ -258,10 +273,10 @@ class _$SendPasswordResetEmailPressed implements SendPasswordResetEmailPressed {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result emailChanged(EmailChanged value),
-    Result sendPasswordResetEmailPressed(SendPasswordResetEmailPressed value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult sendPasswordResetEmailPressed(SendPasswordResetEmailPressed value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (sendPasswordResetEmailPressed != null) {
@@ -276,9 +291,11 @@ abstract class SendPasswordResetEmailPressed implements PasswordResetEvent {
       _$SendPasswordResetEmailPressed;
 }
 
+/// @nodoc
 class _$PasswordResetStateTearOff {
   const _$PasswordResetStateTearOff();
 
+// ignore: unused_element
   _PasswordResetState call(
       {@required EmailAddress emailAddress,
       @required bool showErrorMessages,
@@ -293,18 +310,22 @@ class _$PasswordResetStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PasswordResetState = _$PasswordResetStateTearOff();
 
+/// @nodoc
 mixin _$PasswordResetState {
   EmailAddress get emailAddress;
   bool get showErrorMessages;
   bool get isSubmitting;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
 
+  @JsonKey(ignore: true)
   $PasswordResetStateCopyWith<PasswordResetState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PasswordResetStateCopyWith<$Res> {
   factory $PasswordResetStateCopyWith(
           PasswordResetState value, $Res Function(PasswordResetState) then) =
@@ -316,6 +337,7 @@ abstract class $PasswordResetStateCopyWith<$Res> {
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
+/// @nodoc
 class _$PasswordResetStateCopyWithImpl<$Res>
     implements $PasswordResetStateCopyWith<$Res> {
   _$PasswordResetStateCopyWithImpl(this._value, this._then);
@@ -347,6 +369,7 @@ class _$PasswordResetStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$PasswordResetStateCopyWith<$Res>
     implements $PasswordResetStateCopyWith<$Res> {
   factory _$PasswordResetStateCopyWith(
@@ -360,6 +383,7 @@ abstract class _$PasswordResetStateCopyWith<$Res>
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
+/// @nodoc
 class __$PasswordResetStateCopyWithImpl<$Res>
     extends _$PasswordResetStateCopyWithImpl<$Res>
     implements _$PasswordResetStateCopyWith<$Res> {
@@ -393,6 +417,7 @@ class __$PasswordResetStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_PasswordResetState implements _PasswordResetState {
   const _$_PasswordResetState(
       {@required this.emailAddress,
@@ -446,6 +471,7 @@ class _$_PasswordResetState implements _PasswordResetState {
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(authFailureOrSuccessOption);
 
+  @JsonKey(ignore: true)
   @override
   _$PasswordResetStateCopyWith<_PasswordResetState> get copyWith =>
       __$PasswordResetStateCopyWithImpl<_PasswordResetState>(this, _$identity);
@@ -472,5 +498,6 @@ abstract class _PasswordResetState implements PasswordResetState {
   @override
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
   @override
+  @JsonKey(ignore: true)
   _$PasswordResetStateCopyWith<_PasswordResetState> get copyWith;
 }

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'job_post_input_validators.dart';
 
@@ -9,15 +9,18 @@ part of 'job_post_input_validators.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$JobPostInputValidatorTearOff {
   const _$JobPostInputValidatorTearOff();
 
+// ignore: unused_element
   Empty<T> empty<T>({@required String failedValue}) {
     return Empty<T>(
       failedValue: failedValue,
     );
   }
 
+// ignore: unused_element
   InvalidLength<T> invalidLength<T>(
       {@required String failedValue, @required int max}) {
     return InvalidLength<T>(
@@ -26,12 +29,14 @@ class _$JobPostInputValidatorTearOff {
     );
   }
 
+// ignore: unused_element
   InvalidPay<T> invalidPay<T>({@required String failedValue}) {
     return InvalidPay<T>(
       failedValue: failedValue,
     );
   }
 
+// ignore: unused_element
   ListTooLong<T> listTooLong<T>(
       {@required List<dynamic> failedValue, @required int max}) {
     return ListTooLong<T>(
@@ -40,6 +45,7 @@ class _$JobPostInputValidatorTearOff {
     );
   }
 
+// ignore: unused_element
   Multiline<T> multiline<T>({@required String failedValue}) {
     return Multiline<T>(
       failedValue: failedValue,
@@ -47,52 +53,56 @@ class _$JobPostInputValidatorTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $JobPostInputValidator = _$JobPostInputValidatorTearOff();
 
+/// @nodoc
 mixin _$JobPostInputValidator<T> {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result empty(String failedValue),
-    @required Result invalidLength(String failedValue, int max),
-    @required Result invalidPay(String failedValue),
-    @required Result listTooLong(List<dynamic> failedValue, int max),
-    @required Result multiline(String failedValue),
+  TResult when<TResult extends Object>({
+    @required TResult empty(String failedValue),
+    @required TResult invalidLength(String failedValue, int max),
+    @required TResult invalidPay(String failedValue),
+    @required TResult listTooLong(List<dynamic> failedValue, int max),
+    @required TResult multiline(String failedValue),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result empty(String failedValue),
-    Result invalidLength(String failedValue, int max),
-    Result invalidPay(String failedValue),
-    Result listTooLong(List<dynamic> failedValue, int max),
-    Result multiline(String failedValue),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult empty(String failedValue),
+    TResult invalidLength(String failedValue, int max),
+    TResult invalidPay(String failedValue),
+    TResult listTooLong(List<dynamic> failedValue, int max),
+    TResult multiline(String failedValue),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result empty(Empty<T> value),
-    @required Result invalidLength(InvalidLength<T> value),
-    @required Result invalidPay(InvalidPay<T> value),
-    @required Result listTooLong(ListTooLong<T> value),
-    @required Result multiline(Multiline<T> value),
+  TResult map<TResult extends Object>({
+    @required TResult empty(Empty<T> value),
+    @required TResult invalidLength(InvalidLength<T> value),
+    @required TResult invalidPay(InvalidPay<T> value),
+    @required TResult listTooLong(ListTooLong<T> value),
+    @required TResult multiline(Multiline<T> value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result empty(Empty<T> value),
-    Result invalidLength(InvalidLength<T> value),
-    Result invalidPay(InvalidPay<T> value),
-    Result listTooLong(ListTooLong<T> value),
-    Result multiline(Multiline<T> value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult empty(Empty<T> value),
+    TResult invalidLength(InvalidLength<T> value),
+    TResult invalidPay(InvalidPay<T> value),
+    TResult listTooLong(ListTooLong<T> value),
+    TResult multiline(Multiline<T> value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $JobPostInputValidatorCopyWith<T, $Res> {
   factory $JobPostInputValidatorCopyWith(JobPostInputValidator<T> value,
           $Res Function(JobPostInputValidator<T>) then) =
       _$JobPostInputValidatorCopyWithImpl<T, $Res>;
 }
 
+/// @nodoc
 class _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $JobPostInputValidatorCopyWith<T, $Res> {
   _$JobPostInputValidatorCopyWithImpl(this._value, this._then);
@@ -102,12 +112,14 @@ class _$JobPostInputValidatorCopyWithImpl<T, $Res>
   final $Res Function(JobPostInputValidator<T>) _then;
 }
 
+/// @nodoc
 abstract class $EmptyCopyWith<T, $Res> {
   factory $EmptyCopyWith(Empty<T> value, $Res Function(Empty<T>) then) =
       _$EmptyCopyWithImpl<T, $Res>;
   $Res call({String failedValue});
 }
 
+/// @nodoc
 class _$EmptyCopyWithImpl<T, $Res>
     extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $EmptyCopyWith<T, $Res> {
@@ -128,6 +140,7 @@ class _$EmptyCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$Empty<T> implements Empty<T> {
   const _$Empty({@required this.failedValue}) : assert(failedValue != null);
 
@@ -152,18 +165,19 @@ class _$Empty<T> implements Empty<T> {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
 
+  @JsonKey(ignore: true)
   @override
   $EmptyCopyWith<T, Empty<T>> get copyWith =>
       _$EmptyCopyWithImpl<T, Empty<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result empty(String failedValue),
-    @required Result invalidLength(String failedValue, int max),
-    @required Result invalidPay(String failedValue),
-    @required Result listTooLong(List<dynamic> failedValue, int max),
-    @required Result multiline(String failedValue),
+  TResult when<TResult extends Object>({
+    @required TResult empty(String failedValue),
+    @required TResult invalidLength(String failedValue, int max),
+    @required TResult invalidPay(String failedValue),
+    @required TResult listTooLong(List<dynamic> failedValue, int max),
+    @required TResult multiline(String failedValue),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -175,13 +189,13 @@ class _$Empty<T> implements Empty<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result empty(String failedValue),
-    Result invalidLength(String failedValue, int max),
-    Result invalidPay(String failedValue),
-    Result listTooLong(List<dynamic> failedValue, int max),
-    Result multiline(String failedValue),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult empty(String failedValue),
+    TResult invalidLength(String failedValue, int max),
+    TResult invalidPay(String failedValue),
+    TResult listTooLong(List<dynamic> failedValue, int max),
+    TResult multiline(String failedValue),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (empty != null) {
@@ -192,12 +206,12 @@ class _$Empty<T> implements Empty<T> {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result empty(Empty<T> value),
-    @required Result invalidLength(InvalidLength<T> value),
-    @required Result invalidPay(InvalidPay<T> value),
-    @required Result listTooLong(ListTooLong<T> value),
-    @required Result multiline(Multiline<T> value),
+  TResult map<TResult extends Object>({
+    @required TResult empty(Empty<T> value),
+    @required TResult invalidLength(InvalidLength<T> value),
+    @required TResult invalidPay(InvalidPay<T> value),
+    @required TResult listTooLong(ListTooLong<T> value),
+    @required TResult multiline(Multiline<T> value),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -209,13 +223,13 @@ class _$Empty<T> implements Empty<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result empty(Empty<T> value),
-    Result invalidLength(InvalidLength<T> value),
-    Result invalidPay(InvalidPay<T> value),
-    Result listTooLong(ListTooLong<T> value),
-    Result multiline(Multiline<T> value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult empty(Empty<T> value),
+    TResult invalidLength(InvalidLength<T> value),
+    TResult invalidPay(InvalidPay<T> value),
+    TResult listTooLong(ListTooLong<T> value),
+    TResult multiline(Multiline<T> value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (empty != null) {
@@ -229,9 +243,11 @@ abstract class Empty<T> implements JobPostInputValidator<T> {
   const factory Empty({@required String failedValue}) = _$Empty<T>;
 
   String get failedValue;
+  @JsonKey(ignore: true)
   $EmptyCopyWith<T, Empty<T>> get copyWith;
 }
 
+/// @nodoc
 abstract class $InvalidLengthCopyWith<T, $Res> {
   factory $InvalidLengthCopyWith(
           InvalidLength<T> value, $Res Function(InvalidLength<T>) then) =
@@ -239,6 +255,7 @@ abstract class $InvalidLengthCopyWith<T, $Res> {
   $Res call({String failedValue, int max});
 }
 
+/// @nodoc
 class _$InvalidLengthCopyWithImpl<T, $Res>
     extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $InvalidLengthCopyWith<T, $Res> {
@@ -262,6 +279,7 @@ class _$InvalidLengthCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$InvalidLength<T> implements InvalidLength<T> {
   const _$InvalidLength({@required this.failedValue, @required this.max})
       : assert(failedValue != null),
@@ -294,18 +312,19 @@ class _$InvalidLength<T> implements InvalidLength<T> {
       const DeepCollectionEquality().hash(failedValue) ^
       const DeepCollectionEquality().hash(max);
 
+  @JsonKey(ignore: true)
   @override
   $InvalidLengthCopyWith<T, InvalidLength<T>> get copyWith =>
       _$InvalidLengthCopyWithImpl<T, InvalidLength<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result empty(String failedValue),
-    @required Result invalidLength(String failedValue, int max),
-    @required Result invalidPay(String failedValue),
-    @required Result listTooLong(List<dynamic> failedValue, int max),
-    @required Result multiline(String failedValue),
+  TResult when<TResult extends Object>({
+    @required TResult empty(String failedValue),
+    @required TResult invalidLength(String failedValue, int max),
+    @required TResult invalidPay(String failedValue),
+    @required TResult listTooLong(List<dynamic> failedValue, int max),
+    @required TResult multiline(String failedValue),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -317,13 +336,13 @@ class _$InvalidLength<T> implements InvalidLength<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result empty(String failedValue),
-    Result invalidLength(String failedValue, int max),
-    Result invalidPay(String failedValue),
-    Result listTooLong(List<dynamic> failedValue, int max),
-    Result multiline(String failedValue),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult empty(String failedValue),
+    TResult invalidLength(String failedValue, int max),
+    TResult invalidPay(String failedValue),
+    TResult listTooLong(List<dynamic> failedValue, int max),
+    TResult multiline(String failedValue),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (invalidLength != null) {
@@ -334,12 +353,12 @@ class _$InvalidLength<T> implements InvalidLength<T> {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result empty(Empty<T> value),
-    @required Result invalidLength(InvalidLength<T> value),
-    @required Result invalidPay(InvalidPay<T> value),
-    @required Result listTooLong(ListTooLong<T> value),
-    @required Result multiline(Multiline<T> value),
+  TResult map<TResult extends Object>({
+    @required TResult empty(Empty<T> value),
+    @required TResult invalidLength(InvalidLength<T> value),
+    @required TResult invalidPay(InvalidPay<T> value),
+    @required TResult listTooLong(ListTooLong<T> value),
+    @required TResult multiline(Multiline<T> value),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -351,13 +370,13 @@ class _$InvalidLength<T> implements InvalidLength<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result empty(Empty<T> value),
-    Result invalidLength(InvalidLength<T> value),
-    Result invalidPay(InvalidPay<T> value),
-    Result listTooLong(ListTooLong<T> value),
-    Result multiline(Multiline<T> value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult empty(Empty<T> value),
+    TResult invalidLength(InvalidLength<T> value),
+    TResult invalidPay(InvalidPay<T> value),
+    TResult listTooLong(ListTooLong<T> value),
+    TResult multiline(Multiline<T> value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (invalidLength != null) {
@@ -373,9 +392,11 @@ abstract class InvalidLength<T> implements JobPostInputValidator<T> {
 
   String get failedValue;
   int get max;
+  @JsonKey(ignore: true)
   $InvalidLengthCopyWith<T, InvalidLength<T>> get copyWith;
 }
 
+/// @nodoc
 abstract class $InvalidPayCopyWith<T, $Res> {
   factory $InvalidPayCopyWith(
           InvalidPay<T> value, $Res Function(InvalidPay<T>) then) =
@@ -383,6 +404,7 @@ abstract class $InvalidPayCopyWith<T, $Res> {
   $Res call({String failedValue});
 }
 
+/// @nodoc
 class _$InvalidPayCopyWithImpl<T, $Res>
     extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $InvalidPayCopyWith<T, $Res> {
@@ -404,6 +426,7 @@ class _$InvalidPayCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$InvalidPay<T> implements InvalidPay<T> {
   const _$InvalidPay({@required this.failedValue})
       : assert(failedValue != null);
@@ -429,18 +452,19 @@ class _$InvalidPay<T> implements InvalidPay<T> {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
 
+  @JsonKey(ignore: true)
   @override
   $InvalidPayCopyWith<T, InvalidPay<T>> get copyWith =>
       _$InvalidPayCopyWithImpl<T, InvalidPay<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result empty(String failedValue),
-    @required Result invalidLength(String failedValue, int max),
-    @required Result invalidPay(String failedValue),
-    @required Result listTooLong(List<dynamic> failedValue, int max),
-    @required Result multiline(String failedValue),
+  TResult when<TResult extends Object>({
+    @required TResult empty(String failedValue),
+    @required TResult invalidLength(String failedValue, int max),
+    @required TResult invalidPay(String failedValue),
+    @required TResult listTooLong(List<dynamic> failedValue, int max),
+    @required TResult multiline(String failedValue),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -452,13 +476,13 @@ class _$InvalidPay<T> implements InvalidPay<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result empty(String failedValue),
-    Result invalidLength(String failedValue, int max),
-    Result invalidPay(String failedValue),
-    Result listTooLong(List<dynamic> failedValue, int max),
-    Result multiline(String failedValue),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult empty(String failedValue),
+    TResult invalidLength(String failedValue, int max),
+    TResult invalidPay(String failedValue),
+    TResult listTooLong(List<dynamic> failedValue, int max),
+    TResult multiline(String failedValue),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (invalidPay != null) {
@@ -469,12 +493,12 @@ class _$InvalidPay<T> implements InvalidPay<T> {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result empty(Empty<T> value),
-    @required Result invalidLength(InvalidLength<T> value),
-    @required Result invalidPay(InvalidPay<T> value),
-    @required Result listTooLong(ListTooLong<T> value),
-    @required Result multiline(Multiline<T> value),
+  TResult map<TResult extends Object>({
+    @required TResult empty(Empty<T> value),
+    @required TResult invalidLength(InvalidLength<T> value),
+    @required TResult invalidPay(InvalidPay<T> value),
+    @required TResult listTooLong(ListTooLong<T> value),
+    @required TResult multiline(Multiline<T> value),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -486,13 +510,13 @@ class _$InvalidPay<T> implements InvalidPay<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result empty(Empty<T> value),
-    Result invalidLength(InvalidLength<T> value),
-    Result invalidPay(InvalidPay<T> value),
-    Result listTooLong(ListTooLong<T> value),
-    Result multiline(Multiline<T> value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult empty(Empty<T> value),
+    TResult invalidLength(InvalidLength<T> value),
+    TResult invalidPay(InvalidPay<T> value),
+    TResult listTooLong(ListTooLong<T> value),
+    TResult multiline(Multiline<T> value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (invalidPay != null) {
@@ -506,9 +530,11 @@ abstract class InvalidPay<T> implements JobPostInputValidator<T> {
   const factory InvalidPay({@required String failedValue}) = _$InvalidPay<T>;
 
   String get failedValue;
+  @JsonKey(ignore: true)
   $InvalidPayCopyWith<T, InvalidPay<T>> get copyWith;
 }
 
+/// @nodoc
 abstract class $ListTooLongCopyWith<T, $Res> {
   factory $ListTooLongCopyWith(
           ListTooLong<T> value, $Res Function(ListTooLong<T>) then) =
@@ -516,6 +542,7 @@ abstract class $ListTooLongCopyWith<T, $Res> {
   $Res call({List<dynamic> failedValue, int max});
 }
 
+/// @nodoc
 class _$ListTooLongCopyWithImpl<T, $Res>
     extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $ListTooLongCopyWith<T, $Res> {
@@ -540,6 +567,7 @@ class _$ListTooLongCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$ListTooLong<T> implements ListTooLong<T> {
   const _$ListTooLong({@required this.failedValue, @required this.max})
       : assert(failedValue != null),
@@ -572,18 +600,19 @@ class _$ListTooLong<T> implements ListTooLong<T> {
       const DeepCollectionEquality().hash(failedValue) ^
       const DeepCollectionEquality().hash(max);
 
+  @JsonKey(ignore: true)
   @override
   $ListTooLongCopyWith<T, ListTooLong<T>> get copyWith =>
       _$ListTooLongCopyWithImpl<T, ListTooLong<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result empty(String failedValue),
-    @required Result invalidLength(String failedValue, int max),
-    @required Result invalidPay(String failedValue),
-    @required Result listTooLong(List<dynamic> failedValue, int max),
-    @required Result multiline(String failedValue),
+  TResult when<TResult extends Object>({
+    @required TResult empty(String failedValue),
+    @required TResult invalidLength(String failedValue, int max),
+    @required TResult invalidPay(String failedValue),
+    @required TResult listTooLong(List<dynamic> failedValue, int max),
+    @required TResult multiline(String failedValue),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -595,13 +624,13 @@ class _$ListTooLong<T> implements ListTooLong<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result empty(String failedValue),
-    Result invalidLength(String failedValue, int max),
-    Result invalidPay(String failedValue),
-    Result listTooLong(List<dynamic> failedValue, int max),
-    Result multiline(String failedValue),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult empty(String failedValue),
+    TResult invalidLength(String failedValue, int max),
+    TResult invalidPay(String failedValue),
+    TResult listTooLong(List<dynamic> failedValue, int max),
+    TResult multiline(String failedValue),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (listTooLong != null) {
@@ -612,12 +641,12 @@ class _$ListTooLong<T> implements ListTooLong<T> {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result empty(Empty<T> value),
-    @required Result invalidLength(InvalidLength<T> value),
-    @required Result invalidPay(InvalidPay<T> value),
-    @required Result listTooLong(ListTooLong<T> value),
-    @required Result multiline(Multiline<T> value),
+  TResult map<TResult extends Object>({
+    @required TResult empty(Empty<T> value),
+    @required TResult invalidLength(InvalidLength<T> value),
+    @required TResult invalidPay(InvalidPay<T> value),
+    @required TResult listTooLong(ListTooLong<T> value),
+    @required TResult multiline(Multiline<T> value),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -629,13 +658,13 @@ class _$ListTooLong<T> implements ListTooLong<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result empty(Empty<T> value),
-    Result invalidLength(InvalidLength<T> value),
-    Result invalidPay(InvalidPay<T> value),
-    Result listTooLong(ListTooLong<T> value),
-    Result multiline(Multiline<T> value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult empty(Empty<T> value),
+    TResult invalidLength(InvalidLength<T> value),
+    TResult invalidPay(InvalidPay<T> value),
+    TResult listTooLong(ListTooLong<T> value),
+    TResult multiline(Multiline<T> value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (listTooLong != null) {
@@ -652,9 +681,11 @@ abstract class ListTooLong<T> implements JobPostInputValidator<T> {
 
   List<dynamic> get failedValue;
   int get max;
+  @JsonKey(ignore: true)
   $ListTooLongCopyWith<T, ListTooLong<T>> get copyWith;
 }
 
+/// @nodoc
 abstract class $MultilineCopyWith<T, $Res> {
   factory $MultilineCopyWith(
           Multiline<T> value, $Res Function(Multiline<T>) then) =
@@ -662,6 +693,7 @@ abstract class $MultilineCopyWith<T, $Res> {
   $Res call({String failedValue});
 }
 
+/// @nodoc
 class _$MultilineCopyWithImpl<T, $Res>
     extends _$JobPostInputValidatorCopyWithImpl<T, $Res>
     implements $MultilineCopyWith<T, $Res> {
@@ -683,6 +715,7 @@ class _$MultilineCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$Multiline<T> implements Multiline<T> {
   const _$Multiline({@required this.failedValue}) : assert(failedValue != null);
 
@@ -707,18 +740,19 @@ class _$Multiline<T> implements Multiline<T> {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
 
+  @JsonKey(ignore: true)
   @override
   $MultilineCopyWith<T, Multiline<T>> get copyWith =>
       _$MultilineCopyWithImpl<T, Multiline<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result empty(String failedValue),
-    @required Result invalidLength(String failedValue, int max),
-    @required Result invalidPay(String failedValue),
-    @required Result listTooLong(List<dynamic> failedValue, int max),
-    @required Result multiline(String failedValue),
+  TResult when<TResult extends Object>({
+    @required TResult empty(String failedValue),
+    @required TResult invalidLength(String failedValue, int max),
+    @required TResult invalidPay(String failedValue),
+    @required TResult listTooLong(List<dynamic> failedValue, int max),
+    @required TResult multiline(String failedValue),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -730,13 +764,13 @@ class _$Multiline<T> implements Multiline<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result empty(String failedValue),
-    Result invalidLength(String failedValue, int max),
-    Result invalidPay(String failedValue),
-    Result listTooLong(List<dynamic> failedValue, int max),
-    Result multiline(String failedValue),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult empty(String failedValue),
+    TResult invalidLength(String failedValue, int max),
+    TResult invalidPay(String failedValue),
+    TResult listTooLong(List<dynamic> failedValue, int max),
+    TResult multiline(String failedValue),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (multiline != null) {
@@ -747,12 +781,12 @@ class _$Multiline<T> implements Multiline<T> {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result empty(Empty<T> value),
-    @required Result invalidLength(InvalidLength<T> value),
-    @required Result invalidPay(InvalidPay<T> value),
-    @required Result listTooLong(ListTooLong<T> value),
-    @required Result multiline(Multiline<T> value),
+  TResult map<TResult extends Object>({
+    @required TResult empty(Empty<T> value),
+    @required TResult invalidLength(InvalidLength<T> value),
+    @required TResult invalidPay(InvalidPay<T> value),
+    @required TResult listTooLong(ListTooLong<T> value),
+    @required TResult multiline(Multiline<T> value),
   }) {
     assert(empty != null);
     assert(invalidLength != null);
@@ -764,13 +798,13 @@ class _$Multiline<T> implements Multiline<T> {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result empty(Empty<T> value),
-    Result invalidLength(InvalidLength<T> value),
-    Result invalidPay(InvalidPay<T> value),
-    Result listTooLong(ListTooLong<T> value),
-    Result multiline(Multiline<T> value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult empty(Empty<T> value),
+    TResult invalidLength(InvalidLength<T> value),
+    TResult invalidPay(InvalidPay<T> value),
+    TResult listTooLong(ListTooLong<T> value),
+    TResult multiline(Multiline<T> value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (multiline != null) {
@@ -784,5 +818,6 @@ abstract class Multiline<T> implements JobPostInputValidator<T> {
   const factory Multiline({@required String failedValue}) = _$Multiline<T>;
 
   String get failedValue;
+  @JsonKey(ignore: true)
   $MultilineCopyWith<T, Multiline<T>> get copyWith;
 }

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepository extends IUserRepository {
   final Firestore _fireStore;
-
   UserRepository(this._fireStore);
 
   @override
@@ -12,34 +11,33 @@ class UserRepository extends IUserRepository {
     try {
       var userProfile;
       final userCollection = _fireStore.collection('users');
-      final userProfileSnapshot = await userCollection.document('userId').get();
+      print('####### Getting User Profile Data for user $userId');
+      final userProfileSnapshot = await userCollection.document(userId).get();
 
       if (userProfileSnapshot.exists) {
         userProfile = userProfileSnapshot.data;
-        print('User Profile Data: ${userProfile.toString()}');
+        print('####### User Profile Data: ${userProfile.toString()}');
       } else {
         // Throw Failure
         return null;
       }
-      return null; //UserProfile.fromJson(userProfile);
+      return UserProfile.fromJson(userProfile);
     } on Exception {
       return null;
     }
   }
 
   @override
-  Future<void> createUserProfile({UserProfile userProfile}) {
-    // TODO: implement createUserProfile
-    throw UnimplementedError();
+  Future updateUserProfile({String userId, UserProfile userProfile}) {
+    return null;
+    /*
+    _fireStore.collection('users').document(userId).setData({
+      userProfile.toJson();
+    });
+      */
   }
 
-  @override
-  Future<void> updateUserProfile({UserProfile userProfile}) {
-    // TODO: implement updateUserProfile
-    throw UnimplementedError();
-  }
-
-  /*
+/*
   UserRepositoryError _getBsiException(dynamic exception) {
     if (exception) {
       return UserRepositoryHttpError(exception.statusCode);
