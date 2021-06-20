@@ -7,6 +7,7 @@ import 'package:firebaseblocryze/features/user_profile/presentation/user_profile
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';
+import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,68 +15,83 @@ class UserProfilePage extends StatelessWidget {
   final user = UserMocks.getMockUser();
   @override
   Widget build(BuildContext context) {
+    final userId = BlocProvider.of<AuthBloc>(context).userId;
     final userBloc = BlocProvider.of<UserBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
-    final userId = authBloc.userId;
-    userBloc.add(UserProfileFetched(userId: userId));
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        iconTheme: Theme.of(context).iconTheme,
-        title: Text(
-          UserProfileString.profileTitle,
-          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
+    return BlocProvider.value(
+      value: userBloc..add(UserProfileFetched(userId: userId)),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          iconTheme: Theme.of(context).iconTheme,
+          title: Text(
+            UserProfileString.profileTitle,
+            style:
+                TextStyle(color: Theme.of(context).textTheme.headline6.color),
+          ),
+          actions: [
+            BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+              if (state is UserLoadSuccess) {
+                return IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        '/edit-profile',
+                        arguments: state.userProfile,
+                      );
+                    });
+              } else {
+                return SizedBox.shrink();
+              }
+            }),
+          ],
         ),
-        actions: [
-          BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-            if (state is UserLoadSuccess) {
-              return IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      '/edit-profile',
-                      arguments: state.userProfile,
-                    );
-                  });
-            } else {
-              return SizedBox.shrink();
-            }
-          }),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-            if (state is UserLoadSuccess) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProfilePageHeaderWidget(user: state.userProfile),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 6.0, right: 6.0),
-                    child: Divider(
-                      color: Colors.grey[300],
-                      thickness: 2.0,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+              if (state is UserLoadSuccess) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProfilePageHeaderWidget(user: state.userProfile),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6.0, right: 6.0),
+                      child: Divider(
+                        color: Colors.grey[300],
+                        thickness: 2.0,
+                      ),
                     ),
+                    _TabsSection(),
+                  ],
+                );
+              } else if (state is UserLoadInProgress) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is UserLoadFailure) {
+                return Center(
+                  child: Column(
+                    children: [
+                      Text('Oops, something went wrong!'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: RyzePrimaryButton(
+                            title: 'Retry',
+                            action: () {
+                              userBloc.add(UserProfileFetched(userId: userId));
+                            },
+                            isAffirmative: false),
+                      )
+                    ],
                   ),
-                  _TabsSection(),
-                ],
-              );
-            } else if (state is UserLoadInProgress) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is UserLoadFailure) {
-              return Center(
-                child: Text('Oops, something went wrong!'),
-              );
-            } else {
-              return const SizedBox.shrink(
-                key: Key('warrantyHub_emptyView'),
-              );
-            }
-          }),
+                );
+              } else {
+                return const SizedBox.shrink(
+                  key: Key('warrantyHub_emptyView'),
+                );
+              }
+            }),
+          ),
         ),
       ),
     );
