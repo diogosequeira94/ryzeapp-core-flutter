@@ -16,6 +16,7 @@ part 'auth_bloc.freezed.dart';
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _authFacade;
+  String userId;
 
   AuthBloc(this._authFacade) : super(const AuthState.initial());
 
@@ -36,7 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       authCheckRequested: (e) async* {
         final userOption = await _authFacade.getSignedInUser();
         yield userOption.fold(() => const AuthState.unauthenticated(), (user) {
-          print('####### LOG ####### User Id: ${user.id}');
+          userId = user.id.getOrCrash();
+          print('####### LOG ####### User Id: ${user.id.getOrCrash()}');
           return const AuthState.authenticated();
         });
       },

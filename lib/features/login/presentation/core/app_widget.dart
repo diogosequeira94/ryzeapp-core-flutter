@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/injection.dart';
+import 'package:firebaseblocryze/repository/user/user_repository.dart';
 import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/theme/bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +17,11 @@ class AppWidget extends StatelessWidget {
           create: (context) =>
               getIt<AuthBloc>()..add(const AuthEvent.authCheckFirstTimeUser()),
         ),
+        BlocProvider(create: (context) {
+          return UserBloc(
+            userRepository: UserRepository(getIt<Firestore>()),
+          );
+        }),
         BlocProvider(
           create: (context) => ThemeBloc(),
         ),

@@ -4,8 +4,8 @@ import 'package:meta/meta.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UserProfile extends Equatable {
-  final String name;
-  final String surname;
+  final String firstName;
+  final String lastName;
   final String about;
   final String email;
   final String dateOfBirth;
@@ -15,8 +15,8 @@ class UserProfile extends Equatable {
   final String education;
 
   const UserProfile({
-    @required this.name,
-    @required this.surname,
+    @required this.firstName,
+    @required this.lastName,
     @required this.about,
     @required this.email,
     @required this.dateOfBirth,
@@ -28,8 +28,8 @@ class UserProfile extends Equatable {
 
   @override
   List<Object> get props => [
-        name,
-        surname,
+        firstName,
+        lastName,
         about,
         email,
         dateOfBirth,

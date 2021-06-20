@@ -6,6 +6,7 @@ import 'bloc.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository userRepository;
+  UserProfile _userProfile;
 
   UserBloc({@required this.userRepository})
       : assert(userRepository != null),
@@ -27,8 +28,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return;
     }
 
-    UserProfile _userProfile;
+
     yield UserLoadInProgress();
+    print('######### GETTING THE PROFILE.... INSIDE BLOC');
 
     try {
       _userProfile =
@@ -43,6 +45,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return;
     }
 
+    print('######### User Profile Data in BLoc: $_userProfile');
     yield UserLoadSuccess(userProfile: _userProfile);
   }
 }
