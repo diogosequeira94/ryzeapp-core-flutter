@@ -3,7 +3,7 @@ import 'package:firebaseblocryze/features/account/presentation/widgets/horizonta
 import 'package:firebaseblocryze/features/account/presentation/widgets/section_header_widget.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/user_profile_page.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/pages/user_profile_page.dart';
 import 'package:firebaseblocryze/uikit/theme/app_themes.dart';
 import 'package:firebaseblocryze/uikit/theme/bloc/theme_bloc.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';

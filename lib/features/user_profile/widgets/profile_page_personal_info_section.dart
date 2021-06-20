@@ -20,24 +20,31 @@ class ProfilePagePersonalInfo extends StatelessWidget {
         children: [
           Text(
             'Personal',
-            style:
-            TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
-          SizedBox(height: 6),
-          Text(
-            'Email: $email',
-            style: TextStyle(fontSize: 14.0),
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: Text(
+              'Email: $email',
+              style: TextStyle(fontSize: 14.0),
+            ),
           ),
-          SizedBox(height: 6),
-          Text(
-            'Date of Birth: $dateOfBirth',
-            style: TextStyle(fontSize: 14.0),
-          ),
-          SizedBox(height: 6),
-          Text(
-            'Location: $city',
-            style: TextStyle(fontSize: 14.0),
-          ),
+          if (dateOfBirth != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 6.0),
+              child: Text(
+                'Date of Birth: $dateOfBirth',
+                style: TextStyle(fontSize: 14.0),
+              ),
+            ),
+          if (city != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 6.0),
+              child: Text(
+                'Location: $city',
+                style: TextStyle(fontSize: 14.0),
+              ),
+            ),
           SizedBox(height: 6),
           Text(
             'Drivers Licence: Yes',

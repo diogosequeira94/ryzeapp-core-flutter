@@ -1,9 +1,9 @@
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/about_section_tab.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/activity_section_tab.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/education_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/tabs/about_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/tabs/activity_section_tab.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/tabs/education_section_tab.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';
@@ -27,30 +27,55 @@ class UserProfilePage extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
-          IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/edit-profile');
-              }),
+          BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+            if (state is UserLoadSuccess) {
+              return IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      '/edit-profile',
+                      arguments: state.userProfile,
+                    );
+                  });
+            } else {
+              return SizedBox.shrink();
+            }
+          }),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ProfilePageHeaderWidget(user: user),
-              Padding(
-                padding: const EdgeInsets.only(left: 6.0, right: 6.0),
-                child: Divider(
-                  color: Colors.grey[300],
-                  thickness: 2.0,
-                ),
-              ),
-              _TabsSection(),
-            ],
-          ),
+          child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+            if (state is UserLoadSuccess) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ProfilePageHeaderWidget(user: state.userProfile),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6.0, right: 6.0),
+                    child: Divider(
+                      color: Colors.grey[300],
+                      thickness: 2.0,
+                    ),
+                  ),
+                  _TabsSection(),
+                ],
+              );
+            } else if (state is UserLoadInProgress) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is UserLoadFailure) {
+              return Center(
+                child: Text('Oops, something went wrong!'),
+              );
+            } else {
+              return const SizedBox.shrink(
+                key: Key('warrantyHub_emptyView'),
+              );
+            }
+          }),
         ),
       ),
     );

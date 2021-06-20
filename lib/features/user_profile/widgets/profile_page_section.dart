@@ -24,7 +24,7 @@ class ProfilePageSection extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            body,
+            body ?? 'You have not wrote anything about yourself yet, write some lines about you :)',
             style: TextStyle(fontSize: 14.0),
           ),
           const SizedBox(height: 6),

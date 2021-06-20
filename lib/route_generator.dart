@@ -63,7 +63,7 @@ class RouteGenerator {
       case '/messages':
         return MaterialPageRoute(builder: (_) => ChatMessagesPage());
       case '/edit-profile':
-        return MaterialPageRoute(builder: (_) => EditInformationPage());
+        return MaterialPageRoute(builder: (_) => EditInformationPage(args));
       case '/change-password':
         return MaterialPageRoute(builder: (_) => ChangePassword());
       case '/qrcode-generator':

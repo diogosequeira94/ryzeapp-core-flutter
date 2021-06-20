@@ -15,6 +15,8 @@ class UserProfile extends Equatable {
   final bool isDriver;
   final String skills;
   final String education;
+  final int jobsCompleted;
+  final int noShows;
 
   const UserProfile({
     @required this.firstName,
@@ -26,6 +28,8 @@ class UserProfile extends Equatable {
     @required this.isDriver,
     @required this.skills,
     @required this.education,
+    @required this.jobsCompleted,
+    @required this.noShows,
   });
 
   @override
@@ -39,6 +43,8 @@ class UserProfile extends Equatable {
         isDriver,
         skills,
         education,
+        jobsCompleted,
+        noShows,
       ];
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>

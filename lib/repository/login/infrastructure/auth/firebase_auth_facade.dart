@@ -46,6 +46,7 @@ class FirebaseAuthFacade implements IAuthFacade {
               email: emailAddressString, password: passwordString)
           .then((result) {
         _fireStore.collection('users').document(result.user.uid).setData({
+          'userId': result.user.uid,
           'firstName': firstNameString,
           'lastName': lastNameString,
           'email': emailAddressString,
@@ -117,7 +118,7 @@ class FirebaseAuthFacade implements IAuthFacade {
       await _firebaseAuth.sendPasswordResetEmail(email: emailAddressString);
       return right(unit);
     } on PlatformException catch (e) {
-      if(e.code == 'ERROR_USER_NOT_FOUND'){
+      if (e.code == 'ERROR_USER_NOT_FOUND') {
         return left(const AuthFailure.emailNotFound());
       } else {
         return left(const AuthFailure.serverError());

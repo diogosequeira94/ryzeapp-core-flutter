@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebaseblocryze/features/user_profile/model/user_profile_model.dart';
+import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePageHeaderWidget extends StatelessWidget {
-  final UserProfileModel user;
+  final UserProfile user;
   final bool isEditable;
 
   ProfilePageHeaderWidget({@required this.user, this.isEditable = false});
@@ -20,9 +20,11 @@ class ProfilePageHeaderWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ProfileAvatar(user.profilePic),
+            _ProfileAvatar(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQU03HNQk4dsJUHxDwZuJaAPI164FWc6wjg&usqp=CAU'),
             SizedBox(width: 20.0),
-            _DetailsRow(user.name, user.jobTitle),
+            _DetailsRow(
+                '${user.firstName} ${user.lastName}', 'Software Developer'),
           ],
         ),
       ),

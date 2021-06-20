@@ -17,6 +17,8 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
     isDriver: json['isDriver'] as bool,
     skills: json['skills'] as String,
     education: json['education'] as String,
+    jobsCompleted: json['jobsCompleted'] as int,
+    noShows: json['noShows'] as int,
   );
 }
 
@@ -31,4 +33,6 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'isDriver': instance.isDriver,
       'skills': instance.skills,
       'education': instance.education,
+      'jobsCompleted': instance.jobsCompleted,
+      'noShows': instance.noShows,
     };

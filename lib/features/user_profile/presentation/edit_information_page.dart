@@ -5,12 +5,15 @@ import 'package:firebaseblocryze/features/user_profile/utils/user_profile_string
 import 'package:firebaseblocryze/features/user_profile/widgets/date_of_birth_picker.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_section.dart';
+import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditInformationPage extends StatelessWidget {
-  final user = UserMocks.getMockUser();
+  final UserProfile userProfile;
+
+  const EditInformationPage(this.userProfile);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +31,7 @@ class EditInformationPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProfilePageHeaderWidget(user: user),
+              ProfilePageHeaderWidget(user: userProfile),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, left: 6.0, right: 6.0),
                 child: Divider(
@@ -60,9 +63,10 @@ class EditInformationPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 24.0),
                 child: ProfilePageSection(
-                    title: UserProfileString.attachmentsSection,
-                    body: HomePageStrings.dummyProfileSection,
-                hasDivider: false,),
+                  title: UserProfileString.attachmentsSection,
+                  body: HomePageStrings.dummyProfileSection,
+                  hasDivider: false,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 24.0),
@@ -195,7 +199,7 @@ class _PhoneNumberInput extends StatelessWidget {
             borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
           ),
         ),
-        onChanged: (city){},
+        onChanged: (city) {},
       ),
     );
   }
