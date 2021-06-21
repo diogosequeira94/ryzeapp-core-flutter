@@ -66,8 +66,8 @@ class UserProfilePage extends StatelessWidget {
                 );
               } else if (state is UserLoadInProgress) {
                 return Container(
-                  height: 150,
-                  width: 150,
+                  height: 400,
+                  width: double.infinity,
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),

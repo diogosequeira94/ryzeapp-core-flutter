@@ -59,17 +59,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await userRepository.updateUserProfile(
           userId: event.userId, userProfile: event.userProfile);
     } on Exception {
-      yield UserLoadFailure(errorMessage: 'FAIL');
+      yield UserProfileEditFailure(errorMessage: 'FAIL');
       return;
     }
 
     if (_userProfile == null) {
-      yield UserLoadFailure(errorMessage: 'EMPTY OBJECT');
+      yield UserProfileEditFailure(errorMessage: 'EMPTY OBJECT');
       return;
     }
 
     print(
-        '######### User Profile Data in BLoc: ${_userProfile.toJson().toString()}');
-    yield UserLoadSuccess(userProfile: _userProfile);
+        '######### User Profile Updated: ${_userProfile.toJson().toString()}');
+    yield UserProfileEditSuccess();
   }
 }

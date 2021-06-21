@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/injection.dart';
@@ -19,7 +20,9 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider(create: (context) {
           return UserBloc(
-            userRepository: UserRepository(getIt<Firestore>()),
+            userRepository: UserRepository(
+                fireStore: getIt<Firestore>(),
+                firebaseStorage: getIt<FirebaseStorage>()),
           );
         }),
         BlocProvider(

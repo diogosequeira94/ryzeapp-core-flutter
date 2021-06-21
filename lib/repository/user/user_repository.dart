@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/repository/user/i_user_repository.dart';
 import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
@@ -8,15 +7,15 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 
 class UserRepository extends IUserRepository {
-  final Firestore _fireStore;
-  final FirebaseStorage _firebaseStorage;
-  UserRepository(this._fireStore, this._firebaseStorage);
+  final Firestore fireStore;
+  final FirebaseStorage firebaseStorage;
+  UserRepository({this.fireStore, this.firebaseStorage});
 
   @override
   Future<UserProfile> getUserProfileInfo({String userId}) async {
     try {
       var userProfile;
-      final userCollection = _fireStore.collection('users');
+      final userCollection = fireStore.collection('users');
       print('####### Getting User Profile Data for user $userId');
       final userProfileSnapshot = await userCollection.document(userId).get();
 
@@ -35,7 +34,7 @@ class UserRepository extends IUserRepository {
 
   @override
   Future updateUserProfile({String userId, UserProfile userProfile}) {
-    return _fireStore
+    return fireStore
         .collection('users')
         .document(userId)
         .setData(userProfile.toJson());
@@ -44,7 +43,7 @@ class UserRepository extends IUserRepository {
   Future<String> uploadJobImage(File _image) async {
     if (_image != null) {
       try {
-        final storageReference = _firebaseStorage
+        final storageReference = firebaseStorage
             .ref()
             .child('profileImages/${basename(_image.path)}');
         final uploadTask = storageReference.putFile(_image);

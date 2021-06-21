@@ -71,10 +71,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 thickness: 2.0,
               ),
             ),
-            _AboutInput(),
+            _AboutInput(widget.userProfile.about),
             DateOfBirthPicker(),
-            _CityInput(),
-            _PhoneNumberInput(),
+            _CityInput(widget.userProfile.city),
+            _PhoneNumberInput(widget.userProfile.phoneNumber),
             _EducationInput(),
             _SkillsInput(),
             Padding(
@@ -112,6 +112,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
 }
 
 class _AboutInput extends StatelessWidget {
+  final String about;
+  const _AboutInput(this.about);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
@@ -126,6 +128,7 @@ class _AboutInput extends StatelessWidget {
               maxLength: 500,
               keyboardType: TextInputType.text,
               enabled: true,
+              initialValue: about,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: 'About',
@@ -194,6 +197,8 @@ class _SkillsInput extends StatelessWidget {
 }
 
 class _CityInput extends StatelessWidget {
+  final String city;
+  const _CityInput(this.city);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
@@ -206,6 +211,7 @@ class _CityInput extends StatelessWidget {
           keyboardType: TextInputType.text,
           enabled: true,
           textInputAction: TextInputAction.next,
+          initialValue: city ?? '',
           decoration: InputDecoration(
             labelText: 'City',
             hintText: 'E.g Lisbon',
@@ -224,6 +230,8 @@ class _CityInput extends StatelessWidget {
 }
 
 class _PhoneNumberInput extends StatelessWidget {
+  final String phoneNumber;
+  const _PhoneNumberInput(this.phoneNumber);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
@@ -236,6 +244,7 @@ class _PhoneNumberInput extends StatelessWidget {
           keyboardType: TextInputType.number,
           enabled: true,
           textInputAction: TextInputAction.next,
+          initialValue: phoneNumber ?? '',
           decoration: InputDecoration(
             labelText: 'Phone Number',
             errorText:
@@ -298,8 +307,8 @@ class _CreateJobButton extends StatelessWidget {
           isDriver: false,
           skills: null,
           education: null,
-          jobsCompleted: userProfile.jobsCompleted.toInt(),
-          noShows: userProfile.noShows.toInt(),
+          jobsCompleted: null,
+          noShows: null,
         ),
         userId: userId,
         profileImage: formState.profilePicture));
