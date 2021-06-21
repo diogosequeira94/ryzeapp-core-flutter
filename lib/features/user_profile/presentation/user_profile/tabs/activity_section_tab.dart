@@ -1,7 +1,7 @@
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_job_activity.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_job_statistics.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_reviews_section.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/activity_tab/profile_job_activity.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/activity_tab/profile_job_statistics.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/activity_tab/profile_reviews_section.dart';
 import 'package:flutter/material.dart';
 
 class ActivitySectionTab extends StatelessWidget {

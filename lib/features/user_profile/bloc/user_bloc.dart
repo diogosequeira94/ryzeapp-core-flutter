@@ -17,18 +17,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserEvent event,
   ) async* {
     if (event is UserProfileFetched) {
-      yield* _mapWarrantyPlansFetchedToState(event);
+      yield* _mapUserProfileFetchedToState(event);
+    } else if (event is UserProfileSavePressed) {
+      yield* _mapUserProfileSavePressedToState(event);
     }
   }
 
-  Stream<UserState> _mapWarrantyPlansFetchedToState(
+  Stream<UserState> _mapUserProfileFetchedToState(
       UserProfileFetched event) async* {
     if (event.userId == null) {
       yield UserLoadFailure(errorMessage: 'Null ID');
       return;
     }
-
-
     yield UserLoadInProgress();
     print('######### GETTING THE PROFILE.... INSIDE BLOC');
 
@@ -45,7 +45,31 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return;
     }
 
-    print('######### User Profile Data in BLoc: ${_userProfile.toJson().toString()}');
+    print(
+        '######### User Profile Data in BLoc: ${_userProfile.toJson().toString()}');
+    yield UserLoadSuccess(userProfile: _userProfile);
+  }
+
+  Stream<UserState> _mapUserProfileSavePressedToState(
+      UserProfileSavePressed event) async* {
+    yield UserProfileEditInProgress();
+    print('######### UPDATING THE PROFILE.... INSIDE BLOC');
+
+    try {
+      await userRepository.updateUserProfile(
+          userId: event.userId, userProfile: event.userProfile);
+    } on Exception {
+      yield UserLoadFailure(errorMessage: 'FAIL');
+      return;
+    }
+
+    if (_userProfile == null) {
+      yield UserLoadFailure(errorMessage: 'EMPTY OBJECT');
+      return;
+    }
+
+    print(
+        '######### User Profile Data in BLoc: ${_userProfile.toJson().toString()}');
     yield UserLoadSuccess(userProfile: _userProfile);
   }
 }

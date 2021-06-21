@@ -1,10 +1,16 @@
+import 'dart:io';
+import 'package:dartz/dartz.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/repository/user/i_user_repository.dart';
 import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart';
 
 class UserRepository extends IUserRepository {
   final Firestore _fireStore;
-  UserRepository(this._fireStore);
+  final FirebaseStorage _firebaseStorage;
+  UserRepository(this._fireStore, this._firebaseStorage);
 
   @override
   Future<UserProfile> getUserProfileInfo({String userId}) async {
@@ -29,12 +35,34 @@ class UserRepository extends IUserRepository {
 
   @override
   Future updateUserProfile({String userId, UserProfile userProfile}) {
+    return _fireStore
+        .collection('users')
+        .document(userId)
+        .setData(userProfile.toJson());
+  }
+
+  Future<String> uploadJobImage(File _image) async {
+    if (_image != null) {
+      try {
+        final storageReference = _firebaseStorage
+            .ref()
+            .child('profileImages/${basename(_image.path)}');
+        final uploadTask = storageReference.putFile(_image);
+        await uploadTask.onComplete;
+        String returnURL;
+        await storageReference.getDownloadURL().then((fileURL) {
+          returnURL = fileURL;
+        });
+        return returnURL;
+      } on PlatformException catch (e) {
+        if (e.code == 'DATA_LOSS') {
+          return 'DATA FAILED';
+        } else {
+          return 'UNEXPECTED ERROR';
+        }
+      }
+    }
     return null;
-    /*
-    _fireStore.collection('users').document(userId).setData({
-      userProfile.toJson();
-    });
-      */
   }
 
 /*

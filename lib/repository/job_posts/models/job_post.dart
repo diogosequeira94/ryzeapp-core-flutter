@@ -7,6 +7,7 @@ part 'job_post.g.dart';
 @JsonSerializable(explicitToJson: true)
 class JobPost extends Equatable {
   final String jobID;
+  final String posterID;
   final String title;
   final String description;
   final String imageUrl;
@@ -19,6 +20,7 @@ class JobPost extends Equatable {
 
   const JobPost(
       {@required this.jobID,
+      @required this.posterID,
       @required this.title,
       @required this.description,
       @required this.imageUrl,
@@ -32,6 +34,7 @@ class JobPost extends Equatable {
   @override
   List<Object> get props => [
         jobID,
+        posterID,
         title,
         description,
         imageUrl,
@@ -45,6 +48,7 @@ class JobPost extends Equatable {
 
   JobPost copyWith({
     String jobID,
+    String posterID,
     String title,
     String description,
     String imageUrl,
@@ -57,6 +61,7 @@ class JobPost extends Equatable {
   }) {
     return JobPost(
       jobID: jobID ?? this.jobID,
+      posterID: posterID ?? this.posterID,
       title: title ?? this.title,
       description: description ?? this.description,
       imageUrl: imageUrl ?? this.imageUrl,

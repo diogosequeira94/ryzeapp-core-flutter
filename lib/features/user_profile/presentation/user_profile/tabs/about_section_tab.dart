@@ -3,8 +3,8 @@ import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_personal_info_section.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_section.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/about_tab/profile_page_personal_info_section.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

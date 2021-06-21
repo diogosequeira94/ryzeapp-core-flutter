@@ -6,7 +6,7 @@ import 'package:firebaseblocryze/features/user_profile/presentation/user_profile
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/tabs/education_section_tab.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_header.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_header.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,8 +65,12 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 );
               } else if (state is UserLoadInProgress) {
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  height: 150,
+                  width: 150,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               } else if (state is UserLoadFailure) {
                 return Center(

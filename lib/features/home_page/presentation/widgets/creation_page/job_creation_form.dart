@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc
 import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/creation_page/job_category_picker.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
@@ -264,8 +265,10 @@ class _CreateJobButton extends StatelessWidget {
 
   _createJobPost(BuildContext context, JobFormState formState) {
     final _jobsBloc = context.read<JobsBloc>();
+    final userId = BlocProvider.of<AuthBloc>(context).userId;
     _jobsBloc.add(AddJobPost(
         JobPost(
+          posterID: userId,
           jobID: Uuid().v4(),
           title: formState.title.value,
           description: formState.description.value,

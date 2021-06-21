@@ -34,3 +34,15 @@ class UserLoadFailure extends UserState {
 }
 
 class UserNotImplementedFailure extends UserState {}
+
+class UserProfileEditInProgress extends UserState {}
+
+class UserProfileEditSuccess extends UserState {}
+
+class UserProfileEditFailure extends UserState {
+  final String errorMessage;
+
+  UserProfileEditFailure({@required this.errorMessage});
+  @override
+  List<Object> get props => [errorMessage];
+}

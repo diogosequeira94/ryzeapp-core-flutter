@@ -10,6 +10,7 @@ class UserProfile extends Equatable {
   final String lastName;
   final String about;
   final String email;
+  final String phoneNumber;
   final String dateOfBirth;
   final String city;
   final bool isDriver;
@@ -23,6 +24,7 @@ class UserProfile extends Equatable {
     @required this.lastName,
     @required this.about,
     @required this.email,
+    @required this.phoneNumber,
     @required this.dateOfBirth,
     @required this.city,
     @required this.isDriver,
@@ -38,6 +40,7 @@ class UserProfile extends Equatable {
         lastName,
         about,
         email,
+        phoneNumber,
         dateOfBirth,
         city,
         isDriver,

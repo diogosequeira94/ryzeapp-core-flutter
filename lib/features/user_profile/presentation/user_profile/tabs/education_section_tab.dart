@@ -1,7 +1,7 @@
 import 'package:firebaseblocryze/features/home_page/utils/home_page_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/profile_page_section.dart';
+import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_section.dart';
 import 'package:flutter/material.dart';
 
 class EducationSectionTab extends StatelessWidget {
