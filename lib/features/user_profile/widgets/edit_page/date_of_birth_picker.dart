@@ -7,9 +7,22 @@ class DateOfBirthPicker extends StatefulWidget {
 }
 
 class _DateOfBirthPickerState extends State<DateOfBirthPicker> {
-  String birthDateInString = 'Select your Birth Date';
+  String birthDateInString = 'Eg: 01/01/2000';
+  TextEditingController dateController;
   DateTime birthDate;
   bool isDateSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    dateController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    dateController = TextEditingController();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +41,8 @@ class _DateOfBirthPickerState extends State<DateOfBirthPicker> {
                 birthDate = datePick;
                 isDateSelected = true;
                 birthDateInString =
-                    '${birthDate.day}/${birthDate.month}/${birthDate.year}'; // 08/14/2019
+                    '${birthDate.day}/${birthDate.month}/${birthDate.year}';// 08/14/2019
+                dateController.text = birthDateInString;
               },
             );
           }
@@ -37,7 +51,29 @@ class _DateOfBirthPickerState extends State<DateOfBirthPicker> {
           children: [
             Image.asset(JobPostStrings.calendarIcon, width: 34.0, height: 34.0),
             const SizedBox(width: 10.0),
-            Text(birthDateInString),
+            Expanded(
+              child: TextFormField(
+                autofocus: false,
+                minLines: 1,
+                maxLines: 1,
+                maxLengthEnforced: true,
+                keyboardType: TextInputType.number,
+                enabled: true,
+                initialValue: birthDateInString,
+                controller: dateController,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  labelText: 'Date of Birth',
+                  labelStyle: TextStyle(height:0),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Theme.of(context).accentColor),
+                  ),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Theme.of(context).accentColor),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

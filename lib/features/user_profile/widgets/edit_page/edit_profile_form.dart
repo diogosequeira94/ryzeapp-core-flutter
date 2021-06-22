@@ -82,7 +82,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
               child: CheckboxListTile(
                   value: true,
                   title: Padding(
-                    padding: const EdgeInsets.only(bottom: 14.0),
+                    padding: const EdgeInsets.only(top: 6.0, bottom: 14.0),
                     child: Text(
                       'Driver',
                     ),
@@ -102,7 +102,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
-              child: _CreateJobButton(widget.userProfile),
+              child: _UpdateUserProfileButton(widget.userProfile),
             ),
           ],
         ),
@@ -122,7 +122,7 @@ class _AboutInput extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20.0),
           child: TextFormField(
               autofocus: false,
-              minLines: 3,
+              minLines: 1,
               maxLines: 16,
               maxLengthEnforced: true,
               maxLength: 500,
@@ -133,10 +133,14 @@ class _AboutInput extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'About',
                 hintText: 'Write something to describe yourself',
+                labelStyle: TextStyle(height:0),
                 errorText:
                     state.about.invalid ? 'About Section is Invalid' : null,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                ),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Theme.of(context).accentColor),
                 ),
               ),
               onChanged: (about) {
@@ -153,7 +157,7 @@ class _EducationInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20.0),
         child: TextFormField(
           autofocus: false,
-          minLines: 3,
+          minLines: 1,
           maxLines: 16,
           maxLengthEnforced: true,
           maxLength: 500,
@@ -162,9 +166,13 @@ class _EducationInput extends StatelessWidget {
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             labelText: 'Education',
+            labelStyle: TextStyle(height:0),
             hintText: 'Education About yourself',
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
             ),
           ),
         ));
@@ -178,7 +186,7 @@ class _SkillsInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20.0),
         child: TextFormField(
           autofocus: false,
-          minLines: 3,
+          minLines: 1,
           maxLines: 16,
           maxLengthEnforced: true,
           maxLength: 500,
@@ -188,11 +196,15 @@ class _SkillsInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Skills',
             hintText: 'Write something about your skills',
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+            labelStyle: TextStyle(height:0),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor)),
             ),
           ),
-        ));
+        );
   }
 }
 
@@ -214,11 +226,15 @@ class _CityInput extends StatelessWidget {
           initialValue: city ?? '',
           decoration: InputDecoration(
             labelText: 'City',
+            labelStyle: TextStyle(height:0),
             hintText: 'E.g Lisbon',
             errorText:
                 state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (city) =>
@@ -240,17 +256,21 @@ class _PhoneNumberInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
           autofocus: false,
-          maxLength: 15,
+          maxLength: 11,
           keyboardType: TextInputType.number,
           enabled: true,
           textInputAction: TextInputAction.next,
           initialValue: phoneNumber ?? '',
           decoration: InputDecoration(
             labelText: 'Phone Number',
+            labelStyle: TextStyle(height:0),
             errorText:
                 state.phoneNumber.invalid ? 'Invalid phone number.' : null,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (phoneNumber) => context
@@ -262,9 +282,9 @@ class _PhoneNumberInput extends StatelessWidget {
   }
 }
 
-class _CreateJobButton extends StatelessWidget {
+class _UpdateUserProfileButton extends StatelessWidget {
   final UserProfile userProfile;
-  const _CreateJobButton(this.userProfile);
+  const _UpdateUserProfileButton(this.userProfile);
   @override
   Widget build(BuildContext context) {
     final UserBloc _userBloc = BlocProvider.of<UserBloc>(context);

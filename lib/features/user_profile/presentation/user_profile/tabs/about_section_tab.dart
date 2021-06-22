@@ -26,7 +26,8 @@ class AboutSectionTab extends StatelessWidget {
         ProfilePagePersonalInfo(
             email: userProfileInfo.email,
             dateOfBirth: userProfileInfo.dateOfBirth,
-            city: userProfileInfo.city),
+            city: userProfileInfo.city,
+            phoneNumber: userProfileInfo.phoneNumber),
         ProfilePageSection(
           title: UserProfileString.skillsSection,
           body: HomePageStrings.dummyProfileSection,

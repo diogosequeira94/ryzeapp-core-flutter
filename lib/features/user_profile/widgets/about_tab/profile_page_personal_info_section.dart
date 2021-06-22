@@ -4,11 +4,13 @@ class ProfilePagePersonalInfo extends StatelessWidget {
   final String email;
   final String dateOfBirth;
   final String city;
+  final String phoneNumber;
 
   ProfilePagePersonalInfo({
     @required this.email,
     @required this.dateOfBirth,
     @required this.city,
+    @required this.phoneNumber,
   });
 
   @override
@@ -42,6 +44,14 @@ class ProfilePagePersonalInfo extends StatelessWidget {
               padding: const EdgeInsets.only(top: 6.0),
               child: Text(
                 'Location: $city',
+                style: TextStyle(fontSize: 14.0),
+              ),
+            ),
+          if (phoneNumber != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 6.0),
+              child: Text(
+                'Phone Number: $phoneNumber',
                 style: TextStyle(fontSize: 14.0),
               ),
             ),
