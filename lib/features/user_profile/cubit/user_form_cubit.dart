@@ -11,6 +11,7 @@ class UserProfileFormCubit extends Cubit<UserFormState> {
   UserProfileFormCubit() : super(const UserFormState());
 
   void aboutChanged(String value) {
+    print('#### ABOUT CHANGED: $value');
     final about = About.dirty(value);
     emit(state.copyWith(
       about: about,

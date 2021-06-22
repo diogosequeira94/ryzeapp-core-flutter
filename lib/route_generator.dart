@@ -16,7 +16,7 @@ import 'package:firebaseblocryze/features/login/presentation/pages/register_page
 import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/splash_page.dart';
 import 'package:firebaseblocryze/features/qrcode/presentation/pages/qr_code_page.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/edit_information_page.dart';
+import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/pages/edit_information_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

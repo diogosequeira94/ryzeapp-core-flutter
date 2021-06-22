@@ -1,3 +1,4 @@
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/cubit/user_form_cubit.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
@@ -6,7 +7,7 @@ import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'user_profile/pages/user_profile_page.dart';
+import 'user_profile_page.dart';
 
 class EditInformationPage extends StatelessWidget {
   final UserProfile userProfile;
@@ -34,14 +35,14 @@ class EditInformationPage extends StatelessWidget {
                 content: Text('ERROR'),
               ));
             } else if (state is UserProfileEditSuccess) {
+              final userId = BlocProvider.of<AuthBloc>(context).userId;
+              final _userBloc = context.read<UserBloc>();
               Scaffold.of(context).showSnackBar(SnackBar(
                 duration: const Duration(milliseconds: 1500),
                 content: Text('Success! Your profile was updated'),
               ));
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserProfilePage()),
-              );
+              _userBloc.add(UserProfileFetched(userId: userId));
+              Navigator.pop(context);
             }
           },
           child: EditProfileForm(userProfile),

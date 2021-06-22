@@ -23,6 +23,7 @@ class EditProfileForm extends StatefulWidget {
 }
 
 class _EditProfileFormState extends State<EditProfileForm> {
+  UserProfileFormCubit userFormCubit;
   FocusNode aboutNode;
   FocusNode phoneNumberNode;
   FocusNode cityNode;
@@ -34,6 +35,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
   @override
   void initState() {
     super.initState();
+    userFormCubit = BlocProvider.of<UserProfileFormCubit>(context);
     aboutNode = FocusNode();
     cityNode = FocusNode();
     phoneNumberNode = FocusNode();
@@ -72,7 +74,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
               ),
             ),
             _AboutInput(widget.userProfile.about),
-            _DateOfBirthPicker(),
+            _DateOfBirthPicker(widget.userProfile.dateOfBirth),
             _CityInput(widget.userProfile.city),
             _PhoneNumberInput(widget.userProfile.phoneNumber),
             _EducationInput(),
@@ -143,8 +145,8 @@ class _AboutInput extends StatelessWidget {
                   borderSide: BorderSide(color: Theme.of(context).accentColor),
                 ),
               ),
-              onChanged: (about) {
-                context.read<UserProfileFormCubit>().aboutChanged(about);
+              onChanged: (newAbout) {
+                context.read<UserProfileFormCubit>().aboutChanged(newAbout);
               }));
     });
   }
@@ -219,8 +221,8 @@ class _CityInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
           autofocus: false,
-          maxLength: 15,
-          keyboardType: TextInputType.text,
+          maxLength: 20,
+          keyboardType: TextInputType.name,
           enabled: true,
           textInputAction: TextInputAction.next,
           initialValue: city ?? '',
@@ -257,7 +259,7 @@ class _PhoneNumberInput extends StatelessWidget {
         child: TextFormField(
           autofocus: false,
           maxLength: 11,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.phone,
           enabled: true,
           textInputAction: TextInputAction.next,
           initialValue: phoneNumber ?? '',
@@ -276,6 +278,76 @@ class _PhoneNumberInput extends StatelessWidget {
           onChanged: (phoneNumber) => context
               .read<UserProfileFormCubit>()
               .phoneNumberChanged(phoneNumber),
+        ),
+      );
+    });
+  }
+}
+
+class _DateOfBirthPicker extends StatefulWidget {
+  final String dateOfBirth;
+  const _DateOfBirthPicker(this.dateOfBirth);
+  @override
+  _DateOfBirthPickerState createState() => _DateOfBirthPickerState();
+}
+
+class _DateOfBirthPickerState extends State<_DateOfBirthPicker> {
+  String birthDateInString = 'Eg: 01/01/2000';
+  DateTime birthDate;
+  bool isDateSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserProfileFormCubit, UserFormState>(
+        builder: (context, state) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: GestureDetector(
+          onTap: () async {
+            final initialDate = DateTime.now();
+            final datePick = await showDatePicker(
+                context: context,
+                initialDate: initialDate,
+                firstDate: DateTime(1940),
+                lastDate: DateTime(initialDate.year + 1));
+            if (datePick != null && datePick != birthDate) {
+              context.read<UserProfileFormCubit>().dateOfBirthSelected(
+                  '${birthDate.day}/${birthDate.month}/${birthDate.year}');
+              setState(
+                () {
+                  birthDate = datePick;
+                  isDateSelected = true;
+                  birthDateInString = state.dateOfBirth.value;
+                },
+              );
+            }
+          },
+          child: TextFormField(
+            key: Key(state.dateOfBirth.value),
+            autofocus: false,
+            minLines: 1,
+            maxLines: 1,
+            maxLengthEnforcement: MaxLengthEnforcement.enforced,
+            keyboardType: TextInputType.number,
+            enabled: false,
+            initialValue: widget.dateOfBirth ?? birthDateInString,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              labelText: 'Date of Birth',
+              labelStyle: TextStyle(height: 0),
+              errorText:
+                  state.dateOfBirth.invalid ? 'Invalid Date of Birth' : null,
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).accentColor),
+              ),
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).accentColor),
+              ),
+            ),
+            onChanged: (dateOfBirth) => context
+                .read<UserProfileFormCubit>()
+                .dateOfBirthSelected(dateOfBirth),
+          ),
         ),
       );
     });
@@ -313,6 +385,7 @@ class _UpdateUserProfileButton extends StatelessWidget {
       BuildContext context, UserProfile userProfile, UserFormState formState) {
     final _userBloc = context.read<UserBloc>();
     final userId = BlocProvider.of<AuthBloc>(context).userId;
+    print('######### UPDATING WITH NEW VALUE : ${formState.about.value}');
     _userBloc.add(UserProfileSavePressed(
         userProfile: UserProfile(
           firstName: userProfile.firstName,
@@ -320,7 +393,7 @@ class _UpdateUserProfileButton extends StatelessWidget {
           about: formState.about.value,
           email: userProfile.email,
           phoneNumber: formState.phoneNumber.value,
-          dateOfBirth: null,
+          dateOfBirth: formState.dateOfBirth.value,
           city: formState.city.value,
           isDriver: false,
           skills: null,
@@ -352,69 +425,5 @@ class _UpdateUserProfileButton extends StatelessWidget {
         _updateUserProfilePost(context, userProfile, formState);
       },
     )..show();
-  }
-}
-
-class _DateOfBirthPicker extends StatefulWidget {
-  @override
-  _DateOfBirthPickerState createState() => _DateOfBirthPickerState();
-}
-
-class _DateOfBirthPickerState extends State<_DateOfBirthPicker> {
-  String birthDateInString = 'Eg: 01/01/2000';
-  DateTime birthDate;
-  bool isDateSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: GestureDetector(
-        onTap: () async {
-          final initialDate = DateTime.now();
-          final datePick = await showDatePicker(
-              context: context,
-              initialDate: initialDate,
-              firstDate: DateTime(1940),
-              lastDate: DateTime(initialDate.year + 1));
-          if (datePick != null && datePick != birthDate) {
-            setState(
-              () {
-                birthDate = datePick;
-                isDateSelected = true;
-                birthDateInString =
-                    '${birthDate.day}/${birthDate.month}/${birthDate.year}'; // 08/14/2019
-              },
-            );
-          }
-        },
-        child: Flexible(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 50.0),
-            child: TextFormField(
-              key: Key(birthDateInString),
-              autofocus: false,
-              minLines: 1,
-              maxLines: 1,
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              keyboardType: TextInputType.number,
-              enabled: false,
-              initialValue: birthDateInString,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                labelText: 'Date of Birth',
-                labelStyle: TextStyle(height: 0),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).accentColor),
-                ),
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).accentColor),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

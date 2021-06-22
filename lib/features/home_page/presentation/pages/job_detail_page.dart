@@ -68,7 +68,7 @@ class JobDetailPage extends StatelessWidget {
                         children: [
                           Flexible(
                               child: Text(
-                            'Posted by: RyzeApp',
+                            'Posted by: ${jobPost.posterID}',
                           )),
                           const SizedBox(width: 6.0),
                           if (isVerified)
@@ -128,6 +128,38 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16.0),
                     Text(
+                      'Start Date',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 6.0),
+                    Text(
+                      jobPost.startDate.isEmpty ? 'N/A' : jobPost.startDate,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      'End Date',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 6.0),
+                    Text(
+                      jobPost.endDate.isEmpty ? 'N/A' : jobPost.endDate,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    Text(
                       'Positions Available',
                       style: TextStyle(
                         fontSize: 18.0,
@@ -137,6 +169,22 @@ class JobDetailPage extends StatelessWidget {
                     const SizedBox(height: 6.0),
                     Text(
                       jobPost.slotsAvailable.toString(),
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      'Additional Information',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 6.0),
+                    Text(
+                      jobPost.additionalInfo ?? '',
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal,
