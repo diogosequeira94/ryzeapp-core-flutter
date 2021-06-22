@@ -22,12 +22,12 @@ class ProfilePageSection extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 8.0),
           Text(
             body ?? 'You have not wrote anything about yourself yet, write some lines about you :)',
             style: TextStyle(fontSize: 14.0),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 8.0),
           hasDivider
               ? Divider(
                   color: Colors.grey[300],

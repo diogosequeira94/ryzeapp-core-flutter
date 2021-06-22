@@ -7,10 +7,10 @@ import 'package:firebaseblocryze/features/user_profile/cubit/user_form_cubit.dar
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_header.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_section.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/edit_page/date_of_birth_picker.dart';
 import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
@@ -72,7 +72,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
               ),
             ),
             _AboutInput(widget.userProfile.about),
-            DateOfBirthPicker(),
+            _DateOfBirthPicker(),
             _CityInput(widget.userProfile.city),
             _PhoneNumberInput(widget.userProfile.phoneNumber),
             _EducationInput(),
@@ -124,7 +124,7 @@ class _AboutInput extends StatelessWidget {
               autofocus: false,
               minLines: 1,
               maxLines: 16,
-              maxLengthEnforced: true,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
               maxLength: 500,
               keyboardType: TextInputType.text,
               enabled: true,
@@ -133,7 +133,7 @@ class _AboutInput extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'About',
                 hintText: 'Write something to describe yourself',
-                labelStyle: TextStyle(height:0),
+                labelStyle: TextStyle(height: 0),
                 errorText:
                     state.about.invalid ? 'About Section is Invalid' : null,
                 focusedBorder: UnderlineInputBorder(
@@ -154,19 +154,19 @@ class _EducationInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 20.0),
+        padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
           autofocus: false,
           minLines: 1,
           maxLines: 16,
-          maxLengthEnforced: true,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
           maxLength: 500,
           keyboardType: TextInputType.text,
           enabled: true,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             labelText: 'Education',
-            labelStyle: TextStyle(height:0),
+            labelStyle: TextStyle(height: 0),
             hintText: 'Education About yourself',
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Theme.of(context).accentColor),
@@ -183,28 +183,28 @@ class _SkillsInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 20.0),
-        child: TextFormField(
-          autofocus: false,
-          minLines: 1,
-          maxLines: 16,
-          maxLengthEnforced: true,
-          maxLength: 500,
-          keyboardType: TextInputType.text,
-          enabled: true,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            labelText: 'Skills',
-            hintText: 'Write something about your skills',
-            labelStyle: TextStyle(height:0),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).accentColor),
-            ),
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).accentColor)),
-            ),
+      padding: const EdgeInsets.only(top: 8.0),
+      child: TextFormField(
+        autofocus: false,
+        minLines: 1,
+        maxLines: 16,
+        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+        maxLength: 500,
+        keyboardType: TextInputType.text,
+        enabled: true,
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          labelText: 'Skills',
+          hintText: 'Write something about your skills',
+          labelStyle: TextStyle(height: 0),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Theme.of(context).accentColor),
           ),
-        );
+          border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor)),
+        ),
+      ),
+    );
   }
 }
 
@@ -226,7 +226,7 @@ class _CityInput extends StatelessWidget {
           initialValue: city ?? '',
           decoration: InputDecoration(
             labelText: 'City',
-            labelStyle: TextStyle(height:0),
+            labelStyle: TextStyle(height: 0),
             hintText: 'E.g Lisbon',
             errorText:
                 state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
@@ -263,7 +263,7 @@ class _PhoneNumberInput extends StatelessWidget {
           initialValue: phoneNumber ?? '',
           decoration: InputDecoration(
             labelText: 'Phone Number',
-            labelStyle: TextStyle(height:0),
+            labelStyle: TextStyle(height: 0),
             errorText:
                 state.phoneNumber.invalid ? 'Invalid phone number.' : null,
             focusedBorder: UnderlineInputBorder(
@@ -287,8 +287,6 @@ class _UpdateUserProfileButton extends StatelessWidget {
   const _UpdateUserProfileButton(this.userProfile);
   @override
   Widget build(BuildContext context) {
-    final UserBloc _userBloc = BlocProvider.of<UserBloc>(context);
-
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, formState) {
@@ -354,5 +352,69 @@ class _UpdateUserProfileButton extends StatelessWidget {
         _updateUserProfilePost(context, userProfile, formState);
       },
     )..show();
+  }
+}
+
+class _DateOfBirthPicker extends StatefulWidget {
+  @override
+  _DateOfBirthPickerState createState() => _DateOfBirthPickerState();
+}
+
+class _DateOfBirthPickerState extends State<_DateOfBirthPicker> {
+  String birthDateInString = 'Eg: 01/01/2000';
+  DateTime birthDate;
+  bool isDateSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: GestureDetector(
+        onTap: () async {
+          final initialDate = DateTime.now();
+          final datePick = await showDatePicker(
+              context: context,
+              initialDate: initialDate,
+              firstDate: DateTime(1940),
+              lastDate: DateTime(initialDate.year + 1));
+          if (datePick != null && datePick != birthDate) {
+            setState(
+              () {
+                birthDate = datePick;
+                isDateSelected = true;
+                birthDateInString =
+                    '${birthDate.day}/${birthDate.month}/${birthDate.year}'; // 08/14/2019
+              },
+            );
+          }
+        },
+        child: Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 50.0),
+            child: TextFormField(
+              key: Key(birthDateInString),
+              autofocus: false,
+              minLines: 1,
+              maxLines: 1,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              keyboardType: TextInputType.number,
+              enabled: false,
+              initialValue: birthDateInString,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                labelText: 'Date of Birth',
+                labelStyle: TextStyle(height: 0),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                ),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

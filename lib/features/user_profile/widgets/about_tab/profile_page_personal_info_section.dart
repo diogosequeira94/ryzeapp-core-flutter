@@ -25,7 +25,7 @@ class ProfilePagePersonalInfo extends StatelessWidget {
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 6.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               'Email: $email',
               style: TextStyle(fontSize: 14.0),
@@ -33,7 +33,7 @@ class ProfilePagePersonalInfo extends StatelessWidget {
           ),
           if (dateOfBirth != null)
             Padding(
-              padding: const EdgeInsets.only(top: 6.0),
+              padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 'Date of Birth: $dateOfBirth',
                 style: TextStyle(fontSize: 14.0),
@@ -41,7 +41,7 @@ class ProfilePagePersonalInfo extends StatelessWidget {
             ),
           if (city != null)
             Padding(
-              padding: const EdgeInsets.only(top: 6.0),
+              padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 'Location: $city',
                 style: TextStyle(fontSize: 14.0),
@@ -49,18 +49,18 @@ class ProfilePagePersonalInfo extends StatelessWidget {
             ),
           if (phoneNumber != null)
             Padding(
-              padding: const EdgeInsets.only(top: 6.0),
+              padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 'Phone Number: $phoneNumber',
                 style: TextStyle(fontSize: 14.0),
               ),
             ),
-          SizedBox(height: 6),
+          SizedBox(height: 8.0),
           Text(
             'Drivers Licence: Yes',
             style: TextStyle(fontSize: 14.0),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 8.0),
           Divider(
             color: Colors.grey[300],
             thickness: 2.0,
