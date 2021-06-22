@@ -45,7 +45,7 @@ class _ProfileAvatar extends StatelessWidget {
         ),
         Positioned(
             bottom: 0.0,
-            right: 0.8,
+            right: 0.0,
             child: Container(
               width: 15,
               height: 15,

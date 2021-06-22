@@ -13,8 +13,11 @@ class JobPost extends Equatable {
   final String imageUrl;
   final String status;
   final String city;
+  final String startDate;
+  final String endDate;
   final String hourRate;
   final bool isRemote;
+  final String additionalInfo;
   final int slotsAvailable;
   final List<String> languages;
 
@@ -27,6 +30,9 @@ class JobPost extends Equatable {
       @required this.status,
       @required this.city,
       @required this.hourRate,
+      @required this.startDate,
+      @required this.endDate,
+      @required this.additionalInfo,
       @required this.isRemote,
       @required this.slotsAvailable,
       @required this.languages});
@@ -42,6 +48,9 @@ class JobPost extends Equatable {
         city,
         hourRate,
         isRemote,
+        startDate,
+        endDate,
+        additionalInfo,
         slotsAvailable,
         languages,
       ];
@@ -55,6 +64,9 @@ class JobPost extends Equatable {
     String status,
     String city,
     String hourRate,
+    String startDate,
+    String endDate,
+    String additionalInfo,
     bool isRemote,
     int slotsAvailable,
     List<String> languages,
@@ -69,6 +81,9 @@ class JobPost extends Equatable {
       city: city ?? this.city,
       hourRate: hourRate ?? this.hourRate,
       isRemote: isRemote ?? this.isRemote,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      additionalInfo: additionalInfo ?? this.additionalInfo,
       slotsAvailable: slotsAvailable ?? this.slotsAvailable,
       languages: languages ?? this.languages,
     );

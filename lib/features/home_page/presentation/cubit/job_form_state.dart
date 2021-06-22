@@ -9,6 +9,7 @@ class JobFormState extends Equatable {
     this.hourRate = const HourRate.pure(),
     this.startDateTime = '',
     this.endDateTime = '',
+    this.additionalInfo = '',
     this.isDisclaimerAccepted = false,
     this.status = FormzStatus.pure,
   });
@@ -20,11 +21,23 @@ class JobFormState extends Equatable {
   final HourRate hourRate;
   final String startDateTime;
   final String endDateTime;
+  final String additionalInfo;
   final bool isDisclaimerAccepted;
   final FormzStatus status;
 
   @override
-  List<Object> get props => [image, title, description, city, hourRate, startDateTime, endDateTime, isDisclaimerAccepted, status];
+  List<Object> get props => [
+        image,
+        title,
+        description,
+        city,
+        hourRate,
+        startDateTime,
+        endDateTime,
+        additionalInfo,
+        isDisclaimerAccepted,
+        status
+      ];
 
   JobFormState copyWith({
     File image,
@@ -35,6 +48,7 @@ class JobFormState extends Equatable {
     String startDateTime,
     String endDateTime,
     bool isDisclaimerAccepted,
+    String additionalInfo,
     FormzStatus status,
   }) {
     return JobFormState(
@@ -45,6 +59,7 @@ class JobFormState extends Equatable {
       hourRate: hourRate ?? this.hourRate,
       startDateTime: startDateTime ?? this.startDateTime,
       endDateTime: endDateTime ?? this.endDateTime,
+      additionalInfo: additionalInfo ?? this.additionalInfo,
       isDisclaimerAccepted: isDisclaimerAccepted ?? this.isDisclaimerAccepted,
       status: status ?? this.status,
     );

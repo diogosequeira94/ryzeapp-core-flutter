@@ -5,7 +5,8 @@ import 'package:meta/meta.dart';
 
 class JobDetailPage extends StatelessWidget {
   final JobPost jobPost;
-  JobDetailPage({@required this.jobPost});
+  final bool isVerified;
+  JobDetailPage({@required this.jobPost, this.isVerified = true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,7 @@ class JobDetailPage extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme,
         title: Text(
           'Job Details',
-          style: TextStyle(
-            color: Theme.of(context).textTheme.headline6.color
-          ),
+          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
         actions: [
           IconButton(icon: Icon(Icons.share), onPressed: () {}),
@@ -69,11 +68,13 @@ class JobDetailPage extends StatelessWidget {
                         children: [
                           Flexible(
                               child: Text(
-                            'RyzeApp',
+                            'Posted by: RyzeApp',
                           )),
                           const SizedBox(width: 6.0),
-                          Icon(Icons.check_circle,
-                              color: Theme.of(context).accentColor, size: 22.0),
+                          if (isVerified)
+                            Icon(Icons.check_circle,
+                                color: Theme.of(context).accentColor,
+                                size: 22.0),
                         ],
                       ),
                     ),

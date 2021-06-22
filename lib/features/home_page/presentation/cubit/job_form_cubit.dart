@@ -20,6 +20,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       endDateTime: state.endDateTime,
       image: state.image,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
       title: title,
       status: Formz.validate(
           [title, state.description, state.city, state.hourRate]),
@@ -32,6 +34,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDateTime: state.startDateTime,
       endDateTime: state.endDateTime,
       image: state.image,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       description: description,
       status: Formz.validate(
@@ -45,6 +49,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDateTime: state.startDateTime,
       endDateTime: state.endDateTime,
       image: state.image,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       city: city,
       status: Formz.validate(
@@ -58,6 +64,7 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDateTime: state.startDateTime,
       endDateTime: state.endDateTime,
       image: state.image,
+      additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       hourRate: hourRate,
       status: Formz.validate(
@@ -70,6 +77,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDateTime: state.startDateTime,
       endDateTime: state.endDateTime,
       image: state.image,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: value,
       status: Formz.validate(
           [state.title, state.description, state.city, state.hourRate]),
@@ -81,6 +90,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDateTime: state.startDateTime,
       endDateTime: state.endDateTime,
       image: imageFile,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       status: Formz.validate(
           [state.title, state.description, state.city, state.hourRate]),
@@ -92,6 +103,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDateTime: value,
       endDateTime: state.endDateTime,
       image: state.image,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       status: Formz.validate(
           [state.title, state.description, state.city, state.hourRate]),
@@ -103,7 +116,23 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDateTime: state.startDateTime,
       endDateTime: value,
       image: state.image,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
+      status: Formz.validate(
+          [state.title, state.description, state.city, state.hourRate]),
+    ));
+  }
+
+  void additionalInfoChanged(String additionalInfoValue) {
+    emit(state.copyWith(
+      startDateTime: state.startDateTime,
+      endDateTime: state.endDateTime,
+      image: state.image,
+      hourRate: state.hourRate,
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
+      title: state.title,
+      additionalInfo: additionalInfoValue,
       status: Formz.validate(
           [state.title, state.description, state.city, state.hourRate]),
     ));

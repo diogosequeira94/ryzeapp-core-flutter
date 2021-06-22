@@ -154,7 +154,7 @@ class _DescriptionInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
           autofocus: false,
-          maxLength: 50,
+          maxLength: 150,
           keyboardType: TextInputType.text,
           enabled: true,
           textInputAction: TextInputAction.next,
@@ -275,7 +275,10 @@ class _CreateJobButton extends StatelessWidget {
           status: 'Active',
           city: formState.city.value,
           imageUrl: null,
+          startDate: formState.startDateTime,
+          endDate: formState.endDateTime,
           hourRate: '${formState.hourRate.value}€ / h',
+          additionalInfo: formState.additionalInfo,
           isRemote: false,
           slotsAvailable: 1,
           languages: ['Portuguese'],
@@ -344,7 +347,7 @@ class _JobPhoto extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 24.0),
           child: InkWell(
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
+                borderRadius: BorderRadius.circular(12.0),
                 child: state.image != null
                     ? Image.file(
                         state.image,
@@ -491,8 +494,9 @@ class _AdditionalInformationInput extends StatelessWidget {
               borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
             ),
           ),
-          onChanged: (hourRate) =>
-              context.read<JobFormCubit>().hourRateChanged(hourRate),
+          onChanged: (additionalInfo) => context
+              .read<JobFormCubit>()
+              .additionalInfoChanged(additionalInfo),
         ),
       );
     });
