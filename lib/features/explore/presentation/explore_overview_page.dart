@@ -7,8 +7,8 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detai
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/job_categories_grid.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/home_page_section_header.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/job_categories_grid.dart';
 
 class ExploreOverviewPage extends StatefulWidget {
   ExploreOverviewPage({Key key}) : super(key: key);

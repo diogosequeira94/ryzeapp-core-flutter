@@ -1,6 +1,6 @@
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page_section_header.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/home_page_section_header.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';

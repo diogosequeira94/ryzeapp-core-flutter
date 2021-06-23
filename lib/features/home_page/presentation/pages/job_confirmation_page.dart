@@ -1,6 +1,4 @@
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page/confirmation_page_header.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page/job_disclaimer.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page/location_image_preview.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/confirmation_page/widgets.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
