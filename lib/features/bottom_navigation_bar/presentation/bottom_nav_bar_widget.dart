@@ -6,6 +6,9 @@ import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.
 import 'package:firebaseblocryze/features/explore/presentation/explore_overview_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +20,6 @@ class BottomNavBarWidget extends StatefulWidget {
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           } else if (state is BottomNavigationAccountPageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationAccountPageLoaded) {
-            return AccountOverviewPage();
+            final userId = BlocProvider.of<AuthBloc>(context).userId;
+            return BlocProvider.value(
+                value: BlocProvider.of<UserBloc>(context)
+                  ..add(UserProfileFetched(userId: userId)),
+                child: AccountOverviewPage());
           } else if (state is BottomNavigationExplorePageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationExplorePageLoaded) {

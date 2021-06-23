@@ -41,10 +41,21 @@ class _EditProfileFormState extends State<EditProfileForm> {
     userFormCubit = BlocProvider.of<UserProfileFormCubit>(context);
 
     //Add Default Values
-    userFormCubit.aboutChanged(widget.userProfile.about);
-    userFormCubit.cityChanged(widget.userProfile.city);
-    userFormCubit.phoneNumberChanged(widget.userProfile.phoneNumber);
-    userFormCubit.dateOfBirthSelected(widget.userProfile.dateOfBirth);
+    if (widget.userProfile.about != null) {
+      userFormCubit.aboutChanged(widget.userProfile.about);
+    }
+
+    if (widget.userProfile.city != null) {
+      userFormCubit.cityChanged(widget.userProfile.city);
+    }
+
+    if (widget.userProfile.phoneNumber != null) {
+      userFormCubit.phoneNumberChanged(widget.userProfile.phoneNumber);
+    }
+
+    if (widget.userProfile.dateOfBirth != null) {
+      userFormCubit.dateOfBirthSelected(widget.userProfile.dateOfBirth);
+    }
   }
 
   @override
@@ -64,7 +75,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfilePageHeaderWidget(user: widget.userProfile),
+            ProfilePageHeaderWidget(user: widget.userProfile, isEditing: true),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 6.0, right: 6.0),
               child: Divider(
@@ -117,7 +128,6 @@ class _AboutInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
         builder: (context, state) {
-      print('THE INITIAL VALUE IS: ${state.about.value}');
       return Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: TextFormField(
@@ -128,7 +138,7 @@ class _AboutInput extends StatelessWidget {
               maxLength: 500,
               keyboardType: TextInputType.text,
               enabled: true,
-              initialValue: state.about.value,
+              initialValue: state.about.value ?? '',
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: 'About',

@@ -6,7 +6,7 @@ import 'bloc.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository userRepository;
-  UserProfile _userProfile;
+  UserProfile userProfile;
 
   UserBloc({@required this.userRepository})
       : assert(userRepository != null),
@@ -33,21 +33,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     print('######### GETTING THE PROFILE.... INSIDE BLOC');
 
     try {
-      _userProfile =
+      userProfile =
           await userRepository.getUserProfileInfo(userId: event.userId);
     } on Exception {
       yield UserLoadFailure(errorMessage: 'FAIL');
       return;
     }
 
-    if (_userProfile == null) {
+    if (userProfile == null) {
       yield UserLoadFailure(errorMessage: 'EMPTY OBJECT');
       return;
     }
 
     print(
-        '######### User Profile Data in BLoc: ${_userProfile.toJson().toString()}');
-    yield UserLoadSuccess(userProfile: _userProfile);
+        '######### User Profile Data in BLoc: ${userProfile.toJson().toString()}');
+    yield UserLoadSuccess(userProfile: userProfile);
   }
 
   Stream<UserState> _mapUserProfileSavePressedToState(
@@ -63,13 +63,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return;
     }
 
-    if (_userProfile == null) {
+    if (userProfile == null) {
       yield UserProfileEditFailure(errorMessage: 'EMPTY OBJECT');
       return;
     }
 
-    print(
-        '######### User Profile Updated: ${_userProfile.toJson().toString()}');
+    print('######### User Profile Updated: ${userProfile.toJson().toString()}');
     yield UserProfileEditSuccess();
   }
 }

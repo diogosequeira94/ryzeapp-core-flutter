@@ -7,8 +7,6 @@ import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'user_profile_page.dart';
-
 class EditInformationPage extends StatelessWidget {
   final UserProfile userProfile;
 
@@ -31,16 +29,20 @@ class EditInformationPage extends StatelessWidget {
           listener: (context, state) {
             print(state.toString());
             if (state is UserProfileEditFailure) {
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text('ERROR'),
-              ));
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(content: Text('ERROR')),
+                );
             } else if (state is UserProfileEditSuccess) {
               final userId = BlocProvider.of<AuthBloc>(context).userId;
               final _userBloc = context.read<UserBloc>();
-              Scaffold.of(context).showSnackBar(SnackBar(
-                duration: const Duration(milliseconds: 1500),
-                content: Text('Success! Your profile was updated'),
-              ));
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                      content: Text('Success! Your profile was updated')),
+                );
               _userBloc.add(UserProfileFetched(userId: userId));
               Navigator.pop(context);
             }

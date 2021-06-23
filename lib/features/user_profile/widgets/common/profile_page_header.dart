@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebaseblocryze/features/user_profile/cubit/user_form_cubit.dart';
 import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePageHeaderWidget extends StatelessWidget {
   final UserProfile user;
-  final bool isEditable;
+  final bool isEditing;
 
-  ProfilePageHeaderWidget({@required this.user, this.isEditable = false});
+  ProfilePageHeaderWidget({@required this.user, this.isEditing = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +25,12 @@ class ProfilePageHeaderWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ProfileAvatar(
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQU03HNQk4dsJUHxDwZuJaAPI164FWc6wjg&usqp=CAU'),
+            GestureDetector(
+              onTap: () async => isEditing ? await getImage(context) : null,
+              child: _ProfileAvatar(
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQU03HNQk4dsJUHxDwZuJaAPI164FWc6wjg&usqp=CAU',
+                  isEditing),
+            ),
             SizedBox(width: 20.0),
             _DetailsRow(
                 '${user.firstName} ${user.lastName}', 'Software Developer'),
@@ -30,11 +39,21 @@ class ProfilePageHeaderWidget extends StatelessWidget {
       ),
     );
   }
+
+  Future getImage(BuildContext context) async {
+    ImagePicker picker = ImagePicker();
+    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final _image = File(pickedFile.path);
+      context.read<UserProfileFormCubit>().profilePictureSelected(_image);
+    }
+  }
 }
 
 class _ProfileAvatar extends StatelessWidget {
   final String profilePicUrl;
-  const _ProfileAvatar(this.profilePicUrl);
+  final bool isEditing;
+  const _ProfileAvatar(this.profilePicUrl, this.isEditing);
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -44,16 +63,35 @@ class _ProfileAvatar extends StatelessWidget {
           backgroundImage: NetworkImage(profilePicUrl),
         ),
         Positioned(
-            bottom: 0.0,
-            right: 0.0,
-            child: Container(
-              width: 15,
-              height: 15,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
-              ),
-            ))
+            bottom: isEditing ? null : 0.0,
+            right: isEditing ? null : 0.0,
+            left: isEditing ? 0.0 : null,
+            top: isEditing ? 0.0 : null,
+            child: isEditing
+                ? Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.black54,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Icon(
+                      Icons.edit,
+                      color: Colors.black54,
+                    ),
+                  )
+                : Container(
+                    width: 15,
+                    height: 15,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
+                  ))
       ],
     );
   }

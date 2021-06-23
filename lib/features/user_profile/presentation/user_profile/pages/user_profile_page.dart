@@ -17,85 +17,81 @@ class UserProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userId = BlocProvider.of<AuthBloc>(context).userId;
     final userBloc = BlocProvider.of<UserBloc>(context);
-    return BlocProvider.value(
-      value: userBloc..add(UserProfileFetched(userId: userId)),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          iconTheme: Theme.of(context).iconTheme,
-          title: Text(
-            UserProfileString.profileTitle,
-            style:
-                TextStyle(color: Theme.of(context).textTheme.headline6.color),
-          ),
-          actions: [
-            BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-              if (state is UserLoadSuccess) {
-                return IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        '/edit-profile',
-                        arguments: state.userProfile,
-                      );
-                    });
-              } else {
-                return SizedBox.shrink();
-              }
-            }),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconTheme: Theme.of(context).iconTheme,
+        title: Text(
+          UserProfileString.profileTitle,
+          style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-              if (state is UserLoadSuccess) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ProfilePageHeaderWidget(user: state.userProfile),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 6.0, right: 6.0),
-                      child: Divider(
-                        color: Colors.grey[300],
-                        thickness: 2.0,
-                      ),
+        actions: [
+          BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+            if (state is UserLoadSuccess) {
+              return IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      '/edit-profile',
+                      arguments: state.userProfile,
+                    );
+                  });
+            } else {
+              return SizedBox.shrink();
+            }
+          }),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+            if (state is UserLoadSuccess) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ProfilePageHeaderWidget(user: state.userProfile),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6.0, right: 6.0),
+                    child: Divider(
+                      color: Colors.grey[300],
+                      thickness: 2.0,
                     ),
-                    _TabsSection(),
+                  ),
+                  _TabsSection(),
+                ],
+              );
+            } else if (state is UserLoadInProgress) {
+              return Container(
+                height: 400,
+                width: double.infinity,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (state is UserLoadFailure) {
+              return Center(
+                child: Column(
+                  children: [
+                    Text('Oops, something went wrong!'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: RyzePrimaryButton(
+                          title: 'Retry',
+                          action: () {
+                            userBloc.add(UserProfileFetched(userId: userId));
+                          },
+                          isAffirmative: false),
+                    )
                   ],
-                );
-              } else if (state is UserLoadInProgress) {
-                return Container(
-                  height: 400,
-                  width: double.infinity,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              } else if (state is UserLoadFailure) {
-                return Center(
-                  child: Column(
-                    children: [
-                      Text('Oops, something went wrong!'),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: RyzePrimaryButton(
-                            title: 'Retry',
-                            action: () {
-                              userBloc.add(UserProfileFetched(userId: userId));
-                            },
-                            isAffirmative: false),
-                      )
-                    ],
-                  ),
-                );
-              } else {
-                return const SizedBox.shrink(
-                  key: Key('warrantyHub_emptyView'),
-                );
-              }
-            }),
-          ),
+                ),
+              );
+            } else {
+              return const SizedBox.shrink(
+                key: Key('warrantyHub_emptyView'),
+              );
+            }
+          }),
         ),
       ),
     );
