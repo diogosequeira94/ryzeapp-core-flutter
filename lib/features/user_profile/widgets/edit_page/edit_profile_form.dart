@@ -117,7 +117,7 @@ class _AboutInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
         builder: (context, state) {
-          print('THE INITIAL VALUE IS: ${state.about.value}');
+      print('THE INITIAL VALUE IS: ${state.about.value}');
       return Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: TextFormField(
@@ -309,14 +309,8 @@ class _DateOfBirthPickerState extends State<_DateOfBirthPicker> {
                 lastDate: DateTime(initialDate.year + 1));
             if (datePick != null && datePick != birthDate) {
               context.read<UserProfileFormCubit>().dateOfBirthSelected(
-                  '${birthDate.day}/${birthDate.month}/${birthDate.year}');
-              setState(
-                () {
-                  birthDate = datePick;
-                  isDateSelected = true;
-                  birthDateInString = state.dateOfBirth.value;
-                },
-              );
+                  '${datePick.day}/${datePick.month}/${datePick.year}');
+              isDateSelected = true;
             }
           },
           child: TextFormField(
