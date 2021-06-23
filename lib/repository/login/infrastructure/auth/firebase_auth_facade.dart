@@ -37,8 +37,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   }) async {
     final emailAddressString = email.getOrCrash();
     final passwordString = password.getOrCrash();
-    final firstNameString = firstName.getOrCrash();
-    final lastNameString = lastName.getOrCrash();
+    final firstNameString = firstName.getOrCrash()?.trim();
+    final lastNameString = lastName.getOrCrash()?.trim();
 
     try {
       await _firebaseAuth

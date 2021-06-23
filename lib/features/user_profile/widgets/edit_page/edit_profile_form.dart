@@ -28,21 +28,23 @@ class _EditProfileFormState extends State<EditProfileForm> {
   FocusNode phoneNumberNode;
   FocusNode cityNode;
   FocusNode submitNode;
-  TextEditingController aboutController;
-  TextEditingController phoneNumberController;
-  TextEditingController cityController;
 
   @override
   void initState() {
     super.initState();
-    userFormCubit = BlocProvider.of<UserProfileFormCubit>(context);
+
     aboutNode = FocusNode();
     cityNode = FocusNode();
     phoneNumberNode = FocusNode();
     submitNode = FocusNode();
-    aboutController = TextEditingController();
-    phoneNumberController = TextEditingController();
-    cityController = TextEditingController();
+
+    userFormCubit = BlocProvider.of<UserProfileFormCubit>(context);
+
+    //Add Default Values
+    userFormCubit.aboutChanged(widget.userProfile.about);
+    userFormCubit.cityChanged(widget.userProfile.city);
+    userFormCubit.phoneNumberChanged(widget.userProfile.phoneNumber);
+    userFormCubit.dateOfBirthSelected(widget.userProfile.dateOfBirth);
   }
 
   @override
@@ -52,9 +54,6 @@ class _EditProfileFormState extends State<EditProfileForm> {
     phoneNumberNode.dispose();
     cityNode.dispose();
     submitNode.dispose();
-    aboutController.dispose();
-    phoneNumberController.dispose();
-    cityController.dispose();
   }
 
   @override
@@ -73,10 +72,10 @@ class _EditProfileFormState extends State<EditProfileForm> {
                 thickness: 2.0,
               ),
             ),
-            _AboutInput(widget.userProfile.about),
-            _DateOfBirthPicker(widget.userProfile.dateOfBirth),
-            _CityInput(widget.userProfile.city),
-            _PhoneNumberInput(widget.userProfile.phoneNumber),
+            _AboutInput(),
+            _DateOfBirthPicker(),
+            _CityInput(),
+            _PhoneNumberInput(),
             _EducationInput(),
             _SkillsInput(),
             Padding(
@@ -114,12 +113,11 @@ class _EditProfileFormState extends State<EditProfileForm> {
 }
 
 class _AboutInput extends StatelessWidget {
-  final String about;
-  const _AboutInput(this.about);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
         builder: (context, state) {
+          print('THE INITIAL VALUE IS: ${state.about.value}');
       return Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: TextFormField(
@@ -130,7 +128,7 @@ class _AboutInput extends StatelessWidget {
               maxLength: 500,
               keyboardType: TextInputType.text,
               enabled: true,
-              initialValue: about,
+              initialValue: state.about.value,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: 'About',
@@ -145,8 +143,9 @@ class _AboutInput extends StatelessWidget {
                   borderSide: BorderSide(color: Theme.of(context).accentColor),
                 ),
               ),
-              onChanged: (newAbout) {
-                context.read<UserProfileFormCubit>().aboutChanged(newAbout);
+              onChanged: (about) {
+                print('On Changed About: $about');
+                context.read<UserProfileFormCubit>().aboutChanged(about);
               }));
     });
   }
@@ -211,8 +210,6 @@ class _SkillsInput extends StatelessWidget {
 }
 
 class _CityInput extends StatelessWidget {
-  final String city;
-  const _CityInput(this.city);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
@@ -220,36 +217,35 @@ class _CityInput extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
-          autofocus: false,
-          maxLength: 20,
-          keyboardType: TextInputType.name,
-          enabled: true,
-          textInputAction: TextInputAction.next,
-          initialValue: city ?? '',
-          decoration: InputDecoration(
-            labelText: 'City',
-            labelStyle: TextStyle(height: 0),
-            hintText: 'E.g Lisbon',
-            errorText:
-                state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            autofocus: false,
+            maxLength: 20,
+            keyboardType: TextInputType.name,
+            enabled: true,
+            textInputAction: TextInputAction.next,
+            initialValue: state.city.value ?? '',
+            decoration: InputDecoration(
+              labelText: 'City',
+              labelStyle: TextStyle(height: 0),
+              hintText: 'E.g Lisbon',
+              errorText:
+                  state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).accentColor),
+              ),
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).accentColor),
+              ),
             ),
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).accentColor),
-            ),
-          ),
-          onChanged: (city) =>
-              context.read<UserProfileFormCubit>().cityChanged(city),
-        ),
+            onChanged: (city) {
+              print('On Changed City: $city');
+              context.read<UserProfileFormCubit>().cityChanged(city);
+            }),
       );
     });
   }
 }
 
 class _PhoneNumberInput extends StatelessWidget {
-  final String phoneNumber;
-  const _PhoneNumberInput(this.phoneNumber);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
@@ -262,7 +258,7 @@ class _PhoneNumberInput extends StatelessWidget {
           keyboardType: TextInputType.phone,
           enabled: true,
           textInputAction: TextInputAction.next,
-          initialValue: phoneNumber ?? '',
+          initialValue: state.phoneNumber.value ?? '',
           decoration: InputDecoration(
             labelText: 'Phone Number',
             labelStyle: TextStyle(height: 0),
@@ -275,9 +271,12 @@ class _PhoneNumberInput extends StatelessWidget {
               borderSide: BorderSide(color: Theme.of(context).accentColor),
             ),
           ),
-          onChanged: (phoneNumber) => context
-              .read<UserProfileFormCubit>()
-              .phoneNumberChanged(phoneNumber),
+          onChanged: (phoneNumber) {
+            print('On PhoneNumber: $phoneNumber');
+            context
+                .read<UserProfileFormCubit>()
+                .phoneNumberChanged(phoneNumber);
+          },
         ),
       );
     });
@@ -285,8 +284,6 @@ class _PhoneNumberInput extends StatelessWidget {
 }
 
 class _DateOfBirthPicker extends StatefulWidget {
-  final String dateOfBirth;
-  const _DateOfBirthPicker(this.dateOfBirth);
   @override
   _DateOfBirthPickerState createState() => _DateOfBirthPickerState();
 }
@@ -330,7 +327,7 @@ class _DateOfBirthPickerState extends State<_DateOfBirthPicker> {
             maxLengthEnforcement: MaxLengthEnforcement.enforced,
             keyboardType: TextInputType.number,
             enabled: false,
-            initialValue: widget.dateOfBirth ?? birthDateInString,
+            initialValue: state.dateOfBirth.value ?? birthDateInString,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               labelText: 'Date of Birth',
@@ -360,7 +357,6 @@ class _UpdateUserProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileFormCubit, UserFormState>(
-      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, formState) {
         return BlocBuilder<UserBloc, UserState>(
           builder: (context, userState) {
@@ -385,7 +381,6 @@ class _UpdateUserProfileButton extends StatelessWidget {
       BuildContext context, UserProfile userProfile, UserFormState formState) {
     final _userBloc = context.read<UserBloc>();
     final userId = BlocProvider.of<AuthBloc>(context).userId;
-    print('######### UPDATING WITH NEW VALUE : ${formState.about.value}');
     _userBloc.add(UserProfileSavePressed(
         userProfile: UserProfile(
           firstName: userProfile.firstName,
