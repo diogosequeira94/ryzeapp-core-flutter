@@ -40,7 +40,7 @@ class UserRepository extends IUserRepository {
         .setData(userProfile.toJson());
   }
 
-  Future<String> uploadJobImage(File _image) async {
+  Future<String> uploadProfileImage(File _image) async {
     if (_image != null) {
       try {
         final storageReference = firebaseStorage

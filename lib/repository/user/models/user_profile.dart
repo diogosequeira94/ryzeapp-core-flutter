@@ -8,6 +8,7 @@ part 'user_profile.g.dart';
 class UserProfile extends Equatable {
   final String firstName;
   final String lastName;
+  final String profilePicUrl;
   final String about;
   final String email;
   final String phoneNumber;
@@ -22,6 +23,7 @@ class UserProfile extends Equatable {
   const UserProfile({
     @required this.firstName,
     @required this.lastName,
+    @required this.profilePicUrl,
     @required this.about,
     @required this.email,
     @required this.phoneNumber,
@@ -38,6 +40,7 @@ class UserProfile extends Equatable {
   List<Object> get props => [
         firstName,
         lastName,
+        profilePicUrl,
         about,
         email,
         phoneNumber,
@@ -49,6 +52,38 @@ class UserProfile extends Equatable {
         jobsCompleted,
         noShows,
       ];
+
+  UserProfile copyWith({
+    String firstName,
+    String lastName,
+    String profilePicUrl,
+    String about,
+    String email,
+    String phoneNumber,
+    String dateOfBirth,
+    String city,
+    bool isDriver,
+    String skills,
+    String education,
+    int jobsCompleted,
+    int noShows,
+  }) {
+    return UserProfile(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      profilePicUrl: profilePicUrl ?? this.profilePicUrl,
+      about: about ?? this.about,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      city: city ?? this.city,
+      isDriver: isDriver ?? this.isDriver,
+      skills: skills ?? this.skills,
+      education: education ?? this.education,
+      jobsCompleted: jobsCompleted ?? this.jobsCompleted,
+      noShows: noShows ?? this.noShows,
+    );
+  }
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);

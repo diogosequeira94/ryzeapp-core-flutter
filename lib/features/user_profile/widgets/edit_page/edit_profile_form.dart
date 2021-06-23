@@ -5,7 +5,6 @@ import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/cubit/user_form_cubit.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
-import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_header.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_section.dart';
 import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
@@ -13,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+
+import 'edit_page_header.dart';
 
 class EditProfileForm extends StatefulWidget {
   final UserProfile userProfile;
@@ -75,7 +76,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfilePageHeaderWidget(user: widget.userProfile, isEditing: true),
+            EditPageHeaderWidget(user: widget.userProfile),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 6.0, right: 6.0),
               child: Divider(

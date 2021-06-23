@@ -67,6 +67,7 @@ flutter:
      - assets/ryze-calendar-icon.png
      - assets/creditcard/mastercard.png
      - assets/creditcard/contact_less.png
+     - assets/profile-avatar-placeholder.png
   # example:
   fonts:
     - family: CourrierPrime

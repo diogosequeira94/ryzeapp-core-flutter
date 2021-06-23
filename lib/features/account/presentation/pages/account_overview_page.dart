@@ -47,6 +47,7 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
       body: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
           if (state is UserLoadSuccess) {
+            final profileImage = _userBloc.userProfile.profilePicUrl;
             return SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -74,8 +75,10 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                           ),
                           leading: CircleAvatar(
                             radius: 30.0,
-                            backgroundImage: NetworkImage(
-                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbQU03HNQk4dsJUHxDwZuJaAPI164FWc6wjg&usqp=CAU'),
+                            backgroundImage: profileImage != null
+                                ? NetworkImage(profileImage)
+                                : AssetImage(
+                                    'assets/profile-avatar-placeholder.png'),
                           ),
                           trailing: Icon(
                             Icons.keyboard_arrow_right,

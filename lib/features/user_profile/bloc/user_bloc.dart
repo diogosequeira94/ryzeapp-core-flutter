@@ -53,11 +53,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> _mapUserProfileSavePressedToState(
       UserProfileSavePressed event) async* {
     yield UserProfileEditInProgress();
-    print('######### UPDATING THE PROFILE.... INSIDE BLOC');
-
     try {
+      final userProfileImageUrl =
+          await userRepository.uploadProfileImage(event.profileImage);
       await userRepository.updateUserProfile(
-          userId: event.userId, userProfile: event.userProfile);
+          userId: event.userId,
+          userProfile:
+              event.userProfile.copyWith(profilePicUrl: userProfileImageUrl));
     } on Exception {
       yield UserProfileEditFailure(errorMessage: 'FAIL');
       return;
