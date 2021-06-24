@@ -1,5 +1,5 @@
 import 'package:firebaseblocryze/features/account/cubit/add_card_form_cubit.dart';
-import 'package:firebaseblocryze/features/account/presentation/widgets/credit_card_widget.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/wallet/credit_card_widget.dart';
 import 'package:firebaseblocryze/features/account/utils/account_strings.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';

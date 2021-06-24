@@ -24,10 +24,6 @@ class _JobFormState extends State<JobForm> {
   FocusNode hourRateNode;
   FocusNode cityNode;
   FocusNode submitNode;
-  TextEditingController titleController;
-  TextEditingController descriptionController;
-  TextEditingController cityController;
-  TextEditingController hourRateController;
 
   @override
   void initState() {
@@ -37,10 +33,6 @@ class _JobFormState extends State<JobForm> {
     cityNode = FocusNode();
     hourRateNode = FocusNode();
     submitNode = FocusNode();
-    titleController = TextEditingController();
-    descriptionController = TextEditingController();
-    cityController = TextEditingController();
-    hourRateController = TextEditingController();
   }
 
   @override
@@ -51,10 +43,6 @@ class _JobFormState extends State<JobForm> {
     cityNode.dispose();
     hourRateNode.dispose();
     submitNode.dispose();
-    titleController.dispose();
-    descriptionController.dispose();
-    cityController.dispose();
-    hourRateController.dispose();
   }
 
   @override
@@ -237,7 +225,6 @@ class _HourRateInput extends StatelessWidget {
 class _CreateJobButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final JobsBloc _jobsBloc = BlocProvider.of<JobsBloc>(context);
     return BlocBuilder<JobFormCubit, JobFormState>(
       buildWhen: (previous, current) =>
           previous.status != current.status ||
@@ -281,6 +268,7 @@ class _CreateJobButton extends StatelessWidget {
           additionalInfo: formState.additionalInfo,
           isRemote: false,
           slotsAvailable: 1,
+          maxCandidates: 1,
           languages: ['Portuguese'],
         ),
         formState.image));
@@ -370,7 +358,8 @@ class _JobPhoto extends StatelessWidget {
 
   Future getImage(BuildContext context) async {
     ImagePicker picker = ImagePicker();
-    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
+    PickedFile pickedFile =
+        await picker.getImage(source: ImageSource.gallery, imageQuality: 85);
     if (pickedFile != null) {
       final _image = File(pickedFile.path);
       context.read<JobFormCubit>().jobPictureSelected(_image);
@@ -379,8 +368,11 @@ class _JobPhoto extends StatelessWidget {
 }
 
 class _DateTimeCalendar extends StatelessWidget {
-  var pickedDate = DateTime.now();
-  var pickedTime = TimeOfDay.now();
+  var fromPickedDate = DateTime.now();
+  var fromPickedTime = TimeOfDay.now();
+
+  var untilPickedDate = DateTime.now();
+  var untilPickedTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobFormCubit, JobFormState>(
@@ -401,11 +393,12 @@ class _DateTimeCalendar extends StatelessWidget {
                     Image.asset(JobPostStrings.calendarIcon,
                         width: 34.0, height: 34.0),
                     SizedBox(width: 10),
-                    Text(
-                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 16:00 CET"),
+                    Text(state.startDateTime.isEmpty
+                        ? '${fromPickedDate.day}/${fromPickedDate.month}/${fromPickedDate.year} @ ${fromPickedTime.hour}:${fromPickedTime.minute}'
+                        : state.startDateTime),
                   ],
                 ),
-                onTap: () => _pickDate(context),
+                onTap: () => _fromPickDate(context),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
@@ -417,11 +410,12 @@ class _DateTimeCalendar extends StatelessWidget {
                     Image.asset(JobPostStrings.calendarIcon,
                         width: 34.0, height: 34.0),
                     SizedBox(width: 10),
-                    Text(
-                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} @ 19:00 CET"),
+                    Text(state.endDateTime.isEmpty
+                        ? 'Select an ending date'
+                        : state.endDateTime),
                   ],
                 ),
-                onTap: () => _pickDate(context),
+                onTap: () => _untilPickDate(context),
               ),
             ],
           ),
@@ -430,10 +424,61 @@ class _DateTimeCalendar extends StatelessWidget {
     );
   }
 
-  _pickDate(BuildContext context) async {
+  // Region From Date
+  _fromPickDate(BuildContext context) async {
+    var fromPickedDate = DateTime.now();
     DateTime date = await showDatePicker(
         context: context,
-        initialDate: pickedDate,
+        initialDate: fromPickedDate,
+        firstDate: DateTime.now().subtract(Duration(days: 0)),
+        lastDate: DateTime(DateTime.now().year + 1),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              dialogBackgroundColor: Colors.white,
+              colorScheme: ColorScheme.light().copyWith(
+                primary: Theme.of(context).accentColor,
+              ),
+            ),
+            child: child,
+          );
+        });
+    if (date != null) {
+      fromPickedDate = date;
+      _fromPickTime(context, fromPickedDate);
+    }
+  }
+
+  _fromPickTime(BuildContext context, DateTime fromPickedDate) async {
+    var fromPickedTime = TimeOfDay.now();
+    TimeOfDay time = await showTimePicker(
+        context: context,
+        initialTime: fromPickedTime,
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              dialogBackgroundColor: Colors.white,
+              colorScheme: ColorScheme.light().copyWith(
+                primary: Theme.of(context).accentColor,
+              ),
+            ),
+            child: child,
+          );
+        });
+    if (time != null) {
+      fromPickedTime = time;
+      final timeStampString =
+          '${fromPickedDate.day}/${fromPickedDate.month}/${fromPickedDate.year} @ ${fromPickedTime.hour}:${fromPickedTime.minute}';
+      context.read<JobFormCubit>().startDateTimeSelected(timeStampString);
+    }
+  }
+
+  //Regin Until Date
+  _untilPickDate(BuildContext context) async {
+    var untilPickedDate = DateTime.now();
+    DateTime date = await showDatePicker(
+        context: context,
+        initialDate: untilPickedDate,
         firstDate: DateTime.now().subtract(Duration(days: 0)),
         lastDate: DateTime(DateTime.now().year + 2),
         builder: (BuildContext context, Widget child) {
@@ -448,15 +493,16 @@ class _DateTimeCalendar extends StatelessWidget {
           );
         });
     if (date != null) {
-      pickedDate = date;
-      _pickTime(context);
+      untilPickedDate = date;
+      _untilPickTime(context, untilPickedDate);
     }
   }
 
-  _pickTime(BuildContext context) async {
+  _untilPickTime(BuildContext context, DateTime untilPickedDate) async {
+    var untilPickedTime = TimeOfDay.now();
     TimeOfDay time = await showTimePicker(
         context: context,
-        initialTime: pickedTime,
+        initialTime: untilPickedTime,
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: Theme.of(context).copyWith(
@@ -468,7 +514,12 @@ class _DateTimeCalendar extends StatelessWidget {
             child: child,
           );
         });
-    if (time != null) pickedTime = time;
+    if (time != null) {
+      untilPickedTime = time;
+      final timeStampString =
+          '${untilPickedDate.day}/${untilPickedDate.month}/${untilPickedDate.year} @ ${untilPickedTime.hour}:${untilPickedTime.minute}';
+      context.read<JobFormCubit>().endDateTimeSelected(timeStampString);
+    }
   }
 }
 

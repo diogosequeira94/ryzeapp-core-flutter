@@ -9,6 +9,7 @@ part of 'job_post.dart';
 JobPost _$JobPostFromJson(Map<String, dynamic> json) {
   return JobPost(
     jobID: json['jobID'] as String,
+    posterName: json['posterName'] as String,
     posterID: json['posterID'] as String,
     title: json['title'] as String,
     description: json['description'] as String,
@@ -21,12 +22,14 @@ JobPost _$JobPostFromJson(Map<String, dynamic> json) {
     additionalInfo: json['additionalInfo'] as String,
     isRemote: json['isRemote'] as bool,
     slotsAvailable: json['slotsAvailable'] as int,
+    maxCandidates: json['maxCandidates'] as int,
     languages: (json['languages'] as List)?.map((e) => e as String)?.toList(),
   );
 }
 
 Map<String, dynamic> _$JobPostToJson(JobPost instance) => <String, dynamic>{
       'jobID': instance.jobID,
+      'posterName': instance.posterName,
       'posterID': instance.posterID,
       'title': instance.title,
       'description': instance.description,
@@ -39,5 +42,6 @@ Map<String, dynamic> _$JobPostToJson(JobPost instance) => <String, dynamic>{
       'isRemote': instance.isRemote,
       'additionalInfo': instance.additionalInfo,
       'slotsAvailable': instance.slotsAvailable,
+      'maxCandidates': instance.maxCandidates,
       'languages': instance.languages,
     };

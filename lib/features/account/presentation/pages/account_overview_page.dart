@@ -1,6 +1,7 @@
 import 'package:firebaseblocryze/features/account/presentation/pages/wallet_page.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/faq/faq_section.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/legal_policies/legal_policies_section.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/widgets.dart';
-import 'package:firebaseblocryze/features/help_and_support/pages/insurance_page.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
@@ -184,33 +185,8 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                       style: TextStyle(fontSize: 16.0),
                     ),
                   ),
-                  SectionHeader(title: 'F.A.Q'),
-                  ListTile(
-                    title: Text('How to start your first job'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Do I need an Insurance?'),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => InsurancePage()),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Check-in and Checkout'),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text('Terms of Contract'),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
-                    onTap: () {},
-                  ),
+                  FaqSection(),
+                  LegalPoliciesSection(),
                   SizedBox(height: 24.0),
                   BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
                     return RyzePrimaryButton(

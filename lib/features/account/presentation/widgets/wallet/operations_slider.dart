@@ -1,4 +1,4 @@
-import 'package:firebaseblocryze/features/account/presentation/widgets/operation_item.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/wallet/operation_item.dart';
 import 'package:flutter/material.dart';
 
 class OperationsSlider extends StatelessWidget {
@@ -22,8 +22,10 @@ class OperationsSlider extends StatelessWidget {
   List<OperationItem> _buildOperationsList() {
     List<OperationItem> _operations = [
       OperationItem(
-          title: 'Withdraw', operationIcon: Icon(Icons.monetization_on_outlined)),
-      OperationItem(title: 'Deposits', operationIcon: Icon(Icons.shopping_bag_outlined)),
+          title: 'Withdraw',
+          operationIcon: Icon(Icons.monetization_on_outlined)),
+      OperationItem(
+          title: 'Deposits', operationIcon: Icon(Icons.shopping_bag_outlined)),
       OperationItem(
           title: 'Transfer',
           operationIcon: Icon(Icons.transfer_within_a_station_outlined)),

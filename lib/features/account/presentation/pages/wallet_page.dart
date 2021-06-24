@@ -1,6 +1,6 @@
 import 'package:firebaseblocryze/features/account/model/card_model.dart';
-import 'package:firebaseblocryze/features/account/presentation/widgets/credit_card_widget.dart';
-import 'package:firebaseblocryze/features/account/presentation/widgets/operations_slider.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/wallet/credit_card_widget.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/wallet/operations_slider.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/section_header_widget.dart';
 import 'package:flutter/material.dart';
 

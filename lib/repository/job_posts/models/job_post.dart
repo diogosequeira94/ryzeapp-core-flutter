@@ -7,6 +7,7 @@ part 'job_post.g.dart';
 @JsonSerializable(explicitToJson: true)
 class JobPost extends Equatable {
   final String jobID;
+  final String posterName;
   final String posterID;
   final String title;
   final String description;
@@ -19,10 +20,12 @@ class JobPost extends Equatable {
   final bool isRemote;
   final String additionalInfo;
   final int slotsAvailable;
+  final int maxCandidates;
   final List<String> languages;
 
   const JobPost(
       {@required this.jobID,
+      @required this.posterName,
       @required this.posterID,
       @required this.title,
       @required this.description,
@@ -35,11 +38,13 @@ class JobPost extends Equatable {
       @required this.additionalInfo,
       @required this.isRemote,
       @required this.slotsAvailable,
+      @required this.maxCandidates,
       @required this.languages});
 
   @override
   List<Object> get props => [
         jobID,
+        posterName,
         posterID,
         title,
         description,
@@ -52,11 +57,13 @@ class JobPost extends Equatable {
         endDate,
         additionalInfo,
         slotsAvailable,
+        maxCandidates,
         languages,
       ];
 
   JobPost copyWith({
     String jobID,
+    String posterName,
     String posterID,
     String title,
     String description,
@@ -69,10 +76,12 @@ class JobPost extends Equatable {
     String additionalInfo,
     bool isRemote,
     int slotsAvailable,
+    int maxCandidates,
     List<String> languages,
   }) {
     return JobPost(
       jobID: jobID ?? this.jobID,
+      posterName: posterName ?? this.posterName,
       posterID: posterID ?? this.posterID,
       title: title ?? this.title,
       description: description ?? this.description,
@@ -85,6 +94,7 @@ class JobPost extends Equatable {
       endDate: endDate ?? this.endDate,
       additionalInfo: additionalInfo ?? this.additionalInfo,
       slotsAvailable: slotsAvailable ?? this.slotsAvailable,
+      maxCandidates: maxCandidates ?? this.maxCandidates,
       languages: languages ?? this.languages,
     );
   }

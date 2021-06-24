@@ -3,7 +3,7 @@ import 'package:formz/formz.dart';
 enum TitleValidationError { invalid }
 
 class Title extends FormzInput<String, TitleValidationError> {
-  final minLength = 10;
+  final minLength = 5;
   const Title.pure() : super.pure('');
   const Title.dirty([String value = '']) : super.dirty(value);
 

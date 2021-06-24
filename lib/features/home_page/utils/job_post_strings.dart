@@ -11,7 +11,7 @@ class JobPostStrings {
 
   //Job Creation Form errors
   static const String jobFormInvalidTitle =
-      'Title must be at least 10 characters';
+      'Title must be at least 5 characters';
   static const String jobFormInvalidDescription =
       'Description must be at least 25 characters';
   static const String jobFormInvalidCity = 'Invalid City';

@@ -120,8 +120,8 @@ class HomePage extends StatelessWidget {
   Widget _myJobPosts(List jobsList, BuildContext context) {
     return jobsList.isEmpty
         ? Padding(
-            padding: const EdgeInsets.only(left: 14.0, top: 8.0),
-            child: Text('You have No Jobs yet.'),
+            padding: const EdgeInsets.only(left: 14.0, top: 8.0, bottom: 8.0),
+            child: Text('You have no Jobs Posts yet.'),
           )
         : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -216,8 +216,11 @@ class HomePage extends StatelessWidget {
   Widget _allJobPosts(BuildContext context) {
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPost(
+          posterID: 'RyzeApp',
           jobID: job.jobID,
           title: job.title,
+          startDate: job.startDate ?? 'N/A',
+          endDate: job.endDate ?? 'N/A',
           description: job.description,
           status: 'Active',
           hourRate: job.hourRate,
@@ -225,6 +228,8 @@ class HomePage extends StatelessWidget {
           city: job.city,
           isRemote: job.isRemote,
           slotsAvailable: job.slotsAvailable,
+          additionalInfo: 'Please arrive 15 minutes earlier.',
+          maxCandidates: 1,
           languages: job.languages);
     }).toList();
 
