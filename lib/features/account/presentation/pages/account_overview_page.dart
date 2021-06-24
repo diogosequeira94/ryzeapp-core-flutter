@@ -1,8 +1,9 @@
 import 'package:firebaseblocryze/features/account/presentation/pages/wallet_page.dart';
-import 'package:firebaseblocryze/features/account/presentation/widgets/horizontal_divider_widget.dart';
-import 'package:firebaseblocryze/features/account/presentation/widgets/section_header_widget.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/widgets.dart';
+import 'package:firebaseblocryze/features/help_and_support/pages/insurance_page.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
+import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/pages/user_profile_page.dart';
@@ -18,7 +19,8 @@ class AccountOverviewPage extends StatefulWidget {
 }
 
 class _AccountOverviewPageState extends State<AccountOverviewPage> {
-  bool isDarkModeActive = false;
+  bool isDarkModeSelected = sharedPrefs.isDarkModeSelected;
+
   @override
   Widget build(BuildContext context) {
     final _userBloc = context.read<UserBloc>();
@@ -154,22 +156,24 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                     onChanged: (isChecked) {},
                   ),
                   SectionHeader(title: 'Themes'),
-                  SwitchListTile(
-                    activeColor: Theme.of(context).accentColor,
-                    contentPadding: const EdgeInsets.all(0),
-                    value: isDarkModeActive,
-                    title: Text('Dark Mode'),
-                    onChanged: (bool value) {
-                      setState(() {
-                        isDarkModeActive = value;
-                        isDarkModeActive
-                            ? context
-                                .read<ThemeBloc>()
-                                .add(ThemeChanged(theme: AppTheme.DarkRed))
-                            : context
-                                .read<ThemeBloc>()
-                                .add(ThemeChanged(theme: AppTheme.ClassicBlue));
-                      });
+                  BlocBuilder<ThemeBloc, ThemeState>(
+                    builder: (context, state) {
+                      return SwitchListTile(
+                        activeColor: Theme.of(context).accentColor,
+                        contentPadding: const EdgeInsets.all(0),
+                        value:
+                            state.themeData == appThemeData[AppTheme.DarkRed],
+                        title: Text('Dark Mode'),
+                        onChanged: (bool value) {
+                          sharedPrefs.isDarkModeSelected = value;
+                          value
+                              ? context
+                                  .read<ThemeBloc>()
+                                  .add(ThemeChanged(theme: AppTheme.DarkRed))
+                              : context.read<ThemeBloc>().add(
+                                  ThemeChanged(theme: AppTheme.ClassicBlue));
+                        },
+                      );
                     },
                   ),
                   SectionHeader(title: 'Premium'),
@@ -188,17 +192,23 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                   ),
                   ListTile(
                     title: Text('Do I need an Insurance?'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () {},
+                    trailing: const Icon(Icons.keyboard_arrow_right),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => InsurancePage()),
+                      );
+                    },
                   ),
                   ListTile(
                     title: Text('Check-in and Checkout'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
+                    trailing: const Icon(Icons.keyboard_arrow_right),
                     onTap: () {},
                   ),
                   ListTile(
                     title: Text('Terms of Contract'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
+                    trailing: const Icon(Icons.keyboard_arrow_right),
                     onTap: () {},
                   ),
                   SizedBox(height: 24.0),
