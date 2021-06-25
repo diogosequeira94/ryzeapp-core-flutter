@@ -76,20 +76,24 @@ class NotificationsPage extends StatelessWidget {
         languages: ['Portuguese']);
     return Column(
       children: [
-        Card(
-          elevation: 3.0,
-          child: ListTile(
-            title: Text('Job Confirmation: Restaurant'),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                JobStatusPill(jobStatus: 'Active'),
-              ],
+        Container(
+          width: double.infinity,
+          height: 100,
+          child: Card(
+            elevation: 3.0,
+            child: ListTile(
+              title: Text('Job Confirmation: Restaurant'),
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  JobStatusPill(jobStatus: 'Active'),
+                ],
+              ),
+              onTap: () {
+                Navigator.popAndPushNamed(context, '/job-confirmation-page',
+                    arguments: jobPost);
+              },
             ),
-            onTap: () {
-              Navigator.popAndPushNamed(context, '/job-confirmation-page',
-                  arguments: jobPost);
-            },
           ),
         ),
         Divider(height: 1.0,),

@@ -8,7 +8,7 @@ import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/cha
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/pages/job_confirmation_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_confirmation_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job_hub_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/password_reset_page.dart';

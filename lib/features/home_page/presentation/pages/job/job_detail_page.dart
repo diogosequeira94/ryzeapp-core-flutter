@@ -1,3 +1,4 @@
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/flag_as_inappropriate_widget.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class JobDetailPage extends StatelessWidget {
               Container(
                 width: width,
                 margin: EdgeInsets.only(top: height * 0.5),
-                padding: const EdgeInsets.all(30.0),
+                padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15.0),
                 decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: BorderRadius.only(
@@ -190,6 +191,7 @@ class JobDetailPage extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
+                    FlagAsInappropriate(),
                     const SizedBox(height: 26.0),
                     RyzePrimaryButton(
                         title: 'Apply Now',
