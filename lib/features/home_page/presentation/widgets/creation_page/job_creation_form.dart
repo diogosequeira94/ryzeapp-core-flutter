@@ -5,6 +5,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/creation_page/job_category_picker.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/date_and_time.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
@@ -255,6 +256,7 @@ class _CreateJobButton extends StatelessWidget {
     final userId = BlocProvider.of<AuthBloc>(context).userId;
     _jobsBloc.add(AddJobPost(
         JobPost(
+          posterName: 'RyzeApp',
           posterID: userId,
           jobID: Uuid().v4(),
           title: formState.title.value,
@@ -262,13 +264,20 @@ class _CreateJobButton extends StatelessWidget {
           status: 'Active',
           city: formState.city.value,
           imageUrl: null,
-          startDate: formState.startDateTime,
-          endDate: formState.endDateTime,
+          startDate: DateAndTime(
+            date: formState.startDate ?? 'N/A',
+            time: formState.startTime ?? 'N/A',
+          ),
+          endDate: DateAndTime(
+            date: formState.endDate ?? 'N/A',
+            time: formState.endTime ?? 'N/A',
+          ),
           hourRate: '${formState.hourRate.value}€ / h',
           additionalInfo: formState.additionalInfo,
           isRemote: false,
           slotsAvailable: 1,
           maxCandidates: 1,
+          currentProposals: 0,
           languages: ['Portuguese'],
         ),
         formState.image));
@@ -393,9 +402,9 @@ class _DateTimeCalendar extends StatelessWidget {
                     Image.asset(JobPostStrings.calendarIcon,
                         width: 34.0, height: 34.0),
                     SizedBox(width: 10),
-                    Text(state.startDateTime.isEmpty
+                    Text((state.startDate.isEmpty || state.startTime.isEmpty)
                         ? '${fromPickedDate.day}/${fromPickedDate.month}/${fromPickedDate.year} @ ${fromPickedTime.hour}:${fromPickedTime.minute}'
-                        : state.startDateTime),
+                        : '${state.startDate} @ ${state.startTime}'),
                   ],
                 ),
                 onTap: () => _fromPickDate(context),
@@ -410,9 +419,9 @@ class _DateTimeCalendar extends StatelessWidget {
                     Image.asset(JobPostStrings.calendarIcon,
                         width: 34.0, height: 34.0),
                     SizedBox(width: 10),
-                    Text(state.endDateTime.isEmpty
+                    Text((state.endDate.isEmpty || state.endTime.isEmpty)
                         ? 'Select an ending date'
-                        : state.endDateTime),
+                        : '${state.endDate} @ ${state.endTime}'),
                   ],
                 ),
                 onTap: () => _untilPickDate(context),
@@ -467,9 +476,12 @@ class _DateTimeCalendar extends StatelessWidget {
         });
     if (time != null) {
       fromPickedTime = time;
-      final timeStampString =
-          '${fromPickedDate.day}/${fromPickedDate.month}/${fromPickedDate.year} @ ${fromPickedTime.hour}:${fromPickedTime.minute}';
-      context.read<JobFormCubit>().startDateTimeSelected(timeStampString);
+      final startDateString =
+          '${fromPickedDate.day}/${fromPickedDate.month}/${fromPickedDate.year}';
+      final startTimeString = '${fromPickedTime.hour}:${fromPickedTime.minute}';
+
+      context.read<JobFormCubit>().startDateSelected(startDateString);
+      context.read<JobFormCubit>().startTimeSelected(startTimeString);
     }
   }
 
@@ -516,9 +528,12 @@ class _DateTimeCalendar extends StatelessWidget {
         });
     if (time != null) {
       untilPickedTime = time;
-      final timeStampString =
-          '${untilPickedDate.day}/${untilPickedDate.month}/${untilPickedDate.year} @ ${untilPickedTime.hour}:${untilPickedTime.minute}';
-      context.read<JobFormCubit>().endDateTimeSelected(timeStampString);
+      final endDateString =
+          '${untilPickedDate.day}/${untilPickedDate.month}/${untilPickedDate.year}';
+      final endTimeString = '${untilPickedTime.hour}:${untilPickedTime.minute}';
+
+      context.read<JobFormCubit>().endDateSelected(endDateString);
+      context.read<JobFormCubit>().endTimeSelected(endTimeString);
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_
 import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/date_and_time.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
@@ -59,6 +60,7 @@ class HomePage extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          // ToDo: Need to add Bloc States
           return RefreshIndicator(
             onRefresh: () {
               _jobsBloc.add(FetchJobsPosts());
@@ -97,7 +99,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   state is JobsFetchSuccess
-                      ? _myJobPosts(state.list, context)
+                      ? _myJobPosts(state.myJobs, context)
                       : Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Center(child: CircularProgressIndicator()),
@@ -110,7 +112,9 @@ class HomePage extends StatelessWidget {
                   HomePageSectionHeader(title: 'Trending'),
                   _allJobPosts(context, 3),
                   HomePageSectionHeader(title: 'Most Recent'),
-                  _allJobPosts(context),
+                  state is JobsFetchSuccess
+                      ? _allJobsList(context, state.jobsList)
+                      : SizedBox.shrink(),
                 ],
               ),
             ),
@@ -217,6 +221,21 @@ class HomePage extends StatelessWidget {
           );
   }
 
+  Widget _allJobsList(BuildContext context, List<JobPost> jobsList) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: jobsList.length,
+        itemBuilder: (context, index) {
+          final jobPost = jobsList[index];
+          return JobCardItem(jobPost);
+        },
+      ),
+    );
+  }
+
   Widget _allJobPosts(BuildContext context, [int length]) {
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPost(
@@ -224,8 +243,14 @@ class HomePage extends StatelessWidget {
           posterID: 'RyzeApp',
           jobID: job.jobID,
           title: job.title,
-          startDate: job.startDate ?? 'N/A',
-          endDate: job.endDate ?? 'N/A',
+          startDate: DateAndTime(
+            date: job.startDate?.date,
+            time: job.startDate?.time,
+          ),
+          endDate: DateAndTime(
+            date: job.endDate?.date,
+            time: job.endDate?.time,
+          ),
           description: job.description,
           status: 'Active',
           hourRate: job.hourRate,

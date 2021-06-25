@@ -4,7 +4,7 @@ class FlagAsInappropriate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
+      padding: const EdgeInsets.only(top: 20.0),
       child: InkWell(
         onTap: () {},
         child: Row(children: [

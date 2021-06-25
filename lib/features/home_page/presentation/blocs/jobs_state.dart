@@ -16,10 +16,11 @@ class JobsFetchInProgress extends JobsState {
 }
 
 class JobsFetchSuccess extends JobsState {
-  final List<JobPost> list;
-  JobsFetchSuccess(this.list);
+  final List<JobPost> jobsList;
+  final List<JobPost> myJobs;
+  JobsFetchSuccess({@required this.jobsList, @required this.myJobs});
   @override
-  List<Object> get props => [list];
+  List<Object> get props => [jobsList, myJobs];
 }
 
 class JobsFetchFailure extends JobsState {

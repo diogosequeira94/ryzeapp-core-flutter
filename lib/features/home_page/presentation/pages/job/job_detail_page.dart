@@ -139,7 +139,7 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      jobPost.startDate.isEmpty ? 'N/A' : jobPost.startDate,
+                      '${jobPost.startDate.date} @ ${jobPost.startDate.time}',
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal,
@@ -155,16 +155,16 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      jobPost.endDate.isEmpty ? 'N/A' : jobPost.endDate,
+                      '${jobPost.endDate.date} @ ${jobPost.endDate.time}',
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    DetailsSection(
-                        'Positions Available', jobPost.slotsAvailable.toString()),
-                    DetailsSection(
-                        'Current Applications', jobPost.currentProposals.toString()),
+                    DetailsSection('Positions Available',
+                        jobPost.slotsAvailable.toString()),
+                    DetailsSection('Current Applications',
+                        jobPost.currentProposals.toString() ?? '0'),
                     DetailsSection(
                         'Additional Information', jobPost.additionalInfo),
                     FlagAsInappropriate(),

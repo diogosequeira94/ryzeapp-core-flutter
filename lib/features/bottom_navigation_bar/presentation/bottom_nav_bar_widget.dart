@@ -13,6 +13,8 @@ import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../injection.dart';
+
 class BottomNavBarWidget extends StatefulWidget {
   @override
   _BottomNavBarWidgetState createState() => _BottomNavBarWidgetState();
@@ -22,6 +24,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
     return Scaffold(
       body: BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
         builder: (context, state) {
@@ -30,16 +33,17 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           } else if (state is BottomNavigationHomePageLoaded) {
             return BlocProvider(
                 create: (_) => JobsBloc(
-                    JobRepository(Firestore.instance, FirebaseStorage.instance))
-                  ..add(FetchJobsPosts()),
+                      JobRepository(
+                          Firestore.instance, FirebaseStorage.instance),
+                      authBloc,
+                    )..add(FetchJobsPosts()),
                 child: HomePage());
           } else if (state is BottomNavigationAccountPageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationAccountPageLoaded) {
-            final userId = BlocProvider.of<AuthBloc>(context).userId;
             return BlocProvider.value(
                 value: BlocProvider.of<UserBloc>(context)
-                  ..add(UserProfileFetched(userId: userId)),
+                  ..add(UserProfileFetched(userId: authBloc.userId)),
                 child: AccountOverviewPage());
           } else if (state is BottomNavigationExplorePageLoading) {
             return Center(child: CircularProgressIndicator());

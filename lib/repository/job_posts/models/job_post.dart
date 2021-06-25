@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+import 'date_and_time.dart';
+
 part 'job_post.g.dart';
 
 enum JobRateType {
@@ -23,8 +25,8 @@ class JobPost extends Equatable {
   final String imageUrl;
   final String status;
   final String city;
-  final String startDate;
-  final String endDate;
+  final DateAndTime startDate;
+  final DateAndTime endDate;
   final String hourRate;
   final bool isRemote;
   final String additionalInfo;

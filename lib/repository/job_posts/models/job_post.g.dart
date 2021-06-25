@@ -17,8 +17,12 @@ JobPost _$JobPostFromJson(Map<String, dynamic> json) {
     status: json['status'] as String,
     city: json['city'] as String,
     hourRate: json['hourRate'] as String,
-    startDate: json['startDate'] as String,
-    endDate: json['endDate'] as String,
+    startDate: json['startDate'] == null
+        ? null
+        : DateAndTime.fromJson(json['startDate'] as Map<String, dynamic>),
+    endDate: json['endDate'] == null
+        ? null
+        : DateAndTime.fromJson(json['endDate'] as Map<String, dynamic>),
     additionalInfo: json['additionalInfo'] as String,
     isRemote: json['isRemote'] as bool,
     slotsAvailable: json['slotsAvailable'] as int,
@@ -37,8 +41,8 @@ Map<String, dynamic> _$JobPostToJson(JobPost instance) => <String, dynamic>{
       'imageUrl': instance.imageUrl,
       'status': instance.status,
       'city': instance.city,
-      'startDate': instance.startDate,
-      'endDate': instance.endDate,
+      'startDate': instance.startDate?.toJson(),
+      'endDate': instance.endDate?.toJson(),
       'hourRate': instance.hourRate,
       'isRemote': instance.isRemote,
       'additionalInfo': instance.additionalInfo,

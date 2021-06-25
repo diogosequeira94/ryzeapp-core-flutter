@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 
@@ -9,8 +11,9 @@ part 'jobs_event.dart';
 part 'jobs_state.dart';
 
 class JobsBloc extends Bloc<JobsEvent, JobsState> {
+  final AuthBloc _authBloc;
   final JobRepository _jobRepository;
-  JobsBloc(this._jobRepository) : super(JobsInitial());
+  JobsBloc(this._jobRepository, this._authBloc) : super(JobsInitial());
 
   @override
   Stream<JobsState> mapEventToState(
@@ -24,7 +27,11 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           yield JobsFetchFailure('Failure getting list');
         },
         (jobs) async* {
-          yield JobsFetchSuccess(jobs);
+          final userId = _authBloc.userId;
+          print('user ID: $userId');
+          final userJobs =
+              jobs.where((element) => element.posterID == userId).toList();
+          yield JobsFetchSuccess(jobsList: jobs, myJobs: userJobs);
         },
       );
     } else if (event is AddJobPost) {

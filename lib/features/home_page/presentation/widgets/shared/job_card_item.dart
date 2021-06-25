@@ -1,5 +1,6 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/favourites_icon.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 
@@ -70,16 +71,7 @@ class JobCardItem extends StatelessWidget {
                         ),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
-                      child: GestureDetector(
-                        onTap: () {
-                          print('Tapped');
-                        },
-                        child: Icon(
-                          Icons.favorite_border_rounded,
-                          color: Colors.black87,
-                          size: 16.0,
-                        ),
-                      ),
+                      child: AddToFavouritesIcon(),
                     ),
                   ],
                 ),
@@ -88,7 +80,7 @@ class JobCardItem extends StatelessWidget {
                   child: Text('${jobPost.city}, Portugal'),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -96,11 +88,23 @@ class JobCardItem extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Starting: ${jobPost.startDate}'),
+                          Row(
+                            children: [
+                              Icon(Icons.calendar_today_outlined, size: 20.0),
+                              const SizedBox(width: 6.0),
+                              Text('${jobPost.startDate.date}'),
+                            ],
+                          ),
                           const SizedBox(height: 4.0),
-                          Text('Ending: ${jobPost.endDate}')
+                          Row(
+                            children: [
+                              Icon(Icons.alarm, size: 20.0,),
+                              const SizedBox(width: 6.0),
+                              Text('${jobPost.startDate.time}'),
+                            ],
+                          )
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

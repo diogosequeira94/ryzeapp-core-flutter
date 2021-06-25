@@ -7,8 +7,10 @@ class JobFormState extends Equatable {
     this.description = const Description.pure(),
     this.city = const City.pure(),
     this.hourRate = const HourRate.pure(),
-    this.startDateTime = '',
-    this.endDateTime = '',
+    this.startDate = '',
+    this.endDate = '',
+    this.startTime = '',
+    this.endTime = '',
     this.additionalInfo = '',
     this.isDisclaimerAccepted = false,
     this.status = FormzStatus.pure,
@@ -19,8 +21,10 @@ class JobFormState extends Equatable {
   final Description description;
   final City city;
   final HourRate hourRate;
-  final String startDateTime;
-  final String endDateTime;
+  final String startDate;
+  final String endDate;
+  final String startTime;
+  final String endTime;
   final String additionalInfo;
   final bool isDisclaimerAccepted;
   final FormzStatus status;
@@ -32,8 +36,10 @@ class JobFormState extends Equatable {
         description,
         city,
         hourRate,
-        startDateTime,
-        endDateTime,
+        startDate,
+        endDate,
+        startTime,
+        endTime,
         additionalInfo,
         isDisclaimerAccepted,
         status
@@ -45,8 +51,10 @@ class JobFormState extends Equatable {
     Description description,
     City city,
     HourRate hourRate,
-    String startDateTime,
-    String endDateTime,
+    String startDate,
+    String endDate,
+    String startTime,
+    String endTime,
     bool isDisclaimerAccepted,
     String additionalInfo,
     FormzStatus status,
@@ -57,8 +65,10 @@ class JobFormState extends Equatable {
       description: description ?? this.description,
       city: city ?? this.city,
       hourRate: hourRate ?? this.hourRate,
-      startDateTime: startDateTime ?? this.startDateTime,
-      endDateTime: endDateTime ?? this.endDateTime,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      startTime: startTime ?? this.startTime,
+      endTime: endTime ?? this.endTime,
       additionalInfo: additionalInfo ?? this.additionalInfo,
       isDisclaimerAccepted: isDisclaimerAccepted ?? this.isDisclaimerAccepted,
       status: status ?? this.status,
