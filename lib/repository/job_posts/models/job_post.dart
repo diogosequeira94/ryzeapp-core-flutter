@@ -4,6 +4,15 @@ import 'package:meta/meta.dart';
 
 part 'job_post.g.dart';
 
+enum JobRateType {
+  @JsonValue('hourly')
+  hourly,
+  @JsonValue('weekly')
+  weekly,
+  @JsonValue('fixed-term')
+  fixed,
+}
+
 @JsonSerializable(explicitToJson: true)
 class JobPost extends Equatable {
   final String jobID;
@@ -21,6 +30,7 @@ class JobPost extends Equatable {
   final String additionalInfo;
   final int slotsAvailable;
   final int maxCandidates;
+  final int currentProposals;
   final List<String> languages;
 
   const JobPost(
@@ -39,6 +49,7 @@ class JobPost extends Equatable {
       @required this.isRemote,
       @required this.slotsAvailable,
       @required this.maxCandidates,
+      @required this.currentProposals,
       @required this.languages});
 
   @override
@@ -58,6 +69,7 @@ class JobPost extends Equatable {
         additionalInfo,
         slotsAvailable,
         maxCandidates,
+        currentProposals,
         languages,
       ];
 
@@ -77,6 +89,7 @@ class JobPost extends Equatable {
     bool isRemote,
     int slotsAvailable,
     int maxCandidates,
+    int currentProposals,
     List<String> languages,
   }) {
     return JobPost(
@@ -95,6 +108,7 @@ class JobPost extends Equatable {
       additionalInfo: additionalInfo ?? this.additionalInfo,
       slotsAvailable: slotsAvailable ?? this.slotsAvailable,
       maxCandidates: maxCandidates ?? this.maxCandidates,
+      currentProposals: currentProposals ?? this.currentProposals,
       languages: languages ?? this.languages,
     );
   }

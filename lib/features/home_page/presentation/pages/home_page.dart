@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
@@ -107,6 +108,8 @@ class HomePage extends StatelessWidget {
                   ),
                   CategoriesGridWidget(),
                   HomePageSectionHeader(title: 'Trending'),
+                  _allJobPosts(context, 3),
+                  HomePageSectionHeader(title: 'Most Recent'),
                   _allJobPosts(context),
                 ],
               ),
@@ -201,10 +204,11 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.of(context).pushNamed('/job-hub', arguments: JobHubArguments(
-                            jobPostList: jobsList,
-                            jobsBloc: context.read<JobsBloc>(),
-                          ));
+                          Navigator.of(context).pushNamed('/job-hub',
+                              arguments: JobHubArguments(
+                                jobPostList: jobsList,
+                                jobsBloc: context.read<JobsBloc>(),
+                              ));
                         },
                       )
                     : SizedBox.shrink(),
@@ -213,9 +217,10 @@ class HomePage extends StatelessWidget {
           );
   }
 
-  Widget _allJobPosts(BuildContext context) {
+  Widget _allJobPosts(BuildContext context, [int length]) {
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPost(
+          posterName: 'RyzeApp',
           posterID: 'RyzeApp',
           jobID: job.jobID,
           title: job.title,
@@ -230,6 +235,7 @@ class HomePage extends StatelessWidget {
           slotsAvailable: job.slotsAvailable,
           additionalInfo: 'Please arrive 15 minutes earlier.',
           maxCandidates: 1,
+          currentProposals: 0,
           languages: job.languages);
     }).toList();
 
@@ -238,23 +244,10 @@ class HomePage extends StatelessWidget {
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: allJobsMock.length,
+        itemCount: length ?? allJobsMock.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              title: Text(allJobsMock[index].title),
-              subtitle: Text(allJobsMock[index].city),
-              trailing: Text(allJobsMock[index].hourRate),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => JobDetailPage(
-                              jobPost: allJobsMock[index],
-                            )));
-              },
-            ),
-          );
+          final jobPost = allJobsMock[index];
+          return JobCardItem(jobPost);
         },
       ),
     );

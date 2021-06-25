@@ -1,3 +1,4 @@
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/details_section.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/flag_as_inappropriate_widget.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
@@ -45,7 +46,8 @@ class JobDetailPage extends StatelessWidget {
               Container(
                 width: width,
                 margin: EdgeInsets.only(top: height * 0.5),
-                padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 30.0, horizontal: 15.0),
                 decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     borderRadius: BorderRadius.only(
@@ -159,38 +161,12 @@ class JobDetailPage extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
-                    Text(
-                      'Positions Available',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 6.0),
-                    Text(
-                      jobPost.slotsAvailable.toString(),
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Text(
-                      'Additional Information',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 6.0),
-                    Text(
-                      jobPost.additionalInfo ?? '',
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
+                    DetailsSection(
+                        'Positions Available', jobPost.slotsAvailable.toString()),
+                    DetailsSection(
+                        'Current Applications', jobPost.currentProposals.toString()),
+                    DetailsSection(
+                        'Additional Information', jobPost.additionalInfo),
                     FlagAsInappropriate(),
                     const SizedBox(height: 26.0),
                     RyzePrimaryButton(

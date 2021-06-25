@@ -23,6 +23,7 @@ JobPost _$JobPostFromJson(Map<String, dynamic> json) {
     isRemote: json['isRemote'] as bool,
     slotsAvailable: json['slotsAvailable'] as int,
     maxCandidates: json['maxCandidates'] as int,
+    currentProposals: json['currentProposals'] as int,
     languages: (json['languages'] as List)?.map((e) => e as String)?.toList(),
   );
 }
@@ -43,5 +44,6 @@ Map<String, dynamic> _$JobPostToJson(JobPost instance) => <String, dynamic>{
       'additionalInfo': instance.additionalInfo,
       'slotsAvailable': instance.slotsAvailable,
       'maxCandidates': instance.maxCandidates,
+      'currentProposals': instance.currentProposals,
       'languages': instance.languages,
     };
