@@ -110,6 +110,7 @@ class JobConfirmationPage extends StatelessWidget {
                   Navigator.popAndPushNamed(
                     context,
                     '/qrcode-generator',
+                    arguments: jobPost,
                   );
                 },
                 isAffirmative: true),

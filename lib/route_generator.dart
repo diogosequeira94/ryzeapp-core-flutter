@@ -75,7 +75,7 @@ class RouteGenerator {
       case '/change-password':
         return MaterialPageRoute(builder: (_) => ChangePassword());
       case '/qrcode-generator':
-        return MaterialPageRoute(builder: (_) => QrCodePage());
+        return MaterialPageRoute(builder: (_) => QrCodePage(args));
       case '/add-card':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(

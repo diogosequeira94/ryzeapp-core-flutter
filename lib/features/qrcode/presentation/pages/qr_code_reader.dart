@@ -1,10 +1,15 @@
 import 'dart:io';
 
+import 'package:firebaseblocryze/features/qrcode/presentation/pages/starting_point_page.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRCodeReader extends StatefulWidget {
+  final JobPost jobPost;
+  final String dataToScan;
+  QRCodeReader({this.jobPost, this.dataToScan});
   @override
   State<StatefulWidget> createState() => _QRCodeReaderState();
 }
@@ -27,6 +32,7 @@ class _QRCodeReaderState extends State<QRCodeReader> {
 
   @override
   Widget build(BuildContext context) {
+    final jobPostData = '${widget.jobPost.posterID}+${widget.jobPost.jobID}';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -38,7 +44,7 @@ class _QRCodeReaderState extends State<QRCodeReader> {
       ),
       body: Column(
         children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
+          Expanded(flex: 4, child: _buildQrView(context, jobPostData)),
           Expanded(
             flex: 1,
             child: FittedBox(
@@ -123,17 +129,17 @@ class _QRCodeReaderState extends State<QRCodeReader> {
     );
   }
 
-  Widget _buildQrView(BuildContext context) {
+  Widget _buildQrView(BuildContext context, String jobPostData) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400)
+            MediaQuery.of(context).size.height < 400)
         ? 200.0
         : 400.0;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
-      onQRViewCreated: _onQRViewCreated,
+      onQRViewCreated: _onQRViewCreated(controller, jobPostData),
       overlay: QrScannerOverlayShape(
           borderColor: Colors.red,
           borderRadius: 10,
@@ -143,13 +149,22 @@ class _QRCodeReaderState extends State<QRCodeReader> {
     );
   }
 
-  void _onQRViewCreated(QRViewController controller) {
+  _onQRViewCreated(QRViewController controller, String jobPostData) {
     setState(() {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        print(scanData);
+        if (result.code == jobPostData) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => StartingPointPage(),
+            ),
+          );
+        }
       });
     });
   }
