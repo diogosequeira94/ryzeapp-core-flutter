@@ -38,8 +38,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final userOption = await _authFacade.getSignedInUser();
         yield userOption.fold(() => const AuthState.unauthenticated(), (user) {
           userId = user.id.getOrCrash();
-          print('####### LOG ####### User Id: ${user.id.getOrCrash()}');
-          return const AuthState.authenticated();
+          print(
+              '####### AUTH BLOC LOG ####### User Id: ${user.id.getOrCrash()}');
+          return AuthState.authenticated(userId);
         });
       },
       signedOutPressed: (e) async* {

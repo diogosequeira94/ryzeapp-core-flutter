@@ -103,12 +103,10 @@ class JobCardItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Flexible(
-                    child: ExpandableText(
-                      jobPost.description,
-                      collapseText: 'Show less',
-                      expandText: 'Show more',
-                    ),
+                  child: ExpandableText(
+                    jobPost.description,
+                    collapseText: 'Show less',
+                    expandText: 'Show more',
                   ),
                 ),
               ],

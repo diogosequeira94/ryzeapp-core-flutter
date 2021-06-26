@@ -44,7 +44,7 @@ const ALL_CATEGORIES = const [
   ),
   Category(
     id: 'c7',
-    title: 'Recommended',
+    title: 'For You',
     color: Colors.white,
     imageUrl:
     'https://cdn2.iconfinder.com/data/icons/online-shopping-flat-round/550/diamond-512.png',

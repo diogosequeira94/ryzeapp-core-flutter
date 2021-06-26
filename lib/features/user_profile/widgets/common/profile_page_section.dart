@@ -24,7 +24,8 @@ class ProfilePageSection extends StatelessWidget {
           ),
           const SizedBox(height: 8.0),
           Text(
-            body ?? 'You have not wrote anything about yourself yet, write some lines about you :)',
+            body ??
+                'You have not wrote anything about yourself yet, write some lines about you :)',
             style: TextStyle(fontSize: 14.0),
           ),
           const SizedBox(height: 8.0),
@@ -32,8 +33,8 @@ class ProfilePageSection extends StatelessWidget {
               ? Divider(
                   color: Colors.grey[300],
                   thickness: 2.0,
-                  indent: 8.0,
-                  endIndent: 8.0,
+                  indent: 4.0,
+                  endIndent: 4.0,
                 )
               : SizedBox.shrink(),
         ],

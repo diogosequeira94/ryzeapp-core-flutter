@@ -10,6 +10,6 @@ class TimeFormatterUtil {
     if (minutes.toString().length == 1) {
       formattedMinutes = '0${minutes.toString()}';
     }
-    return '$formattedHour:${formattedMinutes}h';
+    return '$formattedHour:$formattedMinutes';
   }
 }

@@ -16,9 +16,10 @@ import 'package:firebaseblocryze/features/login/presentation/pages/register_page
 import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/splash_page.dart';
 import 'package:firebaseblocryze/features/qrcode/presentation/pages/qr_code_page.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/pages/edit_information_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,6 +35,7 @@ class JobHubArguments {
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
+
     final args = settings.arguments;
     switch (settings.name) {
       case '/':
@@ -42,10 +44,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case '/bottom-nav':
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (_) => BottomNavigationBarBloc()
-                  ..add(BottomNavigationHomePagePressed()),
-                child: BottomNavBarWidget()));
+            builder: (context) => MultiBlocProvider(providers: [
+                  BlocProvider(
+                    create: (_) => BottomNavigationBarBloc()
+                      ..add(BottomNavigationHomePagePressed()),
+                  ),
+                  BlocProvider.value(
+                    value: BlocProvider.of<UserBloc>(context)
+                      ..add(UserProfileFetched(userId: args)),
+                  ),
+                ], child: BottomNavBarWidget()));
       case '/login':
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/register':

@@ -6,6 +6,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/widgets/creatio
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/utils/time_formatter.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
@@ -253,10 +254,13 @@ class _CreateJobButton extends StatelessWidget {
 
   _createJobPost(BuildContext context, JobFormState formState) {
     final _jobsBloc = context.read<JobsBloc>();
+    final _userBloc = context.read<UserBloc>();
     final userId = BlocProvider.of<AuthBloc>(context).userId;
+    final userName =
+        '${_userBloc.userProfile.firstName} ${_userBloc.userProfile.lastName}';
     _jobsBloc.add(AddJobPost(
         JobPost(
-          posterName: 'RyzeApp',
+          posterName: userName,
           posterID: userId,
           jobID: Uuid().v4(),
           title: formState.title.value,

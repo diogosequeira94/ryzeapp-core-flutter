@@ -92,9 +92,7 @@ class JobRepository implements IJobPostRepository {
       return Right(_fireStore
           .collection('jobs')
           .document(jobPost.jobID)
-          .setData(jobPost
-              .copyWith(currentProposals: jobPost.currentProposals + 1)
-              .toJson()));
+          .updateData({'currentProposals': jobPost.currentProposals + 1}));
     } on Exception {
       return Left(JobPostFailure.unexpected());
     }

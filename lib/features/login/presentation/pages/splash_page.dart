@@ -14,8 +14,13 @@ class SplashScreen extends StatelessWidget {
           firstTimeUser: (_) {
             Navigator.of(context).pushNamed('/onboarding');
           },
-          authenticated: (_) {
-            Navigator.of(context).pushNamedAndRemoveUntil('/bottom-nav', (Route<dynamic> route) => false);
+          authenticated: (state) {
+            print('###### SPLASH USER ID: ${state.userId}');
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              '/bottom-nav',
+              (Route<dynamic> route) => false,
+              arguments: state.userId,
+            );
           },
           unauthenticated: (_) {
             Navigator.of(context).pushNamed('/login');

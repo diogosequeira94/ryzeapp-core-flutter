@@ -27,12 +27,12 @@ class JobStatistics extends StatelessWidget {
             'Jobs Completed: $jobsCompleted',
             style: TextStyle(fontSize: 14.0),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 6.0),
           Text(
             'No shows: $noShows',
             style: TextStyle(fontSize: 14.0),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 6.0),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -51,8 +51,6 @@ class JobStatistics extends StatelessWidget {
           Divider(
             color: Colors.grey[300],
             thickness: 2.0,
-            indent: 8.0,
-            endIndent: 8.0,
           )
         ],
       ),

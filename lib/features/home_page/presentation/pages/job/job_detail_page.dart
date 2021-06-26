@@ -99,7 +99,7 @@ class JobDetailPage extends StatelessWidget {
                           children: [
                             Flexible(
                                 child: Text(
-                              'Posted by: ${jobPost.posterID}',
+                              'Posted by: ${jobPost.posterName ?? 'Unknown User'}',
                             )),
                             const SizedBox(width: 6.0),
                             if (isVerified)

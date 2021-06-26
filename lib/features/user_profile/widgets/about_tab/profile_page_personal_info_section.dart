@@ -64,8 +64,8 @@ class ProfilePagePersonalInfo extends StatelessWidget {
           Divider(
             color: Colors.grey[300],
             thickness: 2.0,
-            indent: 8.0,
-            endIndent: 8.0,
+            indent: 4.0,
+            endIndent: 4.0,
           )
         ],
       ),

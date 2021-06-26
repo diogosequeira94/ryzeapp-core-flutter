@@ -30,8 +30,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return;
     }
     yield UserLoadInProgress();
-    print('######### GETTING THE PROFILE.... INSIDE BLOC');
-
     try {
       userProfile =
           await userRepository.getUserProfileInfo(userId: event.userId);
@@ -69,8 +67,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       yield UserProfileEditFailure(errorMessage: 'EMPTY OBJECT');
       return;
     }
-
-    print('######### User Profile Updated: ${userProfile.toJson().toString()}');
     yield UserProfileEditSuccess();
   }
 }
