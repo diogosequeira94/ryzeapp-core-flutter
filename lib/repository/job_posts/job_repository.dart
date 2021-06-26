@@ -73,7 +73,7 @@ class JobRepository implements IJobPostRepository {
         });
         return Right(returnURL);
       } on PlatformException catch (e) {
-        if(e.code == 'DATA_LOSS'){
+        if (e.code == 'DATA_LOSS') {
           return Left(const JobPostFailure.dataCorrupted());
         } else {
           return Left(const JobPostFailure.unexpected());

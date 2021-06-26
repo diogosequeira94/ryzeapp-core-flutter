@@ -1,14 +1,21 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/details_section.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/flag_as_inappropriate_widget.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 class JobDetailPage extends StatelessWidget {
   final JobPost jobPost;
+  final bool selfViewing;
   final bool isVerified;
-  JobDetailPage({@required this.jobPost, this.isVerified = true});
+  JobDetailPage(
+      {@required this.jobPost,
+      this.selfViewing = false,
+      this.isVerified = true});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,11 @@ class JobDetailPage extends StatelessWidget {
         ),
         actions: [
           IconButton(icon: Icon(Icons.share), onPressed: () {}),
-          IconButton(icon: Icon(Icons.star_border), onPressed: () {}),
+          IconButton(
+              icon: selfViewing
+                  ? Icon(Icons.edit)
+                  : Icon(Icons.favorite_border_rounded),
+              onPressed: () {}),
         ],
       ),
       body: SingleChildScrollView(
@@ -139,7 +150,7 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      '${jobPost.startDate.date} @ ${jobPost.startDate.time}',
+                      '${jobPost.startDate} @ ${jobPost.startTime}',
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal,
@@ -155,7 +166,7 @@ class JobDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      '${jobPost.endDate.date} @ ${jobPost.endDate.time}',
+                      '${jobPost.endDate} @ ${jobPost.endTime}',
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal,
@@ -167,16 +178,26 @@ class JobDetailPage extends StatelessWidget {
                         jobPost.currentProposals.toString() ?? '0'),
                     DetailsSection(
                         'Additional Information', jobPost.additionalInfo),
-                    FlagAsInappropriate(),
+                    if (!selfViewing) FlagAsInappropriate(),
                     const SizedBox(height: 26.0),
-                    RyzePrimaryButton(
-                        title: 'Apply Now',
-                        action: () {
-                          Navigator.popAndPushNamed(
-                              context, '/job-confirmation-page',
-                              arguments: jobPost);
-                        },
-                        isAffirmative: true)
+                    selfViewing
+                        ? RyzePrimaryButton(
+                            title: 'Cancel Job',
+                            action: () {
+                              _showDeleteConfirmationDialog(context, jobPost);
+                              Navigator.pop(context);
+                            },
+                            isAffirmative: false,
+                          )
+                        : RyzePrimaryButton(
+                            title: 'Apply Now',
+                            action: () {
+                              Navigator.popAndPushNamed(
+                                  context, '/job-confirmation-page',
+                                  arguments: jobPost);
+                            },
+                            isAffirmative: true,
+                          )
                   ],
                 ),
               )
@@ -186,4 +207,26 @@ class JobDetailPage extends StatelessWidget {
       ),
     );
   }
+  _showDeleteConfirmationDialog(BuildContext context, JobPost jobPost) {
+    AwesomeDialog(
+      context: context,
+      width: 350,
+      buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+      headerAnimationLoop: false,
+      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.NO_HEADER,
+      title: 'Cancel Confirmation',
+      desc: 'By cancelling you will permanently delete this job',
+      btnCancelText: 'Go Back',
+      btnCancelColor: Theme.of(context).accentColor,
+      btnOkText: 'Cancel',
+      btnOkColor: Colors.black,
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        final _jobsBloc = context.read<JobsBloc>();
+        _jobsBloc.add(DeleteJobPost(jobPost));
+      },
+    )..show();
+  }
+
 }

@@ -12,24 +12,6 @@ class JobCardItem extends StatelessWidget {
     return _newJobCard(context, jobPost);
   }
 
-  Widget _oldCard(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(jobPost.title),
-        subtitle: Text(jobPost.city),
-        trailing: Text(jobPost.hourRate),
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => JobDetailPage(
-                        jobPost: jobPost,
-                      )));
-        },
-      ),
-    );
-  }
-
   Widget _newJobCard(BuildContext context, JobPost jobPost) {
     return GestureDetector(
       onTap: () {
@@ -85,26 +67,29 @@ class JobCardItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(jobPost.hourRate),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.calendar_today_outlined, size: 20.0),
-                              const SizedBox(width: 6.0),
-                              Text('${jobPost.startDate.date}'),
-                            ],
-                          ),
-                          const SizedBox(height: 4.0),
-                          Row(
-                            children: [
-                              Icon(Icons.alarm, size: 20.0,),
-                              const SizedBox(width: 6.0),
-                              Text('${jobPost.startDate.time}'),
-                            ],
-                          )
-                        ],
-                      ),
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.end,
+                      //   children: [
+                      //     Row(
+                      //       children: [
+                      //         Icon(Icons.calendar_today_outlined, size: 20.0),
+                      //         const SizedBox(width: 6.0),
+                      //         Text('${jobPost.startDate}'),
+                      //       ],
+                      //     ),
+                      //     const SizedBox(height: 4.0),
+                      //     Row(
+                      //       children: [
+                      //         Icon(
+                      //           Icons.alarm,
+                      //           size: 20.0,
+                      //         ),
+                      //         const SizedBox(width: 6.0),
+                      //         Text('${jobPost.startTime}'),
+                      //       ],
+                      //     )
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),

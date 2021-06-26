@@ -13,7 +13,7 @@ class JobPostStrings {
   static const String jobFormInvalidTitle =
       'Title must be at least 5 characters';
   static const String jobFormInvalidDescription =
-      'Description must be at least 25 characters';
+      'Description must be at least 15 characters';
   static const String jobFormInvalidCity = 'Invalid City';
   static const String jobFormInvalidHourRate = 'Invalid Hour Rate';
 

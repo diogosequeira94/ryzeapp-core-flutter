@@ -5,7 +5,6 @@ import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_
 import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
-import 'package:firebaseblocryze/repository/job_posts/models/date_and_time.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
@@ -178,6 +177,7 @@ class HomePage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => JobDetailPage(
+                                      selfViewing: true,
                                           jobPost: jobsList[index],
                                         )));
                           },
@@ -243,14 +243,10 @@ class HomePage extends StatelessWidget {
           posterID: 'RyzeApp',
           jobID: job.jobID,
           title: job.title,
-          startDate: DateAndTime(
-            date: job.startDate?.date,
-            time: job.startDate?.time,
-          ),
-          endDate: DateAndTime(
-            date: job.endDate?.date,
-            time: job.endDate?.time,
-          ),
+          startDate: job.startDate,
+          endDate: job.endDate,
+          startTime: job.startTime,
+          endTime: job.endTime,
           description: job.description,
           status: 'Active',
           hourRate: job.hourRate,

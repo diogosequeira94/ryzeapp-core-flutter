@@ -118,6 +118,22 @@ class JobFormCubit extends Cubit<JobFormState> {
   void startDateSelected(String value) {
     emit(state.copyWith(
       title: state.title,
+      startTime: state.startTime,
+      startDate: value,
+      endDate: state.endDate,
+      endTime: state.endTime,
+      image: state.image,
+      hourRate: state.hourRate,
+      additionalInfo: state.additionalInfo,
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
+      status: Formz.validate(
+          [state.title, state.description, state.city, state.hourRate]),
+    ));
+  }
+
+  void startTimeSelected(String value) {
+    emit(state.copyWith(
+      title: state.title,
       startTime: value,
       startDate: state.startDate,
       endDate: state.endDate,
@@ -137,22 +153,6 @@ class JobFormCubit extends Cubit<JobFormState> {
       startTime: state.startTime,
       startDate: state.startDate,
       endDate: value,
-      endTime: state.endTime,
-      image: state.image,
-      hourRate: state.hourRate,
-      additionalInfo: state.additionalInfo,
-      isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
-    ));
-  }
-
-  void startTimeSelected(String value) {
-    emit(state.copyWith(
-      title: state.title,
-      startTime: value,
-      startDate: state.startDate,
-      endDate: state.endDate,
       endTime: state.endTime,
       image: state.image,
       hourRate: state.hourRate,
