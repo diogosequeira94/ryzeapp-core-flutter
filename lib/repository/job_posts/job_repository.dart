@@ -82,4 +82,21 @@ class JobRepository implements IJobPostRepository {
     }
     return null;
   }
+
+  @override
+  Future<Either<JobPostFailure, void>> submitJobApplication(
+      JobPost jobPost) async {
+    try {
+      // We are only updating a value here, but the purpose is to create a new application to that job with the user info,
+      // and also send 2 notifications
+      return Right(_fireStore
+          .collection('jobs')
+          .document(jobPost.jobID)
+          .setData(jobPost
+              .copyWith(currentProposals: jobPost.currentProposals + 1)
+              .toJson()));
+    } on Exception {
+      return Left(JobPostFailure.unexpected());
+    }
+  }
 }

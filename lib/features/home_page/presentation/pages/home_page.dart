@@ -6,6 +6,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dar
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/categories/main_categories.dart';
 import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
@@ -74,27 +75,27 @@ class HomePage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Your Job Posts',
-                          style: TextStyle(
-                              fontSize: 18.0, fontWeight: FontWeight.w500),
-                        ),
-                        InkWell(
-                            child: Icon(Icons.add),
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => MultiBlocProvider(providers: [
-                                  BlocProvider.value(
-                                      value:
-                                          BlocProvider.of<JobsBloc>(context)),
-                                  BlocProvider(create: (_) => JobFormCubit())
-                                ], child: JobCreation()),
-                              ));
-                            }),
-                      ],
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => MultiBlocProvider(providers: [
+                            BlocProvider.value(
+                                value: BlocProvider.of<JobsBloc>(context)),
+                            BlocProvider(create: (_) => JobFormCubit())
+                          ], child: JobCreation()),
+                        ));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Your Job Posts',
+                            style: TextStyle(
+                                fontSize: 18.0, fontWeight: FontWeight.w500),
+                          ),
+                          Icon(Icons.add),
+                        ],
+                      ),
                     ),
                   ),
                   state is JobsFetchSuccess
@@ -109,7 +110,7 @@ class HomePage extends StatelessWidget {
                   ),
                   CategoriesGridWidget(),
                   HomePageSectionHeader(title: 'Trending'),
-                  _allJobPosts(context, 3),
+                  _mockTrendingJobPosts(context, 3),
                   HomePageSectionHeader(title: 'Most Recent'),
                   state is JobsFetchSuccess
                       ? _allJobsList(context, state.jobsList)
@@ -176,9 +177,12 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => JobDetailPage(
-                                      selfViewing: true,
-                                          jobPost: jobsList[index],
+                                    builder: (_) => BlocProvider.value(
+                                          value: context.watch<JobsBloc>(),
+                                          child: JobDetailPage(
+                                            selfViewing: true,
+                                            jobPost: jobsList[index],
+                                          ),
                                         )));
                           },
                           onLongPress: () {
@@ -236,7 +240,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _allJobPosts(BuildContext context, [int length]) {
+  Widget _mockTrendingJobPosts(BuildContext context, [int length]) {
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPost(
           posterName: 'RyzeApp',
@@ -284,6 +288,7 @@ class HomePage extends StatelessWidget {
       dialogType: DialogType.NO_HEADER,
       title: 'Delete Confirmation',
       desc: 'Are you sure you want to permanently delete this job?',
+      padding: const EdgeInsets.all(8.0),
       btnCancelText: 'Resume',
       btnCancelColor: Colors.blueAccent,
       btnOkText: 'Delete',

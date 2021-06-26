@@ -1,7 +1,7 @@
 import 'package:firebaseblocryze/repository/job_posts/models/category.dart';
 import 'package:flutter/material.dart';
 
-const DUMMY_CATEGORIES = const [
+const MAIN_CATEGORIES = const [
   Category(
     id: 'c1',
     title: 'Bar',
@@ -18,22 +18,22 @@ const DUMMY_CATEGORIES = const [
   ),
   Category(
     id: 'c3',
-    title: 'Education',
+    title: 'Chef',
     color: Colors.white,
-    imageUrl: null,
+    imageUrl: 'https://cdn0.iconfinder.com/data/icons/professional-avatars/105/4-512.png',
   ),
   Category(
     id: 'c4',
-    title: 'Bilingual',
+    title: 'Remote',
     color: Colors.white,
     imageUrl:
         'https://images.vexels.com/media/users/3/157970/isolated/preview/c156b4270aea292b9b335dd463ea17eb-earth-planet-icon-earth-icon-by-vexels.png',
   ),
   Category(
     id: 'c5',
-    title: 'Healthy',
+    title: 'Hotel',
     color: Colors.white,
-    imageUrl: 'https://image.flaticon.com/icons/png/512/249/249187.png',
+    imageUrl: 'https://cdn0.iconfinder.com/data/icons/buildings-3-1/128/110-512.png',
   ),
   Category(
     id: 'c6',

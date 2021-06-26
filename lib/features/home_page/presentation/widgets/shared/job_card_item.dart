@@ -1,8 +1,11 @@
 import 'package:expandable_text/expandable_text.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/favourites_icon.dart';
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class JobCardItem extends StatelessWidget {
   final JobPost jobPost;
@@ -13,13 +16,18 @@ class JobCardItem extends StatelessWidget {
   }
 
   Widget _newJobCard(BuildContext context, JobPost jobPost) {
+    final userId = BlocProvider.of<AuthBloc>(context).userId;
     return GestureDetector(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => JobDetailPage(
-                      jobPost: jobPost,
+                builder: (_) => BlocProvider.value(
+                      value: context.watch<JobsBloc>(),
+                      child: JobDetailPage(
+                        selfViewing: userId == jobPost.posterID,
+                        jobPost: jobPost,
+                      ),
                     )));
       },
       child: Card(

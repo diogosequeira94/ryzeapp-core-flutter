@@ -16,12 +16,10 @@ class UserRepository extends IUserRepository {
     try {
       var userProfile;
       final userCollection = fireStore.collection('users');
-      print('####### Getting User Profile Data for user $userId');
       final userProfileSnapshot = await userCollection.document(userId).get();
 
       if (userProfileSnapshot.exists) {
         userProfile = userProfileSnapshot.data;
-        print('####### User Profile Data: ${userProfile.toString()}');
       } else {
         // Throw Failure
         return null;
