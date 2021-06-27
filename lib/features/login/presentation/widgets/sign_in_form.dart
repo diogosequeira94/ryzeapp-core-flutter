@@ -27,8 +27,9 @@ class SignInForm extends StatelessWidget {
                 ),
               ).show(context);
             },
-            (_) {
-              Navigator.of(context).pushReplacementNamed('/bottom-nav');
+            (userId) {
+              Navigator.of(context)
+                  .pushReplacementNamed('/bottom-nav', arguments: userId);
               context
                   .bloc<AuthBloc>()
                   .add(const AuthEvent.authCheckRequested());
@@ -104,7 +105,8 @@ class SignInForm extends StatelessWidget {
                               'Forgot your password?',
                               style: TextStyle(fontSize: 14.0),
                             ),
-                            onTap: () => Navigator.of(context).pushNamed('/password-reset'),
+                            onTap: () => Navigator.of(context)
+                                .pushNamed('/password-reset'),
                           )),
                       const SizedBox(height: 16.0),
                       Padding(

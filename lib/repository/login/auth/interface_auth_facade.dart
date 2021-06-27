@@ -10,17 +10,17 @@ import 'auth_failure.dart';
 /// Option is basically a non nullable type, it can contain None or Some user.
 abstract class IAuthFacade {
   Future<Option<User>> getSignedInUser();
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
+  Future<Either<AuthFailure, String>> registerWithEmailAndPassword({
     @required EmailAddress email,
     @required Password password,
     @required FirstName firstName,
     @required LastName lastName,
   });
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
+  Future<Either<AuthFailure, String>> signInWithEmailAndPassword({
     @required EmailAddress email,
     @required Password password,
   });
-  Future<Either<AuthFailure, Unit>> signInWithGoogle();
+  Future<Either<AuthFailure, String>> signInWithGoogle();
   Future<Either<AuthFailure, Unit>> sendPasswordResetEmail({
     @required EmailAddress email,
   });

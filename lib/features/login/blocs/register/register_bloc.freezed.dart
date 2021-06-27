@@ -787,13 +787,20 @@ class _$RegisterStateTearOff {
 
 // ignore: unused_element
   _RegisterState call(
-      {@required FirstName firstName,
-      @required LastName lastName,
-      @required EmailAddress emailAddress,
-      @required Password password,
-      @required bool showErrorMessages,
-      @required bool isSubmitting,
-      @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption}) {
+      {@required
+          FirstName firstName,
+      @required
+          LastName lastName,
+      @required
+          EmailAddress emailAddress,
+      @required
+          Password password,
+      @required
+          bool showErrorMessages,
+      @required
+          bool isSubmitting,
+      @required
+          Option<Either<AuthFailure, String>> authFailureOrSuccessOption}) {
     return _RegisterState(
       firstName: firstName,
       lastName: lastName,
@@ -818,7 +825,7 @@ mixin _$RegisterState {
   Password get password;
   bool get showErrorMessages;
   bool get isSubmitting;
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Either<AuthFailure, String>> get authFailureOrSuccessOption;
 
   @JsonKey(ignore: true)
   $RegisterStateCopyWith<RegisterState> get copyWith;
@@ -836,7 +843,7 @@ abstract class $RegisterStateCopyWith<$Res> {
       Password password,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, String>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -873,7 +880,7 @@ class _$RegisterStateCopyWithImpl<$Res>
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
-          : authFailureOrSuccessOption as Option<Either<AuthFailure, Unit>>,
+          : authFailureOrSuccessOption as Option<Either<AuthFailure, String>>,
     ));
   }
 }
@@ -892,7 +899,7 @@ abstract class _$RegisterStateCopyWith<$Res>
       Password password,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, String>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -931,7 +938,7 @@ class __$RegisterStateCopyWithImpl<$Res>
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
-          : authFailureOrSuccessOption as Option<Either<AuthFailure, Unit>>,
+          : authFailureOrSuccessOption as Option<Either<AuthFailure, String>>,
     ));
   }
 }
@@ -967,7 +974,7 @@ class _$_RegisterState implements _RegisterState {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Either<AuthFailure, String>> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -1035,7 +1042,7 @@ abstract class _RegisterState implements RegisterState {
           @required
               bool isSubmitting,
           @required
-              Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption}) =
+              Option<Either<AuthFailure, String>> authFailureOrSuccessOption}) =
       _$_RegisterState;
 
   @override
@@ -1051,7 +1058,7 @@ abstract class _RegisterState implements RegisterState {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Either<AuthFailure, String>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$RegisterStateCopyWith<_RegisterState> get copyWith;

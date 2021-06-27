@@ -24,8 +24,9 @@ class RegisterForm extends StatelessWidget {
                 ),
               ).show(context);
             },
-            (_) {
-              Navigator.of(context).pushReplacementNamed('/bottom-nav');
+            (userId) {
+              Navigator.of(context)
+                  .pushReplacementNamed('/bottom-nav', arguments: userId);
             },
           ),
         );

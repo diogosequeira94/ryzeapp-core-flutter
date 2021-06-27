@@ -29,7 +29,7 @@ class FirebaseAuthFacade implements IAuthFacade {
       .then((firebaseUser) => optionOf(firebaseUser?.toDomain()));
 
   @override
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
+  Future<Either<AuthFailure, String>> registerWithEmailAndPassword({
     @required EmailAddress email,
     @required Password password,
     @required FirstName firstName,
@@ -41,10 +41,12 @@ class FirebaseAuthFacade implements IAuthFacade {
     final lastNameString = lastName.getOrCrash()?.trim();
 
     try {
+      var userId;
       await _firebaseAuth
           .createUserWithEmailAndPassword(
               email: emailAddressString, password: passwordString)
           .then((result) {
+        userId = result.user.uid;
         _fireStore.collection('users').document(result.user.uid).setData({
           'userId': result.user.uid,
           'firstName': firstNameString,
@@ -52,7 +54,7 @@ class FirebaseAuthFacade implements IAuthFacade {
           'email': emailAddressString,
         });
       });
-      return right(unit);
+      return right(userId);
     } on PlatformException catch (e) {
       if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
         return left(const AuthFailure.emailAlreadyInUse());
@@ -63,15 +65,15 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
+  Future<Either<AuthFailure, String>> signInWithEmailAndPassword(
       {EmailAddress email, Password password}) async {
     final emailAddressString = email.getOrCrash();
     final passwordString = password.getOrCrash();
 
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final credentials = await _firebaseAuth.signInWithEmailAndPassword(
           email: emailAddressString, password: passwordString);
-      return right(unit);
+      return right(credentials.user.uid);
     } on PlatformException catch (e) {
       if (e.code == 'ERROR_WRONG_PASSWORD' ||
           e.code == 'ERROR_USER_NOT_FOUND') {
@@ -83,7 +85,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
+  Future<Either<AuthFailure, String>> signInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
@@ -97,7 +99,7 @@ class FirebaseAuthFacade implements IAuthFacade {
 
       return _firebaseAuth
           .signInWithCredential(authCredential)
-          .then((r) => right(unit));
+          .then((r) => right(authCredential.providerId));
     } on PlatformException catch (_) {
       return left(const AuthFailure.serverError());
     }

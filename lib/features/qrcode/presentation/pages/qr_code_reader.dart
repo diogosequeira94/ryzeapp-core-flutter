@@ -18,6 +18,7 @@ class _QRCodeReaderState extends State<QRCodeReader> {
   Barcode result;
   QRViewController controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  String jobPostData;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -32,7 +33,7 @@ class _QRCodeReaderState extends State<QRCodeReader> {
 
   @override
   Widget build(BuildContext context) {
-    final jobPostData = '${widget.jobPost.posterID}+${widget.jobPost.jobID}';
+    jobPostData = '${widget.jobPost.posterID}+${widget.jobPost.jobID}';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -139,7 +140,7 @@ class _QRCodeReaderState extends State<QRCodeReader> {
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
-      onQRViewCreated: _onQRViewCreated(controller, jobPostData),
+      onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
           borderColor: Colors.red,
           borderRadius: 10,
@@ -149,20 +150,18 @@ class _QRCodeReaderState extends State<QRCodeReader> {
     );
   }
 
-  _onQRViewCreated(QRViewController controller, String jobPostData) {
+  _onQRViewCreated(QRViewController controller) {
     setState(() {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        print(scanData);
-        if (result.code == jobPostData) {
+        if(result.code == jobPostData){
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => StartingPointPage(),
-            ),
+                builder: (context) => StartingPointPage()),
           );
         }
       });
