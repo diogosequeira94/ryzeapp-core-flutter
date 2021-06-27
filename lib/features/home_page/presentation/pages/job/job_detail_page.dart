@@ -21,7 +21,7 @@ class JobDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
+    final _jobsBloc = context.read<JobsBloc>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -53,7 +53,7 @@ class JobDetailPage extends StatelessWidget {
         } else if (state is DeleteJobSuccess) {
           Navigator.pop(context);
         } else if (state is JobApplicationSuccess) {
-          print('##### LOG: APPLY SUCESS!!!');
+          _jobsBloc.add(FetchJobsPosts());
           Navigator.pop(context);
         }
       }, builder: (context, state) {
@@ -210,7 +210,6 @@ class JobDetailPage extends StatelessWidget {
                           : RyzePrimaryButton(
                               title: 'Apply Now',
                               action: () {
-                                final _jobsBloc = context.read<JobsBloc>();
                                 _jobsBloc.add(JobApplyPressed(jobPost));
                                 //ToDo : Confirmation page is only visible after Employer accepts
                                 // Navigator.popAndPushNamed(

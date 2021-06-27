@@ -42,8 +42,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationAccountPageLoaded) {
             return BlocProvider.value(
-                value: BlocProvider.of<UserBloc>(context)
-                  ..add(UserProfileFetched(userId: authBloc.userId)),
+                value: BlocProvider.of<UserBloc>(context),
                 child: AccountOverviewPage());
           } else if (state is BottomNavigationExplorePageLoading) {
             return Center(child: CircularProgressIndicator());

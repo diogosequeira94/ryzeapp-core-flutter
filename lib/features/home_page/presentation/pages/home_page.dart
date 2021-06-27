@@ -6,7 +6,6 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dar
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
-import 'package:firebaseblocryze/repository/job_posts/models/categories/main_categories.dart';
 import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
@@ -17,111 +16,133 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _jobsBloc = context.watch<JobsBloc>();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        iconTheme: Theme.of(context).iconTheme,
-        automaticallyImplyLeading: false,
-        title: Text('RyzeApp',
-            style:
-                TextStyle(color: Theme.of(context).textTheme.headline6.color)),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.notifications_none),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/notifications');
-              }),
-          IconButton(
-              icon: Icon(Icons.chat_outlined),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/messages');
-              }),
-        ],
-      ),
-      body: BlocConsumer<JobsBloc, JobsState>(
-        listener: (context, state) {
-          if (state is JobsFetchFailure) {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text("Error retrieving data. Please try again"),
-              duration: const Duration(seconds: 2),
-            ));
-          } else if (state is DeleteJobFailure) {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
-              duration: const Duration(seconds: 2),
-            ));
-          } else if (state is DeleteJobSuccess) {
-            Future.delayed(const Duration(milliseconds: 1500), () {
-              _jobsBloc.add(FetchJobsPosts());
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text('Job deleted with success'),
-                duration: const Duration(milliseconds: 1500),
-              ));
-            });
-          }
-        },
-        builder: (context, state) {
-          // ToDo: Need to add Bloc States
-          return RefreshIndicator(
-            onRefresh: () {
-              _jobsBloc.add(FetchJobsPosts());
-              return _jobsBloc.firstWhere((e) => e is! FetchJobsPosts);
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  NewsCarouselSliderWidget(),
-                  CovidPandemicAlert(showAlert: true),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => MultiBlocProvider(providers: [
-                            BlocProvider.value(
-                                value: BlocProvider.of<JobsBloc>(context)),
-                            BlocProvider(create: (_) => JobFormCubit())
-                          ], child: JobCreation()),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          iconTheme: Theme.of(context).iconTheme,
+          automaticallyImplyLeading: false,
+          title: Text('RyzeApp',
+              style: TextStyle(
+                  color: Theme.of(context).textTheme.headline6.color)),
+          actions: [
+            IconButton(
+                icon: Icon(Icons.notifications_none),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/notifications');
+                }),
+            IconButton(
+                icon: Icon(Icons.chat_outlined),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/messages');
+                }),
+          ],
+        ),
+        body: RefreshIndicator(
+          onRefresh: () {
+            _jobsBloc.add(FetchJobsPosts());
+            return _jobsBloc.firstWhere((e) => e is! FetchJobsPosts);
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NewsCarouselSliderWidget(),
+                CovidPandemicAlert(showAlert: true),
+                BlocConsumer<JobsBloc, JobsState>(
+                  listener: (context, state) {
+                    if (state is JobsFetchFailure) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text("Error retrieving data. Please try again"),
+                        duration: const Duration(seconds: 2),
+                      ));
+                    } else if (state is DeleteJobFailure) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(state.message),
+                        duration: const Duration(seconds: 2),
+                      ));
+                    } else if (state is DeleteJobSuccess) {
+                      Future.delayed(const Duration(milliseconds: 1500), () {
+                        _jobsBloc.add(FetchJobsPosts());
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('Job deleted with success'),
+                          duration: const Duration(milliseconds: 1500),
                         ));
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Your Job Posts',
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w500),
-                          ),
-                          Icon(Icons.add),
-                        ],
-                      ),
-                    ),
-                  ),
-                  state is JobsFetchSuccess
-                      ? _myJobPosts(state.myJobs, context)
-                      : Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Center(child: CircularProgressIndicator()),
+                      });
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is JobsFetchInProgress) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 60.0),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                              backgroundColor:
+                                  Theme.of(context).accentColor),
                         ),
-                  HomePageSectionHeader(
-                    title: 'Job Categories',
-                    edgeInsets: const EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 6.0),
-                  ),
-                  CategoriesGridWidget(),
-                  HomePageSectionHeader(title: 'Trending'),
-                  _mockTrendingJobPosts(context, 3),
-                  HomePageSectionHeader(title: 'Most Recent'),
-                  state is JobsFetchSuccess
-                      ? _allJobsList(context, state.jobsList)
-                      : SizedBox.shrink(),
-                ],
-              ),
+                      );
+                    } else if (state is JobsFetchSuccess) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 14.0,
+                                right: 14.0,
+                                top: 20.0,
+                                bottom: 6.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => MultiBlocProvider(providers: [
+                                    BlocProvider.value(
+                                        value:
+                                            BlocProvider.of<JobsBloc>(context)),
+                                    BlocProvider(create: (_) => JobFormCubit())
+                                  ], child: JobCreation()),
+                                ));
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Your Job Posts',
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Icon(Icons.add),
+                                ],
+                              ),
+                            ),
+                          ),
+                          _myJobPosts(state.myJobs, context),
+                          HomePageSectionHeader(
+                            title: 'Job Categories',
+                            edgeInsets:
+                                const EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 6.0),
+                          ),
+                          CategoriesGridWidget(),
+                          HomePageSectionHeader(title: 'Trending'),
+                          _mockTrendingJobPosts(context, 3),
+                          HomePageSectionHeader(title: 'Most Recent'),
+                          _allJobsList(context, state.jobsList),
+                        ],
+                      );
+                    } else if (state is JobsFetchFailure) {
+                      return Center(
+                        child: Text(
+                            'Something went wrong... please reload the page'),
+                      );
+                    } else {
+                      return SizedBox.shrink();
+                    }
+                  },
+                ),
+              ],
             ),
-          );
-        },
-      ),
-    );
+          ),
+        ));
   }
 
   Widget _myJobPosts(List jobsList, BuildContext context) {
