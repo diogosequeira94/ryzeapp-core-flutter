@@ -18,8 +18,12 @@ class JobRepository implements IJobPostRepository {
 
   @override
   Future<Either<JobPostFailure, void>> create(JobPost jobPost) async {
+    // This way we are creating a new Document with a custom jobID
     try {
-      return Right(_fireStore.collection('jobs').add(jobPost.toJson()));
+      return Right(_fireStore
+          .collection('jobs')
+          .document('${jobPost.jobID}')
+          .setData(jobPost.toJson()));
     } on Exception {
       return Left(JobPostFailure.unexpected());
     }
@@ -86,6 +90,7 @@ class JobRepository implements IJobPostRepository {
   @override
   Future<Either<JobPostFailure, void>> submitJobApplication(
       JobPost jobPost) async {
+    print('### UPDATING JOB POST ID: ${jobPost.jobID}');
     try {
       // We are only updating a value here, but the purpose is to create a new application to that job with the user info,
       // and also send 2 notifications

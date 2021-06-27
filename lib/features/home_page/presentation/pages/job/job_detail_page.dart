@@ -53,6 +53,7 @@ class JobDetailPage extends StatelessWidget {
         } else if (state is DeleteJobSuccess) {
           Navigator.pop(context);
         } else if (state is JobApplicationSuccess) {
+          print('##### LOG: APPLY SUCESS!!!');
           Navigator.pop(context);
         }
       }, builder: (context, state) {

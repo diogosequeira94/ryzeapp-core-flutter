@@ -28,6 +28,7 @@ class SignInForm extends StatelessWidget {
               ).show(context);
             },
             (userId) {
+              print('##### SIGN IN FORM ID: $userId');
               Navigator.of(context)
                   .pushReplacementNamed('/bottom-nav', arguments: userId);
               context
