@@ -216,6 +216,7 @@ class JobDetailPage extends StatelessWidget {
                                 //     context, '/job-confirmation-page',
                                 //     arguments: jobPost);
                               },
+                              isLoading: state is JobApplicationInProgress,
                               isAffirmative: true,
                             )
                     ],

@@ -68,16 +68,23 @@ class HomePage extends StatelessWidget {
                           duration: const Duration(milliseconds: 1500),
                         ));
                       });
+                    } else if (state is JobApplicationSuccess) {
+                      Future.delayed(const Duration(milliseconds: 1500), () {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('Your application was submitted.'),
+                          duration: const Duration(milliseconds: 500),
+                        ));
+                      });
                     }
                   },
                   builder: (context, state) {
-                    if (state is JobsFetchInProgress) {
+                    if (state is JobsFetchInProgress ||
+                        state is DeleteJobInProgress) {
                       return Padding(
                         padding: const EdgeInsets.only(top: 60.0),
                         child: Center(
                           child: CircularProgressIndicator(
-                              backgroundColor:
-                                  Theme.of(context).accentColor),
+                              backgroundColor: Theme.of(context).accentColor),
                         ),
                       );
                     } else if (state is JobsFetchSuccess) {
@@ -135,7 +142,14 @@ class HomePage extends StatelessWidget {
                             'Something went wrong... please reload the page'),
                       );
                     } else {
-                      return SizedBox.shrink();
+                      /// ToDo: Return SizedBox.Shrink when find out all other states when deleting.
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 60.0),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                              backgroundColor: Theme.of(context).accentColor),
+                        ),
+                      );
                     }
                   },
                 ),
@@ -198,12 +212,9 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => BlocProvider.value(
-                                          value: context.watch<JobsBloc>(),
-                                          child: JobDetailPage(
-                                            selfViewing: true,
-                                            jobPost: jobsList[index],
-                                          ),
+                                    builder: (_) => JobDetailPage(
+                                          selfViewing: true,
+                                          jobPost: jobsList[index],
                                         )));
                           },
                           onLongPress: () {
@@ -309,7 +320,7 @@ class HomePage extends StatelessWidget {
       dialogType: DialogType.NO_HEADER,
       title: 'Delete Confirmation',
       desc: 'Are you sure you want to permanently delete this job?',
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
       btnCancelText: 'Resume',
       btnCancelColor: Colors.blueAccent,
       btnOkText: 'Delete',

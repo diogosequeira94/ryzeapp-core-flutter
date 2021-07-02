@@ -6,6 +6,7 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/pages/user_profile_page.dart';
 import 'package:firebaseblocryze/injection.dart';
+import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +20,14 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                 create: (context) => JobsBloc(
-                      JobRepository(
-                          Firestore.instance, FirebaseStorage.instance),
-                      BlocProvider.of<AuthBloc>(context),
+                      jobRepository: JobRepository(
+                          FirebaseFirestore.instance, FirebaseStorage.instance),
+                      authBloc: BlocProvider.of<AuthBloc>(context),
+                      applicationsNotifierRepository:
+                          ApplicationsNotifierRepository(
+                        firebaseStorage: FirebaseStorage.instance,
+                        fireStore: FirebaseFirestore.instance,
+                      ),
                     )..add(FetchJobsPosts()),
                 child: HomePage()));
       case '/user-profile':

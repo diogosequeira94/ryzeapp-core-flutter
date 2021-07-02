@@ -3,6 +3,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/creation_page/job_category_picker.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/creation_page/payment_type_picker.dart';
 import 'package:firebaseblocryze/features/home_page/utils/job_post_strings.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/utils/time_formatter.dart';
@@ -59,6 +60,7 @@ class _JobFormState extends State<JobForm> {
             _DescriptionInput(),
             _CityInput(),
             _HourRateInput(),
+            PaymentTypePicker(),
             JobCategoryPicker(),
             _DateTimeCalendar(),
             _AdditionalInformationInput(),
@@ -73,34 +75,6 @@ class _JobFormState extends State<JobForm> {
             _CreateJobButton(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildInputSection(FocusNode focusNode, bool autoFocus, String label,
-      String hint, int length, TextEditingController controller,
-      [FocusNode nextFocus, bool numeric = false]) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: TextFormField(
-        autofocus: autoFocus,
-        focusNode: focusNode,
-        maxLength: length,
-        controller: controller,
-        keyboardType: numeric ? TextInputType.number : TextInputType.text,
-        enabled: true,
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: hint,
-          border: OutlineInputBorder(
-            borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
-          ),
-        ),
-        onFieldSubmitted: (term) {
-          focusNode.unfocus();
-          FocusScope.of(context).requestFocus(nextFocus);
-        },
       ),
     );
   }

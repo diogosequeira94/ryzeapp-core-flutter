@@ -18,10 +18,10 @@ class NotificationsPage extends StatelessWidget {
           iconTheme: Theme.of(context).iconTheme,
           bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.message_outlined, color: Colors.black54)),
+              Tab(icon: Icon(Icons.message_outlined)),
               Tab(
                   icon:
-                      Icon(Icons.watch_later_outlined, color: Colors.black54)),
+                      Icon(Icons.watch_later_outlined)),
             ],
           ),
           title: Text('Notifications',

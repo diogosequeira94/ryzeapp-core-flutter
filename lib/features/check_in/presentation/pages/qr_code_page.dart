@@ -1,8 +1,9 @@
-import 'package:firebaseblocryze/features/qrcode/presentation/pages/qr_code_reader.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+
+import 'qr_code_reader.dart';
 
 class QrCodePage extends StatelessWidget {
   final JobPost jobPost;

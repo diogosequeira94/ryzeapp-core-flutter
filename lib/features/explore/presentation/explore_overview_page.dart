@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/explore/presentation/widgets/categorie
 import 'package:firebaseblocryze/features/explore/presentation/widgets/no_results_found_widget.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_detail_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,18 +24,26 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
     final _bottomNavBloc = context.watch<BottomNavigationBarBloc>();
     final allJobsMock = DUMMY_ALL_JOBS.map((job) {
       return JobPost(
+          posterName: 'RyzeApp',
+          posterID: 'RyzeApp',
           jobID: job.jobID,
           title: job.title,
+          startDate: job.startDate,
+          endDate: job.endDate,
+          startTime: job.startTime,
+          endTime: job.endTime,
           description: job.description,
+          status: 'Active',
           hourRate: job.hourRate,
-          status: job.status,
           imageUrl: job.imageUrl,
           city: job.city,
           isRemote: job.isRemote,
           slotsAvailable: job.slotsAvailable,
+          additionalInfo: 'Please arrive 15 minutes earlier.',
+          maxCandidates: 1,
+          currentProposals: 0,
           languages: job.languages);
     }).toList();
-
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -72,23 +81,21 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
         );
   }
 
-  Widget _jobCategoriesSection(){
+  Widget _jobCategoriesSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HomePageSectionHeader(
           title: 'Job Categories',
         ),
-        Container(
-            height: 100.0,
-            child: CategoriesHorizontalListWidget()),
+        Container(height: 100.0, child: CategoriesHorizontalListWidget()),
       ],
     );
   }
 
   Widget _allJobPosts(List<JobPost> allJobsMock, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 14.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -101,28 +108,8 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
             shrinkWrap: true,
             itemCount: allJobsMock.length,
             itemBuilder: (context, index) {
-              return Card(
-                child: ListTile(
-                  leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: CachedNetworkImage(
-                          imageUrl: allJobsMock[index].imageUrl,
-                          width: 75,
-                          height: 75,
-                          fit: BoxFit.cover)),
-                  title: Text(allJobsMock[index].title),
-                  subtitle: Text(allJobsMock[index].city),
-                  trailing: Text(allJobsMock[index].hourRate),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => JobDetailPage(
-                                  jobPost: allJobsMock[index],
-                                )));
-                  },
-                ),
-              );
+              final jobPost = allJobsMock[index];
+              return JobCardItem(jobPost);
             },
           ),
         ],

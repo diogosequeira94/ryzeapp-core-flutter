@@ -3,13 +3,13 @@ import 'package:firebaseblocryze/injection.dart';
 import 'package:firebaseblocryze/repository/login/auth/interface_auth_facade.dart';
 import 'package:firebaseblocryze/repository/login/core/errors.dart';
 
-extension FirestoreX on Firestore {
+extension FirestoreX on FirebaseFirestore {
   Future<DocumentReference> userDocument() async {
     final userOption = await getIt<IAuthFacade>().getSignedInUser();
     final user = userOption.getOrElse(() => throw NotAuthenticatedError());
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('users')
-        .document(user.id.getOrCrash());
+        .doc(user.id.getOrCrash());
   }
 }
 

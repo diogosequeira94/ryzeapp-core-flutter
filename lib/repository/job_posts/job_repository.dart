@@ -11,19 +11,19 @@ import 'package:path/path.dart';
 
 @LazySingleton(as: IJobPostRepository)
 class JobRepository implements IJobPostRepository {
-  final Firestore _fireStore;
+  final FirebaseFirestore _fireStore;
   final FirebaseStorage _firebaseStorage;
 
   JobRepository(this._fireStore, this._firebaseStorage);
 
   @override
   Future<Either<JobPostFailure, void>> create(JobPost jobPost) async {
-    // This way we are creating a new Document with a custom jobID
+    /// This way we are creating a new Document with a custom jobID
     try {
       return Right(_fireStore
           .collection('jobs')
-          .document('${jobPost.jobID}')
-          .setData(jobPost.toJson()));
+          .doc('${jobPost.jobID}')
+          .set(jobPost.toJson()));
     } on Exception {
       return Left(JobPostFailure.unexpected());
     }
@@ -35,10 +35,10 @@ class JobRepository implements IJobPostRepository {
       return Right(_fireStore
           .collection('jobs')
           .where('jobID', isEqualTo: jobPost.jobID)
-          .getDocuments()
+          .get()
           .then((value) {
-        value.documents.forEach((element) {
-          _fireStore.collection('jobs').document(element.documentID).delete();
+        value.docs.forEach((element) {
+          _fireStore.collection('jobs').doc(element.id).delete();
         });
       }));
     } on Exception {
@@ -49,9 +49,9 @@ class JobRepository implements IJobPostRepository {
   @override
   Future<Either<JobPostFailure, List<JobPost>>> getJobs() async {
     try {
-      final jobsList = await _fireStore.collection('jobs').getDocuments().then(
+      final jobsList = await _fireStore.collection('jobs').get().then(
           (snapshot) =>
-              snapshot.documents.map((e) => JobPost.fromJson(e.data)).toList());
+              snapshot.docs.map((e) => JobPost.fromJson(e.data())).toList());
       return Right(jobsList);
     } on Exception {
       return Left(const JobPostFailure.unexpected());
@@ -69,8 +69,7 @@ class JobRepository implements IJobPostRepository {
       try {
         final storageReference =
             _firebaseStorage.ref().child('jobImages/${basename(_image.path)}');
-        final uploadTask = storageReference.putFile(_image);
-        await uploadTask.onComplete;
+        await storageReference.putFile(_image);
         String returnURL;
         await storageReference.getDownloadURL().then((fileURL) {
           returnURL = fileURL;
@@ -96,8 +95,8 @@ class JobRepository implements IJobPostRepository {
       // and also send 2 notifications
       return Right(_fireStore
           .collection('jobs')
-          .document(jobPost.jobID)
-          .updateData({'currentProposals': jobPost.currentProposals + 1}));
+          .doc(jobPost.jobID)
+          .update({'currentProposals': jobPost.currentProposals + 1}));
     } on Exception {
       return Left(JobPostFailure.unexpected());
     }

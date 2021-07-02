@@ -2,6 +2,9 @@ import 'package:firebaseblocryze/features/account/model/card_model.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/wallet/credit_card_widget.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/wallet/operations_slider.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/section_header_widget.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter/material.dart';
 
 class WalletPage extends StatelessWidget {
@@ -16,6 +19,7 @@ class WalletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _userBloc = context.read<UserBloc>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -46,7 +50,8 @@ class WalletPage extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     )),
               ),
-              Text('Walter White',
+              Text(
+                  '${_userBloc.userProfile.firstName} ${_userBloc.userProfile.lastName}',
                   style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.w700,

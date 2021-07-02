@@ -11,7 +11,7 @@ abstract class FirebaseInjectableModule {
   @lazySingleton
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
   @lazySingleton
-  Firestore get firebaseFireStore => Firestore.instance;
+  FirebaseFirestore get firebaseFireStore => FirebaseFirestore.instance;
   @lazySingleton
   FirebaseStorage get firebaseStorage => FirebaseStorage.instance;
 }

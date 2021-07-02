@@ -8,22 +8,18 @@ import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/cha
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_confirmation_page.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/pages/job_hub_page.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
-import 'package:firebaseblocryze/features/login/presentation/pages/password_reset_page.dart';
-import 'package:firebaseblocryze/features/login/presentation/pages/register_page.dart';
-import 'package:firebaseblocryze/features/login/presentation/pages/sign_in_page.dart';
-import 'package:firebaseblocryze/features/login/presentation/pages/splash_page.dart';
-import 'package:firebaseblocryze/features/qrcode/presentation/pages/qr_code_page.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
-import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/pages/edit_information_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/check_in/presentation/pages/qr_code_page.dart';
 import 'features/explore/presentation/explore_overview_page.dart';
+import 'features/home_page/presentation/pages/pages.dart';
+import 'features/login/presentation/pages/pages.dart';
+import 'features/user_profile/presentation/user_profile/pages/pages.dart';
 
 class JobHubArguments {
   final List<JobPost> jobPostList;

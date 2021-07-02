@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/injection.dart';
+import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/user/user_repository.dart';
 import 'package:firebaseblocryze/route_generator.dart';
 import 'package:firebaseblocryze/uikit/theme/app_themes.dart';
 import 'package:firebaseblocryze/uikit/theme/bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'repository/job_posts/job_repository.dart';
 
 class ShellWidget extends StatefulWidget {
   @override
@@ -18,6 +22,7 @@ class ShellWidget extends StatefulWidget {
 
 class _ShellWidgetState extends State<ShellWidget> {
   AuthBloc _authBloc;
+  JobsBloc _jobsBloc;
   UserBloc _userBloc;
   ThemeBloc _themeBloc;
 
@@ -29,9 +34,20 @@ class _ShellWidgetState extends State<ShellWidget> {
 
   void _initializeBlocs() {
     _authBloc = getIt<AuthBloc>();
+    _jobsBloc = JobsBloc(
+      jobRepository: JobRepository(
+        FirebaseFirestore.instance,
+        FirebaseStorage.instance,
+      ),
+      authBloc: _authBloc,
+      applicationsNotifierRepository: ApplicationsNotifierRepository(
+        fireStore: FirebaseFirestore.instance,
+        firebaseStorage: FirebaseStorage.instance,
+      ),
+    );
     _userBloc = UserBloc(
       userRepository: UserRepository(
-          fireStore: getIt<Firestore>(),
+          fireStore: getIt<FirebaseFirestore>(),
           firebaseStorage: getIt<FirebaseStorage>()),
     );
     _themeBloc = ThemeBloc();
@@ -47,6 +63,9 @@ class _ShellWidgetState extends State<ShellWidget> {
       ),
       BlocProvider<UserBloc>(
         create: (context) => _userBloc,
+      ),
+      BlocProvider<JobsBloc>(
+        create: (context) => _jobsBloc..add(FetchJobsPosts()),
       ),
       BlocProvider<ThemeBloc>(
         create: (context) => _themeBloc

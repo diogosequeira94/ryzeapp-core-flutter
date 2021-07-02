@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebaseblocryze/repository/login/auth/auth_failure.dart';
 import 'package:firebaseblocryze/repository/login/auth/entity/user.dart';
 import 'package:firebaseblocryze/repository/login/auth/interface_auth_facade.dart';
@@ -14,7 +14,7 @@ import 'firebase_user_mapper.dart';
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
-  final Firestore _fireStore;
+  final FirebaseFirestore _fireStore;
   final GoogleSignIn _googleSignIn;
 
   FirebaseAuthFacade(
@@ -24,9 +24,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   );
 
   @override
-  Future<Option<User>> getSignedInUser() => _firebaseAuth
-      .currentUser()
-      .then((firebaseUser) => optionOf(firebaseUser?.toDomain()));
+  Future<Option<User>> getSignedInUser() async =>
+      optionOf(_firebaseAuth.currentUser?.toDomain());
 
   @override
   Future<Either<AuthFailure, String>> registerWithEmailAndPassword({
@@ -47,7 +46,7 @@ class FirebaseAuthFacade implements IAuthFacade {
               email: emailAddressString, password: passwordString)
           .then((result) {
         userId = result.user.uid;
-        _fireStore.collection('users').document(result.user.uid).setData({
+        _fireStore.collection('users').doc(result.user.uid).set({
           'userId': result.user.uid,
           'firstName': firstNameString,
           'lastName': lastNameString,
@@ -55,7 +54,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         });
       });
       return right(userId);
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
         return left(const AuthFailure.emailAlreadyInUse());
       } else {
@@ -74,7 +73,7 @@ class FirebaseAuthFacade implements IAuthFacade {
       final credentials = await _firebaseAuth.signInWithEmailAndPassword(
           email: emailAddressString, password: passwordString);
       return right(credentials.user.uid);
-    } on PlatformException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'ERROR_WRONG_PASSWORD' ||
           e.code == 'ERROR_USER_NOT_FOUND') {
         return left(const AuthFailure.invalidCredentials());
@@ -93,14 +92,14 @@ class FirebaseAuthFacade implements IAuthFacade {
       }
       final googleAuthentication = await googleUser.authentication;
 
-      final authCredential = GoogleAuthProvider.getCredential(
+      final authCredential = GoogleAuthProvider.credential(
           idToken: googleAuthentication.idToken,
           accessToken: googleAuthentication.accessToken);
 
       return _firebaseAuth
           .signInWithCredential(authCredential)
           .then((r) => right(authCredential.providerId));
-    } on PlatformException catch (_) {
+    } on FirebaseAuthException catch (_) {
       return left(const AuthFailure.serverError());
     }
   }

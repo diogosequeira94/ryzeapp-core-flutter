@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 
 class UserRepository extends IUserRepository {
-  final Firestore fireStore;
+  final FirebaseFirestore fireStore;
   final FirebaseStorage firebaseStorage;
   UserRepository({this.fireStore, this.firebaseStorage});
 
@@ -16,14 +16,14 @@ class UserRepository extends IUserRepository {
     try {
       var userProfile;
       final userCollection = fireStore.collection('users');
-      final userProfileSnapshot = await userCollection.document(userId).get();
-
-      if (userProfileSnapshot.exists) {
-        userProfile = userProfileSnapshot.data;
-      } else {
-        // Throw Failure
-        return null;
-      }
+      await userCollection.doc(userId).get().then((document) {
+        if (document.exists) {
+          userProfile = document.data();
+        } else {
+          // Throw Failure
+          return null;
+        }
+      });
       return UserProfile.fromJson(userProfile);
     } on Exception {
       return null;
@@ -32,10 +32,7 @@ class UserRepository extends IUserRepository {
 
   @override
   Future updateUserProfile({String userId, UserProfile userProfile}) {
-    return fireStore
-        .collection('users')
-        .document(userId)
-        .setData(userProfile.toJson());
+    return fireStore.collection('users').doc(userId).set(userProfile.toJson());
   }
 
   Future<String> uploadProfileImage(File _image) async {
@@ -44,8 +41,7 @@ class UserRepository extends IUserRepository {
         final storageReference = firebaseStorage
             .ref()
             .child('profileImages/${basename(_image.path)}');
-        final uploadTask = storageReference.putFile(_image);
-        await uploadTask.onComplete;
+        await storageReference.putFile(_image);
         String returnURL;
         await storageReference.getDownloadURL().then((fileURL) {
           returnURL = fileURL;

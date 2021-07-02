@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 
-class JobCategoryPicker extends StatefulWidget {
+class PaymentTypePicker extends StatefulWidget {
   @override
-  _JobCategoryPickerState createState() => _JobCategoryPickerState();
+  _PaymentTypePickerState createState() => _PaymentTypePickerState();
 }
 
-class _JobCategoryPickerState extends State<JobCategoryPicker> {
+class _PaymentTypePickerState extends State<PaymentTypePicker> {
   final TextEditingController _controller = new TextEditingController();
-  var jobCategoryTitles = [
-    'Bar',
-    'Chef',
-    'Hotel',
-    'IT',
-    'Remote',
-    'Support',
-    'Other',
+  var paymentTypes = [
+    'Fixed-Term',
+    'Hourly',
   ];
   @override
   Widget build(BuildContext context) {
@@ -23,12 +18,12 @@ class _JobCategoryPickerState extends State<JobCategoryPicker> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
               child: Row(
                 children: <Widget>[
                   Expanded(child: TextField(enableInteractiveSelection: false, readOnly: true, controller: _controller, decoration: InputDecoration(
-                    labelText: 'Category',
-                    hintText: 'Select a Category',
+                    labelText: 'PayRate Terms',
+                    hintText: 'Select a pay term.',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
                     ),
@@ -40,7 +35,7 @@ class _JobCategoryPickerState extends State<JobCategoryPicker> {
                       _controller.text = value;
                     },
                     itemBuilder: (BuildContext context) {
-                      return jobCategoryTitles
+                      return paymentTypes
                           .map<PopupMenuItem<String>>((value) {
                         return PopupMenuItem(child: Text(value), value: value);
                       }).toList();

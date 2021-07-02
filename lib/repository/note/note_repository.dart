@@ -6,11 +6,11 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'i_note_repository.dart';
-import 'package:firebaseblocryze/repository/login/infrastructure/core/firestore_helpers.dart';
+import 'package:firebaseblocryze/platform/core_helpers/firestore_helpers.dart';
 
 @LazySingleton(as: INoteRepository)
 class NoteRepository implements INoteRepository {
-  final Firestore _fireStore;
+  final FirebaseFirestore _fireStore;
 
   NoteRepository(this._fireStore);
   @override
@@ -23,12 +23,12 @@ class NoteRepository implements INoteRepository {
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map((snapshot) => right(
-              snapshot.documents
+              snapshot.docs
                   .map((doc) => NoteDto.fromFirestore(doc).toDomain())
                   .toList(),
             ))
         .handleError((e) {
-      if (e is PlatformException && e.message.contains('PERMISSION_DENIED')) {
+      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());
       } else {
         return left(const NoteFailure.unexpected());
@@ -46,8 +46,8 @@ class NoteRepository implements INoteRepository {
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map(
-          (snapshot) => snapshot.documents
-              .map((doc) => NoteDto.fromFirestore(doc).toDomain()),
+          (snapshot) =>
+              snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
         )
         .map(
           (notes) => right(
@@ -73,11 +73,9 @@ class NoteRepository implements INoteRepository {
       // We need to convert the Dart Object to a normal model to send it to FireStore
       final noteDto = NoteDto.fromDomain(note);
       // When set data is call over a non-existing document, it will be created, if it exists, it will be override.
-      await userDoc.noteCollection
-          .document(noteDto.id)
-          .setData(noteDto.toJson());
+      await userDoc.noteCollection.doc(noteDto.id).set(noteDto.toJson());
       return right(unit);
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(NoteFailure.insufficientPermission());
       } else {
@@ -93,11 +91,9 @@ class NoteRepository implements INoteRepository {
       // We need to convert the Dart Object to a normal model to send it to FireStore
       final noteDto = NoteDto.fromDomain(note);
       // When set data is call over a non-existing document, it will be created, if it exists, it will be override.
-      await userDoc.noteCollection
-          .document(noteDto.id)
-          .updateData(noteDto.toJson());
+      await userDoc.noteCollection.doc(noteDto.id).update(noteDto.toJson());
       return right(unit);
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());
       } else if (e.message.contains('NOT_FOUND')) {
@@ -115,9 +111,9 @@ class NoteRepository implements INoteRepository {
       // We need to convert the Dart Object to a normal model to send it to FireStore
       final noteId = note.id.getOrCrash();
       // When set data is call over a non-existing document, it will be created, if it exists, it will be override.
-      await userDoc.noteCollection.document(noteId).delete();
+      await userDoc.noteCollection.doc(noteId).delete();
       return right(unit);
-    } on PlatformException catch (e) {
+    } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
         return left(NoteFailure.insufficientPermission());
       } else if (e.message.contains('NOT_FOUND')) {

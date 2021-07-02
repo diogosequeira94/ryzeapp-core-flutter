@@ -1,19 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_overview_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
-import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
-import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../injection.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   @override
@@ -24,20 +18,13 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final authBloc = BlocProvider.of<AuthBloc>(context);
     return Scaffold(
       body: BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
         builder: (context, state) {
           if (state is BottomNavigationHomePageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationHomePageLoaded) {
-            return BlocProvider(
-                create: (_) => JobsBloc(
-                      JobRepository(
-                          Firestore.instance, FirebaseStorage.instance),
-                      authBloc,
-                    )..add(FetchJobsPosts()),
-                child: HomePage());
+            return HomePage();
           } else if (state is BottomNavigationAccountPageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationAccountPageLoaded) {
@@ -51,7 +38,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                 value: BlocProvider.of<BottomNavigationBarBloc>(context),
                 child: ExploreOverviewPage());
           } else if (state is BottomNavigationExploreMapLoaded) {
-            return ExploreMapPage();
+            return BlocProvider.value(
+                value: BlocProvider.of<JobsBloc>(context),
+                child: ExploreMapPage());
           } else {
             return Container();
           }

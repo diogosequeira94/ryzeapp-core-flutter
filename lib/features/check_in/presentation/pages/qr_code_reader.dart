@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:firebaseblocryze/features/qrcode/presentation/pages/starting_point_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+import 'starting_point_page.dart';
 
 class QRCodeReader extends StatefulWidget {
   final JobPost jobPost;
@@ -157,11 +158,11 @@ class _QRCodeReaderState extends State<QRCodeReader> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        if(result.code == jobPostData){
+        if (result.code == jobPostData) {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => StartingPointPage()),
+                builder: (context) => StartingPointPage(widget.jobPost)),
           );
         }
       });

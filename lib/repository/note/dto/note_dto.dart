@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/repository/login/core/value_object.dart';
 import 'package:firebaseblocryze/repository/note/models/note.dart';
@@ -29,26 +28,29 @@ abstract class NoteDto implements _$NoteDto {
       id: note.id.getOrCrash(),
       body: note.body.getOrCrash(),
       color: note.color.getOrCrash().value,
-      todos: note.toDos.getOrCrash().map((todoItem) => 
-      TodoItemDto.fromDomain(todoItem),
-      ).toList(),
+      todos: note.toDos
+          .getOrCrash()
+          .map(
+            (todoItem) => TodoItemDto.fromDomain(todoItem),
+          )
+          .toList(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );
   }
 
   Note toDomain() {
     return Note(
-      id: UniqueId.fromUniqueString(id),
-      body: NoteBody(body),
-      color: NoteColor(Color(color)),
-      toDos: List3(todos.map((dto) => dto.toDomain()).toList())
-    );
+        id: UniqueId.fromUniqueString(id),
+        body: NoteBody(body),
+        color: NoteColor(Color(color)),
+        toDos: List3(todos.map((dto) => dto.toDomain()).toList()));
   }
 
-  factory NoteDto.fromJson(Map<String, dynamic> json) => _$NoteDtoFromJson(json);
+  factory NoteDto.fromJson(Map<String, dynamic> json) =>
+      _$NoteDtoFromJson(json);
 
   factory NoteDto.fromFirestore(DocumentSnapshot doc) {
-    return NoteDto.fromJson(doc.data).copyWith(id: doc.documentID);
+    return NoteDto.fromJson(doc.data()).copyWith(id: doc.id);
   }
 }
 
@@ -76,9 +78,9 @@ abstract class TodoItemDto implements _$TodoItemDto {
   //Converting todoItem to a DTO
   factory TodoItemDto.fromDomain(TodoItem todoItem) {
     return TodoItemDto(
-     id: todoItem.uniqueId.getOrCrash(),
-     name: todoItem.name.getOrCrash(),
-     done: todoItem.done,
+      id: todoItem.uniqueId.getOrCrash(),
+      name: todoItem.name.getOrCrash(),
+      done: todoItem.done,
     );
   }
 
@@ -90,5 +92,6 @@ abstract class TodoItemDto implements _$TodoItemDto {
     );
   }
 
-  factory TodoItemDto.fromJson(Map<String, dynamic> json) => _$TodoItemDtoFromJson(json);
+  factory TodoItemDto.fromJson(Map<String, dynamic> json) =>
+      _$TodoItemDtoFromJson(json);
 }
