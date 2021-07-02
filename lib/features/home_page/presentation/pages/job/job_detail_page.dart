@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/details_section.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/flag_as_inappropriate_widget.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/widgets.dart';
+import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
@@ -210,11 +210,11 @@ class JobDetailPage extends StatelessWidget {
                           : RyzePrimaryButton(
                               title: 'Apply Now',
                               action: () {
-                                _jobsBloc.add(JobApplyPressed(jobPost));
-                                //ToDo : Confirmation page is only visible after Employer accepts
-                                // Navigator.popAndPushNamed(
-                                //     context, '/job-confirmation-page',
-                                //     arguments: jobPost);
+                                final _userBloc = context.read<UserBloc>();
+                                final userName =
+                                    '${_userBloc.userProfile.firstName} ${_userBloc.userProfile.lastName}';
+                                _jobsBloc.add(JobApplyPressed(
+                                    jobPost: jobPost, userName: userName));
                               },
                               isLoading: state is JobApplicationInProgress,
                               isAffirmative: true,

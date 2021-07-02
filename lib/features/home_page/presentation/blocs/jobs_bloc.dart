@@ -72,16 +72,19 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
     } else if (event is JobApplyPressed) {
       yield JobApplicationInProgress();
       final loadingBool = await _getLoadingBool();
+      final dateTimeStamp = DateTime.now().toIso8601String();
+      final userId = authBloc.userId;
       final fakeApplicationMock = Application(
         userName: 'Diogo Sequeira',
-        userId: '123',
-        dateOfAppliance: 'Today',
+        userId: userId,
+        dateOfAppliance: dateTimeStamp,
         accepted: false,
       );
-      final submitApplication =
-          await applicationsNotifierRepository.submitJobApplication(
-              jobPostId: event.jobPost.jobID,
-              jobApplication: fakeApplicationMock);
+
+      // Creates [Application] under applications sub collection
+      await applicationsNotifierRepository.submitJobApplication(
+          jobPostId: event.jobPost.jobID, jobApplication: fakeApplicationMock);
+      // Increments [ApplicationCounter] under job details
       final incrementApplicationCounter =
           await jobRepository.submitJobApplication(event.jobPost);
       yield incrementApplicationCounter.fold(

@@ -19,9 +19,10 @@ class AddJobPost extends JobsEvent {
 
 class JobApplyPressed extends JobsEvent {
   final JobPost jobPost;
-  JobApplyPressed(this.jobPost);
+  final String userName;
+  JobApplyPressed({this.jobPost, this.userName});
   @override
-  List<Object> get props => [jobPost];
+  List<Object> get props => [jobPost, userName];
 }
 
 class DeleteJobPost extends JobsEvent {
