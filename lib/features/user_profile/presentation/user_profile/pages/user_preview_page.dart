@@ -1,21 +1,19 @@
-import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
+import 'package:firebaseblocryze/features/user_profile/cubit/user_preview/user_preview_cubit.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/tabs/about_section_tab.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/tabs/activity_section_tab.dart';
 import 'package:firebaseblocryze/features/user_profile/presentation/user_profile/tabs/education_section_tab.dart';
-import 'package:firebaseblocryze/features/user_profile/utils/user_mocks.dart';
 import 'package:firebaseblocryze/features/user_profile/utils/user_profile_strings.dart';
 import 'package:firebaseblocryze/features/user_profile/widgets/common/profile_page_header.dart';
+import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UserProfilePage extends StatelessWidget {
-  final user = UserMocks.getMockUser();
+class UserPreviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final userId = BlocProvider.of<AuthBloc>(context).userId;
     final userBloc = BlocProvider.of<UserBloc>(context);
     return Scaffold(
       appBar: AppBar(
@@ -25,28 +23,13 @@ class UserProfilePage extends StatelessWidget {
           UserProfileString.profileTitle,
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
-        actions: [
-          BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-            if (state is UserLoadSuccess) {
-              return IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      '/edit-profile',
-                      arguments: state.userProfile,
-                    );
-                  });
-            } else {
-              return SizedBox.shrink();
-            }
-          }),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-            if (state is UserLoadSuccess) {
+          child: BlocBuilder<UserPreviewCubit, UserPreviewState>(
+              builder: (context, state) {
+            if (state is UserProfilePreviewSuccess) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -58,18 +41,20 @@ class UserProfilePage extends StatelessWidget {
                       thickness: 2.0,
                     ),
                   ),
-                  _TabsSection(),
+                  _TabsSection(state.userProfile),
                 ],
               );
-            } else if (state is UserLoadInProgress) {
+            } else if (state is UserProfilePreviewInProgress) {
               return Container(
                 height: 400,
                 width: double.infinity,
                 child: Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).accentColor,
+                  ),
                 ),
               );
-            } else if (state is UserLoadFailure) {
+            } else if (state is UserProfilePreviewFailure) {
               return Center(
                 child: Column(
                   children: [
@@ -79,7 +64,7 @@ class UserProfilePage extends StatelessWidget {
                       child: RyzePrimaryButton(
                           title: 'Retry',
                           action: () {
-                            userBloc.add(UserProfileFetched(userId: userId));
+                            userBloc.add(UserProfilePreviewFetched(userId: ''));
                           },
                           isAffirmative: false),
                     )
@@ -99,6 +84,8 @@ class UserProfilePage extends StatelessWidget {
 }
 
 class _TabsSection extends StatelessWidget {
+  final UserProfile userProfile;
+  _TabsSection(this.userProfile);
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -119,7 +106,7 @@ class _TabsSection extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height / 1.5,
             child: TabBarView(children: [
-              AboutSectionTab(null),
+              AboutSectionTab(userProfile),
               EducationSectionTab(),
               ActivitySectionTab(),
             ]),

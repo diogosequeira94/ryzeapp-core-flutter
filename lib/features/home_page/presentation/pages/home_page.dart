@@ -322,9 +322,9 @@ class HomePage extends StatelessWidget {
       desc: 'Are you sure you want to permanently delete this job?',
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
       btnCancelText: 'Resume',
-      btnCancelColor: Colors.blueAccent,
+      btnCancelColor: Colors.black,
       btnOkText: 'Delete',
-      btnOkColor: Colors.black,
+      btnOkColor: Colors.red,
       btnCancelOnPress: () {},
       btnOkOnPress: () {
         final _jobsBloc = context.read<JobsBloc>();

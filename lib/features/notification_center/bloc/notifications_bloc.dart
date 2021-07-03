@@ -29,11 +29,13 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         notificationsList = await applicationsNotifierRepository
             .getNotificationsList(userId: uid);
       } on Exception {
+        print('##### EXCEPTION');
         yield NotificationsFetchFailure('FAIL');
         return;
       }
 
       if (notificationsList == null) {
+        print('##### WHATTT');
         yield NotificationsFetchFailure('EMPTY OBJECT');
         return;
       }

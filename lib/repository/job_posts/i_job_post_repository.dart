@@ -7,6 +7,7 @@ abstract class IJobPostRepository {
   // watch available jobs
   // Create Update Delete
   Future<Either<JobPostFailure, List<JobPost>>> getJobs();
+  Future<Either<JobPostFailure, JobPost>> getJobById(String jobID);
   Future<Either<JobPostFailure, void>> create(JobPost jobPost);
   Future<Either<JobPostFailure, void>> submitJobApplication(JobPost jobPost);
   Future<Either<JobPostFailure, void>> update(JobPost jobPost);

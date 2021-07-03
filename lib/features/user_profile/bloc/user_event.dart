@@ -14,6 +14,13 @@ class UserProfileFetched extends UserEvent {
   List<Object> get props => [userId];
 }
 
+class UserProfilePreviewFetched extends UserEvent {
+  final String userId;
+  const UserProfilePreviewFetched({this.userId});
+  @override
+  List<Object> get props => [userId];
+}
+
 class UserProfileSavePressed extends UserEvent {
   final File profileImage;
   final String userId;

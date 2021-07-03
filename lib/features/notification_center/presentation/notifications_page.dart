@@ -1,4 +1,6 @@
-import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/notifications/notifications_bloc.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebaseblocryze/features/notification_center/bloc/notifications_bloc.dart';
+import 'package:firebaseblocryze/features/notification_center/presentation/notification_details_page.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/notification.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
@@ -16,15 +18,22 @@ class NotificationsPage extends StatelessWidget {
             child: Icon(Icons.close),
             onTap: () => Navigator.of(context).pop(),
           ),
+          actions: [
+            IconButton(
+                icon: Icon(Icons.delete_outline_outlined),
+                onPressed: () {
+                  _showDeleteNotificationsDialog(context);
+                }),
+          ],
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           iconTheme: Theme.of(context).iconTheme,
-          bottom: TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.message_outlined)),
-              Tab(icon: Icon(Icons.watch_later_outlined)),
-            ],
-          ),
+          // bottom: TabBar(
+          //   tabs: [
+          //     Tab(icon: Icon(Icons.message_outlined)),
+          //     Tab(icon: Icon(Icons.watch_later_outlined)),
+          //   ],
+          // ),
           title: Text('Notifications',
               style: TextStyle(
                   color: Theme.of(context).textTheme.headline6.color)),
@@ -40,12 +49,7 @@ class NotificationsPage extends StatelessWidget {
                 ),
               );
             } else if (state is NotificationsFetchSuccess) {
-              return TabBarView(
-                children: [
-                  _buildNotificationsList(state.notificationsList),
-                  _buildNotificationMock(context),
-                ],
-              );
+              return _buildNotificationsList(state.notificationsList);
             } else if (state is NotificationsFetchFailure) {
               return Padding(
                 padding: const EdgeInsets.only(top: 60.0),
@@ -63,10 +67,10 @@ class NotificationsPage extends StatelessWidget {
   }
 
   _buildNotificationsList(List notificationsList) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: notificationsList.isEmpty
-          ? Column(
+    return notificationsList.isEmpty
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -84,45 +88,81 @@ class NotificationsPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center),
               ],
-            )
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: notificationsList.length,
-                itemBuilder: (context, index) {
-                  final NotificationModel notification =
-                      notificationsList[index];
-                  return Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 100,
-                        child: Card(
-                          elevation: 3.0,
-                          child: ListTile(
-                            leading: Icon(Icons.notifications_active),
-                            title: Text(
-                                'Job Confirmation: ${notification.applierName} as just applied!'),
-                            trailing: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                JobStatusPill(jobStatus: 'Active'),
-                              ],
-                            ),
-                            onTap: () {},
-                          ),
-                        ),
-                      ),
-                      Divider(
-                        height: 1.0,
-                      ),
-                    ],
-                  );
-                },
-              ),
             ),
+          )
+        : ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: notificationsList.length,
+            itemBuilder: (context, index) {
+              final NotificationModel notification = notificationsList[index];
+              return Card(
+                elevation: 3.0,
+                child: ListTile(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+                  leading: Icon(Icons.work_outline_rounded, size: 30.0),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 16.0),
+                  title: RichText(
+                    text: TextSpan(
+                      text: 'Job Application: ',
+                      style: TextStyle(fontSize: 16.0),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: '${notification.applierName} ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: 'has just applied to your '),
+                        TextSpan(
+                            text: '${notification.jobTitle} ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: 'post!'),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => NotificationDetailsPage(
+                                  jobTitle: notification.jobTitle,
+                                  jobId: notification.jobId,
+                                  applierName: notification.applierName,
+                                  applierId: notification.applierId,
+                                )));
+                  },
+                ),
+              );
+            },
+          );
+  }
+
+  _showDeleteNotificationsDialog(BuildContext context) {
+    AwesomeDialog(
+      context: context,
+      width: 350,
+      buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+      headerAnimationLoop: false,
+      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.NO_HEADER,
+      title: 'Delete Notifications',
+      desc:
+          'Are you sure you want to delete all notifications? You can choose to delete each one by longpressing an entry.',
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
+      btnCancelText: 'Go back',
+      btnCancelColor: Colors.black,
+      btnOkText: 'Delete',
+      btnOkColor: Colors.red,
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {},
+    )..show();
+  }
+
+  Widget _tabView(BuildContext context) {
+    return TabBarView(
+      children: [
+        _buildNotificationsList(null),
+        _buildNotificationMock(context),
+      ],
     );
   }
 

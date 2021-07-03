@@ -64,24 +64,24 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
   }
 
   @override
-  Future<List<NotificationModel>> getNotificationsList({String userId}) {
+  Future<List<NotificationModel>> getNotificationsList({String userId}) async {
     try {
-      final notificationList = fireStore
+      final notificationList = await fireStore
           .collection('users')
           .doc(userId)
           .collection('notifications')
           .get()
           .then((snapshot) {
-            final length = snapshot.docs.length;
-            print('##### NOTIFICAITONS LIST LENGTH $length');
-            if(snapshot.docs.length > 0 ) {
-              snapshot.docs.map((e) => NotificationModel.fromJson(e.data())).toList();
-            } else {
-              final List<NotificationModel> empty = [];
-              return empty;
-            }
+        if (snapshot.docs.length > 0) {
+          return snapshot.docs
+              .map((e) => NotificationModel.fromJson(e.data()))
+              .toList();
+        } else {
+          final List<NotificationModel> empty = [];
+          return empty;
+        }
       });
-
+      print(notificationList);
       return notificationList;
     } on Exception {
       return null;
