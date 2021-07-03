@@ -92,7 +92,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       // Creates [Notification] under Job Posters [NotificationCenter]
       await applicationsNotifierRepository.createInAppNotification(
         jobPost: event.jobPost,
-        userId: userId,
+        applierName: event.userName,
+        applierId: userId,
         posterId: event.jobPost.posterID,
       );
 

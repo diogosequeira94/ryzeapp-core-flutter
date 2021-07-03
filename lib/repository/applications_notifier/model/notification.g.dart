@@ -9,7 +9,8 @@ part of 'notification.dart';
 Notification _$NotificationFromJson(Map<String, dynamic> json) {
   return Notification(
     posterId: json['posterId'] as String,
-    candidateId: json['candidateId'] as String,
+    applierName: json['applierName'] as String,
+    applierId: json['applierId'] as String,
     jobTitle: json['jobTitle'] as String,
     jobId: json['jobId'] as String,
   );
@@ -18,7 +19,8 @@ Notification _$NotificationFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$NotificationToJson(Notification instance) =>
     <String, dynamic>{
       'posterId': instance.posterId,
-      'candidateId': instance.candidateId,
+      'applierName': instance.applierName,
+      'applierId': instance.applierId,
       'jobTitle': instance.jobTitle,
       'jobId': instance.jobId,
     };

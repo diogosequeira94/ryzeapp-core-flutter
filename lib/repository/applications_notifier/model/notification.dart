@@ -7,13 +7,15 @@ part 'notification.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Notification extends Equatable {
   final String posterId;
-  final String candidateId;
+  final String applierName;
+  final String applierId;
   final String jobTitle;
   final String jobId;
 
   const Notification({
     @required this.posterId,
-    @required this.candidateId,
+    @required this.applierName,
+    @required this.applierId,
     @required this.jobTitle,
     @required this.jobId,
   });
@@ -21,7 +23,8 @@ class Notification extends Equatable {
   @override
   List<Object> get props => [
         posterId,
-        candidateId,
+        applierName,
+        applierId,
         jobTitle,
         jobId,
       ];

@@ -39,12 +39,17 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
 
   // Split in the future into a different repository
   @override
-  Future<void> createInAppNotification(
-      {JobPost jobPost, String userId, String posterId}) {
+  Future<void> createInAppNotification({
+    JobPost jobPost,
+    String applierName,
+    String applierId,
+    String posterId,
+  }) {
     try {
       final notification = Notification(
         posterId: posterId,
-        candidateId: userId,
+        applierName: applierName,
+        applierId: applierId,
         jobTitle: jobPost.title,
         jobId: jobPost.jobID,
       );

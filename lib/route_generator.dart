@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/features/account/cubit/add_card_form_cubit.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/add_card_page.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/change_password_page.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/error/payment_failed_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/notifications/notifications_bloc.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/bottom_nav_bar_widget.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/chat_messages_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/notifications_page.dart';
@@ -11,6 +14,8 @@ import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
+import 'package:firebaseblocryze/injection.dart';
+import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +68,15 @@ class RouteGenerator {
       case '/payment-error':
         return MaterialPageRoute(builder: (_) => PaymentFailedPage());
       case '/notifications':
-        return MaterialPageRoute(builder: (_) => NotificationsPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (_) => NotificationsBloc(
+                      ApplicationsNotifierRepository(
+                        fireStore: getIt<FirebaseFirestore>(),
+                        firebaseStorage: getIt<FirebaseStorage>(),
+                      ),
+                    ),
+                child: NotificationsPage()));
       case '/messages':
         return MaterialPageRoute(builder: (_) => ChatMessagesPage());
       case '/edit-profile':

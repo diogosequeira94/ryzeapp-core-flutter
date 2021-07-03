@@ -19,9 +19,7 @@ class NotificationsPage extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.message_outlined)),
-              Tab(
-                  icon:
-                      Icon(Icons.watch_later_outlined)),
+              Tab(icon: Icon(Icons.watch_later_outlined)),
             ],
           ),
           title: Text('Notifications',
@@ -96,7 +94,9 @@ class NotificationsPage extends StatelessWidget {
             ),
           ),
         ),
-        Divider(height: 1.0,),
+        Divider(
+          height: 1.0,
+        ),
       ],
     );
   }
