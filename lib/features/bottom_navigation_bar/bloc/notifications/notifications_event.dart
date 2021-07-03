@@ -10,7 +10,7 @@ class FetchNotifications extends NotificationsEvent {
 }
 
 class DeleteNotification extends NotificationsEvent {
-  final Notification notification;
+  final NotificationModel notification;
   DeleteNotification(this.notification);
   @override
   List<Object> get props => [notification];

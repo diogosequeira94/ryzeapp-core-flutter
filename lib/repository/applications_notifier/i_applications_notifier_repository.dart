@@ -8,6 +8,6 @@ abstract class IApplicationsNotifierRepository {
       {@required String jobPostId, Application jobApplication});
   Future<void> createInAppNotification(
       {JobPost jobPost, String applierName, String applierId, String posterId});
-  Future<List<Notification>> getNotificationsList({@required String userId});
+  Future<List<NotificationModel>> getNotificationsList({@required String userId});
   Future<void> deleteApplication({@required String applicationId});
 }

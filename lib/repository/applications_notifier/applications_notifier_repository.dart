@@ -46,7 +46,7 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
     String posterId,
   }) {
     try {
-      final notification = Notification(
+      final notification = NotificationModel(
         posterId: posterId,
         applierName: applierName,
         applierId: applierId,
@@ -64,7 +64,7 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
   }
 
   @override
-  Future<List<Notification>> getNotificationsList({String userId}) {
+  Future<List<NotificationModel>> getNotificationsList({String userId}) {
     try {
       final notificationList = fireStore
           .collection('users')
@@ -72,7 +72,7 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
           .collection('notifications')
           .get()
           .then((snapshot) {
-        snapshot.docs.map((e) => Notification.fromJson(e.data())).toList();
+        snapshot.docs.map((e) => NotificationModel.fromJson(e.data())).toList();
       });
 
       return notificationList;

@@ -5,14 +5,14 @@ import 'package:meta/meta.dart';
 part 'notification.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Notification extends Equatable {
+class NotificationModel extends Equatable {
   final String posterId;
   final String applierName;
   final String applierId;
   final String jobTitle;
   final String jobId;
 
-  const Notification({
+  const NotificationModel({
     @required this.posterId,
     @required this.applierName,
     @required this.applierId,
@@ -29,8 +29,8 @@ class Notification extends Equatable {
         jobId,
       ];
 
-  factory Notification.fromJson(Map<String, dynamic> json) =>
-      _$NotificationFromJson(json);
+  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
+      _$NotificationModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificationToJson(this);
+  Map<String, dynamic> toJson() => _$NotificationModelToJson(this);
 }

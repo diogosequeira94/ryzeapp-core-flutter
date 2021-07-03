@@ -75,7 +75,7 @@ class RouteGenerator {
                         fireStore: getIt<FirebaseFirestore>(),
                         firebaseStorage: getIt<FirebaseStorage>(),
                       ),
-                    ),
+                    )..add(FetchNotifications()),
                 child: NotificationsPage()));
       case '/messages':
         return MaterialPageRoute(builder: (_) => ChatMessagesPage());

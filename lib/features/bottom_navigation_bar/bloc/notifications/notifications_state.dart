@@ -16,7 +16,7 @@ class NotificationsFetchInProgress extends NotificationsState {
 }
 
 class NotificationsFetchSuccess extends NotificationsState {
-  final List<Notification> notificationsList;
+  final List<NotificationModel> notificationsList;
   NotificationsFetchSuccess({this.notificationsList});
   @override
   List<Object> get props => [notificationsList];
