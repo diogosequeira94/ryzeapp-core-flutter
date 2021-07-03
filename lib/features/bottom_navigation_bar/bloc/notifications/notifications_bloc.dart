@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/notification.dart';
 
@@ -21,8 +22,12 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       yield NotificationsFetchInProgress();
       var notificationsList;
       try {
+        final FirebaseAuth auth = FirebaseAuth.instance;
+        final User user = auth.currentUser;
+        final uid = user.uid;
+        print('##### FIREBASE USER: $uid');
         notificationsList = await applicationsNotifierRepository
-            .getNotificationsList(userId: '123');
+            .getNotificationsList(userId: uid);
       } on Exception {
         yield NotificationsFetchFailure('FAIL');
         return;
@@ -32,9 +37,6 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         yield NotificationsFetchFailure('EMPTY OBJECT');
         return;
       }
-
-      print(
-          '######### NOTIFICATIONS Data in BLoc: ${notificationsList.toJson().toString()}');
       yield NotificationsFetchSuccess(notificationsList: notificationsList);
     }
   }

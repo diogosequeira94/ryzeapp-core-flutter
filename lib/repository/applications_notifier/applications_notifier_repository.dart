@@ -72,7 +72,14 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
           .collection('notifications')
           .get()
           .then((snapshot) {
-        snapshot.docs.map((e) => NotificationModel.fromJson(e.data())).toList();
+            final length = snapshot.docs.length;
+            print('##### NOTIFICAITONS LIST LENGTH $length');
+            if(snapshot.docs.length > 0 ) {
+              snapshot.docs.map((e) => NotificationModel.fromJson(e.data())).toList();
+            } else {
+              final List<NotificationModel> empty = [];
+              return empty;
+            }
       });
 
       return notificationList;

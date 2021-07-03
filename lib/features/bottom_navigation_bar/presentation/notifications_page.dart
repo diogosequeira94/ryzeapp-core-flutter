@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _notificationsBloc = context.watch<NotificationsBloc>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -30,7 +29,7 @@ class NotificationsPage extends StatelessWidget {
               style: TextStyle(
                   color: Theme.of(context).textTheme.headline6.color)),
         ),
-        body: BlocBuilder(
+        body: BlocBuilder<NotificationsBloc, NotificationsState>(
           builder: (context, state) {
             if (state is NotificationsFetchInProgress) {
               return Padding(
@@ -43,8 +42,8 @@ class NotificationsPage extends StatelessWidget {
             } else if (state is NotificationsFetchSuccess) {
               return TabBarView(
                 children: [
-                  _buildNotificationMock(context),
                   _buildNotificationsList(state.notificationsList),
+                  _buildNotificationMock(context),
                 ],
               );
             } else if (state is NotificationsFetchFailure) {
@@ -147,7 +146,7 @@ class NotificationsPage extends StatelessWidget {
           child: Card(
             elevation: 3.0,
             child: ListTile(
-              title: Text('Job Confirmation: Restaurant'),
+              title: Text('Mock'),
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
