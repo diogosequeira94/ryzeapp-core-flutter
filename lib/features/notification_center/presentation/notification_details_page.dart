@@ -19,6 +19,7 @@ class NotificationDetailsPage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    final _jobsBloc = context.watch<JobsBloc>();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -29,37 +30,50 @@ class NotificationDetailsPage extends StatelessWidget {
                 TextStyle(color: Theme.of(context).textTheme.headline6.color),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 24.0, horizontal: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _NotificationHeader(jobTitle, applierName),
-                const SizedBox(height: 30.0),
-                _UserDetailsSection(applierName, applierDescription,
-                    applierPhoneNumber, applierId),
-                const SizedBox(height: 30.0),
-                _DetailedSection(jobTitle, applierName),
-                const SizedBox(height: 50.0),
-                BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
-                  return RyzePrimaryButton(
-                    title: 'Accept',
-                    action: () {
-                      final _jobsBloc = context.watch<JobsBloc>();
-                      _jobsBloc.add(AcceptJobPressed(
-                        jobTitle: jobTitle,
-                        jobId: jobId,
-                        applierId: applierId,
-                      ));
-                    },
-                    isLoading: state is JobAcceptanceInProgress,
-                    isAffirmative: true,
-                  );
-                })
-              ],
+        body: BlocListener<JobsBloc, JobsState>(
+          listener: (context, state) {
+            if (state is JobAcceptanceFailure) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(content: Text('Oops, something went wrong!')),
+                );
+            } else if (state is JobAcceptanceSuccess) {
+              _jobsBloc.add(FetchJobsPosts());
+              Navigator.pop(context);
+            }
+          },
+          child: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 24.0, horizontal: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _NotificationHeader(jobTitle, applierName),
+                  const SizedBox(height: 30.0),
+                  _UserDetailsSection(applierName, applierDescription,
+                      applierPhoneNumber, applierId),
+                  const SizedBox(height: 30.0),
+                  _DetailedSection(jobTitle, applierName),
+                  const SizedBox(height: 50.0),
+                  BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
+                    return RyzePrimaryButton(
+                      title: 'Accept',
+                      action: () {
+                        _jobsBloc.add(AcceptJobPressed(
+                          jobTitle: jobTitle,
+                          jobId: jobId,
+                          applierId: applierId,
+                        ));
+                      },
+                      isLoading: state is JobAcceptanceInProgress,
+                      isAffirmative: true,
+                    );
+                  })
+                ],
+              ),
             ),
           ),
         ));
