@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class NewsCarouselSliderWidget extends StatefulWidget {
@@ -22,11 +23,13 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Column(
           children: [
             CarouselSlider(
               items: imageSliders(),
               options: CarouselOptions(
+                  height: height / 3.8,
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 6),
                   viewportFraction: 1.0,
@@ -50,8 +53,8 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: _current == index
-                        ? Color.fromRGBO(0, 0, 0, 0.9)
-                        : Color.fromRGBO(0, 0, 0, 0.4),
+                        ? sharedPrefs.isDarkModeSelected ? Colors.white : Color.fromRGBO(0, 0, 0, 0.9)
+                        : sharedPrefs.isDarkModeSelected ? Colors.white38 : Color.fromRGBO(0, 0, 0, 0.4),
                   ),
                 );
               }).toList(),
@@ -77,7 +80,7 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Color.fromARGB(200, 0, 0, 0),
+                          Color.fromARGB(170, 0, 0, 0),
                           Color.fromARGB(0, 0, 0, 0)
                         ],
                         begin: Alignment.bottomCenter,

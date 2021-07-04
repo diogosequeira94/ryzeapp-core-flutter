@@ -20,7 +20,7 @@ class UserPreviewPage extends StatelessWidget {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         iconTheme: Theme.of(context).iconTheme,
         title: Text(
-          UserProfileString.profileTitle,
+          UserProfileString.applierProfileTitle,
           style: TextStyle(color: Theme.of(context).textTheme.headline6.color),
         ),
       ),

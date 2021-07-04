@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/notification.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 
+enum NotificationType { application, jobAcceptance }
+
 class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
   final FirebaseFirestore fireStore;
   final FirebaseStorage firebaseStorage;
@@ -41,14 +43,22 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
   @override
   Future<void> createInAppNotification({
     JobPost jobPost,
+    NotificationType type,
     String applierName,
+    String applierDescription,
+    String applierPhoneNumber,
     String applierId,
     String posterId,
   }) {
     try {
       final notification = NotificationModel(
+        notificationType: type == NotificationType.application
+            ? 'application'
+            : 'jobAcceptance',
         posterId: posterId,
         applierName: applierName,
+        applierDescription: applierDescription,
+        applierPhoneNumber: applierPhoneNumber,
         applierId: applierId,
         jobTitle: jobPost.title,
         jobId: jobPost.jobID,

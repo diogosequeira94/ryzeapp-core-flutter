@@ -6,8 +6,15 @@ import 'package:firebaseblocryze/repository/applications_notifier/model/applicat
 abstract class IApplicationsNotifierRepository {
   Future<void> submitJobApplication(
       {@required String jobPostId, Application jobApplication});
-  Future<void> createInAppNotification(
-      {JobPost jobPost, String applierName, String applierId, String posterId});
-  Future<List<NotificationModel>> getNotificationsList({@required String userId});
+  Future<void> createInAppNotification({
+    JobPost jobPost,
+    String applierName,
+    String applierDescription,
+    String applierPhoneNumber,
+    String applierId,
+    String posterId,
+  });
+  Future<List<NotificationModel>> getNotificationsList(
+      {@required String userId});
   Future<void> deleteApplication({@required String applicationId});
 }

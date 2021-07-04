@@ -25,17 +25,13 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         final FirebaseAuth auth = FirebaseAuth.instance;
         final User user = auth.currentUser;
         final uid = user.uid;
-        print('##### FIREBASE USER: $uid');
         notificationsList = await applicationsNotifierRepository
             .getNotificationsList(userId: uid);
       } on Exception {
-        print('##### EXCEPTION');
         yield NotificationsFetchFailure('FAIL');
         return;
       }
-
       if (notificationsList == null) {
-        print('##### WHATTT');
         yield NotificationsFetchFailure('EMPTY OBJECT');
         return;
       }

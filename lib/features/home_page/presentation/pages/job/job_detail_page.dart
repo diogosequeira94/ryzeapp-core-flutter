@@ -211,10 +211,10 @@ class JobDetailPage extends StatelessWidget {
                               title: 'Apply Now',
                               action: () {
                                 final _userBloc = context.read<UserBloc>();
-                                final userName =
-                                    '${_userBloc.userProfile.firstName} ${_userBloc.userProfile.lastName}';
                                 _jobsBloc.add(JobApplyPressed(
-                                    jobPost: jobPost, userName: userName));
+                                  jobPost: jobPost,
+                                  userProfile: _userBloc.userProfile,
+                                ));
                               },
                               isLoading: state is JobApplicationInProgress,
                               isAffirmative: true,

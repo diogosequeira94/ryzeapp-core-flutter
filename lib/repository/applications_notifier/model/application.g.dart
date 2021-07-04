@@ -9,6 +9,8 @@ part of 'application.dart';
 Application _$ApplicationFromJson(Map<String, dynamic> json) {
   return Application(
     userName: json['userName'] as String,
+    userDescription: json['userDescription'] as String,
+    userPhoneNumber: json['userPhoneNumber'] as String,
     userId: json['userId'] as String,
     dateOfAppliance: json['dateOfAppliance'] as String,
     accepted: json['accepted'] as bool,
@@ -17,8 +19,10 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$ApplicationToJson(Application instance) =>
     <String, dynamic>{
-      'userName': instance.userName,
       'userId': instance.userId,
+      'userName': instance.userName,
+      'userDescription': instance.userDescription,
+      'userPhoneNumber': instance.userPhoneNumber,
       'dateOfAppliance': instance.dateOfAppliance,
       'accepted': instance.accepted,
     };

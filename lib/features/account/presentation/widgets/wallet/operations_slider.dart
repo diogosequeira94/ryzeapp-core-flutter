@@ -22,7 +22,7 @@ class OperationsSlider extends StatelessWidget {
   List<OperationItem> _buildOperationsList() {
     List<OperationItem> _operations = [
       OperationItem(
-          title: 'Withdraw',
+          title: 'CashOut',
           operationIcon: Icon(Icons.monetization_on_outlined, size: 28.0)),
       OperationItem(
           title: 'Invoices', operationIcon: Icon(Icons.insert_drive_file_outlined, size: 28.0,)),

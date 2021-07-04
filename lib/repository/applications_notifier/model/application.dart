@@ -6,13 +6,17 @@ part 'application.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Application extends Equatable {
-  final String userName;
   final String userId;
+  final String userName;
+  final String userDescription;
+  final String userPhoneNumber;
   final String dateOfAppliance;
   final bool accepted;
 
   const Application({
     @required this.userName,
+    @required this.userDescription,
+    @required this.userPhoneNumber,
     @required this.userId,
     @required this.dateOfAppliance,
     @required this.accepted,
@@ -20,8 +24,10 @@ class Application extends Equatable {
 
   @override
   List<Object> get props => [
-        userName,
         userId,
+        userName,
+        userDescription,
+        userPhoneNumber,
         dateOfAppliance,
         accepted,
       ];

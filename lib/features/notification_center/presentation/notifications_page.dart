@@ -41,12 +41,9 @@ class NotificationsPage extends StatelessWidget {
         body: BlocBuilder<NotificationsBloc, NotificationsState>(
           builder: (context, state) {
             if (state is NotificationsFetchInProgress) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Center(
-                  child: CircularProgressIndicator(
-                      backgroundColor: Theme.of(context).accentColor),
-                ),
+              return Center(
+                child: CircularProgressIndicator(
+                    backgroundColor: Theme.of(context).accentColor),
               );
             } else if (state is NotificationsFetchSuccess) {
               return _buildNotificationsList(state.notificationsList);
@@ -68,71 +65,80 @@ class NotificationsPage extends StatelessWidget {
 
   _buildNotificationsList(List notificationsList) {
     return notificationsList.isEmpty
-        ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.notifications_none, size: 80, color: Colors.black45),
-                const SizedBox(height: 24.0),
-                Text('You have no notifications right now.',
-                    style:
-                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.center),
-                const SizedBox(height: 8.0),
-                Text(
-                    'When you have job updates, messages or news, it will be showed here.',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                    textAlign: TextAlign.center),
-              ],
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.notifications_none,
+                      size: 80, color: Colors.black45),
+                  const SizedBox(height: 24.0),
+                  Text('You have no notifications right now.',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.center),
+                  const SizedBox(height: 8.0),
+                  Text(
+                      'When you have job updates, messages or news, it will be showed here.',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                      textAlign: TextAlign.center),
+                ],
+              ),
             ),
           )
-        : ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: notificationsList.length,
-            itemBuilder: (context, index) {
-              final NotificationModel notification = notificationsList[index];
-              return Card(
-                elevation: 3.0,
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-                  leading: Icon(Icons.work_outline_rounded, size: 30.0),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 16.0),
-                  title: RichText(
-                    text: TextSpan(
-                      text: 'Job Application: ',
-                      style: TextStyle(fontSize: 16.0),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '${notification.applierName} ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: 'has just applied to your '),
-                        TextSpan(
-                            text: '${notification.jobTitle} ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: 'post!'),
-                      ],
+        : SingleChildScrollView(
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: notificationsList.length,
+              itemBuilder: (context, index) {
+                final NotificationModel notification = notificationsList[index];
+                return Card(
+                  elevation: 3.0,
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+                    leading: Icon(Icons.work_outline_rounded, size: 30.0),
+                    trailing: Icon(Icons.arrow_forward_ios, size: 16.0),
+                    title: RichText(
+                      text: TextSpan(
+                        text: 'Job Application: ',
+                        style: TextStyle(fontSize: 16.0),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: '${notification.applierName} ',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: 'has just applied to your '),
+                          TextSpan(
+                              text: '${notification.jobTitle} ',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: 'post!'),
+                        ],
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => NotificationDetailsPage(
+                                    jobTitle: notification.jobTitle,
+                                    jobId: notification.jobId,
+                                    applierName: notification.applierName,
+                                    applierDescription:
+                                        notification.applierDescription,
+                                    applierPhoneNumber:
+                                        notification.applierPhoneNumber,
+                                    applierId: notification.applierId,
+                                  )));
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => NotificationDetailsPage(
-                                  jobTitle: notification.jobTitle,
-                                  jobId: notification.jobId,
-                                  applierName: notification.applierName,
-                                  applierId: notification.applierId,
-                                )));
-                  },
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
   }
 

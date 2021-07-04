@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/application.dart';
+import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
 import 'package:meta/meta.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
@@ -76,8 +77,13 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       final userId = authBloc.userId;
       final dateTimeStamp = DateTime.now().toIso8601String();
 
+      final userName =
+          '${event.userProfile.firstName} ${event.userProfile.lastName}';
+
       final application = Application(
-        userName: event.userName,
+        userName: userName,
+        userDescription: event.userProfile.about ?? '',
+        userPhoneNumber: event.userProfile.phoneNumber ?? '',
         userId: userId,
         dateOfAppliance: dateTimeStamp,
         accepted: false,
@@ -92,7 +98,10 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       // Creates [Notification] under Job Posters [NotificationCenter]
       await applicationsNotifierRepository.createInAppNotification(
         jobPost: event.jobPost,
-        applierName: event.userName,
+        type: NotificationType.application,
+        applierName: userName,
+        applierDescription: event.userProfile.about ?? '',
+        applierPhoneNumber: event.userProfile.phoneNumber ?? '',
         applierId: userId,
         posterId: event.jobPost.posterID,
       );
