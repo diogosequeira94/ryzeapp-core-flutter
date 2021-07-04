@@ -41,7 +41,7 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
 
   // Split in the future into a different repository
   @override
-  Future<void> createInAppNotification({
+  Future<void> createJobApplicationNotification({
     JobPost jobPost,
     NotificationType type,
     String applierName,
@@ -52,9 +52,7 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
   }) {
     try {
       final notification = NotificationModel(
-        notificationType: type == NotificationType.application
-            ? 'application'
-            : 'jobAcceptance',
+        notificationType: 'application',
         posterId: posterId,
         applierName: applierName,
         applierDescription: applierDescription,
@@ -93,6 +91,30 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
       });
       print(notificationList);
       return notificationList;
+    } on Exception {
+      return null;
+    }
+  }
+
+  @override
+  Future<void> acceptCandidateApplication(
+      {String jobTitle, String jobPostId, String applierId}) {
+    try {
+      final notification = NotificationModel(
+        notificationType: 'jobAcceptance',
+        posterId: '',
+        applierName: '',
+        applierDescription: '',
+        applierPhoneNumber: '',
+        applierId: applierId,
+        jobTitle: jobTitle,
+        jobId: jobPostId,
+      );
+      final usersCollection = fireStore.collection('users');
+      return usersCollection
+          .doc(applierId)
+          .collection('notifications')
+          .add(notification.toJson());
     } on Exception {
       return null;
     }

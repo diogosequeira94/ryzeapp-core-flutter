@@ -1,7 +1,9 @@
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotificationDetailsPage extends StatelessWidget {
   final String jobTitle, jobId;
@@ -42,11 +44,21 @@ class NotificationDetailsPage extends StatelessWidget {
                 const SizedBox(height: 30.0),
                 _DetailedSection(jobTitle, applierName),
                 const SizedBox(height: 50.0),
-                RyzePrimaryButton(
-                  title: 'Accept',
-                  action: () {},
-                  isAffirmative: true,
-                )
+                BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
+                  return RyzePrimaryButton(
+                    title: 'Accept',
+                    action: () {
+                      final _jobsBloc = context.watch<JobsBloc>();
+                      _jobsBloc.add(AcceptJobPressed(
+                        jobTitle: jobTitle,
+                        jobId: jobId,
+                        applierId: applierId,
+                      ));
+                    },
+                    isLoading: state is JobAcceptanceInProgress,
+                    isAffirmative: true,
+                  );
+                })
               ],
             ),
           ),

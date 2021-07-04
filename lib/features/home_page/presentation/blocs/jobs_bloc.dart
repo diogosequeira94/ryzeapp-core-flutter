@@ -96,7 +96,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       );
 
       // Creates [Notification] under Job Posters [NotificationCenter]
-      await applicationsNotifierRepository.createInAppNotification(
+      await applicationsNotifierRepository.createJobApplicationNotification(
         jobPost: event.jobPost,
         type: NotificationType.application,
         applierName: userName,
@@ -114,6 +114,22 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             JobApplicationFailure('Oops, something wrong happened. Try again.'),
         (success) => JobApplicationSuccess(),
       );
+    } else if (event is AcceptJobPressed) {
+      yield JobAcceptanceInProgress();
+      await _getLoadingBool();
+
+      try {
+        // Creates [Notification] under Appliers [NotificationCenter]
+        await applicationsNotifierRepository.acceptCandidateApplication(
+          jobTitle: event.jobTitle,
+          jobPostId: event.jobId,
+          applierId: event.applierId,
+        );
+      } on Exception {
+        yield JobAcceptanceFailure('FAILURE');
+        return;
+      }
+      yield JobAcceptanceSuccess();
     }
   }
 }

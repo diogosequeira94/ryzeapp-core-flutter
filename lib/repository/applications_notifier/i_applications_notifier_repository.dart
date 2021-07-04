@@ -6,7 +6,12 @@ import 'package:firebaseblocryze/repository/applications_notifier/model/applicat
 abstract class IApplicationsNotifierRepository {
   Future<void> submitJobApplication(
       {@required String jobPostId, Application jobApplication});
-  Future<void> createInAppNotification({
+  Future<void> acceptCandidateApplication({
+    @required String jobTitle,
+    String jobPostId,
+    String applierId,
+  });
+  Future<void> createJobApplicationNotification({
     JobPost jobPost,
     String applierName,
     String applierDescription,

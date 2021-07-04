@@ -106,34 +106,51 @@ class NotificationsPage extends StatelessWidget {
                     trailing: Icon(Icons.arrow_forward_ios, size: 16.0),
                     title: RichText(
                       text: TextSpan(
-                        text: 'Job Application: ',
+                        text: notification.notificationType == 'application'
+                            ? 'Job Application: '
+                            : 'Confirmation: ',
                         style: TextStyle(fontSize: 16.0),
                         children: <TextSpan>[
                           TextSpan(
-                              text: '${notification.applierName} ',
+                              text:
+                                  notification.notificationType == 'application'
+                                      ? '${notification.applierName} '
+                                      : 'You have been accepted for the ',
                               style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'has just applied to your '),
+                          TextSpan(
+                            text: notification.notificationType == 'application'
+                                ? 'has just applied to your '
+                                : '${notification.jobTitle} ',
+                          ),
                           TextSpan(
                               text: '${notification.jobTitle} ',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'post!'),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                          TextSpan(
+                            text: notification.notificationType == 'application'
+                                ? 'post!'
+                                : 'position!',
+                          ),
                         ],
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => NotificationDetailsPage(
-                                    jobTitle: notification.jobTitle,
-                                    jobId: notification.jobId,
-                                    applierName: notification.applierName,
-                                    applierDescription:
-                                        notification.applierDescription,
-                                    applierPhoneNumber:
-                                        notification.applierPhoneNumber,
-                                    applierId: notification.applierId,
-                                  )));
+                      notification.notificationType == 'application'
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => NotificationDetailsPage(
+                                        jobTitle: notification.jobTitle,
+                                        jobId: notification.jobId,
+                                        applierName: notification.applierName,
+                                        applierDescription:
+                                            notification.applierDescription,
+                                        applierPhoneNumber:
+                                            notification.applierPhoneNumber,
+                                        applierId: notification.applierId,
+                                      )))
+                          : null;
                     },
                   ),
                 );

@@ -86,3 +86,22 @@ class JobApplicationFailure extends JobsState {
   @override
   List<Object> get props => [message];
 }
+
+class JobAcceptanceInProgress extends JobsState {
+  JobAcceptanceInProgress();
+  @override
+  List<Object> get props => [];
+}
+
+class JobAcceptanceSuccess extends JobsState {
+  JobAcceptanceSuccess();
+  @override
+  List<Object> get props => [];
+}
+
+class JobAcceptanceFailure extends JobsState {
+  final String message;
+  JobAcceptanceFailure(this.message);
+  @override
+  List<Object> get props => [message];
+}
