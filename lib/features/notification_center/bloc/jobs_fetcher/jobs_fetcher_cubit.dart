@@ -25,7 +25,10 @@ class JobsFetcherCubit extends Cubit<JobsFetcherState> {
       return null;
     }
 
-    print('######### Job Data in Cubit: ${jobPost.toJson().toString()}');
-    emit(FetchSingleJobSuccess(job: jobPost));
+    emit(jobPost.fold(
+      (failure) =>
+          FetchSingleJobFailure('Oops, something wrong happened. Try again.'),
+      (job) => FetchSingleJobSuccess(job: job),
+    ));
   }
 }

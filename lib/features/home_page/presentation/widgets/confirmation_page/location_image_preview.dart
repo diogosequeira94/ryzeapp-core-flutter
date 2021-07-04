@@ -18,7 +18,7 @@ class LocationImagePreview extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
-        child: Image.network(getJobLocation(),
+        child: Image.network('https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/clients/denver/Maps_8b394d1e-613f-44d4-9ad0-6b5f8a4ffcab.png',
             fit: BoxFit.cover, width: double.infinity),
       ),
       onTap: () => LocationUtil.navigateTo(latitude: lat, longitude: long),

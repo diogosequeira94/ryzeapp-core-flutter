@@ -10,7 +10,6 @@ class QrCodePage extends StatelessWidget {
   const QrCodePage(this.jobPost);
   @override
   Widget build(BuildContext context) {
-    final qrCodeData = '${jobPost.posterID}+${jobPost.jobID}';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -25,13 +24,13 @@ class QrCodePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 80.0),
+            SizedBox(height: 40.0),
             QrImage(
-              data: qrCodeData,
+              data: '${jobPost.jobID}',
               version: 3,
               size: 250.0,
             ),
-            const SizedBox(height: 15.0),
+            const SizedBox(height: 60.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -54,7 +53,7 @@ class QrCodePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => QRCodeReader(
-                            jobPost: jobPost, dataToScan: qrCodeData),
+                            jobPost: jobPost, dataToScan: '${jobPost.jobID}'),
                       ),
                     );
                   },

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/application.dart';
 import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
-import 'package:meta/meta.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
