@@ -36,10 +36,10 @@ class NotificationDetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _NotificationHeader(jobTitle, applierName),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 30.0),
                 _UserDetailsSection(applierName, applierDescription,
                     applierPhoneNumber, applierId),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 30.0),
                 _DetailedSection(jobTitle, applierName),
                 const SizedBox(height: 50.0),
                 RyzePrimaryButton(
