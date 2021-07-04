@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:firebaseblocryze/features/notification_center/bloc/notifications_bloc.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
+import 'package:firebaseblocryze/features/notification_center/bloc/notifications/notifications_bloc.dart';
 import 'package:firebaseblocryze/features/notification_center/presentation/notification_details_page.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/notification.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
@@ -149,8 +150,11 @@ class NotificationsPage extends StatelessWidget {
                                         applierPhoneNumber:
                                             notification.applierPhoneNumber,
                                         applierId: notification.applierId,
-                                      )))
-                          : null;
+                                      )),
+                            )
+                          : Navigator.of(context).pushNamed(
+                              '/job-confirmation-page',
+                              arguments: notification.jobId);
                     },
                   ),
                 );

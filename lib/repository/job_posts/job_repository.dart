@@ -105,13 +105,16 @@ class JobRepository implements IJobPostRepository {
   @override
   Future<Either<JobPostFailure, JobPost>> getJobById(String jobID) async {
     try {
-      final jobPost =
-          await _fireStore.collection('jobs').doc(jobID).get().then((document) {
+      print('######## GETTING THE JOB');
+      var job;
+      await _fireStore.collection('jobs').doc(jobID).get().then((document) {
         if (document.exists) {
-          JobPost.fromJson(document.data());
+          print('######## EXISTS');
+          job = JobPost.fromJson(document.data());
         }
       });
-      return Right(jobPost);
+      print('######## ${job}');
+      return Right(job);
     } on Exception {
       return Left(JobPostFailure.unexpected());
     }

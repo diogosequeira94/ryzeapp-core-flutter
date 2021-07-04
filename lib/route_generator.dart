@@ -5,7 +5,7 @@ import 'package:firebaseblocryze/features/account/presentation/pages/add_card_pa
 import 'package:firebaseblocryze/features/account/presentation/pages/change_password_page.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/error/payment_failed_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
-import 'package:firebaseblocryze/features/notification_center/bloc/notifications_bloc.dart';
+import 'package:firebaseblocryze/features/notification_center/bloc/notifications/notifications_bloc.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/bottom_nav_bar_widget.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/presentation/chat_messages_page.dart';
 import 'package:firebaseblocryze/features/notification_center/presentation/notifications_page.dart';
@@ -27,7 +27,9 @@ import 'features/check_in/presentation/pages/qr_code_page.dart';
 import 'features/explore/presentation/explore_overview_page.dart';
 import 'features/home_page/presentation/pages/pages.dart';
 import 'features/login/presentation/pages/pages.dart';
+import 'features/notification_center/bloc/jobs_fetcher/jobs_fetcher_cubit.dart';
 import 'features/user_profile/presentation/user_profile/pages/pages.dart';
+import 'repository/job_posts/job_repository.dart';
 
 class JobHubArguments {
   final List<JobPost> jobPostList;
@@ -112,7 +114,14 @@ class RouteGenerator {
         });
       case '/job-confirmation-page':
         return MaterialPageRoute(
-            builder: (_) => JobConfirmationPage(jobPost: args));
+            builder: (context) => BlocProvider(
+                create: (_) => JobsFetcherCubit(
+                      JobRepository(
+                        FirebaseFirestore.instance,
+                        FirebaseStorage.instance,
+                      ),
+                    )..fetchSingleJob(args),
+                child: JobConfirmationPage(jobId: args)));
       default:
         return _errorRoute();
     }
