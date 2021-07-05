@@ -74,21 +74,21 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _jobCategoriesSection(),
+            _jobCategoriesSection(allJobsMock),
             _allJobPosts(allJobsMock, context),
           ],
         )) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 
-  Widget _jobCategoriesSection() {
+  Widget _jobCategoriesSection(List<JobPost> allJobsMock) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HomePageSectionHeader(
           title: 'Job Categories',
         ),
-        Container(height: 100.0, child: CategoriesHorizontalListWidget()),
+        Container(height: 100.0, child: CategoriesHorizontalListWidget(allJobsMock)),
       ],
     );
   }

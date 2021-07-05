@@ -62,7 +62,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Text(
                       _currentPage != _numPages - 1 ? LoginStrings.skipBtn : '',
                       style: TextStyle(
-                        color: Colors.black54,
                         fontSize: 20.0,
                       ),
                     ),
@@ -80,9 +79,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       });
                     },
                     children: [
-                      OnBoardingBodySection(title: 'Grow your network daily, while learning new skills', body: 'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment', imagePath: LoginStrings.firstOnBoardPath),
-                      OnBoardingBodySection(title: 'Connect with people and build a report', body: 'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment', imagePath: LoginStrings.secondOnBoardPath),
-                      OnBoardingBodySection(title: 'All set! Lets start making money together!', body: 'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor increment'),
+                      OnBoardingBodySection(title: 'Grow your network daily, while learning new skills', body: 'At RyzeApp you will be presented new job opportunities so you can continue to improve your career while explore our diverse markets!', imagePath: LoginStrings.firstOnBoardPath),
+                      OnBoardingBodySection(title: 'Connect with people and build a report', body: 'Meeting new people is a valuable tool which can help you to get more jobs. Here you have the change to meet many employers.', imagePath: LoginStrings.secondOnBoardPath),
+                      OnBoardingBodySection(title: 'All set! Lets start working together!', body: 'With us is simple, we believe any good work should be rewarded. Ready for a life change?'),
                     ],
                   ),
                 ),

@@ -42,25 +42,22 @@ class NewsCarouselSliderWidgetState extends State<NewsCarouselSliderWidget> {
                   }
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: imgList.map((url) {
-                  int index = imgList.indexOf(url);
-                  return Container(
-                    width: 8.0,
-                    height: 8.0,
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _current == index
-                          ? sharedPrefs.isDarkModeSelected ? Colors.white : Color.fromRGBO(0, 0, 0, 0.9)
-                          : sharedPrefs.isDarkModeSelected ? Colors.white38 : Color.fromRGBO(0, 0, 0, 0.4),
-                    ),
-                  );
-                }).toList(),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imgList.map((url) {
+                int index = imgList.indexOf(url);
+                return Container(
+                  width: 8.0,
+                  height: 8.0,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _current == index
+                        ? sharedPrefs.isDarkModeSelected ? Colors.white : Color.fromRGBO(0, 0, 0, 0.9)
+                        : sharedPrefs.isDarkModeSelected ? Colors.white38 : Color.fromRGBO(0, 0, 0, 0.4),
+                  ),
+                );
+              }).toList(),
             ),
           ]
       );

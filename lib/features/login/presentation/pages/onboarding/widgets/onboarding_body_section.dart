@@ -31,12 +31,12 @@ class OnBoardingBodySection extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
             child: Text(
               title,
-              style: TextStyle(color: Colors.black, fontSize: 26.0),
+              style: TextStyle(fontSize: 26.0),
             ),
           ),
           Text(
             body,
-            style: TextStyle(color: Colors.black, fontSize: 16.0),
+            style: TextStyle(fontSize: 16.0),
           ),
         ],
       ),

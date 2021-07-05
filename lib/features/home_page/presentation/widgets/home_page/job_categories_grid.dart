@@ -1,8 +1,11 @@
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/job_category_item.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/categories/main_categories.dart';
+import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesGridWidget extends StatelessWidget {
+  final List<JobPost> list;
+  CategoriesGridWidget(this.list);
   @override
   Widget build(BuildContext context) {
     return GridView.count(
@@ -13,7 +16,7 @@ class CategoriesGridWidget extends StatelessWidget {
         mainAxisSpacing: 10,
         crossAxisCount: 3,
         children: MAIN_CATEGORIES.map((cat) {
-          return CategoryItem(cat);
+          return CategoryItem(cat, list);
         }).toList()
           ..sort((a, b) => a.category.title.compareTo(b.category.title)));
   }

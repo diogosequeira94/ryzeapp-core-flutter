@@ -9,7 +9,7 @@ class CovidPandemicAlert extends StatelessWidget {
     return showAlert
         ? Padding(
             padding: const EdgeInsets.only(
-                left: 14.0, right: 14.0, top: 16.0, bottom: 6.0),
+                left: 12.0, right: 12.0, top: 14.0, bottom: 4.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Container(

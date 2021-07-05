@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
                             edgeInsets:
                                 const EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 6.0),
                           ),
-                          CategoriesGridWidget(),
+                          CategoriesGridWidget(state.jobsList),
                           HomePageSectionHeader(title: 'Trending'),
                           _mockTrendingJobPosts(context, 3),
                           HomePageSectionHeader(title: 'Most Recent'),

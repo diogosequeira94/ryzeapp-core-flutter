@@ -12,6 +12,7 @@ import 'package:firebaseblocryze/features/notification_center/presentation/notif
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/login/presentation/pages/onboarding/onboarding_screen.dart';
+import 'package:firebaseblocryze/features/shared/pages/job_category_page.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/cubit/user_preview/user_preview_cubit.dart';
@@ -36,6 +37,13 @@ class JobHubArguments {
   final JobsBloc jobsBloc;
 
   JobHubArguments({this.jobPostList, this.jobsBloc});
+}
+
+class JobCategoryListArguments {
+  final List<JobPost> jobPostList;
+  final String categoryTitle;
+
+  JobCategoryListArguments({this.jobPostList, this.categoryTitle});
 }
 
 class RouteGenerator {
@@ -79,6 +87,11 @@ class RouteGenerator {
           return JobHubPage(
               myJobsList: argument.jobPostList, jobsBloc: argument.jobsBloc);
         });
+      case '/job-category-list':
+        final JobCategoryListArguments argument = args;
+        return MaterialPageRoute(
+            builder: (_) =>
+                JobCategoryPage(argument.categoryTitle, argument.jobPostList));
       case '/job-confirmation-page':
         return MaterialPageRoute(
             builder: (context) => BlocProvider(

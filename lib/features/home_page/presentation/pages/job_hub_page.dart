@@ -6,7 +6,6 @@ import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class JobHubPage extends StatelessWidget {
   final List<JobPost> myJobsList;

@@ -28,7 +28,7 @@ class QrCodePage extends StatelessWidget {
             QrImage(
               data: '${jobPost.jobID}',
               version: 3,
-              size: 250.0,
+              size: 300.0,
             ),
             const SizedBox(height: 60.0),
             Padding(
