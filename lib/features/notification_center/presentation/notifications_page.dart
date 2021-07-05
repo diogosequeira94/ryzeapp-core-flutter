@@ -1,8 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/notification_center/bloc/notifications/notifications_bloc.dart';
-import 'package:firebaseblocryze/features/notification_center/presentation/notification_details_page.dart';
-import 'package:firebaseblocryze/repository/applications_notifier/model/notification.dart';
+import 'package:firebaseblocryze/features/notification_center/presentation/widgets/notification_card.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
@@ -97,67 +95,7 @@ class NotificationsPage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: notificationsList.length,
               itemBuilder: (context, index) {
-                final NotificationModel notification = notificationsList[index];
-                return Card(
-                  elevation: 3.0,
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-                    leading: Icon(Icons.work_outline_rounded, size: 30.0),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 16.0),
-                    title: RichText(
-                      text: TextSpan(
-                        text: notification.notificationType == 'application'
-                            ? 'Job Application: '
-                            : 'Confirmation: ',
-                        style: TextStyle(fontSize: 16.0),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text:
-                                  notification.notificationType == 'application'
-                                      ? '${notification.applierName} '
-                                      : 'You have been accepted for the ',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(
-                            text: notification.notificationType == 'application'
-                                ? 'has just applied to your '
-                                : '${notification.jobTitle} ',
-                          ),
-                          TextSpan(
-                              text: '${notification.jobTitle} ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )),
-                          TextSpan(
-                            text: notification.notificationType == 'application'
-                                ? 'post!'
-                                : 'position!',
-                          ),
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      notification.notificationType == 'application'
-                          ? Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => NotificationDetailsPage(
-                                        jobTitle: notification.jobTitle,
-                                        jobId: notification.jobId,
-                                        applierName: notification.applierName,
-                                        applierDescription:
-                                            notification.applierDescription,
-                                        applierPhoneNumber:
-                                            notification.applierPhoneNumber,
-                                        applierId: notification.applierId,
-                                      )),
-                            )
-                          : Navigator.of(context).pushNamed(
-                              '/job-confirmation-page',
-                              arguments: notification.jobId);
-                    },
-                  ),
-                );
+                return NotificationCard(notificationsList[index]);
               },
             ),
           );
