@@ -60,18 +60,36 @@ class RouteGenerator {
                       ..add(UserProfileFetched(userId: args)),
                   ),
                 ], child: BottomNavBarWidget()));
+      // Region Login
       case '/login':
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/register':
         return MaterialPageRoute(builder: (_) => RegisterPage());
       case '/password-reset':
         return MaterialPageRoute(builder: (_) => PasswordResetPage());
+      // Region Explore
       case '/explore-map':
         return MaterialPageRoute(builder: (_) => ExploreMapPage());
       case '/explore-overview':
         return MaterialPageRoute(builder: (_) => ExploreOverviewPage());
-      case '/payment-error':
-        return MaterialPageRoute(builder: (_) => PaymentFailedPage());
+      // Region Job
+      case '/job-hub':
+        return MaterialPageRoute(builder: (_) {
+          final JobHubArguments argument = args;
+          return JobHubPage(
+              myJobsList: argument.jobPostList, jobsBloc: argument.jobsBloc);
+        });
+      case '/job-confirmation-page':
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                create: (_) => JobsFetcherCubit(
+                      JobRepository(
+                        FirebaseFirestore.instance,
+                        FirebaseStorage.instance,
+                      ),
+                    )..fetchSingleJob(args),
+                child: JobConfirmationPage(jobId: args)));
+      // Region Notifications
       case '/notifications':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
@@ -98,30 +116,17 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ChatMessagesPage());
       case '/edit-profile':
         return MaterialPageRoute(builder: (_) => EditInformationPage(args));
-      case '/change-password':
-        return MaterialPageRoute(builder: (_) => ChangePassword());
       case '/qrcode-generator':
         return MaterialPageRoute(builder: (_) => QrCodePage(args));
+      // Region Account
+      case '/change-password':
+        return MaterialPageRoute(builder: (_) => ChangePassword());
+      case '/payment-error':
+        return MaterialPageRoute(builder: (_) => PaymentFailedPage());
       case '/add-card':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                 create: (_) => AddCardFormCubit(), child: AddCardPage()));
-      case '/job-hub':
-        return MaterialPageRoute(builder: (_) {
-          final JobHubArguments argument = args;
-          return JobHubPage(
-              myJobsList: argument.jobPostList, jobsBloc: argument.jobsBloc);
-        });
-      case '/job-confirmation-page':
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                create: (_) => JobsFetcherCubit(
-                      JobRepository(
-                        FirebaseFirestore.instance,
-                        FirebaseStorage.instance,
-                      ),
-                    )..fetchSingleJob(args),
-                child: JobConfirmationPage(jobId: args)));
       default:
         return _errorRoute();
     }
