@@ -8,7 +8,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="RyzeApp"
-        android:icon="@mipmap/ryze_app_logo">
+        android:icon="@mipmap/ryze_launcher_logo">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBkrrghT29DxjqTRkkmt5nEIlDSCi-vk58"/>
