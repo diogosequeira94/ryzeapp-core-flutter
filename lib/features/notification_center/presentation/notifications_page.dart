@@ -18,11 +18,18 @@ class NotificationsPage extends StatelessWidget {
             onTap: () => Navigator.of(context).pop(),
           ),
           actions: [
-            IconButton(
-                icon: Icon(Icons.delete_outline_outlined),
-                onPressed: () {
-                  _showDeleteNotificationsDialog(context);
-                }),
+            BlocBuilder<NotificationsBloc, NotificationsState>(
+              builder: (context, state){
+                if(state is NotificationsFetchSuccess && state.notificationsList.isNotEmpty){
+                  return IconButton(
+                      icon: Icon(Icons.delete_outline_outlined),
+                      onPressed: () {
+                        _showDeleteNotificationsDialog(context);
+                      });
+                }
+                return SizedBox.shrink();
+              },
+            ),
           ],
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,

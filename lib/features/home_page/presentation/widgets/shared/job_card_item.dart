@@ -47,7 +47,7 @@ class JobCardItem extends StatelessWidget {
                       child: Text(
                         jobPost.title,
                         style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w400),
+                            fontSize: 19.0, fontWeight: FontWeight.w400),
                       ),
                     ),
                     Container(
@@ -67,13 +67,19 @@ class JobCardItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
-                  child: Text('${jobPost.city}, Portugal'),
+                  child: Text('${jobPost.posterName}'),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
+                  padding: const EdgeInsets.only(top: 30.0, bottom: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Row(
+                        children: [
+                          Icon(Icons.location_on, size: 18.0, color: Color(0xFFEA4335),),
+                          Text('${jobPost.city}'),
+                        ],
+                      ),
                       Text(jobPost.hourRate),
                       // Column(
                       //   crossAxisAlignment: CrossAxisAlignment.end,
