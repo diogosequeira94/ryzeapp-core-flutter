@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _myInvites(),
-                          _myJobPosts(state.myJobs, context),
+                       //   _myJobPosts(state.myJobs, context),
                           HomePageSectionHeader(
                             title: 'Job Categories',
                             edgeInsets:
@@ -146,7 +146,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 14.0, top: 8.0, bottom: 8.0),
+          padding: const EdgeInsets.only(left: 14.0, top: 8.0, bottom: 14.0),
           child: Text('You have no Invites yet.'),
         )
       ],
