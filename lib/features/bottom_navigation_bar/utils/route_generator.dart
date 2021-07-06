@@ -22,7 +22,6 @@ class RouteGenerator {
                 create: (context) => JobsBloc(
                       jobRepository: JobRepository(
                           FirebaseFirestore.instance, FirebaseStorage.instance),
-                      authBloc: BlocProvider.of<AuthBloc>(context),
                       applicationsNotifierRepository:
                           ApplicationsNotifierRepository(
                         firebaseStorage: FirebaseStorage.instance,

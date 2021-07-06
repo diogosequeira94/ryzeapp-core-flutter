@@ -1,4 +1,5 @@
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
+import 'package:firebaseblocryze/features/shared/utils/strings_getter.dart';
 import 'package:firebaseblocryze/features/shared/widgets/job_category_page_header.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,10 @@ class JobCategoryPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            JobCategoryPageHeader(category,
-                'Restaurant jobs can be from Bartending, Front-of-House, Cook, Chef and many other. Always dress sharp and stay clean!'),
+            JobCategoryPageHeader(
+              category,
+              StringsGetter.getCategoryDescription(category),
+            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 4.0, vertical: 14.0),

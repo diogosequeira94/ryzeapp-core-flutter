@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/explore/presentation/widgets/categories_horizontal_list.dart';
 import 'package:firebaseblocryze/features/explore/presentation/widgets/no_results_found_widget.dart';
@@ -9,7 +8,6 @@ import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/home_page_section_header.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/job_categories_grid.dart';
 
 class ExploreOverviewPage extends StatefulWidget {
   ExploreOverviewPage({Key key}) : super(key: key);

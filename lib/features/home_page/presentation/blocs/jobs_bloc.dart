@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
@@ -14,12 +15,10 @@ part 'jobs_event.dart';
 part 'jobs_state.dart';
 
 class JobsBloc extends Bloc<JobsEvent, JobsState> {
-  final AuthBloc authBloc;
   final JobRepository jobRepository;
   final ApplicationsNotifierRepository applicationsNotifierRepository;
   JobsBloc(
       {@required this.jobRepository,
-      @required this.authBloc,
       @required this.applicationsNotifierRepository})
       : super(JobsInitial());
 
@@ -39,7 +38,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           yield JobsFetchFailure('Failure getting list');
         },
         (jobs) async* {
-          final userId = authBloc.userId;
+          final FirebaseAuth auth = FirebaseAuth.instance;
+          final userId = auth.currentUser.uid;
           print('user ID: $userId');
           final userJobs =
               jobs.where((element) => element.posterID == userId).toList();
@@ -74,7 +74,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       yield JobApplicationInProgress();
       await _getLoadingBool();
 
-      final userId = authBloc.userId;
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final userId = auth.currentUser.uid;
       final dateTimeStamp = DateTime.now().toIso8601String();
 
       final userName =

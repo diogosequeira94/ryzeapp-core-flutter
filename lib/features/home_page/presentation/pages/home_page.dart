@@ -91,38 +91,7 @@ class HomePage extends StatelessWidget {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 14.0,
-                                right: 14.0,
-                                top: 20.0,
-                                bottom: 6.0),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => MultiBlocProvider(providers: [
-                                    BlocProvider.value(
-                                        value:
-                                            BlocProvider.of<JobsBloc>(context)),
-                                    BlocProvider(create: (_) => JobFormCubit())
-                                  ], child: JobCreation()),
-                                ));
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Your Job Posts',
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Icon(Icons.add),
-                                ],
-                              ),
-                            ),
-                          ),
+                          _myInvites(),
                           _myJobPosts(state.myJobs, context),
                           HomePageSectionHeader(
                             title: 'Job Categories',
@@ -159,102 +128,159 @@ class HomePage extends StatelessWidget {
         ));
   }
 
+  Widget _myInvites() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Job Invites',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 14.0, top: 8.0, bottom: 8.0),
+          child: Text('You have no Invites yet.'),
+        )
+      ],
+    );
+  }
+
   Widget _myJobPosts(List jobsList, BuildContext context) {
-    return jobsList.isEmpty
-        ? Padding(
-            padding: const EdgeInsets.only(left: 14.0, top: 8.0, bottom: 8.0),
-            child: Text('You have no Jobs Posts yet.'),
-          )
-        : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 14.0, right: 14.0, top: 20.0, bottom: 6.0),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider.value(value: BlocProvider.of<JobsBloc>(context)),
+                  BlocProvider(create: (_) => JobFormCubit())
+                ], child: JobCreation()),
+              ));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return Dismissible(
-                      key: Key('${jobsList[index]}'),
-                      direction: DismissDirection.horizontal,
-                      background: JobDismissBackground(
-                          bgColor: Colors.lightGreen,
-                          icon: Icons.edit_outlined,
-                          iconAlignment: Alignment.centerLeft),
-                      secondaryBackground: JobDismissBackground(
-                          bgColor: Color(0xFFDD0000),
-                          icon: Icons.delete_outlined,
-                          iconAlignment: Alignment.centerRight),
-                      confirmDismiss:
-                          (DismissDirection dismissDirection) async {
-                        switch (dismissDirection) {
-                          case DismissDirection.endToStart:
-                            return await _showDeleteConfirmationDialog(
-                                context, jobsList[index]);
-                          case DismissDirection.startToEnd:
-                            return false;
-                          default:
-                            return false;
-                        }
-                      },
-                      child: Card(
-                        child: ListTile(
-                          title: Text(jobsList[index].title),
-                          subtitle: Text(jobsList[index].city),
-                          trailing: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(jobsList[index].hourRate),
-                              JobStatusPill(jobStatus: jobsList[index].status),
-                            ],
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => JobDetailPage(
-                                          selfViewing: true,
-                                          jobPost: jobsList[index],
-                                        )));
-                          },
-                          onLongPress: () {
-                            _showDeleteConfirmationDialog(
-                                context, jobsList[index]);
-                          },
-                        ),
-                      ),
-                    );
-                  },
+                Text(
+                  'Your Job Posts',
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
                 ),
-                jobsList.length > 2
-                    ? GestureDetector(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 8.0, right: 6.0),
-                          child: Container(
-                            height: 25.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text('See All'),
-                                SizedBox(width: 4.0),
-                                Icon(Icons.arrow_forward, size: 18.0),
-                              ],
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/job-hub',
-                              arguments: JobHubArguments(
-                                jobPostList: jobsList,
-                                jobsBloc: context.read<JobsBloc>(),
-                              ));
-                        },
-                      )
-                    : SizedBox.shrink(),
+                Icon(Icons.add),
               ],
             ),
-          );
+          ),
+        ),
+        jobsList.isEmpty
+            ? Padding(
+                padding:
+                    const EdgeInsets.only(left: 14.0, top: 8.0, bottom: 8.0),
+                child: Text('You have no Jobs Posts yet.'),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                          key: Key('${jobsList[index]}'),
+                          direction: DismissDirection.horizontal,
+                          background: JobDismissBackground(
+                              bgColor: Colors.lightGreen,
+                              icon: Icons.edit_outlined,
+                              iconAlignment: Alignment.centerLeft),
+                          secondaryBackground: JobDismissBackground(
+                              bgColor: Color(0xFFDD0000),
+                              icon: Icons.delete_outlined,
+                              iconAlignment: Alignment.centerRight),
+                          confirmDismiss:
+                              (DismissDirection dismissDirection) async {
+                            switch (dismissDirection) {
+                              case DismissDirection.endToStart:
+                                return await _showDeleteConfirmationDialog(
+                                    context, jobsList[index]);
+                              case DismissDirection.startToEnd:
+                                return false;
+                              default:
+                                return false;
+                            }
+                          },
+                          child: Card(
+                            child: ListTile(
+                              title: Text(jobsList[index].title),
+                              subtitle: Text(jobsList[index].city),
+                              trailing: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(jobsList[index].hourRate),
+                                  JobStatusPill(
+                                      jobStatus: jobsList[index].status),
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => JobDetailPage(
+                                              selfViewing: true,
+                                              jobPost: jobsList[index],
+                                            )));
+                              },
+                              onLongPress: () {
+                                _showDeleteConfirmationDialog(
+                                    context, jobsList[index]);
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    jobsList.length > 2
+                        ? GestureDetector(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, right: 6.0),
+                              child: Container(
+                                height: 25.0,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text('See All'),
+                                    SizedBox(width: 4.0),
+                                    Icon(Icons.arrow_forward, size: 18.0),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/job-hub',
+                                  arguments: JobHubArguments(
+                                    jobPostList: jobsList,
+                                    jobsBloc: context.read<JobsBloc>(),
+                                  ));
+                            },
+                          )
+                        : SizedBox.shrink(),
+                  ],
+                ),
+              ),
+      ],
+    );
   }
 
   Widget _allJobsList(BuildContext context, List<JobPost> jobsList) {

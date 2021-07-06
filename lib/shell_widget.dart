@@ -39,7 +39,6 @@ class _ShellWidgetState extends State<ShellWidget> {
         FirebaseFirestore.instance,
         FirebaseStorage.instance,
       ),
-      authBloc: _authBloc,
       applicationsNotifierRepository: ApplicationsNotifierRepository(
         fireStore: FirebaseFirestore.instance,
         firebaseStorage: FirebaseStorage.instance,

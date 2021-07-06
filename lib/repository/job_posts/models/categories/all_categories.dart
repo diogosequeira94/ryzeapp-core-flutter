@@ -51,13 +51,6 @@ const ALL_CATEGORIES = const [
   ),
   Category(
     id: 'c7',
-    title: 'Builder',
-    color: Colors.white,
-    imageUrl:
-    'https://icons-for-free.com/iconfiles/png/512/road+worker+icon-1320184411508677050.png',
-  ),
-  Category(
-    id: 'c7',
     title: 'Support',
     color: Colors.white,
     imageUrl:
