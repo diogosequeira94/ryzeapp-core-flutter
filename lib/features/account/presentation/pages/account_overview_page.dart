@@ -131,22 +131,8 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                   SwitchListTile(
                     activeColor: Theme.of(context).accentColor,
                     contentPadding: const EdgeInsets.all(0),
-                    value: true,
-                    title: Text('Receive Notifications'),
-                    onChanged: (isChecked) {},
-                  ),
-                  SwitchListTile(
-                    activeColor: Theme.of(context).accentColor,
-                    contentPadding: const EdgeInsets.all(0),
                     value: false,
-                    title: Text('Receive Market News'),
-                    onChanged: (isChecked) {},
-                  ),
-                  SwitchListTile(
-                    activeColor: Theme.of(context).accentColor,
-                    contentPadding: const EdgeInsets.all(0),
-                    value: false,
-                    title: Text('Receive Offers Notification'),
+                    title: Text('Receive Invites Notification'),
                     onChanged: (isChecked) {},
                   ),
                   SwitchListTile(

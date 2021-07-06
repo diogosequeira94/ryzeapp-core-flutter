@@ -51,7 +51,7 @@ class _CurrentPasswordInput extends StatelessWidget {
             labelText: AccountStrings.currentPasswordLabel,
             hintText: AccountStrings.currentPasswordHint,
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (description) => {}),
@@ -74,7 +74,7 @@ class _NewPasswordInput extends StatelessWidget {
             labelText: AccountStrings.newPasswordLabel,
             hintText: AccountStrings.newPasswordHint,
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (description) => {}),
@@ -97,7 +97,7 @@ class _ConfirmNewPasswordInput extends StatelessWidget {
             labelText: AccountStrings.confirmPasswordLabel,
             hintText: AccountStrings.confirmPasswordHint,
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (description) => {}),

@@ -99,7 +99,7 @@ class _TitleInput extends StatelessWidget {
                   ? JobPostStrings.jobFormInvalidTitle
                   : null,
               border: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+                borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
               ),
             ),
             onChanged: (title) {
@@ -129,7 +129,7 @@ class _DescriptionInput extends StatelessWidget {
                 ? JobPostStrings.jobFormInvalidDescription
                 : null,
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (description) =>
@@ -158,7 +158,7 @@ class _CityInput extends StatelessWidget {
             errorText:
                 state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (city) => context.read<JobFormCubit>().cityChanged(city),
@@ -187,7 +187,7 @@ class _HourRateInput extends StatelessWidget {
                 ? JobPostStrings.jobFormInvalidHourRate
                 : null,
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (hourRate) =>
@@ -532,7 +532,7 @@ class _AdditionalInformationInput extends StatelessWidget {
             labelText: 'Additional Notes',
             hintText: 'Details you want to share with appliances.',
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+              borderSide: BorderSide(width: 0.5, color: Theme.of(context).accentColor),
             ),
           ),
           onChanged: (additionalInfo) => context
