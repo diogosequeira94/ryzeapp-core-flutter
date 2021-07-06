@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CovidPandemicAlert extends StatelessWidget {
+class IncompleteProfileBanner extends StatelessWidget {
   final bool showAlert;
-  const CovidPandemicAlert({this.showAlert = false});
+  const IncompleteProfileBanner({this.showAlert = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +19,16 @@ class CovidPandemicAlert extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Container(
-                  height: 100.0,
+                  height: 110.0,
                   width: double.infinity,
-                  color: Colors.blueAccent,
+                  color: Theme.of(context).cardColor,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: [
                         Icon(
-                          Icons.notification_important,
-                          size: 36.0,
+                          Icons.settings,
+                          size: 38.0,
                           color: Colors.white,
                         ),
                         SizedBox(width: 20.0),
@@ -38,15 +38,15 @@ class CovidPandemicAlert extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'COVID-19 Recommendation',
+                                'Incomplete Profile',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 16.0,
+                                    fontSize: 18.0,
                                     color: Colors.white),
                               ),
                               SizedBox(height: 5.0),
                               Text(
-                                'Please make sure you always follow prevention guidelines and stay safe during pandemic times.',
+                                'Complete your profile to apply for jobs and get hired.',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],

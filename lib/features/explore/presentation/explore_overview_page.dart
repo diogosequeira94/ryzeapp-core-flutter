@@ -1,13 +1,15 @@
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
-import 'package:firebaseblocryze/features/explore/presentation/widgets/categories_horizontal_list.dart';
-import 'package:firebaseblocryze/features/explore/presentation/widgets/no_results_found_widget.dart';
+import 'package:firebaseblocryze/features/explore/presentation/widgets/incomplete_profile_banner.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_detail_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/home_page_section_header.dart';
+
+import 'widgets/categories_horizontal_list.dart';
+import 'widgets/no_results_found_widget.dart';
 
 class ExploreOverviewPage extends StatefulWidget {
   ExploreOverviewPage({Key key}) : super(key: key);
@@ -72,6 +74,7 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            IncompleteProfileBanner(showAlert: true),
             _jobCategoriesSection(allJobsMock),
             _allJobPosts(allJobsMock, context),
           ],
@@ -86,7 +89,8 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
         HomePageSectionHeader(
           title: 'Job Categories',
         ),
-        Container(height: 100.0, child: CategoriesHorizontalListWidget(allJobsMock)),
+        Container(
+            height: 100.0, child: CategoriesHorizontalListWidget(allJobsMock)),
       ],
     );
   }

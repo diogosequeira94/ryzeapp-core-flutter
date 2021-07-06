@@ -76,7 +76,8 @@ class JobCardItem extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.location_on, size: 18.0, color: Color(0xFFEA4335),),
+                          const Icon(Icons.location_on, size: 18.0, color: Color(0xFFEA4335),),
+                          const SizedBox(width: 3.0),
                           Text('${jobPost.city}'),
                         ],
                       ),
