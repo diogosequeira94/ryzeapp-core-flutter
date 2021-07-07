@@ -15,10 +15,11 @@ class UserProfile extends Equatable {
   final String dateOfBirth;
   final String city;
   final bool isDriver;
-  final String skills;
+  final List<String> skills;
   final String education;
   final int jobsCompleted;
   final int noShows;
+  final bool isComplete;
 
   const UserProfile({
     @required this.firstName,
@@ -34,6 +35,7 @@ class UserProfile extends Equatable {
     @required this.education,
     @required this.jobsCompleted,
     @required this.noShows,
+    @required this.isComplete,
   });
 
   @override
@@ -51,6 +53,7 @@ class UserProfile extends Equatable {
         education,
         jobsCompleted,
         noShows,
+        isComplete,
       ];
 
   UserProfile copyWith({
@@ -63,10 +66,11 @@ class UserProfile extends Equatable {
     String dateOfBirth,
     String city,
     bool isDriver,
-    String skills,
+    List<String> skills,
     String education,
     int jobsCompleted,
     int noShows,
+    bool isComplete,
   }) {
     return UserProfile(
       firstName: firstName ?? this.firstName,
@@ -82,6 +86,7 @@ class UserProfile extends Equatable {
       education: education ?? this.education,
       jobsCompleted: jobsCompleted ?? this.jobsCompleted,
       noShows: noShows ?? this.noShows,
+      isComplete: isComplete ?? this.isComplete,
     );
   }
 
