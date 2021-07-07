@@ -18,19 +18,16 @@ class BottomNavigationBarBloc
     if (event is BottomNavigationHomePagePressed) {
       yield BottomNavigationHomePageLoading();
       yield BottomNavigationHomePageLoaded();
-    }
-
-    if (event is BottomNavigationExplorePagePressed) {
+    } else if (event is BottomNavigationExplorePagePressed) {
       yield BottomNavigationExplorePageLoading();
       yield BottomNavigationExplorePageLoaded();
-    }
-
-    if (event is BottomNavigationExploreMapPressed) {
+    } else if (event is BottomNavigationExploreMapPressed) {
       yield BottomNavigationExploreMapLoading();
       yield BottomNavigationExploreMapLoaded();
-    }
-
-    if (event is BottomNavigationAccountPagePressed) {
+    } else if (event is BottomNavigationJobsHubPressed) {
+      yield BottomNavigationJobsHubPageLoading();
+      yield BottomNavigationJobsHubPageLoaded();
+    } else if (event is BottomNavigationAccountPagePressed) {
       yield BottomNavigationAccountPageLoading();
       yield BottomNavigationAccountPageLoaded();
     }

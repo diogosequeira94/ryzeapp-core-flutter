@@ -28,8 +28,7 @@ class IncompleteProfileBanner extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.settings,
-                          size: 38.0,
-                          color: Colors.white,
+                          size: 40.0,
                         ),
                         SizedBox(width: 20.0),
                         Expanded(
@@ -40,15 +39,12 @@ class IncompleteProfileBanner extends StatelessWidget {
                               Text(
                                 'Incomplete Profile',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.0,
-                                    color: Colors.white),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 19.0),
                               ),
                               SizedBox(height: 5.0),
                               Text(
-                                'Complete your profile to apply for jobs and get hired.',
-                                style: TextStyle(color: Colors.white),
-                              ),
+                                'Complete your profile to apply for jobs and get hired.'),
                             ],
                           ),
                         )

@@ -4,6 +4,7 @@ import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.
 import 'package:firebaseblocryze/features/explore/presentation/explore_overview_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
+import 'package:firebaseblocryze/features/jobs_hub/jobs_hub_page.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,8 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             return HomePage();
           } else if (state is BottomNavigationAccountPageLoading) {
             return Center(child: CircularProgressIndicator());
+          } else if (state is BottomNavigationJobsHubPageLoaded) {
+            return JobsHubPage();
           } else if (state is BottomNavigationAccountPageLoaded) {
             return BlocProvider.value(
                 value: BlocProvider.of<UserBloc>(context),
@@ -50,6 +53,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
               builder: (context, state) {
         return BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
           items: [
             BottomNavigationBarItem(
@@ -61,7 +65,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               label: 'Explore',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.work_rounded),
+              label: 'Hub',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.person),
+              backgroundColor: Theme.of(context).accentColor,
               label: 'Account',
             ),
           ],
@@ -77,6 +86,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   .add(BottomNavigationExplorePagePressed());
             }
             if (index == 2) {
+              context
+                  .read<BottomNavigationBarBloc>()
+                  .add(BottomNavigationJobsHubPressed());
+            }
+            if (index == 3) {
               context
                   .read<BottomNavigationBarBloc>()
                   .add(BottomNavigationAccountPagePressed());

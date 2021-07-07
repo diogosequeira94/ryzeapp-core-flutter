@@ -31,9 +31,28 @@ class BottomNavigationExplorePageLoading extends BottomNavigationBarState {
   List<Object> get props => [];
 }
 
-class BottomNavigationExplorePageLoadingFailure extends BottomNavigationBarState {
+class BottomNavigationExplorePageLoadingFailure
+    extends BottomNavigationBarState {
   final String error;
   const BottomNavigationExplorePageLoadingFailure(this.error);
+  @override
+  List<Object> get props => [error];
+}
+
+class BottomNavigationJobsHubPageLoaded extends BottomNavigationBarState {
+  @override
+  List<Object> get props => [];
+}
+
+class BottomNavigationJobsHubPageLoading extends BottomNavigationBarState {
+  @override
+  List<Object> get props => [];
+}
+
+class BottomNavigationJobsHubPageLoadingFailure
+    extends BottomNavigationBarState {
+  final String error;
+  const BottomNavigationJobsHubPageLoadingFailure(this.error);
   @override
   List<Object> get props => [error];
 }
@@ -48,7 +67,8 @@ class BottomNavigationAccountPageLoading extends BottomNavigationBarState {
   List<Object> get props => [];
 }
 
-class BottomNavigationAccountPageLoadingFailure extends BottomNavigationBarState {
+class BottomNavigationAccountPageLoadingFailure
+    extends BottomNavigationBarState {
   final String error;
   const BottomNavigationAccountPageLoadingFailure(this.error);
   @override

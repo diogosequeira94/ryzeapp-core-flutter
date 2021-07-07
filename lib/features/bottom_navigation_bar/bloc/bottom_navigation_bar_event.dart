@@ -9,6 +9,11 @@ class BottomNavigationHomePagePressed extends BottomNavigationBarEvent {
   List<Object> get props => [];
 }
 
+class BottomNavigationJobsHubPressed extends BottomNavigationBarEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class BottomNavigationExplorePagePressed extends BottomNavigationBarEvent {
   @override
   List<Object> get props => [];
@@ -23,4 +28,3 @@ class BottomNavigationAccountPagePressed extends BottomNavigationBarEvent {
   @override
   List<Object> get props => [];
 }
-
