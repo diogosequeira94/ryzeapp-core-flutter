@@ -2,12 +2,16 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_creation_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_detail_page.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/jobs_hub/cubit/my_jobs_cubit.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../route_generator.dart';
 
 class JobsHubPage extends StatelessWidget {
   @override
@@ -109,12 +113,15 @@ class JobsHubPage extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 4.0),
                       child: Text(
                         'Sent (${state.applications.length})',
-                        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w500),
                       ),
                     ),
-                    Flexible(
+                    Expanded(
                       child: ListView.builder(
                         padding: const EdgeInsets.all(0),
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
                         itemCount: state.applications.length,
                         itemBuilder: (context, index) => Card(
                           child: ListTile(
@@ -167,44 +174,120 @@ class JobsHubPage extends StatelessWidget {
   }
 
   Widget _buildMyPostsList(BuildContext context) {
-    return Center(
+    return BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
+      if (state is JobsFetchSuccess) {
+        return state.myJobs.isEmpty
+            ? Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        child: Icon(Icons.add_circle_outline,
+                            size: 80, color: Colors.black45),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => MultiBlocProvider(providers: [
+                              BlocProvider.value(
+                                  value: BlocProvider.of<JobsBloc>(context)),
+                              BlocProvider(create: (_) => JobFormCubit())
+                            ], child: JobCreation()),
+                          ));
+                        },
+                      ),
+                      const SizedBox(height: 24.0),
+                      Text('You have not posted any jobs yet',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.center),
+                      const SizedBox(height: 10.0),
+                      Text(
+                          'If you would like to add a job post, click in the icon above.',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                          textAlign: TextAlign.center),
+                    ],
+                  ),
+                ),
+              )
+            : _myJobsList(state.myJobs, context);
+      } else {
+        return SizedBox.shrink();
+      }
+    });
+  }
+
+  Widget _myJobsList(List jobsList, BuildContext context) {
+    return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(
-              child: Icon(Icons.add_circle_outline,
-                  size: 80, color: Colors.black45),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => MultiBlocProvider(providers: [
-                    BlocProvider.value(
-                        value: BlocProvider.of<JobsBloc>(context)),
-                    BlocProvider(create: (_) => JobFormCubit())
-                  ], child: JobCreation()),
-                ));
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: jobsList.length,
+              itemBuilder: (context, index) {
+                return Dismissible(
+                  key: Key('${jobsList[index]}'),
+                  direction: DismissDirection.horizontal,
+                  background: JobDismissBackground(
+                      bgColor: Colors.lightGreen,
+                      icon: Icons.edit_outlined,
+                      iconAlignment: Alignment.centerLeft),
+                  secondaryBackground: JobDismissBackground(
+                      bgColor: Color(0xFFDD0000),
+                      icon: Icons.delete_outlined,
+                      iconAlignment: Alignment.centerRight),
+                  confirmDismiss: (DismissDirection dismissDirection) async {
+                    switch (dismissDirection) {
+                      case DismissDirection.endToStart:
+                        return await _showDeleteConfirmationDialog(
+                            context, jobsList[index]);
+                      case DismissDirection.startToEnd:
+                        return false;
+                      default:
+                        return false;
+                    }
+                  },
+                  child: Card(
+                    child: ListTile(
+                      title: Text(jobsList[index].title),
+                      subtitle: Text(jobsList[index].city),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(jobsList[index].hourRate),
+                          JobStatusPill(jobStatus: jobsList[index].status),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => JobDetailPage(
+                                      selfViewing: true,
+                                      jobPost: jobsList[index],
+                                    )));
+                      },
+                      onLongPress: () {
+                        _showDeleteConfirmationDialog(context, jobsList[index]);
+                      },
+                    ),
+                  ),
+                );
               },
             ),
-            const SizedBox(height: 24.0),
-            Text('You have not posted any jobs yet',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center),
-            const SizedBox(height: 10.0),
-            Text(
-                'If you would like to add a job post, click in the icon above.',
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-                textAlign: TextAlign.center),
           ],
         ),
       ),
     );
   }
 
-  _showDeleteNotificationsDialog(BuildContext context) {
+  _showDeleteConfirmationDialog(BuildContext context, JobPost jobPost) {
     AwesomeDialog(
       context: context,
       width: 350,
@@ -212,57 +295,18 @@ class JobsHubPage extends StatelessWidget {
       headerAnimationLoop: false,
       animType: AnimType.BOTTOMSLIDE,
       dialogType: DialogType.NO_HEADER,
-      title: 'Delete Notifications',
-      desc:
-          'Are you sure you want to delete all notifications? You can choose to delete each one by longpressing an entry.',
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
-      btnCancelText: 'Go back',
+      title: 'Delete Confirmation',
+      desc: 'Are you sure you want to permanently delete this job?',
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+      btnCancelText: 'Resume',
       btnCancelColor: Colors.black,
       btnOkText: 'Delete',
       btnOkColor: Colors.red,
       btnCancelOnPress: () {},
-      btnOkOnPress: () {},
+      btnOkOnPress: () {
+        final _jobsBloc = context.read<JobsBloc>();
+        _jobsBloc.add(DeleteJobPost(jobPost));
+      },
     )..show();
-  }
-
-  _buildNotificationMock(BuildContext context) {
-    final jobPost = JobPost(
-        jobID: '213213',
-        title: 'Mock Job',
-        description: 'This is a Mock Job, not Real. Do not Work for free',
-        imageUrl: null,
-        status: 'Active',
-        city: 'Lisbon',
-        hourRate: '20€ / hour',
-        isRemote: true,
-        slotsAvailable: 1,
-        languages: ['Portuguese']);
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 100,
-          child: Card(
-            elevation: 3.0,
-            child: ListTile(
-              title: Text('Mock'),
-              trailing: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  JobStatusPill(jobStatus: 'Active'),
-                ],
-              ),
-              onTap: () {
-                Navigator.popAndPushNamed(context, '/job-confirmation-page',
-                    arguments: jobPost);
-              },
-            ),
-          ),
-        ),
-        Divider(
-          height: 1.0,
-        ),
-      ],
-    );
   }
 }
