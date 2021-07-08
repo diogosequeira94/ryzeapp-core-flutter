@@ -2,6 +2,8 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_creation_page.dart';
+import 'package:firebaseblocryze/features/jobs_hub/cubit/my_jobs_cubit.dart';
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class JobsHubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userId = BlocProvider.of<AuthBloc>(context).userId;
+    final myJobsCubit = BlocProvider.of<MyJobsCubit>(context);
+    myJobsCubit.fetchMyApplications(userId);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -55,7 +60,7 @@ class JobsHubPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            _buildActiveList(),
+            _buildActiveList(context),
             _buildCompleteList(),
             _buildMyPostsList(context),
           ],
@@ -64,33 +69,70 @@ class JobsHubPage extends StatelessWidget {
     );
   }
 
-  _buildActiveList() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(Icons.work_off_outlined, size: 80, color: Colors.black45),
-            const SizedBox(height: 24.0),
-            Text('You have no active jobs ongoing',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center),
-            const SizedBox(height: 10.0),
-            Text(
-                'When you have jobs updates or posts, everything will be displayed here.',
-                style: TextStyle(
-                  fontSize: 16.0,
+  Widget _buildActiveList(BuildContext context) {
+    return BlocBuilder<MyJobsCubit, MyJobsState>(
+      builder: (context, state) {
+        if (state is FetchMyApplicationsSuccess) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                state.applications.isEmpty
+                    ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.work_off_outlined,
+                            size: 80, color: Colors.black45),
+                        const SizedBox(height: 24.0),
+                        Text('You have no active jobs ongoing',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600),
+                            textAlign: TextAlign.center),
+                        const SizedBox(height: 10.0),
+                        Text(
+                            'When you have jobs updates or posts, everything will be displayed here.',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.center),
+                      ],
+                    )
+                    : SwitchListTile(
+                        activeColor: Theme.of(context).accentColor,
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 0.0),
+                        value: false,
+                        title: Text('Hide unsuccessful applications'),
+                        onChanged: (isChecked) {},
+                      ),
+                ListView.builder(
+                  itemCount: state.applications.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(state.applications[index].jobTitle),
+                    subtitle:
+                        Text(state.applications[index].dateOfApplication),
+                    onTap: () {},
+                  ),
                 ),
-                textAlign: TextAlign.center),
-          ],
-        ),
-      ),
+              ],
+            ),
+          );
+        } else if (state is FetchMyApplicationsInProgress) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).accentColor,
+            ),
+          );
+        } else {
+          return SizedBox.shrink();
+        }
+      },
     );
   }
 
-  _buildCompleteList() {
+  Widget _buildCompleteList() {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -104,8 +146,7 @@ class JobsHubPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center),
             const SizedBox(height: 10.0),
-            Text(
-                'When you complete a job, the details will be displayed here.',
+            Text('When you complete a job, the details will be displayed here.',
                 style: TextStyle(
                   fontSize: 16.0,
                 ),
@@ -116,7 +157,7 @@ class JobsHubPage extends StatelessWidget {
     );
   }
 
-  _buildMyPostsList(BuildContext context) {
+  Widget _buildMyPostsList(BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -124,14 +165,19 @@ class JobsHubPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(child: Icon(Icons.add_circle_outline, size: 80, color: Colors.black45), onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => MultiBlocProvider(providers: [
-                  BlocProvider.value(value: BlocProvider.of<JobsBloc>(context)),
-                  BlocProvider(create: (_) => JobFormCubit())
-                ], child: JobCreation()),
-              ));
-            },),
+            GestureDetector(
+              child: Icon(Icons.add_circle_outline,
+                  size: 80, color: Colors.black45),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => MultiBlocProvider(providers: [
+                    BlocProvider.value(
+                        value: BlocProvider.of<JobsBloc>(context)),
+                    BlocProvider(create: (_) => JobFormCubit())
+                  ], child: JobCreation()),
+                ));
+              },
+            ),
             const SizedBox(height: 24.0),
             Text('You have not posted any jobs yet',
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),

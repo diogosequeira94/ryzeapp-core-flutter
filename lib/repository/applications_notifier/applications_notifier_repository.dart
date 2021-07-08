@@ -2,6 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/i_applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/application.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebaseblocryze/repository/applications_notifier/model/applied_job.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/notification.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 
@@ -115,6 +116,52 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
           .doc(applierId)
           .collection('notifications')
           .add(notification.toJson());
+    } on Exception {
+      return null;
+    }
+  }
+
+  @override
+  Future<void> addUserJobApplication(
+      {String jobPostId, String jobTitle, String userId}) {
+    try {
+      final now = DateTime.now();
+
+      final dateOfApplication = '${now.day}/${now.month}/${now.year}';
+      final appliedJob = AppliedJob(
+          jobTitle: jobTitle,
+          dateOfApplication: dateOfApplication,
+          accepted: false);
+      final usersCollection = fireStore.collection('users');
+      return usersCollection
+          .doc(jobPostId)
+          .collection('applications')
+          .add(appliedJob.toJson());
+    } on Exception {
+      return null;
+    }
+  }
+
+  @override
+  Future<List<AppliedJob>> getUserJobApplications({String userId}) async {
+    try {
+      final myApplicationsList = await fireStore
+          .collection('users')
+          .doc(userId)
+          .collection('applications')
+          .get()
+          .then((snapshot) {
+        if (snapshot.docs.length > 0) {
+          return snapshot.docs
+              .map((e) => AppliedJob.fromJson(e.data()))
+              .toList();
+        } else {
+          final List<AppliedJob> empty = [];
+          return empty;
+        }
+      });
+      print(myApplicationsList);
+      return myApplicationsList;
     } on Exception {
       return null;
     }

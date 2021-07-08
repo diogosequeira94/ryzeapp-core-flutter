@@ -1,6 +1,6 @@
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/explore/presentation/widgets/incomplete_profile_banner.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
@@ -22,28 +22,6 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
   @override
   Widget build(BuildContext context) {
     final _bottomNavBloc = context.watch<BottomNavigationBarBloc>();
-    final allJobsMock = DUMMY_ALL_JOBS.map((job) {
-      return JobPost(
-          posterName: 'RyzeApp',
-          posterID: 'RyzeApp',
-          jobID: job.jobID,
-          title: job.title,
-          startDate: job.startDate,
-          endDate: job.endDate,
-          startTime: job.startTime,
-          endTime: job.endTime,
-          description: job.description,
-          status: 'Active',
-          hourRate: job.hourRate,
-          imageUrl: job.imageUrl,
-          city: job.city,
-          isRemote: job.isRemote,
-          slotsAvailable: job.slotsAvailable,
-          additionalInfo: 'Please arrive 15 minutes earlier.',
-          maxCandidates: 1,
-          currentProposals: 0,
-          languages: job.languages);
-    }).toList();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -53,14 +31,20 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
               style: TextStyle(
                   color: Theme.of(context).textTheme.headline6.color)),
           actions: [
-            IconButton(
-              onPressed: () {
-                showSearch(
-                    context: context,
-                    delegate: ExploreModuleSearch(allJobsMock));
-              },
-              icon: Icon(Icons.search),
-            ),
+            BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
+              if (state is JobsFetchSuccess) {
+                return IconButton(
+                  onPressed: () {
+                    showSearch(
+                        context: context,
+                        delegate: ExploreModuleSearch(state.jobsList));
+                  },
+                  icon: Icon(Icons.search),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            }),
             IconButton(
               onPressed: () {
                 _bottomNavBloc.add(BottomNavigationExploreMapPressed());
@@ -70,15 +54,65 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           ],
         ),
         body: SingleChildScrollView(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IncompleteProfileBanner(showAlert: true),
-            _jobCategoriesSection(allJobsMock),
-            _allJobPosts(allJobsMock, context),
-          ],
-        )) // This trailing comma makes auto-formatting nicer for build methods.
+            child:
+                BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
+          if (state is JobApplicationSuccess) {
+            Future.delayed(const Duration(milliseconds: 750), () {
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Your application was submitted.'),
+                duration: const Duration(milliseconds: 1250),
+              ));
+            });
+          }
+        }, builder: (context, state) {
+          if (state is JobsFetchSuccess) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IncompleteProfileBanner(showAlert: true),
+                _jobCategoriesSection(state.jobsList),
+                _allJobPosts(state.jobsList, context),
+              ],
+            );
+          } else if (state is JobsFetchInProgress) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IncompleteProfileBanner(showAlert: true),
+                Expanded(
+                    child: CircularProgressIndicator(
+                  color: Theme.of(context).accentColor,
+                )),
+              ],
+            );
+          } else if (state is JobsFetchFailure) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IncompleteProfileBanner(showAlert: true),
+                Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0, vertical: 14.0),
+                    child: Text('Oops something went wrong')),
+              ],
+            );
+          } else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IncompleteProfileBanner(showAlert: true),
+                Expanded(
+                    child: CircularProgressIndicator(
+                  color: Theme.of(context).accentColor,
+                )),
+              ],
+            );
+          }
+        })) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 
@@ -90,8 +124,7 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           title: 'Job Categories',
         ),
         Container(
-            height: 100.0,
-            child: CategoriesHorizontalListWidget(allJobsMock)),
+            height: 100.0, child: CategoriesHorizontalListWidget(allJobsMock)),
       ],
     );
   }

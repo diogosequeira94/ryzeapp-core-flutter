@@ -1,12 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseblocryze/features/account/presentation/pages/account_overview_page.dart';
 import 'package:firebaseblocryze/features/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_map_page.dart';
 import 'package:firebaseblocryze/features/explore/presentation/explore_overview_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/pages/home_page.dart';
-import 'package:firebaseblocryze/features/jobs_hub/jobs_hub_page.dart';
+import 'package:firebaseblocryze/features/jobs_hub/cubit/my_jobs_cubit.dart';
+import 'package:firebaseblocryze/features/jobs_hub/presentation/jobs_hub_page.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/user_bloc.dart';
+import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +33,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           } else if (state is BottomNavigationAccountPageLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is BottomNavigationJobsHubPageLoaded) {
-            return JobsHubPage();
+            return BlocProvider(
+                create: (context) => MyJobsCubit(ApplicationsNotifierRepository(
+                      firebaseStorage: FirebaseStorage.instance,
+                      fireStore: FirebaseFirestore.instance,
+                    )),
+                child: JobsHubPage());
           } else if (state is BottomNavigationAccountPageLoaded) {
             return BlocProvider.value(
                 value: BlocProvider.of<UserBloc>(context),

@@ -61,18 +61,18 @@ class HomePage extends StatelessWidget {
                         duration: const Duration(seconds: 2),
                       ));
                     } else if (state is DeleteJobSuccess) {
-                      Future.delayed(const Duration(milliseconds: 1500), () {
+                      Future.delayed(const Duration(milliseconds: 750), () {
                         _jobsBloc.add(FetchJobsPosts());
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text('Job deleted with success'),
-                          duration: const Duration(milliseconds: 1500),
+                          duration: const Duration(milliseconds: 1250),
                         ));
                       });
                     } else if (state is JobApplicationSuccess) {
-                      Future.delayed(const Duration(milliseconds: 1500), () {
+                      Future.delayed(const Duration(milliseconds: 750), () {
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text('Your application was submitted.'),
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 1250),
                         ));
                       });
                     }

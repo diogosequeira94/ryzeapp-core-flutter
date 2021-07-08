@@ -7,7 +7,6 @@ import 'package:equatable/equatable.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/applications_notifier_repository.dart';
 import 'package:firebaseblocryze/repository/applications_notifier/model/application.dart';
 import 'package:firebaseblocryze/repository/user/models/user_profile.dart';
-import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/job_repository.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 
@@ -90,10 +89,17 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         accepted: false,
       );
 
-      // Creates [Application] under applications sub collection
+      // Creates [Application] under [Jobs] applications sub collection
       await applicationsNotifierRepository.submitJobApplication(
         jobPostId: event.jobPost.jobID,
         jobApplication: application,
+      );
+
+      // Creates [Application] under [Users] applications sub collection
+      await applicationsNotifierRepository.addUserJobApplication(
+        jobPostId: event.jobPost.jobID,
+        jobTitle: event.jobPost.title,
+        userId: userId,
       );
 
       // Creates [Notification] under Job Posters [NotificationCenter]
