@@ -73,52 +73,53 @@ class JobsHubPage extends StatelessWidget {
     return BlocBuilder<MyJobsCubit, MyJobsState>(
       builder: (context, state) {
         if (state is FetchMyApplicationsSuccess) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                state.applications.isEmpty
-                    ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.work_off_outlined,
-                            size: 80, color: Colors.black45),
-                        const SizedBox(height: 24.0),
-                        Text('You have no active jobs ongoing',
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.center),
-                        const SizedBox(height: 10.0),
-                        Text(
-                            'When you have jobs updates or posts, everything will be displayed here.',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
-                            textAlign: TextAlign.center),
-                      ],
-                    )
-                    : SwitchListTile(
-                        activeColor: Theme.of(context).accentColor,
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 0.0),
-                        value: false,
-                        title: Text('Hide unsuccessful applications'),
-                        onChanged: (isChecked) {},
+          return state.applications.isEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(Icons.work_off_outlined,
+                        size: 80, color: Colors.black45),
+                    const SizedBox(height: 24.0),
+                    Text('You have no active jobs ongoing',
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center),
+                    const SizedBox(height: 10.0),
+                    Text(
+                        'When you have jobs updates or posts, everything will be displayed here.',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.center),
+                  ],
+                )
+              : Column(
+                  children: [
+                    SwitchListTile(
+                      activeColor: Theme.of(context).accentColor,
+                      contentPadding:
+                          const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 0.0),
+                      value: false,
+                      title: Text('Hide unsuccessful applications'),
+                      onChanged: (isChecked) {},
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        itemCount: state.applications.length,
+                        itemBuilder: (context, index) => Card(
+                          child: ListTile(
+                            title: Text(state.applications[index].jobTitle),
+                            subtitle:
+                                Text(state.applications[index].dateOfApplication),
+                            onTap: () {},
+                          ),
+                        ),
                       ),
-                ListView.builder(
-                  itemCount: state.applications.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(state.applications[index].jobTitle),
-                    subtitle:
-                        Text(state.applications[index].dateOfApplication),
-                    onTap: () {},
-                  ),
-                ),
-              ],
-            ),
-          );
+                    ),
+                  ],
+                );
         } else if (state is FetchMyApplicationsInProgress) {
           return Center(
             child: CircularProgressIndicator(

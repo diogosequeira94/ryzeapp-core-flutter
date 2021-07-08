@@ -134,7 +134,7 @@ class ApplicationsNotifierRepository extends IApplicationsNotifierRepository {
           accepted: false);
       final usersCollection = fireStore.collection('users');
       return usersCollection
-          .doc(jobPostId)
+          .doc(userId)
           .collection('applications')
           .add(appliedJob.toJson());
     } on Exception {
