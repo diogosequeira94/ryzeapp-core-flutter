@@ -90,7 +90,8 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
           title: 'Job Categories',
         ),
         Container(
-            height: 100.0, child: CategoriesHorizontalListWidget(allJobsMock)),
+            height: 100.0,
+            child: CategoriesHorizontalListWidget(allJobsMock)),
       ],
     );
   }

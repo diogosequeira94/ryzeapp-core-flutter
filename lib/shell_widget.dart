@@ -13,6 +13,7 @@ import 'package:firebaseblocryze/uikit/theme/bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'platform/l10n/l10n.dart';
 import 'repository/job_posts/job_repository.dart';
 
 class ShellWidget extends StatefulWidget {
@@ -90,6 +91,7 @@ class _ShellWidgetState extends State<ShellWidget> {
             theme: state.themeData,
             initialRoute: '/',
             onGenerateRoute: RouteGenerator.generateRoute,
+          //  supportedLocales: L10n.all,
           );
         },
       ),

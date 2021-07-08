@@ -1,13 +1,17 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_creation_page.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class JobsHubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -26,12 +30,19 @@ class JobsHubPage extends StatelessWidget {
                   child: Text(
                 'Active',
                 style: TextStyle(
-                  fontSize: 16.0,
+                    fontSize: 16.0,
                     color: Theme.of(context).textTheme.headline6.color),
               )),
               Tab(
                   child: Text(
-                'Referrals',
+                'Completed',
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: Theme.of(context).textTheme.headline6.color),
+              )),
+              Tab(
+                  child: Text(
+                'My Posts',
                 style: TextStyle(
                     fontSize: 16.0,
                     color: Theme.of(context).textTheme.headline6.color),
@@ -45,7 +56,8 @@ class JobsHubPage extends StatelessWidget {
         body: TabBarView(
           children: [
             _buildActiveList(),
-            _buildActiveList(),
+            _buildCompleteList(),
+            _buildMyPostsList(context),
           ],
         ),
       ),
@@ -62,12 +74,71 @@ class JobsHubPage extends StatelessWidget {
           children: [
             Icon(Icons.work_off_outlined, size: 80, color: Colors.black45),
             const SizedBox(height: 24.0),
-            Text('You have no active jobs ongoing.',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+            Text('You have no active jobs ongoing',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 10.0),
             Text(
                 'When you have jobs updates or posts, everything will be displayed here.',
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+                textAlign: TextAlign.center),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildCompleteList() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.work_off_outlined, size: 80, color: Colors.black45),
+            const SizedBox(height: 24.0),
+            Text('No jobs completed',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center),
+            const SizedBox(height: 10.0),
+            Text(
+                'When you complete a job, the details will be displayed here.',
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+                textAlign: TextAlign.center),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildMyPostsList(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(child: Icon(Icons.add_circle_outline, size: 80, color: Colors.black45), onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider.value(value: BlocProvider.of<JobsBloc>(context)),
+                  BlocProvider(create: (_) => JobFormCubit())
+                ], child: JobCreation()),
+              ));
+            },),
+            const SizedBox(height: 24.0),
+            Text('You have not posted any jobs yet',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center),
+            const SizedBox(height: 10.0),
+            Text(
+                'If you would like to add a job post, click in the icon above.',
                 style: TextStyle(
                   fontSize: 16.0,
                 ),

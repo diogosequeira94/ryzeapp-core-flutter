@@ -66,7 +66,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.work_rounded),
-              label: 'Hub',
+              label: 'My Jobs',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

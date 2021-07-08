@@ -12,7 +12,7 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 4.0, left: 1.0, right: 1.0),
+      padding: const EdgeInsets.only(top: 4.0, left: 1.0, right: 1.0,bottom: 4.0),
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, '/job-category-list',
