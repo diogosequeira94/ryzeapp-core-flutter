@@ -95,6 +95,7 @@ class JobsHubPage extends StatelessWidget {
                   ],
                 )
               : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SwitchListTile(
                       activeColor: Theme.of(context).accentColor,
@@ -104,15 +105,22 @@ class JobsHubPage extends StatelessWidget {
                       title: Text('Hide unsuccessful applications'),
                       onChanged: (isChecked) {},
                     ),
-                    Expanded(
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 4.0),
+                      child: Text(
+                        'Sent (${state.applications.length})',
+                        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    Flexible(
                       child: ListView.builder(
                         padding: const EdgeInsets.all(0),
                         itemCount: state.applications.length,
                         itemBuilder: (context, index) => Card(
                           child: ListTile(
                             title: Text(state.applications[index].jobTitle),
-                            subtitle:
-                                Text(state.applications[index].dateOfApplication),
+                            subtitle: Text(
+                                state.applications[index].dateOfApplication),
                             onTap: () {},
                           ),
                         ),
