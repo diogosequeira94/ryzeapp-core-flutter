@@ -115,7 +115,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
       // Increments [ApplicationCounter] under job details
       final incrementApplicationCounter =
-          await jobRepository.submitJobApplication(event.jobPost);
+          await jobRepository.submitJobApplication(event.jobPost, userId);
       yield incrementApplicationCounter.fold(
         (failure) =>
             JobApplicationFailure('Oops, something wrong happened. Try again.'),

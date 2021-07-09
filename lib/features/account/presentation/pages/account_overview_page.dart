@@ -98,7 +98,7 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                     child: Column(
                       children: [
                         ListTile(
-                          leading: Icon(Icons.monetization_on),
+                          leading: Icon(Icons.account_balance_outlined),
                           title: Text('My Wallet'),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () => Navigator.push(

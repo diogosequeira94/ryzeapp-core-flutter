@@ -88,15 +88,15 @@ class JobRepository implements IJobPostRepository {
 
   @override
   Future<Either<JobPostFailure, void>> submitJobApplication(
-      JobPost jobPost) async {
+      JobPost jobPost, String userId) async {
     print('### UPDATING JOB POST ID: ${jobPost.jobID}');
     try {
       // We are only updating a value here, but the purpose is to create a new application to that job with the user info,
       // and also send 2 notifications
-      return Right(_fireStore
-          .collection('jobs')
-          .doc(jobPost.jobID)
-          .update({'currentProposals': jobPost.currentProposals + 1}));
+      List currentProposals = jobPost.currentProposals;
+      currentProposals.add(userId);
+      return Right(_fireStore.collection('jobs').doc(jobPost.jobID).update(
+          {'currentProposals': FieldValue.arrayUnion(currentProposals)}));
     } on Exception {
       return Left(JobPostFailure.unexpected());
     }
@@ -105,15 +105,12 @@ class JobRepository implements IJobPostRepository {
   @override
   Future<Either<JobPostFailure, JobPost>> getJobById(String jobID) async {
     try {
-      print('######## GETTING THE JOB');
       var job;
       await _fireStore.collection('jobs').doc(jobID).get().then((document) {
         if (document.exists) {
-          print('######## EXISTS');
           job = JobPost.fromJson(document.data());
         }
       });
-      print('######## ${job}');
       return Right(job);
     } on Exception {
       return Left(JobPostFailure.unexpected());

@@ -12,7 +12,6 @@ import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class JobsHubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -348,6 +347,31 @@ class _MyJobsList extends StatelessWidget {
                 );
               },
             ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => MultiBlocProvider(providers: [
+                    BlocProvider.value(
+                        value: BlocProvider.of<JobsBloc>(context)),
+                    BlocProvider(create: (_) => JobFormCubit())
+                  ], child: JobCreation()),
+                ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Icon(Icons.add_circle_outline),
+                    const SizedBox(width: 5.0),
+                    const Text(
+                      'Add job',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/widgets.dart';
+import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/user_profile/bloc/bloc.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
@@ -21,7 +22,9 @@ class JobDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final userId = BlocProvider.of<AuthBloc>(context).userId;
     final _jobsBloc = context.read<JobsBloc>();
+    print('##### CURENT LENG: ${jobPost.currentProposals?.length}');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -193,7 +196,7 @@ class JobDetailPage extends StatelessWidget {
                       DetailsSection('Positions Available',
                           jobPost.slotsAvailable.toString()),
                       DetailsSection('Current Applications',
-                          jobPost.currentProposals.toString() ?? '0'),
+                          jobPost.currentProposals?.length.toString() ?? '0'),
                       DetailsSection(
                           'Additional Information', jobPost.additionalInfo),
                       if (!selfViewing) FlagAsInappropriate(),
@@ -207,18 +210,41 @@ class JobDetailPage extends StatelessWidget {
                               isLoading: state is DeleteJobInProgress,
                               isAffirmative: false,
                             )
-                          : RyzePrimaryButton(
-                              title: 'Apply Now',
-                              action: () {
-                                final _userBloc = context.read<UserBloc>();
-                                _jobsBloc.add(JobApplyPressed(
-                                  jobPost: jobPost,
-                                  userProfile: _userBloc.userProfile,
-                                ));
-                              },
-                              isLoading: state is JobApplicationInProgress,
-                              isAffirmative: true,
-                            )
+                          : _alreadyApplied(jobPost, userId)
+                              ? Column(
+                                  children: [
+                                    Divider(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 14.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.check_circle),
+                                          const SizedBox(width: 8.0),
+                                          Flexible(
+                                            child: Text(
+                                              'You already applied for this job',
+                                              style: TextStyle(fontSize: 16.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : RyzePrimaryButton(
+                                  title: 'Apply Now',
+                                  action: () {
+                                    final _userBloc = context.read<UserBloc>();
+                                    _jobsBloc.add(JobApplyPressed(
+                                      jobPost: jobPost,
+                                      userProfile: _userBloc.userProfile,
+                                    ));
+                                  },
+                                  isLoading: state is JobApplicationInProgress,
+                                  isAffirmative: true,
+                                )
                     ],
                   ),
                 )
@@ -229,6 +255,9 @@ class JobDetailPage extends StatelessWidget {
       }),
     );
   }
+
+  bool _alreadyApplied(JobPost jobPost, String uId) =>
+      jobPost.currentProposals.contains(uId);
 
   _showDeleteConfirmationDialog(BuildContext context, JobPost jobPost) {
     AwesomeDialog(

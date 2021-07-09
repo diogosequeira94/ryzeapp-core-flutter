@@ -34,7 +34,7 @@ class JobPost extends Equatable {
   final String additionalInfo;
   final int slotsAvailable;
   final int maxCandidates;
-  final int currentProposals;
+  final List<String> currentProposals;
   final List<String> languages;
 
   const JobPost(

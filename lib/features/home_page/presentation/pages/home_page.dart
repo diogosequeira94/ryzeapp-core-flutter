@@ -183,7 +183,7 @@ class HomePage extends StatelessWidget {
           slotsAvailable: job.slotsAvailable,
           additionalInfo: 'Please arrive 15 minutes earlier.',
           maxCandidates: 1,
-          currentProposals: 0,
+          currentProposals: [],
           languages: job.languages);
     }).toList();
 

@@ -5,17 +5,14 @@ class OperationsSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var operations = _buildOperationsList();
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 3.0),
-      child: Container(
-        height: 120,
-        child: ListView.builder(
-            itemCount: operations.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return operations[index];
-            }),
-      ),
+    return Container(
+      height: 120,
+      child: ListView.builder(
+          itemCount: operations.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return operations[index];
+          }),
     );
   }
 
@@ -23,12 +20,14 @@ class OperationsSlider extends StatelessWidget {
     List<OperationItem> _operations = [
       OperationItem(
           title: 'CashOut',
-          operationIcon: Icon(Icons.monetization_on_outlined, size: 28.0)),
+          operationIcon: Icon(Icons.monetization_on_outlined, size: 28.0, color: Colors.white)),
       OperationItem(
-          title: 'Invoices', operationIcon: Icon(Icons.insert_drive_file_outlined, size: 28.0,)),
+          title: 'Invoices', operationIcon: Icon(Icons.insert_drive_file_outlined, size: 28.0, color: Colors.white)),
+      OperationItem(
+          title: 'Cards', operationIcon: Icon(Icons.credit_card_rounded, size: 28.0, color: Colors.white)),
       OperationItem(
           title: 'Transfer',
-          operationIcon: Icon(Icons.transfer_within_a_station_outlined, size: 28.0)),
+          operationIcon: Icon(Icons.transfer_within_a_station_outlined, size: 28.0, color: Colors.white)),
     ];
     return _operations;
   }
