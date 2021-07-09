@@ -6,12 +6,12 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_d
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/jobs_hub/cubit/my_jobs_cubit.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
+import 'package:firebaseblocryze/features/notification_center/bloc/jobs_fetcher/jobs_fetcher_cubit.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../route_generator.dart';
 
 class JobsHubPage extends StatelessWidget {
   @override
@@ -64,16 +64,19 @@ class JobsHubPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            _buildActiveList(context),
-            _buildCompleteList(),
-            _buildMyPostsList(context),
+            _ActiveJobsTab(),
+            _CompletedJobsTab(),
+            _MyJobsTab(),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildActiveList(BuildContext context) {
+class _ActiveJobsTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<MyJobsCubit, MyJobsState>(
       builder: (context, state) {
         if (state is FetchMyApplicationsSuccess) {
@@ -128,7 +131,9 @@ class JobsHubPage extends StatelessWidget {
                             title: Text(state.applications[index].jobTitle),
                             subtitle: Text(
                                 state.applications[index].dateOfApplication),
-                            onTap: () {},
+                            onTap: () {
+                              // Take me to details
+                            },
                           ),
                         ),
                       ),
@@ -147,8 +152,11 @@ class JobsHubPage extends StatelessWidget {
       },
     );
   }
+}
 
-  Widget _buildCompleteList() {
+class _CompletedJobsTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -172,9 +180,33 @@ class JobsHubPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildMyPostsList(BuildContext context) {
-    return BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
+class _MyJobsTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final _jobsBloc = context.watch<JobsBloc>();
+    return BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
+      if (state is JobsFetchFailure) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Error retrieving data. Please try again"),
+          duration: const Duration(seconds: 2),
+        ));
+      } else if (state is DeleteJobFailure) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(state.message),
+          duration: const Duration(seconds: 2),
+        ));
+      } else if (state is DeleteJobSuccess) {
+        Future.delayed(const Duration(milliseconds: 250), () {
+          _jobsBloc.add(FetchJobsPosts());
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text('Job deleted with success'),
+            duration: const Duration(milliseconds: 1250),
+          ));
+        });
+      }
+    }, builder: (context, state) {
       if (state is JobsFetchSuccess) {
         return state.myJobs.isEmpty
             ? Center(
@@ -213,14 +245,49 @@ class JobsHubPage extends StatelessWidget {
                   ),
                 ),
               )
-            : _myJobsList(state.myJobs, context);
+            : _MyJobsList(state.myJobs);
+      } else if (state is FetchSingleJobFailure) {
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.error_outline_rounded,
+                    size: 80, color: Colors.black45),
+                const SizedBox(height: 24.0),
+                Text('Something went wrong',
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.center),
+                const SizedBox(height: 10.0),
+                Text(
+                    'Looks like something went wrong with your request, we are sorry for the inconvenience',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                    textAlign: TextAlign.center),
+              ],
+            ),
+          ),
+        );
       } else {
-        return SizedBox.shrink();
+        return Center(
+          child: CircularProgressIndicator(
+            color: Theme.of(context).accentColor,
+          ),
+        );
       }
     });
   }
+}
 
-  Widget _myJobsList(List jobsList, BuildContext context) {
+class _MyJobsList extends StatelessWidget {
+  final List jobsList;
+  _MyJobsList(this.jobsList);
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4.0),

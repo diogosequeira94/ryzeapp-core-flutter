@@ -1,13 +1,9 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
-import 'package:firebaseblocryze/features/home_page/presentation/pages/pages.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/shared/job_card_item.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
-import 'package:firebaseblocryze/route_generator.dart';
-import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
