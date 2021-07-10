@@ -214,7 +214,8 @@ class _CreateJobButton extends StatelessWidget {
             return RyzePrimaryButton(
               title: JobPostStrings.createJobBtn,
               enabled: (formState.status.isValidated &&
-                  formState.isDisclaimerAccepted),
+                  formState.isDisclaimerAccepted &&
+                  _isEndDateTimeSelected(formState)),
               action: () {
                 formState.image == null
                     ? _showConfirmationDialog(context, formState)
@@ -227,6 +228,10 @@ class _CreateJobButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool _isEndDateTimeSelected(JobFormState formState) {
+    return formState.endTime.isNotEmpty && formState.endTime.isNotEmpty;
   }
 
   _createJobPost(BuildContext context, JobFormState formState) {
@@ -250,6 +255,8 @@ class _CreateJobButton extends StatelessWidget {
           endDate: formState.endDate ?? 'N/A',
           endTime: formState.endTime ?? 'N/A',
           hourRate: '${formState.hourRate.value}€ / h',
+          category: formState.category ?? 'Other',
+          payTerms: formState.payTerms ?? '',
           additionalInfo: formState.additionalInfo,
           isRemote: false,
           slotsAvailable: 1,

@@ -1,4 +1,6 @@
+import 'package:firebaseblocryze/features/home_page/presentation/cubit/job_form_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PaymentTypePicker extends StatefulWidget {
   @override
@@ -13,40 +15,50 @@ class _PaymentTypePickerState extends State<PaymentTypePicker> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(child: TextField(enableInteractiveSelection: false, readOnly: true, controller: _controller, decoration: InputDecoration(
-                    labelText: 'PayRate Terms',
-                    hintText: 'Select a pay term.',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+    return BlocBuilder<JobFormCubit, JobFormState>(builder: (context, state) {
+      return Center(
+        child: Container(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: TextField(
+                      enableInteractiveSelection: false,
+                      readOnly: true,
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        labelText: 'PayRate Terms',
+                        hintText: 'Select a pay term.',
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 0.5, color: Color(0xFF3229bf)),
+                        ),
+                      ),
+                    )),
+                    PopupMenuButton(
+                      padding: const EdgeInsets.all(0),
+                      icon: const Icon(Icons.arrow_drop_down),
+                      onSelected: (String value) {
+                        context.read<JobFormCubit>().payTermsSelected(value);
+                        _controller.text = value;
+                      },
+                      itemBuilder: (BuildContext context) {
+                        return paymentTypes.map<PopupMenuItem<String>>((value) {
+                          return PopupMenuItem(
+                              child: Text(value), value: value);
+                        }).toList();
+                      },
                     ),
-                  ),)),
-                  PopupMenuButton(
-                    padding: const EdgeInsets.all(0),
-                    icon: const Icon(Icons.arrow_drop_down),
-                    onSelected: (String value) {
-                      _controller.text = value;
-                    },
-                    itemBuilder: (BuildContext context) {
-                      return paymentTypes
-                          .map<PopupMenuItem<String>>((value) {
-                        return PopupMenuItem(child: Text(value), value: value);
-                      }).toList();
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

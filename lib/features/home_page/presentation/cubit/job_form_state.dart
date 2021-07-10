@@ -7,6 +7,8 @@ class JobFormState extends Equatable {
     this.description = const Description.pure(),
     this.city = const City.pure(),
     this.hourRate = const HourRate.pure(),
+    this.payTerms,
+    this.category,
     this.startDate = '',
     this.endDate = '',
     this.startTime = '',
@@ -21,6 +23,8 @@ class JobFormState extends Equatable {
   final Description description;
   final City city;
   final HourRate hourRate;
+  final String payTerms;
+  final String category;
   final String startDate;
   final String endDate;
   final String startTime;
@@ -36,6 +40,8 @@ class JobFormState extends Equatable {
         description,
         city,
         hourRate,
+        payTerms,
+        category,
         startDate,
         endDate,
         startTime,
@@ -51,6 +57,8 @@ class JobFormState extends Equatable {
     Description description,
     City city,
     HourRate hourRate,
+    String payTerms,
+    String category,
     String startDate,
     String endDate,
     String startTime,
@@ -65,6 +73,8 @@ class JobFormState extends Equatable {
       description: description ?? this.description,
       city: city ?? this.city,
       hourRate: hourRate ?? this.hourRate,
+      payTerms: payTerms ?? this.payTerms,
+      category: category ?? this.category,
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       startTime: startTime ?? this.startTime,
