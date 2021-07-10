@@ -4,12 +4,17 @@ import 'package:meta/meta.dart';
 class OperationItem extends StatelessWidget {
   final String title;
   final Icon operationIcon;
+  final double rightPadding;
 
-  const OperationItem({@required this.title, @required this.operationIcon});
+  const OperationItem({
+    @required this.title,
+    @required this.operationIcon,
+    this.rightPadding = 22.0,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 4.0, right: 22.0, bottom: 2.0),
+      padding: EdgeInsets.only(top: 4.0, right: rightPadding, bottom: 2.0),
       child: GestureDetector(
         onTap: () {},
         child: Column(
