@@ -122,7 +122,7 @@ class _ActiveJobsTab extends StatelessWidget {
                     Expanded(
                       child: ListView.builder(
                         padding: const EdgeInsets.all(0),
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: AlwaysScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: state.applications.length,
                         itemBuilder: (context, index) => Card(

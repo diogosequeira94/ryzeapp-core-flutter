@@ -118,7 +118,7 @@ class WalletPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Container(
       width: width,
-      padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15.0),
+      padding: const EdgeInsets.fromLTRB(15, 30, 15, 30),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.only(

@@ -12,6 +12,7 @@ final appThemeData = {
       primaryColor: Color(0xFF3229bf),
       accentColor: Color(0xFF4568ff),
       buttonColor: Color(0xFF3229bf),
+      iconTheme: IconThemeData(color: Color(0xFF656565), opacity: 1.0, size: 24.0),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),

@@ -69,6 +69,7 @@ class _DetailsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cityLocation = city ?? 'Unknown';
     return Padding(
       padding: const EdgeInsets.only(top: 14.0),
       child: Column(
@@ -94,7 +95,7 @@ class _DetailsRow extends StatelessWidget {
                 color: Colors.redAccent,
               ),
               SizedBox(width: 5.0),
-              Text('$city, Portugal')
+              Text('$cityLocation, Portugal')
             ],
           ),
         ],

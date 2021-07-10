@@ -94,7 +94,7 @@ class _TitleInput extends StatelessWidget {
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               labelText: 'Title',
-              hintText: 'Enter Title',
+              hintText: 'E.g Electrician Needed',
               errorText: state.title.invalid
                   ? JobPostStrings.jobFormInvalidTitle
                   : null,
@@ -179,13 +179,12 @@ class _HourRateInput extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: TextFormField(
           autofocus: false,
-          maxLength: 4,
+          maxLength: 2,
           keyboardType: TextInputType.number,
           enabled: true,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             labelText: 'Hour Rate',
-            hintText: 'Enter Hour Rate',
             errorText: state.hourRate.invalid
                 ? JobPostStrings.jobFormInvalidHourRate
                 : null,

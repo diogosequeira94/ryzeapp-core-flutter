@@ -42,12 +42,12 @@ class UserProfilePage extends StatelessWidget {
           }),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-            if (state is UserLoadSuccess) {
-              return Column(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+          if (state is UserLoadSuccess) {
+            return SingleChildScrollView(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProfilePageHeaderWidget(user: state.userProfile),
@@ -60,39 +60,39 @@ class UserProfilePage extends StatelessWidget {
                   ),
                   _TabsSection(),
                 ],
-              );
-            } else if (state is UserLoadInProgress) {
-              return Container(
-                height: 400,
-                width: double.infinity,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            } else if (state is UserLoadFailure) {
-              return Center(
-                child: Column(
-                  children: [
-                    Text('Oops, something went wrong!'),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: RyzePrimaryButton(
-                          title: 'Retry',
-                          action: () {
-                            userBloc.add(UserProfileFetched(userId: userId));
-                          },
-                          isAffirmative: false),
-                    )
-                  ],
-                ),
-              );
-            } else {
-              return const SizedBox.shrink(
-                key: Key('warrantyHub_emptyView'),
-              );
-            }
-          }),
-        ),
+              ),
+            );
+          } else if (state is UserLoadInProgress) {
+            return Container(
+              height: 400,
+              width: double.infinity,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else if (state is UserLoadFailure) {
+            return Center(
+              child: Column(
+                children: [
+                  Text('Oops, something went wrong!'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: RyzePrimaryButton(
+                        title: 'Retry',
+                        action: () {
+                          userBloc.add(UserProfileFetched(userId: userId));
+                        },
+                        isAffirmative: false),
+                  )
+                ],
+              ),
+            );
+          } else {
+            return const SizedBox.shrink(
+              key: Key('warrantyHub_emptyView'),
+            );
+          }
+        }),
       ),
     );
   }
@@ -104,20 +104,17 @@ class _TabsSection extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+        children: [
+          TabBar(
+              labelColor: Theme.of(context).textTheme.headline6.color,
+              indicatorColor: Theme.of(context).accentColor,
+              tabs: [
+                Tab(text: "ABOUT"),
+                Tab(text: "EDUCATION"),
+                Tab(text: "ACTIVITY"),
+              ]),
           Container(
-            child: TabBar(
-                labelColor: Theme.of(context).textTheme.headline6.color,
-                indicatorColor: Theme.of(context).accentColor,
-                tabs: [
-                  Tab(text: "ABOUT"),
-                  Tab(text: "EDUCATION"),
-                  Tab(text: "ACTIVITY"),
-                ]),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height / 1.5,
+            height: 500,
             child: TabBarView(children: [
               AboutSectionTab(null),
               EducationSectionTab(),
