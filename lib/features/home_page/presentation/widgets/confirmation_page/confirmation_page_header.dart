@@ -6,6 +6,7 @@ class ConfirmationPageHeader extends StatelessWidget {
   ConfirmationPageHeader({@required this.jobEntityName});
   @override
   Widget build(BuildContext context) {
+    final entityName = jobEntityName.trimRight() ?? 'Someone';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -20,7 +21,7 @@ class ConfirmationPageHeader extends StatelessWidget {
           ),
         ),
         Text(
-          '${jobEntityName.trimRight()} has accepted your work appliance and is looking forward to working with you! You can see all the details for your gig below.',
+          '$entityName has accepted your work appliance and is looking forward to working with you! You can see all the details for your gig below.',
           style: TextStyle(
             fontSize: 16.0,
             color: Colors.grey[500],

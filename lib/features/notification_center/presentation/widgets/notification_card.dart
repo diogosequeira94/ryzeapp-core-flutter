@@ -14,7 +14,7 @@ class NotificationCard extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
         leading: Icon(Icons.work_outline_rounded, size: 30.0),
         trailing: Icon(Icons.arrow_forward_ios, size: 16.0),
-        title: _getNotificationTitle(isApplication),
+        title: _getNotificationTitle(context, isApplication),
         onTap: () {
           isApplication
               ? Navigator.push(
@@ -36,12 +36,14 @@ class NotificationCard extends StatelessWidget {
     );
   }
 
-  Widget _getNotificationTitle(bool isApplication) {
+  Widget _getNotificationTitle(BuildContext context, bool isApplication) {
     if (isApplication) {
       return RichText(
         text: TextSpan(
           text: 'Job Application: ',
-          style: TextStyle(fontSize: 16.0),
+          style: TextStyle(
+              fontSize: 16.0,
+              color: Theme.of(context).textTheme.headline6.color),
           children: <TextSpan>[
             TextSpan(
                 text: '${notification.applierName} ',
@@ -60,7 +62,9 @@ class NotificationCard extends StatelessWidget {
       return RichText(
         text: TextSpan(
           text: 'Confirmation: ',
-          style: TextStyle(fontSize: 16.0),
+          style: TextStyle(
+              fontSize: 16.0,
+              color: Theme.of(context).textTheme.headline6.color),
           children: <TextSpan>[
             TextSpan(text: 'You have been accepted for the '),
             TextSpan(

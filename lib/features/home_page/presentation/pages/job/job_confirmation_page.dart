@@ -152,12 +152,33 @@ class JobConfirmationPage extends StatelessWidget {
                 ],
               ),
             );
-          } else if (state is FetchSingleJobFailure) {
-            return Center(
-              child: Text('Ooops! Something did go wrong!'),
+          } else if (state is FetchSingleJobEmpty) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.hourglass_bottom, size: 80, color: Colors.black45),
+                  const SizedBox(height: 24.0),
+                  Text('Job Expired',
+                      style: TextStyle(
+                          fontSize: 24.0, fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.center),
+                  const SizedBox(height: 24.0),
+                  Text(
+                      'Looks like the job you were looking for was cancelled or it has expired. ',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                      textAlign: TextAlign.center),
+                ],
+              ),
             );
           } else {
-            return const SizedBox.shrink();
+            return const Center(
+              child: Text('Oops, something went wrong'),
+            );
           }
         },
       ),

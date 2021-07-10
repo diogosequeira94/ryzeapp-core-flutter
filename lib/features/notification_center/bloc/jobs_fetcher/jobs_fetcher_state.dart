@@ -15,6 +15,12 @@ class FetchSingleJobInProgress extends JobsFetcherState {
   List<Object> get props => [];
 }
 
+class FetchSingleJobEmpty extends JobsFetcherState {
+  FetchSingleJobEmpty();
+  @override
+  List<Object> get props => [];
+}
+
 class FetchSingleJobSuccess extends JobsFetcherState {
   final JobPost job;
   FetchSingleJobSuccess({@required this.job});

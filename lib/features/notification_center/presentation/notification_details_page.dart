@@ -92,7 +92,7 @@ class _NotificationHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 16.0),
           child: Text(
             'Job Application',
             style: TextStyle(
@@ -102,7 +102,7 @@ class _NotificationHeader extends StatelessWidget {
           ),
         ),
         Text(
-          '${applierName.trimRight()} has submitted a job application to your job post. \nBefore deciding weather to accept the application you can find more details below.',
+          '${applierName.trimRight()} has submitted a job application to your job post. \n\nBefore deciding weather to accept the application you can find more details below.',
           style: TextStyle(
             fontSize: 16.0,
           ),
@@ -165,7 +165,7 @@ class _DetailedSection extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: 'You can check full job details by clicking ',
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(fontSize: 16.0,color: Theme.of(context).textTheme.headline6.color),
             children: <TextSpan>[
               TextSpan(
                   text: 'here.',
@@ -193,6 +193,8 @@ class _UserDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final description = applierDescription.isEmpty ? 'Not provided' : applierDescription;
+    final contact = applierPhone.isEmpty ? 'Not provided' : applierPhone;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -215,14 +217,14 @@ class _UserDetailsSection extends StatelessWidget {
           ),
         ),
         Text(
-          'About: $applierDescription',
+          'About: $description',
           style: TextStyle(
             fontSize: 16.0,
           ),
         ),
         const SizedBox(height: 12.0),
         Text(
-          'Contact: $applierPhone',
+          'Contact: $contact',
           style: TextStyle(
             fontSize: 16.0,
           ),
@@ -232,7 +234,7 @@ class _UserDetailsSection extends StatelessWidget {
           text: TextSpan(
             text:
                 'You can check ${applierName.trimRight()} full profile by clicking ',
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(fontSize: 16.0, color: Theme.of(context).textTheme.headline6.color),
             children: <TextSpan>[
               TextSpan(
                   text: 'here.',

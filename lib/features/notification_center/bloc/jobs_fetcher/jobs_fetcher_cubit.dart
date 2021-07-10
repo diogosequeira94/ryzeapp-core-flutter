@@ -20,15 +20,14 @@ class JobsFetcherCubit extends Cubit<JobsFetcherState> {
       return null;
     }
 
-    if (jobPost == null) {
-      emit(FetchSingleJobFailure('EMPTY OBJECT'));
-      return null;
-    }
-
     emit(jobPost.fold(
-      (failure) =>
-          FetchSingleJobFailure('Oops, something wrong happened. Try again.'),
-      (job) => FetchSingleJobSuccess(job: job),
-    ));
+        (failure) =>
+            FetchSingleJobFailure('Oops, something wrong happened. Try again.'),
+        (job) {
+      if (job == null) {
+        return FetchSingleJobEmpty();
+      }
+      return FetchSingleJobSuccess(job: job);
+    }));
   }
 }

@@ -147,9 +147,7 @@ class _SkillTagsSectionState extends State<SkillTagsSection> {
             title: selectedTags[index],
             color: Colors.blue,
             activeColor: Colors.red,
-            onPressed: (Item item) {
-              print('pressed');
-            },
+            onPressed: (Item item) {},
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             elevation: 0.0,
