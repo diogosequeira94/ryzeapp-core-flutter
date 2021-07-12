@@ -5,7 +5,9 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_c
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/jobs_hub/cubit/my_jobs_cubit.dart';
+import 'package:firebaseblocryze/features/jobs_hub/widgets/hide_unsuccessful_switch.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
+import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
 import 'package:firebaseblocryze/features/notification_center/bloc/jobs_fetcher/jobs_fetcher_cubit.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
@@ -103,14 +105,7 @@ class _ActiveJobsTab extends StatelessWidget {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SwitchListTile(
-                      activeColor: Theme.of(context).accentColor,
-                      contentPadding:
-                          const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 0.0),
-                      value: false,
-                      title: Text('Hide unsuccessful applications'),
-                      onChanged: (isChecked) {},
-                    ),
+                    HideUnsuccessfulSwitch(),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 4.0),
                       child: Text(

@@ -25,7 +25,7 @@ class ProfilePagePersonalInfo extends StatelessWidget {
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 16.0),
             child: Text(
               'Email: $email',
               style: TextStyle(fontSize: 14.0),

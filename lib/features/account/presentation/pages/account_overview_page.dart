@@ -1,6 +1,7 @@
 import 'package:firebaseblocryze/features/account/presentation/pages/wallet_page.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/faq/faq_section.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/legal_policies/legal_policies_section.dart';
+import 'package:firebaseblocryze/features/account/presentation/widgets/notifications/notification_settings.dart';
 import 'package:firebaseblocryze/features/account/presentation/widgets/widgets.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
@@ -127,21 +128,7 @@ class _AccountOverviewPageState extends State<AccountOverviewPage> {
                       ],
                     ),
                   ),
-                  SectionHeader(title: 'Notification Settings'),
-                  SwitchListTile(
-                    activeColor: Theme.of(context).accentColor,
-                    contentPadding: const EdgeInsets.all(0),
-                    value: false,
-                    title: Text('Receive Invites Notification'),
-                    onChanged: (isChecked) {},
-                  ),
-                  SwitchListTile(
-                    activeColor: Theme.of(context).accentColor,
-                    contentPadding: const EdgeInsets.all(0),
-                    value: true,
-                    title: Text('Receive Responses Notification'),
-                    onChanged: (isChecked) {},
-                  ),
+                  NotificationSettings(),
                   SectionHeader(title: 'Themes'),
                   BlocBuilder<ThemeBloc, ThemeState>(
                     builder: (context, state) {

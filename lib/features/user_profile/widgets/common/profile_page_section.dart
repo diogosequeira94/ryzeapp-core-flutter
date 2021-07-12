@@ -22,7 +22,7 @@ class ProfilePageSection extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 16.0),
           Text(
             body ??
                 'Tell us a bit about yourself.',

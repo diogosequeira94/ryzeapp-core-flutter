@@ -14,7 +14,7 @@ class EducationSectionTab extends StatelessWidget {
         children: [
           ProfilePageSection(
               title: UserProfileString.educationSection,
-              body: HomePageStrings.dummyProfileSection),
+              body: 'You did not add anything to your education.'),
           Padding(
             padding: const EdgeInsets.only(bottom: 24.0, top: 12.0),
             child: Column(
@@ -24,19 +24,9 @@ class EducationSectionTab extends StatelessWidget {
                   'Attachments',
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
                 ),
-                const SizedBox(height: 12.0),
+                const SizedBox(height: 16.0),
                 Text('You did not add any attachments yet.'),
                 const SizedBox(height: 12.0),
-                Row(
-                  children: [
-                    Icon(Icons.add),
-                    Text(
-                      'Add Files',
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 6),
                 Divider(
                   color: Colors.grey[300],
                   thickness: 2.0,

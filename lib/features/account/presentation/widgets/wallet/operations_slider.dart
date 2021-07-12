@@ -22,11 +22,11 @@ class OperationsSlider extends StatelessWidget {
   List<OperationItem> _buildOperationsList() {
     List<OperationItem> _operations = [
       OperationItem(
-          title: 'CashOut',
+          title: 'Withdraw',
           operationIcon: Icon(Icons.monetization_on_outlined,
               size: 28.0, color: Colors.white)),
       OperationItem(
-          title: 'Invoices',
+          title: 'Payslips',
           operationIcon: Icon(Icons.insert_drive_file_outlined,
               size: 28.0, color: Colors.white)),
       OperationItem(
@@ -34,7 +34,7 @@ class OperationsSlider extends StatelessWidget {
           operationIcon:
               Icon(Icons.credit_card_rounded, size: 28.0, color: Colors.white)),
       OperationItem(
-        title: 'Transfer',
+        title: 'Deposit',
         operationIcon: Icon(Icons.transfer_within_a_station_outlined,
             size: 28.0, color: Colors.white),
         rightPadding: 0.0,
