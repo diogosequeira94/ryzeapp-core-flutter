@@ -7,6 +7,7 @@ class UserFormState extends Equatable {
     this.dateOfBirth = const DateOfBirth.pure(),
     this.city = const City.pure(),
     this.phoneNumber = const PhoneNumber.pure(),
+    this.skills = const [],
     this.status = FormzStatus.pure,
   });
 
@@ -15,11 +16,12 @@ class UserFormState extends Equatable {
   final DateOfBirth dateOfBirth;
   final City city;
   final PhoneNumber phoneNumber;
+  final List<String> skills;
   final FormzStatus status;
 
   @override
   List<Object> get props =>
-      [profilePicture, about, dateOfBirth, city, phoneNumber, status];
+      [profilePicture, about, dateOfBirth, city, phoneNumber, skills, status];
 
   UserFormState copyWith({
     File profilePicture,
@@ -27,6 +29,7 @@ class UserFormState extends Equatable {
     DateOfBirth dateOfBirth,
     City city,
     PhoneNumber phoneNumber,
+    List<String> skills,
     FormzStatus status,
   }) {
     return UserFormState(
@@ -35,6 +38,7 @@ class UserFormState extends Equatable {
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       city: city ?? this.city,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      skills: skills ?? this.skills,
       status: status ?? this.status,
     );
   }

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:textfield_tags/textfield_tags.dart';
 
 import 'edit_page_header.dart';
 
@@ -194,29 +195,83 @@ class _EducationInput extends StatelessWidget {
 class _SkillsInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: TextFormField(
-        autofocus: false,
-        minLines: 1,
-        maxLines: 16,
-        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-        maxLength: 500,
-        keyboardType: TextInputType.text,
-        enabled: true,
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          labelText: 'Skills',
-          hintText: 'Write something about your skills',
-          labelStyle: TextStyle(height: 0),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).accentColor),
-          ),
-          border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).accentColor)),
+    return BlocBuilder<UserProfileFormCubit, UserFormState>(
+        builder: (context, state) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Skills',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: TextFieldTags(
+                tagsStyler: TagsStyler(
+                  tagTextPadding: const EdgeInsets.all(4.0),
+                  showHashtag: false,
+                  tagMargin: const EdgeInsets.only(right: 12.0, bottom: 6.0),
+                  tagCancelIcon: Icon(
+                    Icons.cancel,
+                    size: 15.0,
+                    color: Colors.white,
+                  ),
+                  tagCancelIconPadding:
+                      EdgeInsets.only(left: 4.0, top: 2.0, right: 2.0),
+                  tagPadding: EdgeInsets.only(
+                      top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                  tagDecoration: BoxDecoration(
+                    color: Theme.of(context).accentColor,
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20.0),
+                    ),
+                  ),
+                  tagTextStyle: TextStyle(fontWeight: FontWeight.normal),
+                ),
+                textFieldStyler: TextFieldStyler(
+                  textFieldEnabled: true,
+                  helperText: '',
+                  hintText: '',
+                  isDense: false,
+                  textFieldBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Theme.of(context).accentColor),
+                  ),
+                  textFieldFocusedBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Theme.of(context).accentColor),
+                  ),
+                ),
+                onDelete: (tag) {
+                  context.read<UserProfileFormCubit>().removeSkillTag(tag);
+                },
+                onTag: (String tag) {
+                  final skillsLength =
+                      context.read<UserProfileFormCubit>().state.skills.length;
+                  if (skillsLength > 5) {
+                    context.read<UserProfileFormCubit>().skillAdded(tag);
+                  }
+                },
+                validator: (String tag) {
+                  final skillsLength =
+                      context.read<UserProfileFormCubit>().state.skills.length;
+                  if (skillsLength > 5) {
+                    return "You reached the max limit";
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ],
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -396,7 +451,7 @@ class _UpdateUserProfileButton extends StatelessWidget {
           dateOfBirth: formState.dateOfBirth.value,
           city: formState.city.value,
           isDriver: false,
-          skills: null,
+          skills: formState.skills,
           education: null,
           jobsCompleted: null,
           noShows: null,

@@ -198,7 +198,18 @@ class JobDetailPage extends StatelessWidget {
                           jobPost.currentProposals?.length.toString() ?? '0'),
                       DetailsSection(
                           'Additional Information', jobPost.additionalInfo),
-                      if (!selfViewing) FlagAsInappropriate(),
+                      if (!selfViewing)
+                        InkWell(
+                            onTap: () => showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  // shape: RoundedRectangleBorder(
+                                  context: context,
+                                  builder: (context) {
+                                    return _ReportJobBottomSheet();
+                                  },
+                                ),
+                            child: FlagAsInappropriate()),
                       const SizedBox(height: 26.0),
                       selfViewing
                           ? RyzePrimaryButton(
@@ -278,5 +289,96 @@ class JobDetailPage extends StatelessWidget {
         _jobsBloc.add(DeleteJobPost(jobPost));
       },
     )..show();
+  }
+}
+
+class _ReportJobBottomSheet extends StatefulWidget {
+  @override
+  __ReportJobBottomSheetState createState() => __ReportJobBottomSheetState();
+}
+
+class __ReportJobBottomSheetState extends State<_ReportJobBottomSheet> {
+  int value;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => Navigator.of(context).pop(),
+      child: GestureDetector(
+        onTap: () {},
+        child: DraggableScrollableSheet(
+          initialChildSize: 0.9,
+          minChildSize: 0.5,
+          maxChildSize: 0.9,
+          builder: (_, controller) => Container(
+            decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius:
+                    BorderRadiusDirectional.vertical(top: Radius.circular(20))),
+            padding: const EdgeInsets.all(16),
+            child: ListView(
+              controller: controller,
+              children: [
+                const SizedBox(height: 8.0),
+                Text(
+                  'Help Us Understand What it Happening',
+                  style: TextStyle(fontSize: 22.0),
+                ),
+                const SizedBox(height: 10.0),
+                Text(
+                  'Select the reason below which you believe its the most suitable',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                const SizedBox(height: 25.0),
+                RadioListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  value: 0,
+                  groupValue: value,
+                  onChanged: (ind) => setState(() => value = ind),
+                  title: Text('This job displays inappropriate content.'),
+                ),
+                RadioListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  value: 1,
+                  groupValue: value,
+                  onChanged: (ind) => setState(() => value = ind),
+                  title: Text('This is not a real job and can be considerate as spam.'),
+                ),
+                RadioListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  value: 2,
+                  groupValue: value,
+                  onChanged: (ind) => setState(() => value = ind),
+                  title:
+                      Text('It has harassment or hate speech.'),
+                ),
+                RadioListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  value: 3,
+                  groupValue: value,
+                  onChanged: (ind) => setState(() => value = ind),
+                  title: Text('Duplicate post'),
+                ),
+                RadioListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  value: 1,
+                  groupValue: 3,
+                  onChanged: (value) {},
+                  title: Text('Something else'),
+                ),
+                const SizedBox(height: 50.0),
+                RyzePrimaryButton(
+                  title: 'Send',
+                  action: () {
+                    Navigator.of(context).pop();
+                  },
+                  isAffirmative: true,
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
