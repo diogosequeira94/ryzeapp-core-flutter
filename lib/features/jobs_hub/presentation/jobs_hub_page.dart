@@ -5,9 +5,8 @@ import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_c
 import 'package:firebaseblocryze/features/home_page/presentation/pages/job/job_detail_page.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/home_page/widgets.dart';
 import 'package:firebaseblocryze/features/jobs_hub/cubit/my_jobs_cubit.dart';
-import 'package:firebaseblocryze/features/jobs_hub/widgets/hide_unsuccessful_switch.dart';
+import 'package:firebaseblocryze/features/jobs_hub/widgets/widgets.dart';
 import 'package:firebaseblocryze/features/login/blocs/auth/auth_bloc.dart';
-import 'package:firebaseblocryze/features/login/utils/shared_preferences.dart';
 import 'package:firebaseblocryze/features/notification_center/bloc/jobs_fetcher/jobs_fetcher_cubit.dart';
 import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/job_status_pill.dart';
@@ -28,10 +27,7 @@ class JobsHubPage extends StatelessWidget {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           iconTheme: Theme.of(context).iconTheme,
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.list),
-            ),
+            SettingsDropdownIcon(),
           ],
           bottom: TabBar(
             indicatorWeight: 3.0,
@@ -122,8 +118,8 @@ class _ActiveJobsTab extends StatelessWidget {
                       itemBuilder: (context, index) => Card(
                         child: ListTile(
                           title: Text(state.applications[index].jobTitle),
-                          subtitle: Text(
-                              state.applications[index].dateOfApplication),
+                          subtitle:
+                              Text(state.applications[index].dateOfApplication),
                           onTap: () {
                             // Take me to details
                           },
