@@ -12,29 +12,30 @@ class ProfileReviews extends StatelessWidget {
             'Reviews',
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 6),
-          ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return Card(
-                margin: const EdgeInsets.symmetric(vertical: 4.0),
-                child: ListTile(
-                  title: Text('Jesse PinkMan'),
-                  subtitle: Text('Good Job Mister White!!'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(child: Icon(Icons.alarm, size: 18.0)),
-                        const SizedBox(width: 2.0),
-                        Text('10 min ago'),
-                      ],
-                    ),
-                ),
-              );
-            },
-          ),
+          const SizedBox(height: 16),
+          Text('No one has reviewed your performance yet.'),
+          // ListView.builder(
+          //   physics: NeverScrollableScrollPhysics(),
+          //   shrinkWrap: true,
+          //   itemCount: 1,
+          //   itemBuilder: (context, index) {
+          //     return Card(
+          //       margin: const EdgeInsets.symmetric(vertical: 4.0),
+          //       child: ListTile(
+          //         title: Text('Jesse PinkMan'),
+          //         subtitle: Text('Good Job Mister White!!'),
+          //         trailing: Row(
+          //           mainAxisSize: MainAxisSize.min,
+          //             children: [
+          //               Flexible(child: Icon(Icons.alarm, size: 18.0)),
+          //               const SizedBox(width: 2.0),
+          //               Text('10 min ago'),
+          //             ],
+          //           ),
+          //       ),
+          //     );
+          //   },
+          // ),
           const SizedBox(height: 6),
         ],
       ),

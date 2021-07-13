@@ -16,6 +16,7 @@ class JobPostStrings {
       'Description must be at least 15 characters';
   static const String jobFormInvalidCity = 'Invalid City';
   static const String jobFormInvalidHourRate = 'Invalid Hour Rate';
+  static const String jobFormInvalidDuration = 'Invalid Duration';
 
   //Job Hub
   static const String jobHubPageTitle = 'My Jobs';

@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/forms/city.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/forms/description.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/forms/hour_rate.dart';
+import 'package:firebaseblocryze/features/home_page/presentation/model/forms/shift_duration.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/forms/title.dart';
 import 'package:formz/formz.dart';
 
@@ -21,14 +22,21 @@ class JobFormCubit extends Cubit<JobFormState> {
       startTime: state.startTime,
       endTime: state.endTime,
       image: state.image,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       hourRate: state.hourRate,
       payTerms: state.payTerms,
       category: state.category,
       additionalInfo: state.additionalInfo,
       title: title,
-      status: Formz.validate(
-          [title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -38,6 +46,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       title: state.title,
       startDate: state.startDate,
       endDate: state.endDate,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       startTime: state.startTime,
       endTime: state.endTime,
       image: state.image,
@@ -47,8 +57,13 @@ class JobFormCubit extends Cubit<JobFormState> {
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       description: description,
-      status: Formz.validate(
-          [state.title, description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -59,6 +74,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDate: state.startDate,
       endDate: state.endDate,
       startTime: state.startTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       endTime: state.endTime,
       image: state.image,
       hourRate: state.hourRate,
@@ -67,8 +84,39 @@ class JobFormCubit extends Cubit<JobFormState> {
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       city: city,
-      status: Formz.validate(
-          [state.title, state.description, city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
+    ));
+  }
+
+  void startTypeSelected(JobStartType jobStartType) {
+    emit(state.copyWith(
+      title: state.title,
+      startDate: state.startDate,
+      endDate: state.endDate,
+      startTime: state.startTime,
+      endTime: state.endTime,
+      image: state.image,
+      jobStartType: jobStartType,
+      hourRate: state.hourRate,
+      shiftDuration: state.shiftDuration,
+      payTerms: state.payTerms,
+      category: state.category,
+      additionalInfo: state.additionalInfo,
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
+      city: state.city,
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -79,6 +127,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDate: state.startDate,
       endDate: state.endDate,
       startTime: state.startTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       endTime: state.endTime,
       image: state.image,
       additionalInfo: state.additionalInfo,
@@ -86,8 +136,39 @@ class JobFormCubit extends Cubit<JobFormState> {
       hourRate: hourRate,
       payTerms: state.payTerms,
       category: state.category,
-      status: Formz.validate(
-          [state.title, state.description, state.city, hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        hourRate,
+        state.shiftDuration
+      ]),
+    ));
+  }
+
+  void shiftDurationChanged(String value) {
+    final shiftDuration = ShiftDuration.dirty(value);
+    emit(state.copyWith(
+      title: state.title,
+      startDate: state.startDate,
+      endDate: state.endDate,
+      startTime: state.startTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: shiftDuration,
+      endTime: state.endTime,
+      image: state.image,
+      additionalInfo: state.additionalInfo,
+      isDisclaimerAccepted: state.isDisclaimerAccepted,
+      hourRate: state.hourRate,
+      payTerms: state.payTerms,
+      category: state.category,
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        shiftDuration,
+        state.hourRate
+      ]),
     ));
   }
 
@@ -100,12 +181,19 @@ class JobFormCubit extends Cubit<JobFormState> {
       endTime: state.endTime,
       image: state.image,
       hourRate: state.hourRate,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       payTerms: state.payTerms,
       category: state.category,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: value,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -116,14 +204,21 @@ class JobFormCubit extends Cubit<JobFormState> {
       endDate: state.endDate,
       startTime: state.startTime,
       endTime: state.endTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       image: imageFile,
       hourRate: state.hourRate,
       payTerms: state.payTerms,
       category: state.category,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -134,14 +229,21 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDate: value,
       endDate: state.endDate,
       endTime: state.endTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       image: state.image,
       hourRate: state.hourRate,
       payTerms: state.payTerms,
       category: state.category,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -152,14 +254,21 @@ class JobFormCubit extends Cubit<JobFormState> {
       startDate: state.startDate,
       endDate: state.endDate,
       endTime: state.endTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       image: state.image,
       hourRate: state.hourRate,
       payTerms: value,
       category: state.category,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -168,6 +277,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       title: state.title,
       startTime: state.startTime,
       startDate: state.startDate,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       payTerms: state.payTerms,
       category: value,
       endDate: state.endDate,
@@ -176,8 +287,13 @@ class JobFormCubit extends Cubit<JobFormState> {
       hourRate: state.hourRate,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -186,6 +302,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       title: state.title,
       startTime: value,
       startDate: state.startDate,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       endDate: state.endDate,
       endTime: state.endTime,
       image: state.image,
@@ -194,8 +312,13 @@ class JobFormCubit extends Cubit<JobFormState> {
       category: state.category,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -203,6 +326,8 @@ class JobFormCubit extends Cubit<JobFormState> {
     emit(state.copyWith(
       title: state.title,
       startTime: state.startTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       startDate: state.startDate,
       endDate: value,
       endTime: state.endTime,
@@ -212,8 +337,13 @@ class JobFormCubit extends Cubit<JobFormState> {
       category: state.category,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -223,6 +353,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       startTime: state.startTime,
       startDate: state.startDate,
       endDate: state.endDate,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       endTime: value,
       image: state.image,
       hourRate: state.hourRate,
@@ -230,8 +362,13 @@ class JobFormCubit extends Cubit<JobFormState> {
       category: state.category,
       additionalInfo: state.additionalInfo,
       isDisclaimerAccepted: state.isDisclaimerAccepted,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 
@@ -241,6 +378,8 @@ class JobFormCubit extends Cubit<JobFormState> {
       endDate: state.endDate,
       startTime: state.startTime,
       endTime: state.endTime,
+      jobStartType: state.jobStartType,
+      shiftDuration: state.shiftDuration,
       image: state.image,
       hourRate: state.hourRate,
       payTerms: state.payTerms,
@@ -248,8 +387,13 @@ class JobFormCubit extends Cubit<JobFormState> {
       isDisclaimerAccepted: state.isDisclaimerAccepted,
       title: state.title,
       additionalInfo: additionalInfoValue,
-      status: Formz.validate(
-          [state.title, state.description, state.city, state.hourRate]),
+      status: Formz.validate([
+        state.title,
+        state.description,
+        state.city,
+        state.hourRate,
+        state.shiftDuration
+      ]),
     ));
   }
 }

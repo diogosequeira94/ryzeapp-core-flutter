@@ -1,5 +1,10 @@
 part of 'job_form_cubit.dart';
 
+enum JobStartType {
+  asSoonAsPossible,
+  specificDate,
+}
+
 class JobFormState extends Equatable {
   const JobFormState({
     this.image,
@@ -9,6 +14,8 @@ class JobFormState extends Equatable {
     this.hourRate = const HourRate.pure(),
     this.payTerms,
     this.category,
+    this.jobStartType = JobStartType.asSoonAsPossible,
+    this.shiftDuration = const ShiftDuration.pure(),
     this.startDate = '',
     this.endDate = '',
     this.startTime = '',
@@ -25,6 +32,8 @@ class JobFormState extends Equatable {
   final HourRate hourRate;
   final String payTerms;
   final String category;
+  final JobStartType jobStartType;
+  final ShiftDuration shiftDuration;
   final String startDate;
   final String endDate;
   final String startTime;
@@ -42,6 +51,8 @@ class JobFormState extends Equatable {
         hourRate,
         payTerms,
         category,
+        jobStartType,
+        shiftDuration,
         startDate,
         endDate,
         startTime,
@@ -59,6 +70,8 @@ class JobFormState extends Equatable {
     HourRate hourRate,
     String payTerms,
     String category,
+    JobStartType jobStartType,
+    ShiftDuration shiftDuration,
     String startDate,
     String endDate,
     String startTime,
@@ -75,6 +88,8 @@ class JobFormState extends Equatable {
       hourRate: hourRate ?? this.hourRate,
       payTerms: payTerms ?? this.payTerms,
       category: category ?? this.category,
+      jobStartType: jobStartType ?? this.jobStartType,
+      shiftDuration: shiftDuration ?? this.shiftDuration,
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       startTime: startTime ?? this.startTime,

@@ -12,6 +12,7 @@ class NotificationSettings extends StatelessWidget {
       child: BlocBuilder<UserSettingsCubit, UserSettingsState>(
           builder: (context, state) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SectionHeader(title: 'Notification Settings'),
             SwitchListTile(

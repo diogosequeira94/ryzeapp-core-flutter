@@ -62,6 +62,7 @@ class _JobFormState extends State<JobForm> {
             _HourRateInput(),
             PaymentTypePicker(),
             JobCategoryPicker(),
+            _JobStartingTypeRadioButtons(),
             _DateTimeCalendar(),
             _AdditionalInformationInput(),
             const SizedBox(height: 8.0),
@@ -136,6 +137,81 @@ class _DescriptionInput extends StatelessWidget {
           ),
           onChanged: (description) =>
               context.read<JobFormCubit>().descriptionChanged(description),
+        ),
+      );
+    });
+  }
+}
+
+class _JobStartingTypeRadioButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<JobFormCubit, JobFormState>(builder: (context, state) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Starting: ',
+              style: TextStyle(fontSize: 17.0),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: RadioListTile(
+                contentPadding: EdgeInsets.all(0),
+                value: state.jobStartType,
+                groupValue: JobStartType.asSoonAsPossible,
+                onChanged: (_) => {
+                  context
+                      .read<JobFormCubit>()
+                      .startTypeSelected(JobStartType.asSoonAsPossible),
+                },
+                title: Text('As soon as possible'),
+              ),
+            ),
+            RadioListTile(
+              contentPadding: EdgeInsets.all(0),
+              value: state.jobStartType,
+              groupValue: JobStartType.specificDate,
+              onChanged: (_) => {
+                context
+                    .read<JobFormCubit>()
+                    .startTypeSelected(JobStartType.specificDate),
+              },
+              title: Text('Select a specific date'),
+            ),
+            Visibility(
+              visible: state.jobStartType == JobStartType.asSoonAsPossible,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 6.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    maxLength: 2,
+                    keyboardType: TextInputType.number,
+                    enabled: true,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      labelText: 'Shift Duration',
+                      hintText: 'expected duration in hours',
+                      errorText: state.shiftDuration.invalid
+                          ? JobPostStrings.jobFormInvalidDuration
+                          : null,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 0.5, color: Theme.of(context).accentColor),
+                      ),
+                    ),
+                    onChanged: (shiftDuration) => context
+                        .read<JobFormCubit>()
+                        .shiftDurationChanged(shiftDuration),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       );
     });
@@ -370,47 +446,50 @@ class _DateTimeCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<JobFormCubit, JobFormState>(
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(bottom: 6.0),
-                child: Text('From:'),
-              ),
-              InkWell(
-                child: Row(
-                  children: [
-                    Image.asset(JobPostStrings.calendarIcon,
-                        width: 34.0, height: 34.0),
-                    SizedBox(width: 10),
-                    Text((state.startDate.isEmpty || state.startTime.isEmpty)
-                        ? '${fromPickedDate.day}/${fromPickedDate.month}/${fromPickedDate.year} @ ${fromPickedTime.hour}:${fromPickedTime.minute}'
-                        : '${state.startDate} @ ${state.startTime}'),
-                  ],
+        return Visibility(
+          visible: state.jobStartType == JobStartType.specificDate,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 6.0),
+                  child: Text('From:'),
                 ),
-                onTap: () => _fromPickDate(context),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
-                child: Text('Until:'),
-              ),
-              InkWell(
-                child: Row(
-                  children: [
-                    Image.asset(JobPostStrings.calendarIcon,
-                        width: 34.0, height: 34.0),
-                    SizedBox(width: 10),
-                    Text((state.endDate.isEmpty || state.endTime.isEmpty)
-                        ? 'Select an ending date'
-                        : '${state.endDate} @ ${state.endTime}'),
-                  ],
+                InkWell(
+                  child: Row(
+                    children: [
+                      Image.asset(JobPostStrings.calendarIcon,
+                          width: 34.0, height: 34.0),
+                      SizedBox(width: 10),
+                      Text((state.startDate.isEmpty || state.startTime.isEmpty)
+                          ? '${fromPickedDate.day}/${fromPickedDate.month}/${fromPickedDate.year} @ ${fromPickedTime.hour}:${fromPickedTime.minute}'
+                          : '${state.startDate} @ ${state.startTime}'),
+                    ],
+                  ),
+                  onTap: () => _fromPickDate(context),
                 ),
-                onTap: () => _untilPickDate(context),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
+                  child: Text('Until:'),
+                ),
+                InkWell(
+                  child: Row(
+                    children: [
+                      Image.asset(JobPostStrings.calendarIcon,
+                          width: 34.0, height: 34.0),
+                      SizedBox(width: 10),
+                      Text((state.endDate.isEmpty || state.endTime.isEmpty)
+                          ? 'Select an ending date'
+                          : '${state.endDate} @ ${state.endTime}'),
+                    ],
+                  ),
+                  onTap: () => _untilPickDate(context),
+                ),
+              ],
+            ),
           ),
         );
       },

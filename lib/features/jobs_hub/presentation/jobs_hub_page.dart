@@ -114,22 +114,28 @@ class _ActiveJobsTab extends StatelessWidget {
                             fontSize: 16.0, fontWeight: FontWeight.w500),
                       ),
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.all(0),
-                        physics: AlwaysScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.applications.length,
-                        itemBuilder: (context, index) => Card(
-                          child: ListTile(
-                            title: Text(state.applications[index].jobTitle),
-                            subtitle: Text(
-                                state.applications[index].dateOfApplication),
-                            onTap: () {
-                              // Take me to details
-                            },
-                          ),
+                    ListView.builder(
+                      padding: const EdgeInsets.all(0),
+                      physics: AlwaysScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: state.applications.length,
+                      itemBuilder: (context, index) => Card(
+                        child: ListTile(
+                          title: Text(state.applications[index].jobTitle),
+                          subtitle: Text(
+                              state.applications[index].dateOfApplication),
+                          onTap: () {
+                            // Take me to details
+                          },
                         ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 4.0),
+                      child: Text(
+                        'Accepted (0)',
+                        style: TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w500),
                       ),
                     ),
                   ],
