@@ -10,11 +10,21 @@ class SettingsDropdownIcon extends StatelessWidget {
           PopupMenuItem(
             child: Row(
               children: [
-                Icon(Icons.favorite_border_rounded),
-                Text('Favourites'),
+                const Icon(Icons.refresh_rounded),
+                const SizedBox(width: 12.0),
+                const Text('Refresh'),
               ],
             ),
-          )
+          ),
+          PopupMenuItem(
+            child: Row(
+              children: [
+                const Icon(Icons.favorite_border_rounded),
+                const SizedBox(width: 12.0),
+                const Text('Favourites'),
+              ],
+            ),
+          ),
         ],
         child: Icon(
           Icons.more_vert,
