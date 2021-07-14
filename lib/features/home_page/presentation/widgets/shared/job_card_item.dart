@@ -50,7 +50,7 @@ class JobCardItem extends StatelessWidget {
                             fontSize: 19.0, fontWeight: FontWeight.w400),
                       ),
                     ),
-                    AddToFavouritesIcon(),
+                    AddToFavouritesIcon(jobPost),
                   ],
                 ),
                 Padding(
@@ -64,7 +64,11 @@ class JobCardItem extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.location_on, size: 18.0, color: Color(0xFFEA4335),),
+                          const Icon(
+                            Icons.location_on,
+                            size: 18.0,
+                            color: Color(0xFFEA4335),
+                          ),
                           const SizedBox(width: 3.0),
                           Text('${jobPost.city}'),
                         ],
