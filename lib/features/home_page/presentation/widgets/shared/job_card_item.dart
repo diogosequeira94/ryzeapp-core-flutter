@@ -50,19 +50,7 @@ class JobCardItem extends StatelessWidget {
                             fontSize: 19.0, fontWeight: FontWeight.w400),
                       ),
                     ),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black54,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: AddToFavouritesIcon(),
-                    ),
+                    AddToFavouritesIcon(),
                   ],
                 ),
                 Padding(
