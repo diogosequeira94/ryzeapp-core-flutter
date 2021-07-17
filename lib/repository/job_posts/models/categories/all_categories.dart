@@ -50,10 +50,38 @@ const ALL_CATEGORIES = const [
     'https://cdn2.iconfinder.com/data/icons/online-shopping-flat-round/550/diamond-512.png',
   ),
   Category(
-    id: 'c7',
+    id: 'c8',
     title: 'Support',
     color: Colors.white,
     imageUrl:
-    'https://cdn2.iconfinder.com/data/icons/office-culture-8/48/3_employee_worker_woman_businesswoman_avatar_office-512.png',
+    'https://www.citypng.com/public/uploads/preview/-11587915579jcqsavpblp.png',
+  ),
+  Category(
+    id: 'c9',
+    title: 'Carpenter',
+    color: Colors.white,
+    imageUrl:
+    'https://image.flaticon.com/icons/png/512/2994/2994945.png',
+  ),
+  Category(
+    id: 'c9',
+    title: 'Electrician',
+    color: Colors.white,
+    imageUrl:
+    'http://www.mrelectriccumming.com/pictures/el_icon_2.jpg',
+  ),
+  Category(
+    id: 'c9',
+    title: 'Mechanic',
+    color: Colors.white,
+    imageUrl:
+    'https://www.pngkit.com/png/detail/771-7717883_repair-gmail-round-icon-png.png',
+  ),
+  Category(
+    id: 'c9',
+    title: 'Painter',
+    color: Colors.white,
+    imageUrl:
+    'https://image.flaticon.com/icons/png/512/201/201577.png',
   ),
 ];
