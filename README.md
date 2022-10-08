@@ -5,10 +5,14 @@ Complete App - Search for seasonal jobs, register as worker or company, create y
 ## Features
 
 - Firebase Login
+- Hive Database
 - QR Code Reader
+- Check-in
 - Notification System
 - Google Maps integration
 - Jobs Hut
+- Dark Mode
 - UI KIT
+
 ...
 
