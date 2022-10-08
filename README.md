@@ -1,7 +1,14 @@
-# ryzeapp-core
+# RyzeApp
 
-Ryze App Core repository.
+Complete App - Search for seasonal jobs, register as worker or company, create your gigs and receive alert and notifications.
 
-## Getting Started
+## Features
 
-Just run flutter pub get and you'll be set to go.
+- Firebase Login
+- QR Code Reader
+- Notification System
+- Google Maps integration
+- Jobs Hut
+- UI KIT
+...
+
