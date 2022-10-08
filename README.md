@@ -16,3 +16,4 @@ Complete App - Search for seasonal jobs, register as worker or company, create y
 
 ...
 
+App available on Google Play Store and App Store, email invite available upon request
