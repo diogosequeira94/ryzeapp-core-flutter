@@ -4,7 +4,6 @@ import 'package:firebaseblocryze/features/login/presentation/widgets/sign_in_hea
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:firebaseblocryze/injection.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,16 +26,16 @@ class PasswordResetPage extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
-                  FlushbarHelper.createError(
-                    message: failure.map(
-                      cancelledByUser: (_) => LoginStrings.cancelledByUser,
-                      serverError: (_) => LoginStrings.serverError,
-                      emailAlreadyInUse: (_) => LoginStrings.emailAlreadyInUse,
-                      emailNotFound: (_) => LoginStrings.emailNotFound,
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: failure.map(
+                      cancelledByUser: (_) => Text(LoginStrings.cancelledByUser),
+                      serverError: (_) => Text(LoginStrings.serverError),
+                      emailAlreadyInUse: (_) => Text(LoginStrings.emailAlreadyInUse),
+                      emailNotFound: (_) => Text(LoginStrings.emailNotFound),
                       invalidCredentials: (_) =>
-                          LoginStrings.invalidCredentials,
+                          Text(LoginStrings.invalidCredentials),
                     ),
-                  ).show(context);
+                  ));
                 },
                 (_) {
                   Navigator.of(context).pop();

@@ -30,7 +30,6 @@ dependencies:
   flutter_icons: ^1.1.0
   flutter_tags: ^0.4.9+1
   flutter_typeahead:
-  flushbar: ^1.10.4
   formz: ^0.3.2
   google_sign_in: ^4.5.3
   google_maps_flutter: ^1.0.3

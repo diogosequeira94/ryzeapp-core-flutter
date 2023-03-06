@@ -4,7 +4,6 @@ import 'package:firebaseblocryze/features/login/presentation/widgets/sign_in_goo
 import 'package:firebaseblocryze/features/login/presentation/widgets/sign_in_header.dart';
 import 'package:firebaseblocryze/features/login/utils/login_strings.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,15 +16,15 @@ class SignInForm extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              FlushbarHelper.createError(
-                message: failure.map(
-                  cancelledByUser: (_) => LoginStrings.cancelledByUser,
-                  serverError: (_) => LoginStrings.serverError,
-                  emailAlreadyInUse: (_) => LoginStrings.emailAlreadyInUse,
-                  emailNotFound: (_) => LoginStrings.emailNotFound,
-                  invalidCredentials: (_) => LoginStrings.invalidCredentials,
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: failure.map(
+                  cancelledByUser: (_) => Text(LoginStrings.cancelledByUser),
+                  serverError: (_) => Text(LoginStrings.serverError),
+                  emailAlreadyInUse: (_) => Text(LoginStrings.emailAlreadyInUse),
+                  emailNotFound: (_) => Text( LoginStrings.emailNotFound),
+                  invalidCredentials: (_) => Text(LoginStrings.invalidCredentials),
                 ),
-              ).show(context);
+              ));
             },
             (userId) {
               print('##### SIGN IN FORM ID: $userId');
