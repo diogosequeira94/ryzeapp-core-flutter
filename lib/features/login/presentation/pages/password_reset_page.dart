@@ -50,7 +50,7 @@ class PasswordResetPage extends StatelessWidget {
                 children: [
                   SignInHeader(),
                   Form(
-                    autovalidate: state.showErrorMessages,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ListView(

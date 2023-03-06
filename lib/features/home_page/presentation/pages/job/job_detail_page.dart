@@ -1,3 +1,5 @@
+// ignore_for_file: close_sinks
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/widgets/details_page/widgets.dart';
@@ -7,7 +9,6 @@ import 'package:firebaseblocryze/repository/job_posts/models/job_post.dart';
 import 'package:firebaseblocryze/uikit/widgets/ryze_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 class JobDetailPage extends StatelessWidget {
   final JobPost jobPost;
@@ -43,12 +44,12 @@ class JobDetailPage extends StatelessWidget {
       ),
       body: BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
         if (state is DeleteJobFailure) {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.message),
             duration: const Duration(seconds: 2),
           ));
         } else if (state is JobApplicationFailure) {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.message),
             duration: const Duration(seconds: 2),
           ));
@@ -107,7 +108,7 @@ class JobDetailPage extends StatelessWidget {
                             const SizedBox(width: 6.0),
                             if (isVerified)
                               Icon(Icons.check_circle,
-                                  color: Theme.of(context).accentColor,
+                                  color: Theme.of(context).colorScheme.secondary,
                                   size: 22.0),
                           ],
                         ),
@@ -280,7 +281,7 @@ class JobDetailPage extends StatelessWidget {
       title: 'Cancel Confirmation',
       desc: 'By cancelling you will permanently delete this job.',
       btnCancelText: 'Go Back',
-      btnCancelColor: Theme.of(context).accentColor,
+      btnCancelColor: Theme.of(context).colorScheme.secondary,
       btnOkText: 'Cancel',
       btnOkColor: Colors.black,
       btnCancelOnPress: () {},

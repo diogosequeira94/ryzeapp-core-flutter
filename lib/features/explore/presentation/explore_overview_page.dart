@@ -58,7 +58,7 @@ class _ExploreOverviewPageState extends State<ExploreOverviewPage> {
                 BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
           if (state is JobApplicationSuccess) {
             Future.delayed(const Duration(milliseconds: 750), () {
-              Scaffold.of(context).showSnackBar(SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Your application was submitted.'),
                 duration: const Duration(milliseconds: 1250),
               ));

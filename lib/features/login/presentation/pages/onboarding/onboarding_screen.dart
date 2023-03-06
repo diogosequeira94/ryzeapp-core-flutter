@@ -49,9 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Container(
                   alignment: Alignment.centerRight,
-                  child: FlatButton(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
+                  child: TextButton(
                     onPressed: () {
                       setState(() {
                         _pageController.animateToPage(2,

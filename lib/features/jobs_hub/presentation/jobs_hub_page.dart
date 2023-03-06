@@ -139,7 +139,7 @@ class _ActiveJobsTab extends StatelessWidget {
         } else if (state is FetchMyApplicationsInProgress) {
           return Center(
             child: CircularProgressIndicator(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           );
         } else {
@@ -184,19 +184,19 @@ class _MyJobsTab extends StatelessWidget {
     final _jobsBloc = context.watch<JobsBloc>();
     return BlocConsumer<JobsBloc, JobsState>(listener: (context, state) {
       if (state is JobsFetchFailure) {
-        Scaffold.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Error retrieving data. Please try again"),
           duration: const Duration(seconds: 2),
         ));
       } else if (state is DeleteJobFailure) {
-        Scaffold.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.message),
           duration: const Duration(seconds: 2),
         ));
       } else if (state is DeleteJobSuccess) {
         Future.delayed(const Duration(milliseconds: 250), () {
           _jobsBloc.add(FetchJobsPosts());
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Job deleted with success'),
             duration: const Duration(milliseconds: 1250),
           ));
@@ -271,7 +271,7 @@ class _MyJobsTab extends StatelessWidget {
       } else {
         return Center(
           child: CircularProgressIndicator(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         );
       }

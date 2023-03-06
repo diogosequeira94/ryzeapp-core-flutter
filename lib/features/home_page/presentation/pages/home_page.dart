@@ -1,3 +1,5 @@
+// ignore_for_file: close_sinks
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/model/job_post_dummy.dart';
@@ -46,27 +48,27 @@ class HomePage extends StatelessWidget {
                 BlocConsumer<JobsBloc, JobsState>(
                   listener: (context, state) {
                     if (state is JobsFetchFailure) {
-                      Scaffold.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content:
                             Text("Error retrieving data. Please try again"),
                         duration: const Duration(seconds: 2),
                       ));
                     } else if (state is DeleteJobFailure) {
-                      Scaffold.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(state.message),
                         duration: const Duration(seconds: 2),
                       ));
                     } else if (state is DeleteJobSuccess) {
                       Future.delayed(const Duration(milliseconds: 750), () {
                         _jobsBloc.add(FetchJobsPosts());
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Job deleted with success'),
                           duration: const Duration(milliseconds: 1250),
                         ));
                       });
                     } else if (state is JobApplicationSuccess) {
                       Future.delayed(const Duration(milliseconds: 750), () {
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Your application was submitted.'),
                           duration: const Duration(milliseconds: 1250),
                         ));
