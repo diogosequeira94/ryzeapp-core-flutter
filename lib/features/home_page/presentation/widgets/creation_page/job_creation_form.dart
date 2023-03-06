@@ -534,7 +534,7 @@ class _DateTimeCalendar extends StatelessWidget {
             data: Theme.of(context).copyWith(
               dialogBackgroundColor: Colors.white,
               colorScheme: ColorScheme.light().copyWith(
-                primary: Theme.of(context).accentColor,
+                primary: Theme.of(context).colorScheme.secondary,
               ),
             ),
             child: child,
@@ -565,7 +565,7 @@ class _DateTimeCalendar extends StatelessWidget {
             data: Theme.of(context).copyWith(
               dialogBackgroundColor: Colors.white,
               colorScheme: ColorScheme.light().copyWith(
-                primary: Theme.of(context).accentColor,
+                primary: Theme.of(context).colorScheme.secondary,
               ),
             ),
             child: child,
@@ -587,7 +587,7 @@ class _DateTimeCalendar extends StatelessWidget {
             data: Theme.of(context).copyWith(
               dialogBackgroundColor: Colors.white,
               colorScheme: ColorScheme.light().copyWith(
-                primary: Theme.of(context).accentColor,
+                primary: Theme.of(context).colorScheme.secondary,
               ),
             ),
             child: child,
@@ -624,7 +624,7 @@ class _AdditionalInformationInput extends StatelessWidget {
             hintText: 'Details you want to share with appliances.',
             border: OutlineInputBorder(
               borderSide:
-                  BorderSide(width: 0.5, color: Theme.of(context).accentColor),
+                  BorderSide(width: 0.5, color: Theme.of(context).colorScheme.secondary),
             ),
           ),
           onChanged: (additionalInfo) => context
