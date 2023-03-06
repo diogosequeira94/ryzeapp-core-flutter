@@ -1,3 +1,5 @@
+// ignore_for_file: close_sinks
+
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebaseblocryze/features/home_page/presentation/blocs/jobs_bloc.dart';
@@ -101,7 +103,7 @@ class _TitleInput extends StatelessWidget {
                   : null,
               border: OutlineInputBorder(
                 borderSide: BorderSide(
-                    width: 0.5, color: Theme.of(context).accentColor),
+                    width: 0.5, color: Theme.of(context).colorScheme.secondary),
               ),
             ),
             onChanged: (title) {
@@ -132,7 +134,7 @@ class _DescriptionInput extends StatelessWidget {
                 : null,
             border: OutlineInputBorder(
               borderSide:
-                  BorderSide(width: 0.5, color: Theme.of(context).accentColor),
+                  BorderSide(width: 0.5, color: Theme.of(context).colorScheme.secondary),
             ),
           ),
           onChanged: (description) =>
@@ -201,7 +203,7 @@ class _JobStartingTypeRadioButtons extends StatelessWidget {
                           : null,
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 0.5, color: Theme.of(context).accentColor),
+                            width: 0.5, color: Theme.of(context).colorScheme.secondary),
                       ),
                     ),
                     onChanged: (shiftDuration) => context
@@ -237,7 +239,7 @@ class _CityInput extends StatelessWidget {
                 state.city.invalid ? JobPostStrings.jobFormInvalidCity : null,
             border: OutlineInputBorder(
               borderSide:
-                  BorderSide(width: 0.5, color: Theme.of(context).accentColor),
+                  BorderSide(width: 0.5, color: Theme.of(context).colorScheme.secondary),
             ),
           ),
           onChanged: (city) => context.read<JobFormCubit>().cityChanged(city),
@@ -266,7 +268,7 @@ class _HourRateInput extends StatelessWidget {
                 : null,
             border: OutlineInputBorder(
               borderSide:
-                  BorderSide(width: 0.5, color: Theme.of(context).accentColor),
+                  BorderSide(width: 0.5, color: Theme.of(context).colorScheme.secondary),
             ),
           ),
           onChanged: (hourRate) =>
@@ -355,7 +357,7 @@ class _CreateJobButton extends StatelessWidget {
       title: 'Confirmation',
       desc: JobPostStrings.confirmCreationDialogText,
       btnCancelText: 'Go Back',
-      btnCancelColor: Theme.of(context).accentColor,
+      btnCancelColor: Theme.of(context).colorScheme.secondary,
       btnOkText: 'Continue',
       btnOkColor: Colors.black,
       btnCancelOnPress: () {},
@@ -383,7 +385,7 @@ class _JobDisclaimer extends StatelessWidget {
             controlAffinity: ListTileControlAffinity.platform,
             contentPadding: EdgeInsets.all(0.0),
             value: state.isDisclaimerAccepted,
-            activeColor: Theme.of(context).accentColor,
+            activeColor: Theme.of(context).colorScheme.secondary,
             onChanged: (bool checkBoxValue) {
               context
                   .read<JobFormCubit>()
@@ -437,11 +439,12 @@ class _JobPhoto extends StatelessWidget {
 }
 
 class _DateTimeCalendar extends StatelessWidget {
-  var fromPickedDate = DateTime.now();
-  var fromPickedTime = TimeOfDay.now();
+  final fromPickedDate = DateTime.now();
+  final fromPickedTime = TimeOfDay.now();
 
-  var untilPickedDate = DateTime.now();
-  var untilPickedTime = TimeOfDay.now();
+  /// ToDo: Why repeated vars?
+  final untilPickedDate = DateTime.now();
+  final untilPickedTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobFormCubit, JobFormState>(
@@ -509,7 +512,7 @@ class _DateTimeCalendar extends StatelessWidget {
             data: Theme.of(context).copyWith(
               dialogBackgroundColor: Colors.white,
               colorScheme: ColorScheme.light().copyWith(
-                primary: Theme.of(context).accentColor,
+                primary: Theme.of(context).colorScheme.secondary,
               ),
             ),
             child: child,
@@ -612,7 +615,6 @@ class _AdditionalInformationInput extends StatelessWidget {
           autofocus: false,
           minLines: 3,
           maxLines: 16,
-          maxLengthEnforced: true,
           maxLength: 500,
           keyboardType: TextInputType.text,
           enabled: true,
