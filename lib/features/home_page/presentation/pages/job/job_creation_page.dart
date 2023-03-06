@@ -20,11 +20,11 @@ class JobCreation extends StatelessWidget {
         listener: (context, state) {
           print(state.toString());
           if (state is AddJobFailure) {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(state.message),
             ));
           } else if (state is AddJobSuccess) {
-            Scaffold.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               duration: const Duration(milliseconds: 1500),
               content: Text('Success! Your job was created'),
             ));
